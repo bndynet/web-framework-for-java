@@ -1,0 +1,94 @@
+# EMBEDDED SERVER CONFIGURATION (ServerProperties) 
+server:
+  port: 9090
+  address: 127.0.0.1
+  sessionTimeout: 30
+  contextPath: /
+  
+# APPLICATION
+application:
+  title: Web Framework 
+  version: 1.0.0.PRE
+  
+# LOGGING  
+logging:
+  path: /var/logs  
+  file: app.log  
+  config: 
+  level:
+    org.springframework.web: DEBUG
+    
+# BANNER  
+banner:
+  charset: UTF-8 # Banner file encoding.  
+  location: classpath:banner.txt # Banner file location.  
+  image:
+    location: classpath:banner.gif # Banner image file location (jpg/png can also be used).  
+    width:  # Width of the banner image in chars (default 76)  
+    height:  # Height of the banner image in chars (default based on image height)  
+    margin:  # Left hand image margin in chars (default 2)  
+    invert:  # If images should be inverted for dark terminal themes (default false)  
+
+spring:
+  #APPLICATION SETTINGS (SpringApplication) 
+#  main:
+#    banner-mode: console # Mode used to display the banner when the application runs.  
+#    sources: # Sources (class name, package name or XML resource location) to include in the ApplicationContext.  
+#    web-environment: # Run the application in a web environment (auto-detected by default).
+    
+  # Email (MailProperties)  
+#  mail:
+#    default-encoding: UTF-8 # Default MimeMessage encoding.  
+#    host: # SMTP server host. For instance `smtp.example.com`  
+#    jndi-name: # Session JNDI name. When set, takes precedence to others mail settings.  
+#    password: # Login password of the SMTP server.  
+#    port: # SMTP server port.  
+#    protocol: smtp # Protocol used by the SMTP server.  
+#    test-connection: false # Test that the mail server is available on startup.  
+#    username: # Login user of the SMTP server. 
+#    #properties.*: # Additional JavaMail session properties.  
+
+  # DATASOURCE (DataSourceAutoConfiguration & DataSourceProperties)  
+#  datasource:
+#    url: jdbc:mysql://localhost/test
+#    username: dbuser
+#    password: dbpass
+#    driver-class: com.mysql.jdbc.Driver
+#    
+#  data:
+#    # MONGODB (MongoProperties)  
+#    mongodb:
+#      host: # the db host  
+#      port: 27017 # the connection port (defaults to 27107)  
+#      uri: mongodb://localhost/test # connection URL  
+#    mongo:
+#      repositories:
+#        enabled: true # if spring data repository support is enabled 
+#        
+#    # SOLR (SolrProperties})  
+#    solr:
+#      host: http://127.0.0.1:8983/solr  
+#      zkHost: 
+#      repositories:
+#        enabled: true # if spring data repository support is enabled 
+#    
+#  # REDIS (RedisProperties)  
+#  redis:
+#    host: localhost # server host  
+#    password: # server password  
+#    port: 6379 # connection port  
+#    pool:
+#      max-idle: 8 # pool settings ...  
+#      min-idle: 0  
+#      max-active: 8  
+#      max-wait: -1  
+      
+  # THYMELEAF (ThymeleafAutoConfiguration)  
+  thymeleaf:
+    prefix: classpath:/templates/  
+    suffix: .html  
+    mode: HTML5  
+    encoding: UTF-8  
+    content-type: text/html  
+    cache: false
+ 
