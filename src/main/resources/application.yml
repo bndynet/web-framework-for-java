@@ -17,6 +17,7 @@ logging:
   config: 
   level:
     org.springframework.web: DEBUG
+    hibernate: DEBUG
     
 # BANNER  
 banner:
@@ -49,11 +50,24 @@ spring:
 #    #properties.*: # Additional JavaMail session properties.  
 
   # DATASOURCE (DataSourceAutoConfiguration & DataSourceProperties)  
-#  datasource:
-#    url: jdbc:mysql://localhost/test
-#    username: dbuser
-#    password: dbpass
-#    driver-class: com.mysql.jdbc.Driver
+  datasource:
+    url: jdbc:mysql://localhost/sakila?useSSL=true
+    username: root
+    password: 123456
+    driver-class: com.mysql.jdbc.Driver
+    testWhileIdle: true 
+    validationQuery: SELECT 1
+    
+  # JPA
+  jpa:
+    show-sql: true
+    hibernate:
+      ddl-auto: update
+      naming-strategy: org.hibernate.cfg.ImprovedNamingStrategy
+    properties:
+      hibernate:
+        dialect: org.hibernate.dialect.MySQL5Dialect
+    
 #    
 #  data:
 #    # MONGODB (MongoProperties)  
