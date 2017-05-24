@@ -9,18 +9,20 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 @Controller
-@RequestMapping("/thymeleaf")
+@RequestMapping("/")
 public class ThymeleafController {
-	@RequestMapping("/hello")
+	@RequestMapping("/")
 	public String helloHtml(Map<String, Object> map) {
-		List<Integer> lst = new ArrayList<Integer>();
-		for (int i = 0; i < 10; i++) {
-			lst.add(i);
-		}
+		List<String> lst = new ArrayList<String>();
+		lst.add("/");
+		lst.add("/api/welcome?name=Bndy");
+		lst.add("/api/jpa/getcities");
+		lst.add("/api/jpa/getcity?id=4");
+		lst.add("/api/jpa/getcitiesbycountry?id=6");
 
 		map.put("who", "Bing Z");
 		map.put("time", new Date());
-		map.put("ids", lst);
+		map.put("urls", lst);
 
 		return "/hello";
 	}

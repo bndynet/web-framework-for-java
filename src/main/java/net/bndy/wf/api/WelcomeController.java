@@ -13,20 +13,9 @@ import org.springframework.web.bind.annotation.RestController;
 @RequestMapping("/api")
 public class WelcomeController {
 	
-	//e.g. /api/index?name=Bndy
-	@RequestMapping("/index")
+	//e.g. /api/welcome?name=Bndy
+	@RequestMapping("/welcome")
     public String index(@RequestParam(value="name", defaultValue="World") String name) {
         return String.format("Hello, %s!", name);
     }
-	
-	//e.g. /api/get/1
-	@RequestMapping("/get/{id}")
-	public Object get(@PathVariable(name="id") int id){
-		Map<String, Object> result = new HashMap<String, Object>();
-		result.put("id", id);
-		result.put("name", "Bndy");
-		result.put("dt", new Date());
-		result.put("dtString", new Date().toString());
-		return result;
-	}
 }

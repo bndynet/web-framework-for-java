@@ -13,7 +13,7 @@
 	</h2>
 
 	<ul>
-		<li th:each="item:${ids}"><span th:text="${item}"></span></li>
+		<li th:each="item:${urls}"><a th:href="@{${item}}" th:text="${item}"></a></li>
 	</ul>
 </body>
 </html>
