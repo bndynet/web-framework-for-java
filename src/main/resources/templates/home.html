@@ -1,0 +1,16 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:th="http://www.thymeleaf.org"
+	xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity3">
+<head>
+<title>Spring Security Example</title>
+</head>
+<body>
+	<div th:include="_header::default('home page')"></div>
+	<h1>Welcome!</h1>
+
+	<p>
+		Click <a th:href="@{/hello}">here</a> to hello page.
+	</p>
+</body>
+</html>

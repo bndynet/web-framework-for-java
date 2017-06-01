@@ -49,6 +49,14 @@ spring:
 #    username: # Login user of the SMTP server. 
 #    #properties.*: # Additional JavaMail session properties.  
 
+  # MVC
+  mvc:
+    throw-exception-if-no-handler-found: true
+    
+  # RESOURCES
+  resources:
+    add-mappings: false
+
   # DATASOURCE (DataSourceAutoConfiguration & DataSourceProperties)  
   datasource:
     url: jdbc:mysql://localhost/sakila?useSSL=true

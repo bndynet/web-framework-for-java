@@ -12,13 +12,19 @@ import org.springframework.web.bind.annotation.RequestMapping;
 @RequestMapping("/")
 public class ThymeleafController {
 	@RequestMapping("/")
+	public String home(){
+		return "/home";
+	}
+	
+	@RequestMapping("/hello")
 	public String helloHtml(Map<String, Object> map) {
 		List<String> lst = new ArrayList<String>();
 		lst.add("/");
 		lst.add("/api/welcome?name=Bndy");
 		lst.add("/api/jpa/getcities");
-		lst.add("/api/jpa/getcity?id=4");
+		lst.add("/api/jpa/getcity/54");
 		lst.add("/api/jpa/getcitiesbycountry?id=6");
+		lst.add("/api/jpa/error");
 
 		map.put("who", "Bing Z");
 		map.put("time", new Date());

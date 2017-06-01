@@ -23,7 +23,7 @@ public class JpaController {
 		return cityRep.findAll();
 	}
 	
-	//e.g. /api/jpa/getcity?id=45
+	//e.g. /api/jpa/getcity/45
 	@RequestMapping("/getcity/{id}")
 	public City getCity(@PathVariable("id") long id) {
 		return cityRep.findOne(id);
@@ -33,5 +33,11 @@ public class JpaController {
 	@RequestMapping("/getcitiesbycountry")
 	public List<City> getCitiesByCountry(@RequestParam("id") int id) {
 		return cityRep.findByCountryId(id);
+	}
+	
+	//e.g. /api/jpa/error
+	@RequestMapping("/error")
+	public Object getError() throws Exception{
+		throw new Exception("App Exception");
 	}
 }
