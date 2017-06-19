@@ -1,4 +1,4 @@
-# Web Framework
+# Web Framework - A Maven Project
 	
 	
 	 _______                   __                __    __              __     
