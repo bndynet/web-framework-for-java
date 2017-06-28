@@ -26,6 +26,8 @@ public class ThymeleafController {
 		lst.add("/api/jpa/getcitiesbycountry?id=6");
 		lst.add("/api/jpa/error");
 		
+		lst.add("/api/categories");
+		
 		
 		lst.add("/v2/api-docs");
 		lst.add("/doc/api");
