@@ -20,6 +20,17 @@ public class Category {
 
 	@Column(name = "parent_id", nullable = false)
 	private long parentId;
+	
+	@Column(name = "[group]", nullable = true) 
+	private String group;
+
+	public String getGroup() {
+		return group;
+	}
+
+	public void setGroup(String group) {
+		this.group = group;
+	}
 
 	public Long getCategoryId() {
 		return categoryId;
