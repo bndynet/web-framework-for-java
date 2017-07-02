@@ -27,6 +27,7 @@ public class ThymeleafController {
 		lst.add("/api/jpa/error");
 		
 		lst.add("/api/categories");
+		lst.add("/api/user-profile/1");
 		
 		
 		lst.add("/v2/api-docs");
