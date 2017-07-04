@@ -59,7 +59,7 @@ spring:
 
   # DATASOURCE (DataSourceAutoConfiguration & DataSourceProperties)  
   datasource:
-    url: jdbc:mysql://localhost/sakila?useSSL=true
+    url: jdbc:mysql://localhost/cms?useSSL=true
     username: root
     password: 123456
     driver-class: com.mysql.jdbc.Driver
