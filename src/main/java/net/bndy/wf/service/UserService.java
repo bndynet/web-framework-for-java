@@ -5,34 +5,40 @@ import java.util.List;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import net.bndy.wf.domain.*;
 import net.bndy.wf.repository.*;
 
 @Service
+@Transactional
 public class UserService {
 	@Autowired
 	private UserRepository userRepo;
 	
 	private Logger logger = LoggerFactory.getLogger(UserService.class);
+	private PasswordEncoder passwordEncoder = new BCryptPasswordEncoder();
 	
-	public UserService() { }
-	
-	public boolean login(String account, String password){
+	public boolean login(String account, String password) {
 		List<User> users = userRepo.findByUserName(account);
 		if(users.size() == 1) {
 			User user = users.get(0);
-			if(user.getPassword() == password && !user.isDisabled()){
+			String encodedPassword = passwordEncoder.encode(password);
+			if(user.getPassword().equals(password) && this.passwordEncoder.matches(password, encodedPassword) && !user.isDisabled()){
 				logger.info("`{}` logged in", account);
 				return true;
 			}
 		}
+		
 		logger.error("`{}` failed to log in", account);
 		return false;
 	}
 	
 	public User register(User user){
+		user.setPassword(passwordEncoder.encode(user.getPassword()));
 		user.setDisabled(false);
 		return userRepo.saveAndFlush(user);
 	}
@@ -41,5 +47,9 @@ public class UserService {
 		User u = userRepo.findOne(id);
 		u.setDisabled(true);
 		return userRepo.saveAndFlush(u);
+	}
+	
+	public List<User> getAll() {
+		return userRepo.findAll();
 	}
 }
