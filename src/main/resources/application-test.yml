@@ -1,0 +1,9 @@
+spring:
+  # DATASOURCE (DataSourceAutoConfiguration & DataSourceProperties)  
+  datasource:
+    url: jdbc:mysql://localhost/cms-test?useSSL=true
+    username: root
+    password: 123456
+    driver-class: com.mysql.jdbc.Driver
+    testWhileIdle: true 
+    validationQuery: SELECT 1
