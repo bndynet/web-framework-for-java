@@ -9,6 +9,8 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RestController;
 
+import net.bndy.wf.domain.AppResponseResult;
+import net.bndy.wf.domain.AppResponseResultStatus;
 import net.bndy.wf.domain.Category;
 import net.bndy.wf.repository.CategoryRepository;;
 
@@ -18,7 +20,7 @@ public class CategoryController {
 	@Autowired
 	private CategoryRepository categoryRepo;
 
-	@RequestMapping(method = RequestMethod.GET)
+	@RequestMapping(value="", method = RequestMethod.GET)
 	public List<Category> get() {
 		return categoryRepo.findAll();
 	}
@@ -33,8 +35,15 @@ public class CategoryController {
 		return categoryRepo.saveAndFlush(category);
 	}
 
-	@RequestMapping(method = RequestMethod.PUT)
-	public Category saveCategory(@RequestBody Category category) {
+	@RequestMapping(value="/{id}", method = RequestMethod.PUT)
+	public Category saveCategory(@PathVariable long id, @RequestBody Category category) {
+		category.setId(id);
 		return categoryRepo.saveAndFlush(category);
+	}
+	
+	@RequestMapping(value="/{id}", method = RequestMethod.DELETE)
+	public AppResponseResult deleteCategory(@PathVariable long id) {
+		categoryRepo.delete(id);
+		return new AppResponseResult(AppResponseResultStatus.OK);
 	}
 }

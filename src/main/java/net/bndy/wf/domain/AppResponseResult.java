@@ -27,6 +27,10 @@ public class AppResponseResult {
 		this.data = data;
 	}
 	
+	public AppResponseResult(AppResponseResultStatus status) {
+		this.status = status;
+	}
+	
 	public AppResponseResult(String title, AppResponseResultStatus status, Object data){
 		this.title = title;
 		this.status = status;

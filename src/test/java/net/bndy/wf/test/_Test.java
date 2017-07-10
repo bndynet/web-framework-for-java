@@ -15,6 +15,6 @@ import org.springframework.transaction.annotation.Transactional;
 @AutoConfigureTestDatabase(replace = AutoConfigureTestDatabase.Replace.NONE)
 @Transactional(propagation = Propagation.NOT_SUPPORTED)
 @ActiveProfiles("test")
-public class _Test {
+public abstract class _Test {
 
 }

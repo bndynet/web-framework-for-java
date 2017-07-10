@@ -1,8 +1,10 @@
 package net.bndy.wf.api;
 
-import java.util.List;
-
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
+import org.springframework.data.domain.Sort;
+import org.springframework.data.web.PageableDefault;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
@@ -16,13 +18,14 @@ import net.bndy.wf.service.UserService;
 public class UserController {
 	@Autowired
 	private UserService userService;
-	
-	@RequestMapping(method=RequestMethod.GET)
-	public List<User> getAll() {
-		return userService.getAll();
+
+	@RequestMapping(method = RequestMethod.GET)
+	public Page<User> getAll(
+			@PageableDefault(size = 15, sort = { "id" }, direction = Sort.Direction.DESC) Pageable pageable) {
+		return userService.getUsers(pageable);
 	}
-	
-	@RequestMapping(method=RequestMethod.POST)
+
+	@RequestMapping(method = RequestMethod.POST)
 	public User register(@RequestBody User user) {
 		return userService.register(user);
 	}
