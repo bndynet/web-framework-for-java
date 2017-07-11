@@ -1,6 +1,8 @@
 package net.bndy.wf.test;
 
+import org.junit.FixMethodOrder;
 import org.junit.runner.RunWith;
+import org.junit.runners.MethodSorters;
 import org.springframework.boot.test.autoconfigure.jdbc.AutoConfigureTestDatabase;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.boot.test.context.SpringBootTest.WebEnvironment;
@@ -18,6 +20,7 @@ import net.bndy.wf.Application;
 @Transactional(propagation = Propagation.NOT_SUPPORTED)
 @ActiveProfiles("test")
 @SpringBootTest(classes = Application.class, webEnvironment = WebEnvironment.RANDOM_PORT)
+@FixMethodOrder(MethodSorters.DEFAULT)
 public abstract class _Test {
 
 }
