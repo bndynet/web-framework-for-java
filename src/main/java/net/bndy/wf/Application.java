@@ -16,7 +16,7 @@ import springfox.documentation.spi.DocumentationType;
 import springfox.documentation.spring.web.plugins.Docket;
 
 // JUnit test is not compatible with swagger
-//@springfox.documentation.swagger2.annotations.EnableSwagger2
+@springfox.documentation.swagger2.annotations.EnableSwagger2
 @SpringBootApplication
 public class Application {
 	public static void main(String[] args) {
