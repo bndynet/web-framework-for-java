@@ -9,13 +9,13 @@ import org.junit.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.web.client.TestRestTemplate;
 import org.springframework.http.HttpEntity;
+import org.springframework.http.HttpMethod;
+import org.springframework.http.ResponseEntity;
 import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.test.web.servlet.setup.MockMvcBuilders;
 import org.springframework.web.context.WebApplicationContext;
 
-import io.swagger.models.HttpMethod;
 import net.bndy.wf.domain.Category;
-import net.bndy.wf.repository.CategoryRepository;
 
 import static org.junit.Assert.*;
 
@@ -51,23 +51,18 @@ public class CategoryControllerTest extends  _Test {
 	
 	@Test
 	public void testHttpPut() {
-		category.setName("changed");
-		this.restTempalte.put("/api/categories/" + category.getId(), category);
+		String newName = "changed";
+		category.setName(newName);
+		HttpEntity<?> requestEntity = new HttpEntity<Category>(category);
+		ResponseEntity<Category> response = this.restTempalte.exchange("/api/categories/" + category.getId(), HttpMethod.PUT, requestEntity, Category.class);
+		assertTrue(response.getBody().getName().equals(newName));
 	}
 	
 	@Test
 	public void testHttpGet() {
 		Category response = this.restTempalte.getForObject("/api/categories/" + category.getId(), Category.class);
-//		Category response = this.restTempalte.execute(url, method, requestCallback, responseExtractor)("/api/categories/" + category.getId(), Category.class);
 		assertTrue(response.getId() > 0);
 	}
-	
-//	@Test
-//	public void testHttpPatch() {
-//		HttpEntity<Category> request = new HttpEntity<>(category);
-//		Category response = this.restTempalte.("/api/categories/" + category.getId(), HttpMethod.PATCH, request, Category.class);
-//		assertTrue(response.getId() > 0);
-//	}
 	
 	@Test
 	public void testHttpGetAll() {
