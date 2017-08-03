@@ -9,12 +9,12 @@ import org.junit.Assert;
 import org.junit.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 
-import net.bndy.wf.domain.User;
-import net.bndy.wf.service.UserService;
+import net.bndy.wf.modules.app.models.*;
+import net.bndy.wf.modules.app.services.AppUserService;
 
 public class UserServiceTest extends _Test {
 	@Autowired
-	UserService userService;
+	AppUserService userService;
 
 	@Test
 	public void registerAndLogin() {

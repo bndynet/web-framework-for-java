@@ -9,7 +9,7 @@ import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
 
-import net.bndy.wf.domain.*;
+import net.bndy.wf.modules.app.AppException;
 
 @RestController
 @ControllerAdvice
