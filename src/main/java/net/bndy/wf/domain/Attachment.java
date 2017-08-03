@@ -1,8 +1,10 @@
 package net.bndy.wf.domain;
 
+import javax.persistence.Entity;
 import javax.persistence.EnumType;
 import javax.persistence.Enumerated;
 
+@Entity
 public class Attachment extends _BaseEntity {
 
 	private static final long serialVersionUID = 1L;

@@ -1,11 +1,16 @@
 package net.bndy.wf.domain;
 
+import javax.persistence.Column;
+import javax.persistence.Entity;
+
+@Entity
 public class Page extends _BaseEntity {
 
 	private static final long serialVersionUID = 1L;
 
 	private long boTypeId;
 	private String title;
+	@Column(columnDefinition="TEXT")
 	private String content;
 	
 	public String getTitle() {

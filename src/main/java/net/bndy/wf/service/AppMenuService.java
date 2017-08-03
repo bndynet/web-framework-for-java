@@ -18,8 +18,6 @@ public class AppMenuService {
 	private AppMenuRepository appMenuRepo;
 	@Autowired
 	private PageRepository pageRepo;
-	@Autowired
-	private ArticleRepository articleRepo;
 	
 	public List<AppMenu> getAll() {
 		return appMenuRepo.findAll();
@@ -30,10 +28,12 @@ public class AppMenuService {
 		if(menu!=null){
 			switch(menu.getBoType()) {
 			case PAGE:
-				this.pageRepo.deleteByBoTypeId(menu.getBoTypeId());
+//				this.pageRepo.deleteByBoTypeId(menu.getBoTypeId());
 				break;
 				
 			case ARTICLE:
+				break;
+			default:
 				break;
 			}
 		}

@@ -1,5 +1,9 @@
 package net.bndy.wf.domain;
 
+import javax.persistence.Column;
+import javax.persistence.Entity;
+
+@Entity
 public class Article extends _BaseEntity {
 
 	private static final long serialVersionUID = 1L;
@@ -7,6 +11,7 @@ public class Article extends _BaseEntity {
 	private long userId;
 	private long boTypeId;
 	private String title;
+	@Column(columnDefinition="TEXT")
 	private String content;
 	
 	public long getUserId() {

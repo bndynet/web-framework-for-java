@@ -7,6 +7,6 @@ import net.bndy.wf.domain.*;
 
 public interface PageRepository extends JpaRepository<Page, Long> {
 
-	@Query(value="delete from page where boTypeId=:boTypeId")
-	void deleteByBoTypeId(long boTypeId);
+//	@Query(value="delete from page where boTypeId=:boTypeId")
+//	void deleteByBoTypeId(long boTypeId);
 }

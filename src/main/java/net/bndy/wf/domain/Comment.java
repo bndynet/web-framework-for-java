@@ -1,5 +1,8 @@
 package net.bndy.wf.domain;
 
+import javax.persistence.Entity;
+
+@Entity
 public class Comment extends _BaseEntity {
 	
 	private static final long serialVersionUID = 1L;
