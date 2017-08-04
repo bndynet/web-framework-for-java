@@ -25,15 +25,31 @@ public abstract class _BaseEntity implements Serializable {
 	protected Long id;
 
 	@Temporal(TemporalType.TIMESTAMP)
-	private Date createdAt;
+	private Date createDate;
 	@Temporal(TemporalType.TIMESTAMP)
-	private Date updatedAt;
+	private Date lastUpdate;
 
 	@Override
 	public int hashCode() {
 		int hash = 0;
 		hash += (this.getId() != null ? this.getId().hashCode() : 0);
 		return hash;
+	}
+
+	public Date getCreateDate() {
+		return createDate;
+	}
+
+	public void setCreateDate(Date createDate) {
+		this.createDate = createDate;
+	}
+
+	public Date getLastUpdate() {
+		return lastUpdate;
+	}
+
+	public void setLastUpdate(Date lastUpdate) {
+		this.lastUpdate = lastUpdate;
 	}
 
 	@Override
@@ -66,28 +82,20 @@ public abstract class _BaseEntity implements Serializable {
 	}
 
 	public Date getCreatedAt() {
-		return createdAt;
+		return createDate;
 	}
 
 	public void setCreatedAt(Date createdAt) {
-		this.createdAt = createdAt;
-	}
-
-	public Date getUpdatedAt() {
-		return updatedAt;
-	}
-
-	public void setUpdatedAt(Date updatedAt) {
-		this.updatedAt = updatedAt;
+		this.createDate = createdAt;
 	}
 
     @PrePersist  
     public void setCreationDate() {  
-        this.createdAt = new Date();  
+        this.createDate = new Date();  
     }  
   
     @PreUpdate  
     public void setChangeDate() {  
-        this.updatedAt = new Date();  
+        this.lastUpdate = new Date();  
     } 
 }
