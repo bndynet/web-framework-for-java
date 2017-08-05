@@ -1,9 +1,12 @@
 package net.bndy.wf.modules.app.models;
 
+import java.util.Collection;
+
 import javax.persistence.Entity;
 import javax.persistence.EnumType;
 import javax.persistence.Enumerated;
 import javax.persistence.Table;
+import javax.persistence.Transient;
 
 import net.bndy.wf.lib._BaseEntity;
 import net.bndy.wf.modules.app.AppBoType;
@@ -26,6 +29,15 @@ public class Menu extends _BaseEntity {
 	@Enumerated(EnumType.ORDINAL)
 	private AppBoType boType;
 	
+	@Transient
+	private Collection<Menu> children;
+	
+	public Collection<Menu> getChildren() {
+		return children;
+	}
+	public void setChildren(Collection<Menu> children) {
+		this.children = children;
+	}
 	public long getParentId() {
 		return parentId;
 	}

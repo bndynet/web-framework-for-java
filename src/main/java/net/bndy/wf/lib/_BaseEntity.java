@@ -81,21 +81,13 @@ public abstract class _BaseEntity implements Serializable {
 		this.id = id;
 	}
 
-	public Date getCreatedAt() {
-		return createDate;
-	}
-
-	public void setCreatedAt(Date createdAt) {
-		this.createDate = createdAt;
-	}
-
     @PrePersist  
-    public void setCreationDate() {  
+    public void setCreateDate() {  
         this.createDate = new Date();  
     }  
   
     @PreUpdate  
-    public void setChangeDate() {  
+    public void setLastUpdate() {  
         this.lastUpdate = new Date();  
     } 
 }

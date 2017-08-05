@@ -16,11 +16,11 @@ import net.bndy.wf.modules.app.models.*;
 
 @Service
 @Transactional
-public class AppUserService {
+public class UserService {
 	@Autowired
-	private AppUserRepository userRepo;
+	private UserRepository userRepo;
 	
-	private Logger logger = LoggerFactory.getLogger(AppUserService.class);
+	private Logger logger = LoggerFactory.getLogger(UserService.class);
 	private PasswordEncoder passwordEncoder = new BCryptPasswordEncoder();
 	
 	public Page<User> getUsers(Pageable pageable) {

@@ -11,13 +11,13 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 
 import net.bndy.wf.modules.app.models.*;
-import net.bndy.wf.modules.app.services.AppUserService;
+import net.bndy.wf.modules.app.services.UserService;
 
 @RestController
 @RequestMapping("/api/users")
 public class UserController {
 	@Autowired
-	private AppUserService userService;
+	private UserService userService;
 
 	@RequestMapping(method = RequestMethod.GET)
 	public Page<User> getAll(

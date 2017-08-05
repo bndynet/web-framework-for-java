@@ -8,7 +8,7 @@ import org.springframework.data.repository.query.Param;
 
 import net.bndy.wf.modules.app.models.*;
 
-public interface AppUserRepository extends JpaRepository<User, Long> {
+public interface UserRepository extends JpaRepository<User, Long> {
     @Query(value="select t.* from app_user t where t.user_name=:userName", nativeQuery=true)
     List<User> findByUserName(@Param("userName") String userName);
 }

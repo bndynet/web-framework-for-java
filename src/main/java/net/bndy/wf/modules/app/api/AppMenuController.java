@@ -9,13 +9,13 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import net.bndy.wf.modules.app.models.Menu;
-import net.bndy.wf.modules.app.services.AppMenuRepository;
+import net.bndy.wf.modules.app.services.MenuRepository;
 
 @RestController
 @RequestMapping("/api/appmenu")
 public class AppMenuController {
 	@Autowired
-	private AppMenuRepository appMenuRepo;
+	private MenuRepository appMenuRepo;
 
 	@RequestMapping(value="", method = RequestMethod.GET)
 	public List<Menu> get() {

@@ -1,5 +1,8 @@
 package net.bndy.wf.test;
 
+import java.text.SimpleDateFormat;
+import java.util.Date;
+
 import org.junit.FixMethodOrder;
 import org.junit.runner.RunWith;
 import org.junit.runners.MethodSorters;
@@ -22,5 +25,8 @@ import net.bndy.wf.Application;
 @SpringBootTest(classes = Application.class, webEnvironment = WebEnvironment.RANDOM_PORT)
 @FixMethodOrder(MethodSorters.DEFAULT)
 public abstract class _Test {
-
+	
+	protected String getTimestampString() {
+		return new SimpleDateFormat("yyyyMMdd_hhmmss").format(new Date());
+	}
 }
