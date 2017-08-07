@@ -62,6 +62,7 @@ public class Menu extends _BaseEntity {
 	public void setDescription(String description) {
 		this.description = description;
 	}
+
 	public AppBoType getBoType() {
 		return boType;
 	}

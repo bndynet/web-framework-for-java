@@ -15,7 +15,7 @@ public class MenuServiceTest extends _Test {
 	MenuService menuService;
 
 	@Test
-	public void crud() {
+	public void crud() throws Exception {
 		Menu menu = new Menu();
 		menu.setName(this.getTimestampString());
 		menu.setBoType(AppBoType.CMS_PAGE);
