@@ -23,6 +23,10 @@ public class MenuService {
 	private PageRepository pageRepo;
 	@Autowired
 	private ArticleRepository articleRepo;
+	
+	public List<Menu> getList() {
+		return this.menuRepo.findAll();
+	}
 
 	public List<Menu> getMenus() {
 		List<Menu> menus = this.menuRepo.findAll();
@@ -56,7 +60,8 @@ public class MenuService {
 		List<Menu> result = new ArrayList<Menu>();
 		for (Menu m : menus) {
 			if (m.getParentId() == menu.getId()) {
-				menu.getChildren().add(m);
+				m.setChildren(this.getChildrenMenus(m, menus));
+				result.add(m);
 			}
 		}
 		return result;

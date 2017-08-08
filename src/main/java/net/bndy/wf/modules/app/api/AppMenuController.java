@@ -9,19 +9,21 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import net.bndy.wf.modules.app.models.Menu;
-import net.bndy.wf.modules.app.services.MenuRepository;
+import net.bndy.wf.modules.app.services.MenuService;
 
 @RestController
-@RequestMapping("/api/appmenu")
+@RequestMapping("/api/app/menus")
 public class AppMenuController {
 	@Autowired
-	private MenuRepository appMenuRepo;
+	private MenuService menuService;
 
 	@RequestMapping(value="", method = RequestMethod.GET)
-	public List<Menu> get() {
-		Menu m = new Menu();
-		m.setName("Name");
-		this.appMenuRepo.saveAndFlush(m);
-		return this.appMenuRepo.findAll();
+	public List<Menu> get(@RequestParam(name="all", required=false, defaultValue="false") boolean all) {
+		if(all) {
+			return this.menuService.getMenus();
+		}
+		else {
+			return this.menuService.getUserMenus();
+		}
 	}
 }

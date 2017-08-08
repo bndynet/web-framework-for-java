@@ -1,5 +1,6 @@
 package net.bndy.wf.modules.app.models;
 
+import java.util.ArrayList;
 import java.util.Collection;
 
 import javax.persistence.Entity;
@@ -31,6 +32,10 @@ public class Menu extends _BaseEntity {
 	
 	@Transient
 	private Collection<Menu> children;
+	
+	public Menu() {
+		this.setChildren(new ArrayList<Menu>());
+	}
 	
 	public Collection<Menu> getChildren() {
 		return children;
