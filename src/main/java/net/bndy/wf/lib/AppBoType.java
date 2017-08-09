@@ -1,4 +1,4 @@
-package net.bndy.wf.modules.app;
+package net.bndy.wf.lib;
 
 public enum AppBoType {
 	NONE,

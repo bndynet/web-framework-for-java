@@ -1,4 +1,4 @@
-package net.bndy.wf.modules.cms.services;
+package net.bndy.wf.modules.cms.services.repositories;
 
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;

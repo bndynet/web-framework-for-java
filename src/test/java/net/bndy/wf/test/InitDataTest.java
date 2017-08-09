@@ -10,18 +10,19 @@ import org.junit.Assert;
 import org.junit.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 
-import net.bndy.wf.modules.app.AppBoType;
+import net.bndy.wf.lib.AppBoType;
 import net.bndy.wf.modules.app.models.Menu;
 import net.bndy.wf.modules.app.services.MenuService;
 import net.bndy.wf.modules.cms.models.Article;
+import net.bndy.wf.modules.cms.models.Comment;
 import net.bndy.wf.modules.cms.models.Page;
-import net.bndy.wf.modules.cms.services.ArticleRepository;
-import net.bndy.wf.modules.cms.services.PageRepository;
+import net.bndy.wf.modules.cms.services.ArticleService;
+import net.bndy.wf.modules.cms.services.repositories.PageRepository;
 
 public class InitDataTest extends _Test {
 
 	@Autowired
-	ArticleRepository articleRepo;
+	ArticleService articleService;
 	@Autowired
 	PageRepository pageRepo;
 	@Autowired
@@ -74,11 +75,16 @@ public class InitDataTest extends _Test {
 		for (Menu m : menus) {
 			AppBoType boType = m.getBoType();
 			if (boType != null) {
+				Comment comment = new Comment();
 				switch (m.getBoType()) {
 				case CMS_PAGE:
-					Page p = pageRepo.getByBoTypeId(m.getBoTypeId());
+					Page p = this.pageRepo.getByBoTypeId(m.getBoTypeId());
 					p.setContent("Content for " + m.getName());
-					p = pageRepo.saveAndFlush(p);
+					p = this.pageRepo.saveAndFlush(p);
+					comment.setBoId(p.getId());
+					comment.setTitle("Comment Title for " + p.getTitle());
+					comment.setContent("Comment Content for " + p.getTitle());
+					this.articleService.addComment(comment, p.getId());
 					break;
 
 				case CMS_ARTICLE:
@@ -87,7 +93,11 @@ public class InitDataTest extends _Test {
 						article.setBoTypeId(m.getBoTypeId());
 						article.setTitle(m.getName() + " - Title " + i);
 						article.setContent("Content " + i);
-						articleRepo.saveAndFlush(article);
+						article = this.articleService.save(article);
+						comment.setBoId(article.getId());
+						comment.setTitle("Comment Title for " + article.getTitle());
+						comment.setContent("Comment Content for " + article.getTitle());
+						this.articleService.addComment(comment, article.getId());
 					}
 					break;
 

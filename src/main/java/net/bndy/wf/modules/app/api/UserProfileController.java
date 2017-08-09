@@ -7,10 +7,10 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 
 import net.bndy.wf.modules.app.models.UserProfile;
-import net.bndy.wf.modules.app.services.UserProfileRepository;
+import net.bndy.wf.modules.app.services.repositories.UserProfileRepository;
 
 @RestController
-@RequestMapping("/api/user-profile")
+@RequestMapping("/api/v1/user-profile")
 public class UserProfileController {
 	@Autowired
 	private UserProfileRepository userProfileRepo;

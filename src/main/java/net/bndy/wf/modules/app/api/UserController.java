@@ -14,7 +14,7 @@ import net.bndy.wf.modules.app.models.*;
 import net.bndy.wf.modules.app.services.UserService;
 
 @RestController
-@RequestMapping("/api/users")
+@RequestMapping("/api/v1/users")
 public class UserController {
 	@Autowired
 	private UserService userService;

@@ -12,7 +12,7 @@ import net.bndy.wf.modules.app.models.Menu;
 import net.bndy.wf.modules.app.services.MenuService;
 
 @RestController
-@RequestMapping("/api/app/menus")
+@RequestMapping("/api/v1/app/menus")
 public class AppMenuController {
 	@Autowired
 	private MenuService menuService;

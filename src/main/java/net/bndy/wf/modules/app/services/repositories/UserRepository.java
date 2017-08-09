@@ -1,4 +1,4 @@
-package net.bndy.wf.modules.app.services;
+package net.bndy.wf.modules.app.services.repositories;
 
 import java.util.List;
 

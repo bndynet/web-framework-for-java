@@ -1,4 +1,4 @@
-package net.bndy.wf.modules.cms.services;
+package net.bndy.wf.modules.cms.services.repositories;
 
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Modifying;

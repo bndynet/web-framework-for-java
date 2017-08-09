@@ -14,7 +14,13 @@ import javax.persistence.PreUpdate;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+
+import net.bndy.wf.Application;
+
 @MappedSuperclass()
+@JsonIgnoreProperties({ "hibernateLazyInitializer", "handler" })
 public abstract class _BaseEntity implements Serializable {
 	private static final long serialVersionUID = 1L;
 
@@ -25,8 +31,11 @@ public abstract class _BaseEntity implements Serializable {
 	protected Long id;
 
 	@Temporal(TemporalType.TIMESTAMP)
+	@JsonFormat(pattern = Application.DATETIE_FORMAT, timezone = Application.TIMEZONE)
 	private Date createDate;
+
 	@Temporal(TemporalType.TIMESTAMP)
+	@JsonFormat(pattern = Application.DATETIE_FORMAT, timezone = Application.TIMEZONE)
 	private Date lastUpdate;
 
 	@Override
@@ -70,7 +79,7 @@ public abstract class _BaseEntity implements Serializable {
 
 	@Override
 	public String toString() {
-		return this.getClass().getName() + " [ID=" + id + "]";  
+		return this.getClass().getName() + " [ID=" + id + "]";
 	}
 
 	public Long getId() {
@@ -81,13 +90,13 @@ public abstract class _BaseEntity implements Serializable {
 		this.id = id;
 	}
 
-    @PrePersist  
-    public void setCreateDate() {  
-        this.createDate = new Date();  
-    }  
-  
-    @PreUpdate  
-    public void setLastUpdate() {  
-        this.lastUpdate = new Date();  
-    } 
+	@PrePersist
+	public void setCreateDate() {
+		this.createDate = new Date();
+	}
+
+	@PreUpdate
+	public void setLastUpdate() {
+		this.lastUpdate = new Date();
+	}
 }

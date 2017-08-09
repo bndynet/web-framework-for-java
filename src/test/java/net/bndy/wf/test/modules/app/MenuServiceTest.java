@@ -4,7 +4,7 @@ import org.junit.Assert;
 import org.junit.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 
-import net.bndy.wf.modules.app.AppBoType;
+import net.bndy.wf.lib.AppBoType;
 import net.bndy.wf.modules.app.models.Menu;
 import net.bndy.wf.modules.app.services.MenuService;
 import net.bndy.wf.test._Test;

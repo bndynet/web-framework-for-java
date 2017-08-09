@@ -1,4 +1,4 @@
-package net.bndy.wf.modules.app;
+package net.bndy.wf.lib;
 
 public class AppResponseResult {
 	private String title;

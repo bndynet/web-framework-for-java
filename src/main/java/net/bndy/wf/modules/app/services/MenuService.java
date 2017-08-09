@@ -9,9 +9,10 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import net.bndy.wf.modules.app.models.Menu;
+import net.bndy.wf.modules.app.services.repositories.MenuRepository;
 import net.bndy.wf.modules.cms.models.Page;
-import net.bndy.wf.modules.cms.services.ArticleRepository;
-import net.bndy.wf.modules.cms.services.PageRepository;
+import net.bndy.wf.modules.cms.services.ArticleService;
+import net.bndy.wf.modules.cms.services.repositories.PageRepository;
 
 @Service
 @Transactional
@@ -22,7 +23,7 @@ public class MenuService {
 	@Autowired
 	private PageRepository pageRepo;
 	@Autowired
-	private ArticleRepository articleRepo;
+	private ArticleService articleService;
 	
 	public List<Menu> getList() {
 		return this.menuRepo.findAll();
@@ -116,7 +117,7 @@ public class MenuService {
 					break;
 
 				case CMS_ARTICLE:
-					this.articleRepo.deleteByBoTypeId(menu.getBoTypeId());
+					this.articleService.deleteByBoTypeId(menu.getBoTypeId());
 					break;
 				default:
 					break;
