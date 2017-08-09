@@ -18,9 +18,10 @@ public class File extends _BaseEntity {
 	private String path;
 	private String fileName;
 	private String extensionName;
+	
 	@Enumerated(EnumType.ORDINAL)
 	private FileType fileType;
-
+	
 	public long getBoTypeId() {
 		return boTypeId;
 	}

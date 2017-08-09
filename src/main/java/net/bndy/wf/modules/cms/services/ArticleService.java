@@ -12,28 +12,20 @@ import net.bndy.wf.modules.cms.services.repositories.*;
 
 @Service
 @Transactional
-public class ArticleService {
+public class ArticleService extends _BaseService<Article> {
 
 	@Autowired
 	ArticleRepository articleRepo;
-	
 	@Autowired
 	CommentRepository commentRepo;
+	@Autowired
+	AttachmentRepository attachmentRepo;
 	
-	public Article get(long articleId){
-		return this.articleRepo.findOne(articleId);
-	}
-
-	public Article save(Article entity) {
-		return articleRepo.saveAndFlush(entity);
-	}
-
-	public void delete(long id) {
-		this.articleRepo.delete(id);
-	}
-
-	public Page<Article> findAll(Pageable pageable) {
-		return this.articleRepo.findAll(pageable);
+	@Override
+	public Article get(long article){
+		Article result = this.articleRepo.findOne(article);
+		result.setAttachments(this.attachmentRepo.findByBo(result.getBoTypeId(), result.getId()));
+		return result;	
 	}
 
 	public Page<Article> findByBoTypeId(long boTypeId, Pageable pageable) {
@@ -50,22 +42,5 @@ public class ArticleService {
 
 	public void deleteByBoTypeId(long boTypeId) {
 		this.articleRepo.deleteByBoTypeId(boTypeId);
-	}
-	
-	public Page<Comment> findByBoId(long articleId, Pageable pageable) {
-		return this.commentRepo.findByBoId(articleId, pageable);
-	}
-	
-	public Comment addComment(Comment comment, long articleId){
-		comment.setBoId(articleId);
-		return this.commentRepo.saveAndFlush(comment);
-	}
-	
-	public void deleteComment(long commentId){
-		this.commentRepo.delete(commentId);
-	}
-	
-	public void deleteAllComments(long articleId) {
-		this.commentRepo.deleteByBoId(articleId);
 	}
 }

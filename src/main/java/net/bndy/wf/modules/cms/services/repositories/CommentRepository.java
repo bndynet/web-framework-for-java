@@ -14,7 +14,7 @@ public interface CommentRepository extends JpaRepository<Comment, Long> {
 	
 	@Modifying
 	@Transactional
-	void deleteByBoId(long boId);
+	void deleteByBoIdAndBoTypeId(long boId, long boTypeId);
 	
 	@Query(value="SELECT t FROM #{#entityName} t "
 			+ "WHERE t.boId = :boId "

@@ -1,9 +1,5 @@
 package net.bndy.wf.test;
 
-import static org.junit.Assert.fail;
-
-import java.text.SimpleDateFormat;
-import java.util.Date;
 import java.util.List;
 
 import org.junit.Assert;
@@ -22,16 +18,17 @@ import net.bndy.wf.modules.cms.services.repositories.PageRepository;
 public class InitDataTest extends _Test {
 
 	@Autowired
+	MenuService menuService;
+	@Autowired
 	ArticleService articleService;
 	@Autowired
 	PageRepository pageRepo;
-	@Autowired
-	MenuService menuService;
 
 	@Test
 	public void initSeed() {
 		initMenuChildren(null, 10);
 		initMenuData();
+		Assert.assertTrue(this.menuService.getList().size() > 0);
 	}
 
 	private void initMenuChildren(Menu pmenu, int count) {
