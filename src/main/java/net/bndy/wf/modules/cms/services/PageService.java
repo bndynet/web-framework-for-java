@@ -15,6 +15,7 @@ public class PageService extends _BaseService<Page> {
 	@Autowired
 	PageRepository pageRepo;
 	
+	@Override
 	public Page get(long pageId) {
 		Page result = this.pageRepo.findOne(pageId);
 		result.setAttachments(this.attachmentRepo.findByBo(result.getBoTypeId(), result.getId()));

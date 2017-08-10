@@ -8,6 +8,7 @@ import javax.transaction.Transactional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import net.bndy.wf.lib._BaseService;
 import net.bndy.wf.modules.app.models.Menu;
 import net.bndy.wf.modules.app.services.repositories.MenuRepository;
 import net.bndy.wf.modules.cms.models.Page;
@@ -16,7 +17,7 @@ import net.bndy.wf.modules.cms.services.repositories.PageRepository;
 
 @Service
 @Transactional
-public class MenuService {
+public class MenuService extends _BaseService<Menu> {
 
 	@Autowired
 	private MenuRepository menuRepo;
@@ -106,7 +107,8 @@ public class MenuService {
 		}
 	}
 
-	public void delete(long id) throws Exception {
+	@Override
+	public boolean delete(long id) {
 		List<Menu> children = this.menuRepo.getChildren(id);
 		if (children.size() == 0) {
 			Menu menu = this.menuRepo.findOne(id);
@@ -124,9 +126,8 @@ public class MenuService {
 				}
 			}
 			this.menuRepo.delete(id);
+			return true;
 		}
-		else {
-			throw new Exception("The current menu has children.");
-		}
+		return false;
 	}
 }
