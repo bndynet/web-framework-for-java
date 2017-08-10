@@ -7,6 +7,10 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
+
+import io.swagger.annotations.Api;
+import io.swagger.annotations.ApiOperation;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 
@@ -14,6 +18,7 @@ import net.bndy.wf.lib._BaseApi;
 import net.bndy.wf.modules.cms.models.*;
 import net.bndy.wf.modules.cms.services.ArticleService;
 
+@Api(value = "Article API")
 @RestController
 @RequestMapping("/api/v1/cms/articles")
 public class ArticleController extends _BaseApi<Article> {
@@ -21,6 +26,7 @@ public class ArticleController extends _BaseApi<Article> {
 	@Autowired
 	ArticleService articleService;
 	
+	@ApiOperation(value = "Search title and content by bo or keywords") 
 	@RequestMapping(value="/search", method = RequestMethod.GET)
 	public Page<Article> get(
 			@RequestParam(name = "bo", required = false) Integer boTypeId,

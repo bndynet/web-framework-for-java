@@ -12,12 +12,14 @@ import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import net.bndy.wf.lib._BaseService;
 import net.bndy.wf.modules.app.models.*;
 import net.bndy.wf.modules.app.services.repositories.UserRepository;
 
 @Service
 @Transactional
-public class UserService {
+public class UserService extends _BaseService<User> {
+
 	@Autowired
 	private UserRepository userRepo;
 	
