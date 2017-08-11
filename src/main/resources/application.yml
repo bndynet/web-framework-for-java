@@ -10,6 +10,10 @@ application:
   title: Web Framework 
   version: 1.0.0.PRE
   
+# CUSTOM
+web:
+  upload-path: ~/upload
+  
 # LOGGING  
 logging:
   path: /var/logs  
@@ -51,11 +55,13 @@ spring:
 
   # MVC
   mvc:
+    static-path-pattern: /**
     throw-exception-if-no-handler-found: true
     
   # RESOURCES
   resources:
-    add-mappings: false
+    add-mappings: true
+    static-locations: classpath:/META-INF/resources/,classpath:/resources/,classpath:/static/,classpath:/public/,file:${web.upload-path}
 
   # DATASOURCE (DataSourceAutoConfiguration & DataSourceProperties)  
   datasource:

@@ -50,7 +50,10 @@ public class Application {
 	}
 
 	private ApiInfo apiInfo() {
-		return new ApiInfoBuilder().title("API Documentation").description("").version("1.0")
+		return new ApiInfoBuilder()
+				.title("API Documentation")
+				.version("1.0")
+				.description("This documentation is for web-framework-for-java project. It shows all APIs you can access. Note that, please remove it before publishing to production.")
 				.contact(new Contact("Bendy Zhang", "http://bndy.net", "zb@bndy.net")).build();
 	}
 }

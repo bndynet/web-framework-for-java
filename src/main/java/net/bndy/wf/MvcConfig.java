@@ -19,6 +19,7 @@ public class MvcConfig extends WebMvcConfigurerAdapter {
 	public void addResourceHandlers(ResourceHandlerRegistry registry) {
 		registry.addResourceHandler("/doc/swagger-ui.html**").addResourceLocations("classpath:/META-INF/resources/swagger-ui.html");
 		registry.addResourceHandler("/doc/webjars/**").addResourceLocations("classpath:/META-INF/resources/webjars/");
+		super.addResourceHandlers(registry);
 	}
 	
     @Override
@@ -29,6 +30,9 @@ public class MvcConfig extends WebMvcConfigurerAdapter {
 	
     @Override
     public void addViewControllers(ViewControllerRegistry registry) {
+    	// documentation for API
+		registry.addRedirectViewController("/docs/api", "/docs/api/index.html");
+
 		registry.addRedirectViewController("/doc/api", "/doc/swagger-ui.html");
 		registry.addRedirectViewController("/doc/v2/api-docs", "/v2/api-docs");
         registry.addRedirectViewController("/doc/swagger-resources/configuration/ui","/swagger-resources/configuration/ui");
