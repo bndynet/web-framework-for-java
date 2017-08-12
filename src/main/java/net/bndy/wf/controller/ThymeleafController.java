@@ -20,19 +20,9 @@ public class ThymeleafController {
 	public String helloHtml(Map<String, Object> map) {
 		List<String> lst = new ArrayList<String>();
 		lst.add("/");
-		lst.add("/api/welcome?name=Bndy");
-		lst.add("/api/jpa/getcities");
-		lst.add("/api/jpa/getcity/54");
-		lst.add("/api/jpa/getcitiesbycountry?id=6");
-		lst.add("/api/jpa/error");
-		lst.add("/api/users");
-		
-		lst.add("/api/categories");
-		lst.add("/api/user-profile/1");
-		
-		
 		lst.add("/v2/api-docs");
-		lst.add("/doc/api");
+		lst.add("/swagger-ui.html");
+		lst.add("/docs/api");
 
 		map.put("who", "Bing Z");
 		map.put("time", new Date());

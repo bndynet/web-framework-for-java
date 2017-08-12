@@ -17,8 +17,8 @@ public class MvcConfig extends WebMvcConfigurerAdapter {
 	
 	@Override
 	public void addResourceHandlers(ResourceHandlerRegistry registry) {
-		registry.addResourceHandler("/doc/swagger-ui.html**").addResourceLocations("classpath:/META-INF/resources/swagger-ui.html");
-		registry.addResourceHandler("/doc/webjars/**").addResourceLocations("classpath:/META-INF/resources/webjars/");
+		registry.addResourceHandler("/webjars/**").addResourceLocations("classpath:/META-INF/resources/webjars/");
+		registry.addResourceHandler("/static/**").addResourceLocations("classpath:/static/");
 		super.addResourceHandlers(registry);
 	}
 	
@@ -33,13 +33,6 @@ public class MvcConfig extends WebMvcConfigurerAdapter {
     	// documentation for API
 		registry.addRedirectViewController("/docs/api", "/docs/api/index.html");
 
-		registry.addRedirectViewController("/doc/api", "/doc/swagger-ui.html");
-		registry.addRedirectViewController("/doc/v2/api-docs", "/v2/api-docs");
-        registry.addRedirectViewController("/doc/swagger-resources/configuration/ui","/swagger-resources/configuration/ui");
-        registry.addRedirectViewController("/doc/swagger-resources/configuration/security","/swagger-resources/configuration/security");
-        registry.addRedirectViewController("/doc/swagger-resources", "/swagger-resources");
-        //registry.addViewController("/home").setViewName("home");
-        //registry.addViewController("/").setViewName("home");
         registry.addViewController("/login").setViewName("login");
     }
 

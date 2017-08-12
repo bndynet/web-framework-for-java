@@ -15,7 +15,9 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
         http
         	.csrf().disable() // TODO: remove before release
             .authorizeRequests()
-                .antMatchers("/", "/home", "/api/*/**", "/v2/api-docs", "/docs/*/**").permitAll()
+                .antMatchers("/", "/home", "/webjars/*/**", "/static/*/**", 
+                		"/api/*/**", 
+                		"/v2/api-docs", "/docs/*/**").permitAll()
                 .anyRequest().authenticated()
                 .and()
             .formLogin()
