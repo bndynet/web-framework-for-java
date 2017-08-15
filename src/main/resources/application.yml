@@ -9,11 +9,11 @@ server:
 application:
   title: Web Framework 
   version: 1.0.0.PRE
-  
-# CUSTOM
-web:
-  upload-path: ~/upload
-  
+  # CUSTOM
+  upload-path: upload
+  upload-path-url: http://files.bndy.net
+  rename-upload-file: false
+
 # LOGGING  
 logging:
   path: /var/logs  
@@ -52,6 +52,12 @@ spring:
 #    test-connection: false # Test that the mail server is available on startup.  
 #    username: # Login user of the SMTP server. 
 #    #properties.*: # Additional JavaMail session properties.  
+
+  # Upload
+  http:
+    multipart:
+      max-file-size: 1024KB
+      max-request-size: 1024KB
 
   # MVC
   mvc:

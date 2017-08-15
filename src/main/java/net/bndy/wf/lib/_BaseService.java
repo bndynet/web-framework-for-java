@@ -7,8 +7,12 @@ import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.jpa.repository.JpaRepository;
 
+import net.bndy.wf.ApplicationConfig;
+
 public class _BaseService<T> {
 
+	@Autowired
+	protected ApplicationConfig applicationConfig;
 	@Autowired
 	JpaRepository<T, Long> repo;
 	
