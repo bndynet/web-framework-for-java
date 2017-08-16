@@ -11,6 +11,8 @@ import java.util.Date;
 import java.util.List;
 import java.util.UUID;
 
+import javax.servlet.http.HttpServletRequest;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
@@ -75,15 +77,17 @@ public abstract class _BaseApi<T extends _BaseEntity> {
 
 	@ApiOperation(value = "Upload files")
 	@RequestMapping(value = "/upload", method = RequestMethod.POST, headers = ("content-type=multipart/*"), consumes = MediaType.APPLICATION_FORM_URLENCODED_VALUE)
-	public String upload(@RequestPart(required = true) MultipartFile file) throws IllegalStateException, IOException {
+	public Object upload(
+			@RequestPart(required = true) MultipartFile file,
+			HttpServletRequest request) throws IllegalStateException, IOException {
 
 		String destRelativePath = Paths.get(File.separator, new SimpleDateFormat("yyyy-MM").format(new Date()))
 				.toString();
+		String extensionName = file.getOriginalFilename().substring(file.getOriginalFilename().indexOf("."));
+
 		if (this.appliationConfig.isRenameUploadFile()) {
 			destRelativePath = Paths
-					.get(destRelativePath,
-							UUID.randomUUID().toString()
-									+ file.getOriginalFilename().substring(file.getOriginalFilename().indexOf(".")))
+					.get(destRelativePath, UUID.randomUUID().toString() + extensionName)
 					.toString();
 		} else {
 			destRelativePath = Paths.get(destRelativePath, file.getOriginalFilename()).toString();
@@ -104,6 +108,14 @@ public abstract class _BaseApi<T extends _BaseEntity> {
 		}
 		out.flush();
 		out.close();
-		return destRelativePath;
+		
+		FileInfo fi = new FileInfo();
+		fi.setExtensionName(extensionName);
+		fi.setPath(destAbsPath);
+		fi.setName(file.getOriginalFilename());
+		fi.setRelativePath(destRelativePath);
+		fi.setSize(file.getSize());
+
+		return fi;
 	}
 }

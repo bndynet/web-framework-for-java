@@ -2,7 +2,7 @@
 <head>
 </head>
 <body>
-    <form action="/api/v1/cms/pages/upload" method="post" enctype="multipart/form-data">
+    <form th:action="@{/api/v1/cms/pages/upload(boId=66555,boTypeId=8888)}" method="post" enctype="multipart/form-data">
         <p>
             Select a file : <input type="file" name="file" size="45" />
         </p>

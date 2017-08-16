@@ -1,9 +1,13 @@
 package net.bndy.wf.modules.cms.services;
 
+import java.io.File;
+import java.nio.file.Paths;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 
+import net.bndy.wf.ApplicationConfig;
 import net.bndy.wf.modules.cms.models.Attachment;
 import net.bndy.wf.modules.cms.models.Comment;
 import net.bndy.wf.modules.cms.services.repositories.AttachmentRepository;
@@ -15,6 +19,8 @@ public abstract class _BaseService<T> extends net.bndy.wf.lib._BaseService<T> {
 	CommentRepository commentRepo;
 	@Autowired
 	AttachmentRepository attachmentRepo;
+	@Autowired
+	ApplicationConfig applicationConfig;
 
 	public Page<Comment> findByBoId(long pageId, Pageable pageable) {
 		return this.commentRepo.findByBoId(pageId, pageable);
@@ -37,10 +43,20 @@ public abstract class _BaseService<T> extends net.bndy.wf.lib._BaseService<T> {
 		return this.attachmentRepo.saveAndFlush(attachment);
 	}
 
-	public void deleteAttachment(long id) {
-		Attachment entity = this.attachmentRepo.findOne(id);
+	public void deleteAllAttachments(long boId, long boTypeId) {
+		for (Attachment attachment : this.attachmentRepo.findByBo(boTypeId, boId)) {
+			this.deleteAttachment(attachment.getId());
+		}
+	}
+
+	public void deleteAttachment(long attachmentId) {
+		Attachment entity = this.attachmentRepo.findOne(attachmentId);
 		if (entity != null) {
-			// TODO: remove files from disk
+			String filePath = this.applicationConfig.getUploadPath() + entity.getPath();
+			File file = new File(filePath);
+			if (file.isFile() && file.exists()) {
+				file.delete();
+			}
 		}
 		this.attachmentRepo.delete(entity);
 	}
