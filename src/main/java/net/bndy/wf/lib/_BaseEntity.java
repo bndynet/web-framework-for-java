@@ -92,7 +92,7 @@ public abstract class _BaseEntity implements Serializable {
 
 	@PrePersist
 	public void setCreateDate() {
-		this.createDate = new Date();
+		this.lastUpdate = this.createDate = new Date();
 	}
 
 	@PreUpdate
