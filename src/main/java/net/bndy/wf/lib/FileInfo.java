@@ -52,7 +52,7 @@ public class FileInfo {
 	}
 
 	public FileType getType() {
-		if (this.type != null) {
+		if (this.type == null) {
 			return FileInfo.getTypeByName(this.getName());
 		}
 		return this.type;
