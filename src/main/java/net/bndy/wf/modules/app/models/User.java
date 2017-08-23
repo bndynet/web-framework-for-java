@@ -10,36 +10,38 @@ import net.bndy.wf.lib._BaseEntity;
 public class User extends _BaseEntity {
 	private static final long serialVersionUID = 1L;
 
-	private String userName;
+	private String username;
     private String password;
-    private boolean disabled;
-
-    public boolean isDisabled() {
-		return disabled;
-	}
-
-	public void setDisabled(boolean disabled) {
-		this.disabled = disabled;
-	}
+    private boolean enabled;
 
 	public User(){}
 	
 	public User(User user){
-		this.userName = user.getUserName();
+		this.username = user.getUsername();
 		this.password = user.getPassword();
-		this.disabled = user.isDisabled();
+		this.enabled = user.isEnabled();
 	}
 
-    public String getUserName() {
-        return userName;
-    }
-    public void setUserName(String userName) {
-        this.userName = userName;
-    }
     public String getPassword() {
         return password;
     }
     public void setPassword(String password) {
         this.password = password;
     }
+
+	public boolean isEnabled() {
+		return enabled;
+	}
+
+	public void setEnabled(boolean enabled) {
+		this.enabled = enabled;
+	}
+
+	public String getUsername() {
+		return username;
+	}
+
+	public void setUsername(String username) {
+		this.username = username;
+	}
 }

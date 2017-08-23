@@ -35,7 +35,7 @@ public class UserService extends _BaseService<User> {
 		if(users.size() == 1) {
 			User user = users.get(0);
 			String encodedPassword = passwordEncoder.encode(password);
-			if(user.getPassword().equals(password) && this.passwordEncoder.matches(password, encodedPassword) && !user.isDisabled()){
+			if(user.getPassword().equals(password) && this.passwordEncoder.matches(password, encodedPassword) && !user.isEnabled()){
 				logger.info("`{}` logged in", account);
 				return users.get(0);
 			}
@@ -47,13 +47,13 @@ public class UserService extends _BaseService<User> {
 	
 	public User register(User user){
 		user.setPassword(passwordEncoder.encode(user.getPassword()));
-		user.setDisabled(false);
+		user.setEnabled(true);
 		return userRepo.saveAndFlush(user);
 	}
 	
 	public User disable(Long id){
 		User u = userRepo.findOne(id);
-		u.setDisabled(true);
+		u.setEnabled(false);
 		return userRepo.saveAndFlush(u);
 	}
 	

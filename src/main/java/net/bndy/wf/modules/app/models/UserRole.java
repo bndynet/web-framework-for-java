@@ -10,7 +10,7 @@ import net.bndy.wf.lib._BaseEntity;
 public class UserRole extends _BaseEntity {
 	private static final long serialVersionUID = 1L;
 	private String role;
-    private Long userId;
+    private String username;
   
     public String getRole() {
         return role;
@@ -18,10 +18,10 @@ public class UserRole extends _BaseEntity {
     public void setRole(String role) {
         this.role = role;
     }
-    public Long getUserId() {
-        return userId;
-    }
-    public void setUserId(Long userId) {
-        this.userId = userId;
-    }
+	public String getUsername() {
+		return username;
+	}
+	public void setUsername(String username) {
+		this.username = username;
+	}
 }

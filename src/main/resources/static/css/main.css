@@ -1,4 +1,21 @@
 .page-login .panel {
-	width: 460px;
+	width: 360px;
 	margin: 50px auto;
+}
+
+.page-login h1 {
+	margin: 0;
+}
+
+.page-login .panel .panel-body {
+	padding: 0 30px 30px 30px;
+}
+
+.page-login .panel .panel-body form {
+	margin-top: 30px;
+}
+
+.page-login .panel .panel-body .validation-messages {
+	margin: 0 -30px;
+	padding: 5px 15px;
 }

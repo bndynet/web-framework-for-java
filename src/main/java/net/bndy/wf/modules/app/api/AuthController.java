@@ -25,7 +25,7 @@ public class AuthController extends _BaseApi<User> {
 		User u = (User) this.userService.login(username, password);
 		if(u != null) {
 			User responseUser = new User();
-			responseUser.setUserName(u.getUserName());
+			responseUser.setUsername(u.getUsername());
 			responseUser.setCreateDate(u.getCreateDate());
 			responseUser.setId(u.getId());
 			responseUser.setLastUpdate(u.getLastUpdate());
