@@ -1,16 +1,12 @@
-<!DOCTYPE html>
-<html xmlns="http://www.w3.org/1999/xhtml"
-	xmlns:th="http://www.thymeleaf.org"
-	xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity3">
+<html xmlns:th="http://www.thymeleaf.org"
+	xmlns:layout="http://www.ultraq.net.nz/web/thymeleaf/layout"
+	layout:decorator="common/layout_main">
 <head>
-<title>Spring Security Example</title>
+  <title>Home Page</title>
 </head>
 <body>
-	<div th:include="_header::default('home page')"></div>
-	<h1>Welcome!</h1>
-
-	<p>
-		Click <a th:href="@{/hello}">here</a> to hello page.
-	</p>
+  <div layout:fragment="content">
+    <p>This is a paragraph from the content page</p>
+  </div>
 </body>
 </html>

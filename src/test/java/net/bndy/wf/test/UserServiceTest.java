@@ -26,7 +26,7 @@ public class UserServiceTest extends _Test {
 		if (u.getId() <= 0) {
 			fail("failed to register new user");
 		}
-		boolean result = userService.login(u.getUserName(), u.getPassword());
-		Assert.assertEquals(result, true);
+		u = userService.login(u.getUserName(), u.getPassword());
+		Assert.assertNotNull(u);
 	}
 }

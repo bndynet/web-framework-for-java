@@ -42,7 +42,7 @@ public class ThymeleafController {
 	
 	@PostMapping("/test/upload/handler") 
 	public String upload(@RequestParam("file") MultipartFile file) throws IllegalStateException, IOException {
-		String destFile = new File(".").getCanonicalPath() + File.separator + "a.txt";
+		String destFile = new File(".").getCanonicalPath() + File.separator + file.getOriginalFilename();
 		InputStream in = file.getInputStream();
 		OutputStream out = new FileOutputStream(new File(destFile));
 		int read = 0;

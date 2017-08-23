@@ -1,19 +1,22 @@
 <!DOCTYPE html>
-<html xmlns:th="http://www.thymeleaf.org">
+<html xmlns:th="http://www.thymeleaf.org"
+	xmlns:layout="http://www.ultraq.net.nz/web/thymeleaf/layout"
+	layout:decorator="common/layout">
 <head>
-<meta charset="UTF-8" />
-<title>Thymeleaf</title>
+<title>Hello</title>
 </head>
 <body>
-	<div th:include="_header::default('hello page')"></div>
-	<h2>
-		Hello <span th:text="${who}">Bendy</span>! <small> current
-			time: <span th:text="${time}"></span>
-		</small>
-	</h2>
+	<div layout:fragment="body">
+		<h2>
+			Hello <span th:text="${who}">Bendy</span>! <small> current
+				time: <span th:text="${time}"></span>
+			</small>
+		</h2>
 
-	<ul>
-		<li th:each="item:${urls}"><a th:href="@{${item}}" th:text="${item}"></a></li>
-	</ul>
+		<ul>
+			<li th:each="item:${urls}"><a th:href="@{${item}}"
+				th:text="${item}"></a></li>
+		</ul>
+	</div>
 </body>
 </html>

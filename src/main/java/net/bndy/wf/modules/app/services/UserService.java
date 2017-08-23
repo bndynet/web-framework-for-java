@@ -30,19 +30,19 @@ public class UserService extends _BaseService<User> {
 		return userRepo.findAll(pageable);
 	}
 	
-	public boolean login(String account, String password) {
+	public User login(String account, String password) {
 		List<User> users = userRepo.findByUserName(account);
 		if(users.size() == 1) {
 			User user = users.get(0);
 			String encodedPassword = passwordEncoder.encode(password);
 			if(user.getPassword().equals(password) && this.passwordEncoder.matches(password, encodedPassword) && !user.isDisabled()){
 				logger.info("`{}` logged in", account);
-				return true;
+				return users.get(0);
 			}
 		}
 		
 		logger.error("`{}` failed to log in", account);
-		return false;
+		return null;
 	}
 	
 	public User register(User user){

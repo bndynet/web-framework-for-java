@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+
+<html xmlns:th="http://www.thymeleaf.org"
+	xmlns:layout="http://www.ultraq.net.nz/web/thymeleaf/layout">
+<head>
+<title layout:title-pattern="$DECORATOR_TITLE - $CONTENT_TITLE">Web
+	Framework</title>
+<link rel="stylesheet" type="text/css"
+	href="/webjars/bootstrap/3.3.7/css/bootstrap.min.css" />
+<link rel="stylesheet" type="text/css" href="/static/css/main.css" />
+
+<script type="text/javascript"
+	src="/webjars/jquery/1.11.1/jquery.min.js"></script>
+<script type="text/javascript"
+	src="/webjars/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+</head>
+<body>
+	<div>
+		<div th:replace="common/header::default('Layout Main')"></div>
+		<div layout:fragment="content"></div>
+		<div th:replace="common/footer::footer"></div>
+	</div>
+</body>
+</html>
