@@ -1,0 +1,94 @@
+@import "variables";
+
+html, body {
+	margin: 0;
+	padding: 0;
+	height: 100%;
+	font-size: 14px;
+	font-weight: 200;
+}
+
+.btn:focus,
+.btn:active:focus {
+	outline: none;
+}
+
+.btn-primary {
+	background-color: $color-primary;
+	border: darken($color-primary, 5%);
+
+	&:hover,
+	&:active,
+	&:hover:active,
+	&:focus,
+	&:hover:active:focus {
+		background-color: darken($color-primary, 5%);
+	}
+}
+
+.page-login,
+.page-signup {
+	padding-top: 50px;
+	background-color: #efefef;
+	height: 100%;
+	
+	.logo-block {
+		text-align: center;
+		margin-bottom: 30px;
+
+		img {
+			width: 126px;
+			height: 126px;
+			border-radius: 50%;
+		}
+	}
+
+	.panel {
+		width: 360px;
+		margin: 0 auto;
+
+		.panel-body {
+			padding: 30px;
+
+			form {
+				margin-top: 30px;
+				
+				.form-group {
+					margin-bottom: 25px;
+				}
+			}
+
+			.validation-messages {
+				background-color: $color-danger;
+				color: #ffffff;
+				margin: 0 -30px;
+				padding: 5px 15px;
+			}
+		}
+
+		.panel-footer {
+			text-align: center;
+		}
+		
+		&.login {
+			border: none;
+			box-shadow: 0 3px 5px #dddddd;
+		}
+		
+		&.logout {
+			.panel-body {
+				padding: 5rem 0 6rem 0;
+				font-size: 1.5rem;
+				text-align: center;
+			}
+		}
+	}
+	
+	h1, h3 {
+		margin: 0;
+	}
+	
+	footer {
+		text-align: center;
+	}
+}

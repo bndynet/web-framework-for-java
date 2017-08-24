@@ -6,6 +6,8 @@ import java.util.Date;
 import java.util.List;
 import java.util.Map;
 
+import org.springframework.security.core.Authentication;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -28,9 +30,11 @@ public class ThymeleafController {
 		lst.add("/swagger-ui.html");
 		lst.add("/docs/api");
 
-		map.put("who", "Bing Z");
 		map.put("time", new Date());
 		map.put("urls", lst);
+		
+		Authentication auth = SecurityContextHolder.getContext().getAuthentication();
+		map.put("who", auth.getName());
 
 		return "/hello";
 	}

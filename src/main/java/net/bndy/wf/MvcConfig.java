@@ -33,6 +33,6 @@ public class MvcConfig extends WebMvcConfigurerAdapter {
     	// documentation for API
 		registry.addRedirectViewController("/docs/api", "/docs/api/index.html");
 
-        registry.addViewController("/login").setViewName("login");
+//        registry.addViewController("/login").setViewName("login");
     }
 }

@@ -4,6 +4,6 @@ import org.springframework.data.jpa.repository.JpaRepository;
 
 import net.bndy.wf.modules.app.models.*;
 
-public interface UserRepository extends JpaRepository<User, Long> {
-    User findByUsername(String username);
+public interface RoleRepository extends JpaRepository<Role, Long>  {
+
 }

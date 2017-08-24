@@ -1,5 +1,6 @@
 package net.bndy.wf.modules.app.services;
 
+import java.util.HashSet;
 import java.util.List;
 
 import org.slf4j.Logger;
@@ -14,6 +15,7 @@ import org.springframework.transaction.annotation.Transactional;
 
 import net.bndy.wf.lib._BaseService;
 import net.bndy.wf.modules.app.models.*;
+import net.bndy.wf.modules.app.services.repositories.RoleRepository;
 import net.bndy.wf.modules.app.services.repositories.UserRepository;
 
 @Service
@@ -22,42 +24,56 @@ public class UserService extends _BaseService<User> {
 
 	@Autowired
 	private UserRepository userRepo;
-	
+	@Autowired
+	private RoleRepository roleRepository;
+
 	private Logger logger = LoggerFactory.getLogger(UserService.class);
 	private PasswordEncoder passwordEncoder = new BCryptPasswordEncoder();
-	
+
 	public Page<User> getUsers(Pageable pageable) {
 		return userRepo.findAll(pageable);
 	}
-	
+
 	public User login(String account, String password) {
-		List<User> users = userRepo.findByUserName(account);
-		if(users.size() == 1) {
-			User user = users.get(0);
+		User user = userRepo.findByUsername(account);
+		if (user != null) {
 			String encodedPassword = passwordEncoder.encode(password);
-			if(user.getPassword().equals(password) && this.passwordEncoder.matches(password, encodedPassword) && !user.isEnabled()){
+			if (user.getPassword().equals(password) && this.passwordEncoder.matches(password, encodedPassword)
+					&& !user.isEnabled()) {
 				logger.info("`{}` logged in", account);
-				return users.get(0);
+				return user;
 			}
 		}
-		
+
 		logger.error("`{}` failed to log in", account);
 		return null;
 	}
-	
-	public User register(User user){
+
+	public User register(User user) {
 		user.setPassword(passwordEncoder.encode(user.getPassword()));
 		user.setEnabled(true);
 		return userRepo.saveAndFlush(user);
 	}
-	
-	public User disable(Long id){
+
+	public User disable(Long id) {
 		User u = userRepo.findOne(id);
 		u.setEnabled(false);
 		return userRepo.saveAndFlush(u);
 	}
-	
+
 	public List<User> getAll() {
 		return userRepo.findAll();
 	}
+
+	public User findByUsername(String username) {
+		return this.userRepo.findByUsername(username);
+	}
+
+	@Override
+	public User save(User entity) {
+		entity.setPassword(passwordEncoder.encode(entity.getPassword()));
+		entity.setRoles(new HashSet<>(roleRepository.findAll()));
+		return super.save(entity);
+	}
+
 }

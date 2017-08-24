@@ -1,7 +1,13 @@
 package net.bndy.wf.modules.app.models;
 
+import java.util.Set;
+
 import javax.persistence.Entity;
+import javax.persistence.JoinTable;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToMany;
 import javax.persistence.Table;
+import javax.persistence.Transient;
 
 import net.bndy.wf.lib._BaseEntity;
 
@@ -12,7 +18,16 @@ public class User extends _BaseEntity {
 
 	private String username;
     private String password;
+
+    @Transient
+    private String passwordConfirm;
     private boolean enabled;
+    
+    @ManyToMany
+    @JoinTable(name = "app_user_role", 
+    	joinColumns = @JoinColumn(name = "user_id"), 
+    	inverseJoinColumns = @JoinColumn(name = "role_id"))
+    private Set<Role> roles;
 
 	public User(){}
 	
@@ -43,5 +58,21 @@ public class User extends _BaseEntity {
 
 	public void setUsername(String username) {
 		this.username = username;
+	}
+
+	public Set<Role> getRoles() {
+		return roles;
+	}
+
+	public void setRoles(Set<Role> roles) {
+		this.roles = roles;
+	}
+
+	public String getPasswordConfirm() {
+		return passwordConfirm;
+	}
+
+	public void setPasswordConfirm(String passwordConfirm) {
+		this.passwordConfirm = passwordConfirm;
 	}
 }

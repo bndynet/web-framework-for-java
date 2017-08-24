@@ -3,29 +3,31 @@
 	xmlns:layout="http://www.ultraq.net.nz/web/thymeleaf/layout"
 	layout:decorator="common/layout">
 <head>
-<title>Login</title>
+<title>Sign Up</title>
 </head>
 <body>
-	<div layout:fragment="body" class="page-login">
+	<div layout:fragment="body" class="page-signup">
 		<div class="panel panel-primary login" th:if="!${param.logout}">
 			<div class="panel-body">
 				<div class="logo-block">
 					<img src="/static/img/logo.png" />
 				</div>
-				<div class="validation-messages bg-danger" th:if="${param.error}">
-					<div>Invalid username and password.</div>
-				</div>
-				<form th:action="@{/login}" method="post">
+				<h3>Create your account</h3>
+				<form th:action="@{/signup}" th:object="${model}" method="post">
 					<div class="form-group">
 						<input type="text"
-							class="form-control" name="username" placeholder="Username" />
+							class="form-control" name="username" th:field="*{username}" placeholder="Username" />
 					</div>
 					<div class="form-group">
 						<input type="password"
-							class="form-control" name="password" placeholder="Password" />
+							class="form-control" name="password" th:field="*{password}" placeholder="Password" />
 					</div>
 					<div class="form-group">
-						<input type="submit" class="btn btn-primary btn-block" value="Let me in." />
+						<input type="password"
+							class="form-control" name="passwordConfirm" th:field="*{passwordConfirm}" placeholder="Re-type Password" />
+					</div>
+					<div class="form-group">
+						<input type="submit" class="btn btn-primary btn-block" value="Sign up now" />
 					</div>
 				</form>
 				<div th:replace="common/footer::footer"></div>
