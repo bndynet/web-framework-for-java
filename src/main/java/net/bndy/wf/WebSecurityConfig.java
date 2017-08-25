@@ -21,7 +21,7 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 
 	@Autowired
 	private UserDetailsService userDetailsService;
-
+	
 	@Bean
 	public BCryptPasswordEncoder bCryptPasswordEncoder() {
 		return new BCryptPasswordEncoder();
@@ -29,12 +29,26 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 
 	@Override
 	protected void configure(HttpSecurity http) throws Exception {
-		http.csrf().disable() // TODO: remove before release
-				.authorizeRequests()
-				.antMatchers("/", "/home", "/webjars/*/**", "/static/*/**", "/api/*/**", "/test/*/**", "/v2/api-docs",
-						"/docs/*/**", "/logout", "/signup")
-				.permitAll().anyRequest().authenticated().and().formLogin().loginPage("/login").permitAll().and()
-				.logout().permitAll();
+		// TODO: remove before release
+		http.csrf().disable();
+		
+		http.authorizeRequests()
+			.antMatchers("/webjars/*/**", "/static/*/**", "/api/*/**", "/test/*/**", "/v2/api-docs",
+						"/docs/*/**",
+						"/sso/login*").permitAll()
+			.anyRequest().authenticated();
+
+		http
+			.formLogin()
+				.loginPage("/sso/login")
+				.successHandler(new AuthSuccessHandler("/"))
+				.permitAll()
+				.and()
+			.logout()
+				.logoutUrl("/sso/logout")
+				.logoutSuccessUrl("/sso/login?logout")
+				.deleteCookies("JSESSIONID")
+				.permitAll();
 	}
 
 	@Autowired

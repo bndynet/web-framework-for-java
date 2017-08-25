@@ -13,7 +13,7 @@
 					<img src="/static/img/logo.png" />
 				</div>
 				<h3>Create your account</h3>
-				<form th:action="@{/signup}" th:object="${model}" method="post">
+				<form th:action="@{/sso/signup}" th:object="${model}" method="post">
 					<div class="form-group">
 						<input type="text"
 							class="form-control" name="username" th:field="*{username}" placeholder="Username" />

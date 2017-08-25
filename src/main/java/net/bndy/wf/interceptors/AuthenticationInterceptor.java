@@ -14,11 +14,14 @@ public class AuthenticationInterceptor extends HandlerInterceptorAdapter {
 	@Override
 	public boolean preHandle(HttpServletRequest request, HttpServletResponse response, Object handler)
 			throws Exception {
-		String uri = request.getRequestURI();
-		if(!uri.toLowerCase().endsWith(LOGIN_URI)) {
-			Object user = request.getSession().getAttribute(SESSION_KEY);
-			if(user == null){
-				return false;
+		
+		if (!request.getMethod().equalsIgnoreCase("OPTIONS")) {		// pass pre-flight requests in Cross-origin in AJAX
+			String uri = request.getRequestURI();
+			if(!uri.toLowerCase().endsWith(LOGIN_URI)) {
+				Object user = request.getSession().getAttribute(SESSION_KEY);
+				if(user == null){
+					return false;
+				}
 			}
 		}
 		return true;

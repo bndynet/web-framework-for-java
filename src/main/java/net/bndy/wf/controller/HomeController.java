@@ -15,14 +15,9 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.multipart.MultipartFile;
 
 @Controller
-@RequestMapping("/")
-public class ThymeleafController {
-	@RequestMapping("/")
-	public String home(){
-		return "/home";
-	}
+public class HomeController {
 	
-	@RequestMapping("/hello")
+	@RequestMapping("/")
 	public String helloHtml(Map<String, Object> map) {
 		List<String> lst = new ArrayList<String>();
 		lst.add("/");
@@ -36,7 +31,7 @@ public class ThymeleafController {
 		Authentication auth = SecurityContextHolder.getContext().getAuthentication();
 		map.put("who", auth.getName());
 
-		return "/hello";
+		return "/index";
 	}
 	
 	@RequestMapping("/test/upload")

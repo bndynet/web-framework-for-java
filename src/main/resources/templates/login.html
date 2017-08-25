@@ -15,7 +15,7 @@
 				<div class="validation-messages bg-danger" th:if="${param.error}">
 					<div>Invalid username and password.</div>
 				</div>
-				<form th:action="@{/login}" method="post">
+				<form th:action="@{/sso/login}" method="post">
 					<div class="form-group">
 						<input type="text"
 							class="form-control" name="username" placeholder="Username" />
