@@ -3,25 +3,28 @@ package net.bndy.wf.interceptors;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Component;
 import org.springframework.web.servlet.handler.HandlerInterceptorAdapter;
 
+import net.bndy.wf.Constant;
+
 @Component
 public class AuthenticationInterceptor extends HandlerInterceptorAdapter {
-	private static final String LOGIN_URI = "/api/user/login";
-	private static final String SESSION_KEY = "USER";
+
+	private Logger logger = LoggerFactory.getLogger(this.getClass());
 	
 	@Override
 	public boolean preHandle(HttpServletRequest request, HttpServletResponse response, Object handler)
 			throws Exception {
-		
-		if (!request.getMethod().equalsIgnoreCase("OPTIONS")) {		// pass pre-flight requests in Cross-origin in AJAX
+		// pass pre-flight requests in Cross-origin in AJAX
+		if (!request.getMethod().equalsIgnoreCase("OPTIONS")) {
 			String uri = request.getRequestURI();
-			if(!uri.toLowerCase().endsWith(LOGIN_URI)) {
-				Object user = request.getSession().getAttribute(SESSION_KEY);
-				if(user == null){
-					return false;
-				}
+			logger.info("Request {}", uri);
+			Object user = request.getSession().getAttribute(Constant.KEY_SESSION_USER);
+			if(user == null){
+				return false;
 			}
 		}
 		return true;

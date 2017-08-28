@@ -7,7 +7,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import io.swagger.annotations.Api;
-import net.bndy.wf.lib.UnanthorizedException;
+import net.bndy.wf.exceptions.UnanthorizedException;
 import net.bndy.wf.lib._BaseApi;
 import net.bndy.wf.modules.app.models.User;
 import net.bndy.wf.modules.app.services.UserService;

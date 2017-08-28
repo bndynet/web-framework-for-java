@@ -1,0 +1,32 @@
+<ehcache xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:noNamespaceSchemaLocation="ehcache.xsd" updateCheck="true"
+	monitoring="autodetect" dynamicConfig="true">
+
+<!--  options： user.home, user.dir, java.io.tmpdir -->
+<diskStore path="java.io.tmpdir/wf_cache_ehcache" />
+
+<!--
+	memoryStoreEvictionPolicy: FIFO，first in first out
+		LFU， Less Frequently Used
+		LRU，Least Recently Used
+-->
+<defaultCache 
+	maxEntriesLocalHeap="10000" 
+ 	eternal="false" 
+ 	timeToIdleSeconds="120" 
+ 	timeToLiveSeconds="120" 
+ 	maxEntriesLocalDisk="10000000" 
+ 	diskExpiryThreadIntervalSeconds="120" 
+ 	memoryStoreEvictionPolicy="LRU">
+
+	<!-- Temporary store (localTempSwap) Persistent store (localRestartable)  -->
+	<persistence strategy="localTempSwap"/> 
+</defaultCache> 
+
+<!-- 
+<cache name="[cacheName]" maxEntriesLocalHeap="10000"
+	maxEntriesLocalDisk="1000" eternal="false" diskSpoolBufferSizeMB="20"
+	timeToIdleSeconds="300" timeToLiveSeconds="600"
+	memoryStoreEvictionPolicy="LFU" transactionalMode="off" />
+ -->
+</ehcache>

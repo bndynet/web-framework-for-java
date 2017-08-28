@@ -14,7 +14,7 @@ import net.bndy.wf.lib.AppException;
 @RestController
 @ControllerAdvice
 public class GlobalExceptionHandler {
-	private Logger logger = LoggerFactory.getLogger(GlobalExceptionHandler.class);
+	private Logger logger = LoggerFactory.getLogger(this.getClass());
 	
 	@ExceptionHandler(value = Exception.class)
 	@ResponseBody
