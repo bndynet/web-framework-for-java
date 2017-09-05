@@ -2,12 +2,11 @@
  * Copyright (C) 2017 http://bndy.net
  * Created by Bendy (Bing Zhang)
  ******************************************************************************/
-package net.bndy.wf.modules.app.services.repositories;
+package net.bndy.wf.exceptions;
 
-import org.springframework.data.jpa.repository.JpaRepository;
-
-import net.bndy.wf.modules.app.models.*;
-
-public interface RoleRepository extends JpaRepository<Role, Long>  {
-
+public enum OAuthExceptionType {
+	InvalidClientID,
+	InvalidAuthorizationCode,
+	InvalidAccessToken,
+	InvalidRedirectUri,
 }

@@ -1,3 +1,7 @@
+/*******************************************************************************
+ * Copyright (C) 2017 http://bndy.net
+ * Created by Bendy (Bing Zhang)
+ ******************************************************************************/
 package net.bndy.wf.modules.app.services;
 
 import org.springframework.beans.factory.annotation.Autowired;

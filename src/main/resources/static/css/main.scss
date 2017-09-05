@@ -26,11 +26,14 @@ html, body {
 	}
 }
 
-.page-login,
-.page-signup {
+.page-onebox {
 	padding-top: 50px;
 	background-color: #efefef;
 	height: 100%;
+
+	img.media-object {
+		max-width: 60px;
+	}
 	
 	.logo-block {
 		text-align: center;
@@ -43,18 +46,26 @@ html, body {
 		}
 	}
 
+	.error-block {
+		margin-bottom: 3rem;
+	}
+
 	.panel {
 		width: 360px;
 		margin: 0 auto;
 
 		.panel-body {
-			padding: 30px;
+			padding: 30px 30px 15px 30px;
 
 			form {
 				margin-top: 30px;
 				
 				.form-group {
 					margin-bottom: 25px;
+
+					.btn {
+						margin: 1rem 0;
+					}
 				}
 			}
 
@@ -68,18 +79,26 @@ html, body {
 
 		.panel-footer {
 			text-align: center;
+			border-top: none;
+			background-color: transparent;
+			padding-bottom: 2rem;
 		}
-		
-		&.login {
+
+		&.panel-default {
 			border: none;
 			box-shadow: 0 3px 5px #dddddd;
 		}
 		
 		&.logout {
 			.panel-body {
-				padding: 5rem 0 6rem 0;
+				padding: 5rem 0;
 				font-size: 1.5rem;
 				text-align: center;
+
+				footer {
+					margin-top: 2rem;
+					font-size: 1rem;
+				}
 			}
 		}
 	}

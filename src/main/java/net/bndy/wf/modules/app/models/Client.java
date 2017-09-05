@@ -1,3 +1,7 @@
+/*******************************************************************************
+ * Copyright (C) 2017 http://bndy.net
+ * Created by Bendy (Bing Zhang)
+ ******************************************************************************/
 package net.bndy.wf.modules.app.models;
 
 import javax.persistence.Entity;
@@ -12,6 +16,7 @@ public class Client extends _BaseEntity {
 	private static final long serialVersionUID = 1L;
 
 	private String name;
+	private String icon;
 	private String clientId;
 	private String clientSecret;
 	private String redirectUri;
@@ -55,5 +60,13 @@ public class Client extends _BaseEntity {
 
 	public void setScope(String scope) {
 		this.scope = scope;
+	}
+
+	public String getIcon() {
+		return icon;
+	}
+
+	public void setIcon(String icon) {
+		this.icon = icon;
 	}
 }

@@ -1,9 +1,9 @@
 spring:
   # DATASOURCE (DataSourceAutoConfiguration & DataSourceProperties)  
   datasource:
-    url: jdbc:mysql://192.168.241.139:3306/test?useSSL=true
+    url: jdbc:mysql://127.0.0.1:3306/test
     username: root
-    password: bndy.net 
+    password: 123456
     driver-class: com.mysql.jdbc.Driver
     testWhileIdle: true 
     validationQuery: SELECT 1

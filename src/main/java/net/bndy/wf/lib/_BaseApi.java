@@ -1,3 +1,7 @@
+/*******************************************************************************
+ * Copyright (C) 2017 http://bndy.net
+ * Created by Bendy (Bing Zhang)
+ ******************************************************************************/
 package net.bndy.wf.lib;
 
 import java.io.File;
@@ -29,11 +33,14 @@ import org.springframework.web.multipart.MultipartFile;
 import io.swagger.annotations.ApiOperation;
 
 import net.bndy.wf.*;
+import net.bndy.wf.modules.app.services.repositories.UserRepository;
 
 public abstract class _BaseApi<T extends _BaseEntity> {
 
 	@Autowired
 	_BaseService<T> service;
+	@Autowired
+	UserRepository userRepository;
 	@Autowired
 	ApplicationConfig appliationConfig;
 
@@ -77,18 +84,15 @@ public abstract class _BaseApi<T extends _BaseEntity> {
 
 	@ApiOperation(value = "Upload files")
 	@RequestMapping(value = "/upload", method = RequestMethod.POST, headers = ("content-type=multipart/*"), consumes = MediaType.APPLICATION_FORM_URLENCODED_VALUE)
-	public Object upload(
-			@RequestPart(required = true) MultipartFile file,
-			HttpServletRequest request) throws IllegalStateException, IOException {
+	public Object upload(@RequestPart(required = true) MultipartFile file, HttpServletRequest request)
+			throws IllegalStateException, IOException {
 
 		String destRelativePath = Paths.get(File.separator, new SimpleDateFormat("yyyy-MM").format(new Date()))
 				.toString();
 		String extensionName = file.getOriginalFilename().substring(file.getOriginalFilename().indexOf("."));
 
 		if (this.appliationConfig.isRenameUploadFile()) {
-			destRelativePath = Paths
-					.get(destRelativePath, UUID.randomUUID().toString() + extensionName)
-					.toString();
+			destRelativePath = Paths.get(destRelativePath, UUID.randomUUID().toString() + extensionName).toString();
 		} else {
 			destRelativePath = Paths.get(destRelativePath, file.getOriginalFilename()).toString();
 		}
@@ -108,7 +112,7 @@ public abstract class _BaseApi<T extends _BaseEntity> {
 		}
 		out.flush();
 		out.close();
-		
+
 		FileInfo fi = new FileInfo();
 		fi.setExtensionName(extensionName);
 		fi.setPath(destAbsPath);

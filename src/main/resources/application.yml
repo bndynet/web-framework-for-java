@@ -4,6 +4,10 @@ server:
   address: 127.0.0.1
   sessionTimeout: 30
   contextPath: /
+
+  error:
+    whitelabel:
+      enabled: false
   
 # APPLICATION
 application:

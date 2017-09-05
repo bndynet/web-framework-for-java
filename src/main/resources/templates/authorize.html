@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+	xmlns:layout="http://www.ultraq.net.nz/web/thymeleaf/layout"
+	layout:decorator="common/layout">
+<head>
+<title>Authorize</title>
+</head>
+<body>
+	<div layout:fragment="body" class="page-onebox">
+		<div class="panel panel-default authorize" th:if="!${param.logout}">
+			<div class="panel-body">
+				<div class="logo-block">
+					<img src="/static/img/logo.png" />
+				</div>
+				<div class="error-block" th:if="${error}">
+					<div class="text-center" th:if="${error}=='InvalidClientID'">
+						<h3>Invalid Client ID</h3>
+						<br />
+						<p>This application has not been registered.</p>
+					</div>
+				</div>
+				<form th:action="@{/sso/authorize}" method="post" th:if="!${error}">
+					<div class="media">
+						<div class="media-left">
+							<img class="media-object" th:src="${app.getIcon()}" />
+						</div>
+						<div class="media-body">
+							<h4 class="media-heading" th:text="${app.getName()}"></h4>
+							<small>wants to access your account with the following scope.</small>
+							<div>
+								<i class="glyphicon glyphicon-ok"></i>
+								<span th:text="${scope}"></span>
+							</div>
+						</div>
+					</div>
+					<div class="form-group">
+						<button type="submit" class="btn btn-success btn-block">
+							Authorize <span th:text="${app.getName()}"></span>
+						</button>
+						<div class="text-center">
+							Authorizing will redirect to<br />
+							<b th:text="${redirectUri}"></b>
+						</div>
+					</div>
+				</form>
+				<div th:replace="common/footer::footer"></div>
+			</div>
+		</div>
+	</div>
+</body>
+</html>

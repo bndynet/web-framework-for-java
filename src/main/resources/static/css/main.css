@@ -20,81 +20,87 @@ html, body {
   background-color: #0c83e9;
 }
 
-.page-login,
-.page-signup {
+.page-onebox {
   padding-top: 50px;
   background-color: #efefef;
   height: 100%;
 }
 
-.page-login .logo-block,
-.page-signup .logo-block {
+.page-onebox img.media-object {
+  max-width: 60px;
+}
+
+.page-onebox .logo-block {
   text-align: center;
   margin-bottom: 30px;
 }
 
-.page-login .logo-block img,
-.page-signup .logo-block img {
+.page-onebox .logo-block img {
   width: 126px;
   height: 126px;
   border-radius: 50%;
 }
 
-.page-login .panel,
-.page-signup .panel {
+.page-onebox .error-block {
+  margin-bottom: 3rem;
+}
+
+.page-onebox .panel {
   width: 360px;
   margin: 0 auto;
 }
 
-.page-login .panel .panel-body,
-.page-signup .panel .panel-body {
-  padding: 30px;
+.page-onebox .panel .panel-body {
+  padding: 30px 30px 15px 30px;
 }
 
-.page-login .panel .panel-body form,
-.page-signup .panel .panel-body form {
+.page-onebox .panel .panel-body form {
   margin-top: 30px;
 }
 
-.page-login .panel .panel-body form .form-group,
-.page-signup .panel .panel-body form .form-group {
+.page-onebox .panel .panel-body form .form-group {
   margin-bottom: 25px;
 }
 
-.page-login .panel .panel-body .validation-messages,
-.page-signup .panel .panel-body .validation-messages {
+.page-onebox .panel .panel-body form .form-group .btn {
+  margin: 1rem 0;
+}
+
+.page-onebox .panel .panel-body .validation-messages {
   background-color: #d22222;
   color: #ffffff;
   margin: 0 -30px;
   padding: 5px 15px;
 }
 
-.page-login .panel .panel-footer,
-.page-signup .panel .panel-footer {
+.page-onebox .panel .panel-footer {
   text-align: center;
+  border-top: none;
+  background-color: transparent;
+  padding-bottom: 2rem;
 }
 
-.page-login .panel.login,
-.page-signup .panel.login {
+.page-onebox .panel.panel-default {
   border: none;
   box-shadow: 0 3px 5px #dddddd;
 }
 
-.page-login .panel.logout .panel-body,
-.page-signup .panel.logout .panel-body {
-  padding: 5rem 0 6rem 0;
+.page-onebox .panel.logout .panel-body {
+  padding: 5rem 0;
   font-size: 1.5rem;
   text-align: center;
 }
 
-.page-login h1, .page-login h3,
-.page-signup h1,
-.page-signup h3 {
+.page-onebox .panel.logout .panel-body footer {
+  margin-top: 2rem;
+  font-size: 1rem;
+}
+
+.page-onebox h1, .page-onebox h3 {
   margin: 0;
 }
 
-.page-login footer,
-.page-signup footer {
+.page-onebox footer {
   text-align: center;
 }
  

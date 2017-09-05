@@ -1,3 +1,7 @@
+/*******************************************************************************
+ * Copyright (C) 2017 http://bndy.net
+ * Created by Bendy (Bing Zhang)
+ ******************************************************************************/
 package net.bndy.wf;
 
 import javax.sql.DataSource;
@@ -34,7 +38,7 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 		
 		http.authorizeRequests()
 			.antMatchers("/webjars/*/**", "/static/*/**", "/api/*/**", "/test/*/**", "/v2/api-docs",
-						"/docs/*/**",
+						"/docs/*/**", "/error",
 						"/sso/login*").permitAll()
 			.anyRequest().authenticated();
 

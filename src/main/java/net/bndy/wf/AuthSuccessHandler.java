@@ -1,3 +1,7 @@
+/*******************************************************************************
+ * Copyright (C) 2017 http://bndy.net
+ * Created by Bendy (Bing Zhang)
+ ******************************************************************************/
 package net.bndy.wf;
 
 import java.io.IOException;
@@ -17,11 +21,11 @@ import org.springframework.security.core.Authentication;
 public class AuthSuccessHandler extends SimpleUrlAuthenticationSuccessHandler implements AuthenticationSuccessHandler {
 
 	private RedirectStrategy redirectStrategy = new DefaultRedirectStrategy();
-	
+
 	public AuthSuccessHandler() {
 		super();
 	}
-	
+
 	public AuthSuccessHandler(String defaultTargetUrl) {
 		super(defaultTargetUrl);
 	}
@@ -30,11 +34,20 @@ public class AuthSuccessHandler extends SimpleUrlAuthenticationSuccessHandler im
 	public void onAuthenticationSuccess(HttpServletRequest request, HttpServletResponse response,
 			Authentication authentication) throws IOException, ServletException {
 
-		String redirect = (String) request.getSession().getAttribute(Constant.KEY_SESSION_REDIRECT);
+		// oauth login
+		String clientId = (String) request.getSession().getAttribute(Constant.KEY_OAUTH_CLIENTID);
+		if (clientId != null) {
+			// go to authorization page
+			this.redirectStrategy.sendRedirect(request, response, "/sso/authorize");
+			return;
+		}
+
+		// normal login and redirect to back url
+		String redirect = (String) request.getSession().getAttribute(Constant.KEY_OAUTH_REDIRECT);
 		if (redirect == null || "".equals(redirect)) {
 			redirect = this.getDefaultTargetUrl();
 		}
-		
+
 		this.redirectStrategy.sendRedirect(request, response, redirect);
 	}
 }

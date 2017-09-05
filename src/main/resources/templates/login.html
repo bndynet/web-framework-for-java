@@ -6,8 +6,8 @@
 <title>Login</title>
 </head>
 <body>
-	<div layout:fragment="body" class="page-login">
-		<div class="panel panel-primary login" th:if="!${param.logout}">
+	<div layout:fragment="body" class="page-onebox">
+		<div class="panel panel-default login" th:if="!${param.logout}">
 			<div class="panel-body">
 				<div class="logo-block">
 					<img src="/static/img/logo.png" />
@@ -28,12 +28,17 @@
 						<input type="submit" class="btn btn-primary btn-block" value="Let me in." />
 					</div>
 				</form>
+			</div>
+			<div class="panel-footer">
 				<div th:replace="common/footer::footer"></div>
 			</div>
 		</div>
 		<div class="panel panel-default logout" th:if="${param.logout}">
 			<div class="panel-body">
 				You have been logged out.
+			</div>
+			<div class="panel-footer">
+				<div th:replace="common/footer::footer"></div>
 			</div>
 		</div>
 	</div>
