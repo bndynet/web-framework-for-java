@@ -20,6 +20,7 @@ import io.swagger.annotations.ApiOperation;
 
 import net.bndy.wf.Constant;
 import net.bndy.wf.exceptions.OAuthException;
+import net.bndy.wf.exceptions.OAuthExceptionType;
 import net.bndy.wf.exceptions.UnanthorizedException;
 import net.bndy.wf.modules.app.models.ClientUser;
 import net.bndy.wf.modules.app.models.TokenInfo;
@@ -36,6 +37,13 @@ public class OauthController {
 	UserService userService;
 	@Autowired
 	OAuthService oauthService;
+	
+	@RequestMapping(value="/ex") 
+	public Object ex() {
+		int i = 0;
+		i = 100 / i;
+		return new String[] {"a", "b"};
+	}
 
 	@ApiOperation(value = "Get authorization code by client id")
 	@RequestMapping(value = "/authorize", method = RequestMethod.GET)
@@ -45,7 +53,12 @@ public class OauthController {
 		session.setAttribute(Constant.KEY_OAUTH_CLIENTID, clientId);
 		session.setAttribute(Constant.KEY_OAUTH_REDIRECT, redirectUri);
 		session.setAttribute(Constant.KEY_OAUTH_SCOPE, scope);
-
+		
+		// validate client id
+		if (!this.oauthService.verifyClient(clientId, redirectUri))  {
+			throw new OAuthException(OAuthExceptionType.InvalidClientIDOrRedirectUri);
+		}
+		
 		User user = this.oauthService.getCurrentUser();
 		if (user != null) {
 			ClientUser cu = this.oauthService.getAuthInfo(clientId, user.getId());

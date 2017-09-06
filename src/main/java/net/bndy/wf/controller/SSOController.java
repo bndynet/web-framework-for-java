@@ -104,7 +104,7 @@ public class SSOController {
 			session.removeAttribute(Constant.KEY_OAUTH_CLIENTID);
 			session.removeAttribute(Constant.KEY_OAUTH_REDIRECT);
 			session.removeAttribute(Constant.KEY_OAUTH_SCOPE);
-			model.addAttribute("error", OAuthExceptionType.InvalidClientID.toString());
+			model.addAttribute("error", OAuthExceptionType.InvalidClientIDOrRedirectUri.toString());
 		}
 		return "authorize";
 	}

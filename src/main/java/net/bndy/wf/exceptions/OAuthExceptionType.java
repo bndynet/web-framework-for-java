@@ -4,9 +4,16 @@
  ******************************************************************************/
 package net.bndy.wf.exceptions;
 
+import net.bndy.wf.lib.Description;
+
 public enum OAuthExceptionType {
-	InvalidClientID,
+
+	@Description(value = "Invalid client id or redirect uri.")
+	InvalidClientIDOrRedirectUri,
+
+	@Description(value = "Invalid authorization code.")
 	InvalidAuthorizationCode,
+
+	@Description(value = "Invalid access token.")
 	InvalidAccessToken,
-	InvalidRedirectUri,
 }

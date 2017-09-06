@@ -4,11 +4,7 @@
  ******************************************************************************/
 package net.bndy.wf.exceptions;
 
-import org.springframework.http.HttpStatus;
-import org.springframework.web.bind.annotation.ResponseStatus;
-
-@ResponseStatus(value = HttpStatus.UNAUTHORIZED)
-public class OAuthException extends Exception {
+public class OAuthException extends RuntimeException {
 
 	private static final long serialVersionUID = 1L;
 	
@@ -25,6 +21,10 @@ public class OAuthException extends Exception {
 	public void setType(OAuthExceptionType type) {
 		this.type = type;
 	}
-	
-	
+
+	@Override
+	public String getMessage() {
+		return this.type.toString();
+	}
+
 }
