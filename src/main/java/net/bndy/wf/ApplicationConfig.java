@@ -14,6 +14,7 @@ public class ApplicationConfig {
 	private boolean renameUploadFile;
 	private String uploadPath;
 	private String uploadPathUrl;
+	private String mailSender;
 
 	public void setUploadPath(String uploadPath) {
 		this.uploadPath = uploadPath;
@@ -41,5 +42,13 @@ public class ApplicationConfig {
 
 	public void setRenameUploadFile(boolean renameUploadFile) {
 		this.renameUploadFile = renameUploadFile;
+	}
+
+	public String getMailSender() {
+		return mailSender;
+	}
+
+	public void setMailSender(String mailSender) {
+		this.mailSender = mailSender;
 	}
 }

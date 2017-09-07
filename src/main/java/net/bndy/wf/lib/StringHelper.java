@@ -1,0 +1,61 @@
+/*******************************************************************************
+ * Copyright (C) 2017 http://bndy.net
+ * Created by Bendy (Bing Zhang)
+ ******************************************************************************/
+package net.bndy.wf.lib;
+
+import java.io.BufferedWriter;
+import java.io.FileWriter;
+import java.io.IOException;
+import java.math.BigInteger;
+import java.security.SecureRandom;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.util.Date;
+import java.util.UUID;
+
+public class StringHelper {
+
+	public static String generateUUID() {
+		return UUID.randomUUID().toString();
+	}
+
+	public static String generateRandomString(int length) {
+		SecureRandom secureRandom = new SecureRandom();
+		byte[] token = new byte[length / 2];
+		secureRandom.nextBytes(token);
+		return new BigInteger(1, token).toString(16).toUpperCase();
+	}
+
+	public static String cut(String source, int length) {
+		if (source.length() <= length) {
+			return source;
+		} else {
+			return source.substring(0, length - 1) + "...";
+		}
+	}
+
+	public static String formatDateTime(Date date, String format) {
+		SimpleDateFormat ft = new SimpleDateFormat(format);
+		return ft.format(date);
+	}
+
+	public static Date parseDate(String dateString, String format) throws ParseException {
+		SimpleDateFormat ft = new SimpleDateFormat(format);
+		return ft.parse(dateString);
+	}
+
+	public static void appendToFile(String content, String filename) throws IOException {
+		BufferedWriter out = null;
+		try {
+			out = new BufferedWriter(new FileWriter(filename, true));
+			out.write(content);
+		} catch (IOException e) {
+			throw e;
+		} finally {
+			if (out != null) {
+				out.close();
+			}
+		}
+	}
+}

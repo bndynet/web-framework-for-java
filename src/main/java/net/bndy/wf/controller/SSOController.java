@@ -21,6 +21,8 @@ import net.bndy.wf.exceptions.OAuthException;
 import net.bndy.wf.exceptions.OAuthExceptionType;
 import net.bndy.wf.modules.app.models.*;
 import net.bndy.wf.modules.app.services.*;
+import net.bndy.wf.modules.core.OAuthService;
+import net.bndy.wf.modules.core.SecurityService;
 
 @Controller
 @RequestMapping("/sso")

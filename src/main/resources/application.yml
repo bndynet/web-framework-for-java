@@ -17,6 +17,7 @@ application:
   upload-path: upload
   upload-path-url: http://files.bndy.net
   rename-upload-file: false
+  mail-sender: zb@bndy.net
 
 # LOGGING  
 logging:
@@ -46,16 +47,20 @@ spring:
 #    web-environment: # Run the application in a web environment (auto-detected by default).
     
   # Email (MailProperties)  
-#  mail:
-#    default-encoding: UTF-8 # Default MimeMessage encoding.  
-#    host: # SMTP server host. For instance `smtp.example.com`  
-#    jndi-name: # Session JNDI name. When set, takes precedence to others mail settings.  
-#    password: # Login password of the SMTP server.  
-#    port: # SMTP server port.  
-#    protocol: smtp # Protocol used by the SMTP server.  
-#    test-connection: false # Test that the mail server is available on startup.  
-#    username: # Login user of the SMTP server. 
-#    #properties.*: # Additional JavaMail session properties.  
+  mail:
+    default-encoding: UTF-8 # Default MimeMessage encoding.  
+    host: xxx.bndy.net # SMTP server host. For instance `smtp.example.com`  
+    #jndi-name: # Session JNDI name. When set, takes precedence to others mail settings.  
+    password: xxx # Login password of the SMTP server.  
+    port: 21 # SMTP server port.  
+    protocol: smtp # Protocol used by the SMTP server.  
+    test-connection: false # Test that the mail server is available on startup.  
+    username: xxx # Login user of the SMTP server. 
+    #properties.*: # Additional JavaMail session properties.  
+    properties.mail.smtp:
+        auth: true
+        starttls.enable: true
+        starttls.required: false
 
   # Upload
   http:

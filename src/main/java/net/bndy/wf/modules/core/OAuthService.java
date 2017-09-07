@@ -2,7 +2,7 @@
  * Copyright (C) 2017 http://bndy.net
  * Created by Bendy (Bing Zhang)
  ******************************************************************************/
-package net.bndy.wf.modules.app.services;
+package net.bndy.wf.modules.core;
 
 import java.util.Arrays;
 
@@ -17,8 +17,9 @@ import org.springframework.transaction.annotation.Transactional;
 import net.bndy.wf.Constant;
 import net.bndy.wf.exceptions.OAuthException;
 import net.bndy.wf.exceptions.OAuthExceptionType;
-import net.bndy.wf.lib.Utils;
+import net.bndy.wf.lib.StringHelper;
 import net.bndy.wf.modules.app.models.*;
+import net.bndy.wf.modules.app.services.UserService;
 import net.bndy.wf.modules.app.services.repositories.*;
 
 @Service
@@ -44,7 +45,7 @@ public class OAuthService {
 	}
 
 	public String newAuthCode() {
-		return Utils.generateRandomString(Constant.LEN_AUTH_CODE);
+		return StringHelper.generateRandomString(Constant.LEN_AUTH_CODE);
 	}
 
 	public ClientUser refreshAuthCode(String clientId, long userId) {

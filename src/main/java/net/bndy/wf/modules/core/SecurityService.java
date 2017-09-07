@@ -2,7 +2,7 @@
  * Copyright (C) 2017 http://bndy.net
  * Created by Bendy (Bing Zhang)
  ******************************************************************************/
-package net.bndy.wf.modules.app.services;
+package net.bndy.wf.modules.core;
 
 public interface SecurityService {
 	

@@ -12,11 +12,14 @@ import org.springframework.data.domain.Pageable;
 import org.springframework.data.jpa.repository.JpaRepository;
 
 import net.bndy.wf.ApplicationConfig;
+import net.bndy.wf.modules.core.MailService;
 
 public class _BaseService<T> {
 
 	@Autowired
 	protected ApplicationConfig applicationConfig;
+	@Autowired
+	protected MailService mailService;
 	@Autowired
 	JpaRepository<T, Long> repo;
 	

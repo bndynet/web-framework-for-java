@@ -23,10 +23,10 @@ import net.bndy.wf.exceptions.OAuthException;
 import net.bndy.wf.exceptions.OAuthExceptionType;
 import net.bndy.wf.exceptions.UnanthorizedException;
 import net.bndy.wf.modules.app.models.ClientUser;
-import net.bndy.wf.modules.app.models.TokenInfo;
 import net.bndy.wf.modules.app.models.User;
-import net.bndy.wf.modules.app.services.OAuthService;
 import net.bndy.wf.modules.app.services.UserService;
+import net.bndy.wf.modules.core.OAuthService;
+import net.bndy.wf.modules.core.TokenInfo;
 
 @Api(value = "Authorization and authentication")
 @RestController
