@@ -8,9 +8,15 @@ import javax.servlet.http.HttpServletRequest;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.ControllerAdvice;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.RestController;
+
+import net.bndy.wf.lib.AnnotationHelper;
+import net.bndy.wf.lib.Description;
+import net.bndy.wf.lib.ResponseResult;
 
 @RestController
 @ControllerAdvice(annotations = { RestController.class })
@@ -18,13 +24,23 @@ public class ApiExceptionHandler {
 
 	private Logger logger = LoggerFactory.getLogger(this.getClass());
 
-	public static final String DEFAULT_ERROR_VIEW = "error";
-
-	@ExceptionHandler(value = Exception.class)
-	public Object defaultErrorHandler(HttpServletRequest req, Exception e) throws Exception {
+	@ExceptionHandler(Exception.class)
+	public ResponseEntity<ResponseResult<?>> handleUnexpectedException(HttpServletRequest req, Exception e)
+			throws NoSuchFieldException, SecurityException {
 
 		this.logger.error("{} for {}", e.getMessage(), req.getRequestURL());
-		
-		return e;
+
+		ApiError error = new ApiError(e);
+
+		if (e instanceof EntityNotFoundException) {
+			error.setStatus(HttpStatus.NOT_FOUND);
+		} else if (e instanceof OAuthException) {
+			error.setStatus(HttpStatus.UNAUTHORIZED);
+			OAuthException ex = (OAuthException) e;
+			error.setMessage(AnnotationHelper
+					.getFieldAnnotation(Description.class, OAuthExceptionType.class, ex.getType().name()).value());
+		}
+
+		return error.toResponse();
 	}
 }

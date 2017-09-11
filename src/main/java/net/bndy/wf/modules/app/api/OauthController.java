@@ -21,7 +21,6 @@ import io.swagger.annotations.ApiOperation;
 import net.bndy.wf.Constant;
 import net.bndy.wf.exceptions.OAuthException;
 import net.bndy.wf.exceptions.OAuthExceptionType;
-import net.bndy.wf.exceptions.UnanthorizedException;
 import net.bndy.wf.modules.app.models.ClientUser;
 import net.bndy.wf.modules.app.models.User;
 import net.bndy.wf.modules.app.services.UserService;
@@ -38,13 +37,6 @@ public class OauthController {
 	@Autowired
 	OAuthService oauthService;
 	
-	@RequestMapping(value="/ex") 
-	public Object ex() {
-		int i = 0;
-		i = 100 / i;
-		return new String[] {"a", "b"};
-	}
-
 	@ApiOperation(value = "Get authorization code by client id")
 	@RequestMapping(value = "/authorize", method = RequestMethod.GET)
 	public void authorize(HttpServletResponse response, @RequestParam(name = "response_type") String responseType,
@@ -94,7 +86,7 @@ public class OauthController {
 			responseUser.setLastUpdate(u.getLastUpdate());
 			return responseUser;
 		} else {
-			throw new UnanthorizedException();
+			throw new OAuthException(OAuthExceptionType.InvalidUser);
 		}
 	}
 }

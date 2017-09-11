@@ -39,7 +39,7 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 		http.authorizeRequests()
 			.antMatchers("/webjars/*/**", "/static/*/**", "/api/*/**", "/test/*/**", "/v2/api-docs",
 						"/docs/*/**", "/error",
-						"/sso/login*").permitAll()
+						"/sso/login*", "/sso/signup").permitAll()
 			.anyRequest().authenticated();
 
 		http

@@ -20,6 +20,17 @@ html, body {
   background-color: #0c83e9;
 }
 
+.media-object {
+  border-radius: 4px;
+  width: 40px;
+}
+
+.list-group-item .pull-right {
+  position: absolute;
+  right: 1rem;
+  top: 15px;
+}
+
 .page-onebox {
   padding-top: 50px;
   background-color: #efefef;

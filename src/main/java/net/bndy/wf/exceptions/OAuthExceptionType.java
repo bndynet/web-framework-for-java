@@ -16,4 +16,7 @@ public enum OAuthExceptionType {
 
 	@Description(value = "Invalid access token.")
 	InvalidAccessToken,
+	
+	@Description(value = "Invalid user.")
+	InvalidUser,
 }

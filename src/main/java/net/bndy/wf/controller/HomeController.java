@@ -57,11 +57,4 @@ public class HomeController {
 		out.close();
 		return file.getOriginalFilename();
 	}
-	
-	@RequestMapping("/test/exception") 
-	public String testException(){
-		int i = 0;
-		int s = 100 / i;
-		return "/index";
-	}
 }

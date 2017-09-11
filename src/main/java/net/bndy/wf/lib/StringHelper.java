@@ -35,6 +35,14 @@ public class StringHelper {
 		}
 	}
 
+	public static String capitalize(String value) {
+		if (value != null && !"".equals(value)) {
+			return value.substring(0, 1).toUpperCase() + value.substring(1);
+		}
+
+		return value;
+	}
+
 	public static String formatDateTime(Date date, String format) {
 		SimpleDateFormat ft = new SimpleDateFormat(format);
 		return ft.format(date);

@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+	xmlns:layout="http://www.ultraq.net.nz/web/thymeleaf/layout"
+	layout:decorator="common/layout_main">
+<head>
+<title>Applications</title>
+</head>
+<body>
+	<div layout:fragment="content">
+		<h2>Installed Applications</h2>
+		<ul class="list-group">
+			<li class="list-group-item" th:each="item : ${list}">
+				<div class="media">
+					<div class="media-left">
+						<img class="media-object" th:src="${item.icon}" alt="..." />
+					</div>
+					<div class="media-body">
+						<h4 class="media-heading" th:text="${item.name}"></h4>
+						<span th:text="${item.name}"></span>
+					</div>
+				</div>
+				<div class="pull-right">
+					<button class="btn btn-sm btn-danger">
+						<i class="glyphicon glyphicon-trash"></i>
+					</button>
+				</div>
+			</li>
+		</ul>
+	</div>
+</body>
+</html>
