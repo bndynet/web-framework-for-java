@@ -40,6 +40,9 @@ public class SSOController {
 	@RequestMapping(value = "/signup", method = RequestMethod.GET)
 	public String signup(Model model, HttpSession session) {
 		model.addAttribute("model", new User());
+		if(!this.userService.hasUsers()) {
+			model.addAttribute("admin", true);
+		}
 		return "signup";
 	}
 

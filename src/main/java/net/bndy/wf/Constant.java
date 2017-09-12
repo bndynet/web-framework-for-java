@@ -12,4 +12,6 @@ public class Constant {
 	public static final String KEY_SESSION_USER = "USER";
 	
 	public static final int LEN_AUTH_CODE = 40;
+	public static final int LEN_CLIENT_ID = 40;
+	public static final int LEN_CLIENT_SECRET = 80;
 }

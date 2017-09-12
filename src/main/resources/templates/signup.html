@@ -12,7 +12,8 @@
 				<div class="logo-block">
 					<img src="/static/img/logo.png" />
 				</div>
-				<h3>Create your account</h3>
+				<h3 th:if="!${admin}">Create your account</h3>
+				<h3 th:if="${admin}">Create First Admin User</h3>
 				<form th:action="@{/sso/signup}" th:object="${model}" method="post">
 					<div class="form-group">
 						<input type="text"

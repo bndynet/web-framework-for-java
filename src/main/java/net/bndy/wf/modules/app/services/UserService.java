@@ -37,6 +37,10 @@ public class UserService extends _BaseService<User> {
 	public Page<User> getUsers(Pageable pageable) {
 		return userRepo.findAll(pageable);
 	}
+	
+	public boolean hasUsers() {
+		return this.userRepo.count() > 0;
+	}
 
 	public User login(String account, String password) {
 		User user = userRepo.findByUsername(account);

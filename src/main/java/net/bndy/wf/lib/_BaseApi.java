@@ -77,7 +77,7 @@ public abstract class _BaseApi<T extends _BaseEntity> {
 	}
 
 	@ApiOperation(value = "Delete an entity")
-	@RequestMapping(method = RequestMethod.DELETE)
+	@RequestMapping(value="/{id}", method = RequestMethod.DELETE)
 	public void delete(@PathVariable(name = "id") long id) {
 		this.service.delete(id);
 	}

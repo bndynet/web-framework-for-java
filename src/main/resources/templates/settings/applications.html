@@ -6,26 +6,132 @@
 <title>Applications</title>
 </head>
 <body>
-	<div layout:fragment="content">
-		<h2>Installed Applications</h2>
+	<div layout:fragment="content" ng-controller="SettingsApplicationsCtrl">
+		<div class="page-header">
+			<h2>Installed Applications</h2>
+			<div class="toolbox">
+				<md-button class="md-primary no-margin" ng-click="add()">
+				Add Application </md-button>
+			</div>
+		</div>
 		<ul class="list-group">
-			<li class="list-group-item" th:each="item : ${list}">
+			<li class="list-group-item" ng-repeat="item in data">
 				<div class="media">
 					<div class="media-left">
-						<img class="media-object" th:src="${item.icon}" alt="..." />
+						<img class="media-object" ng-src="{{item.icon}}" />
 					</div>
 					<div class="media-body">
-						<h4 class="media-heading" th:text="${item.name}"></h4>
-						<span th:text="${item.name}"></span>
+						<h4 class="media-heading" ng-bind="item.name"></h4>
+						<span>Client ID: {{item.clientId}}</span>
 					</div>
 				</div>
 				<div class="pull-right">
-					<button class="btn btn-sm btn-danger">
+					<button class="btn btn-sm btn-primary"
+						ng-click="edit(item)">
+						<i class="glyphicon glyphicon-edit"></i>
+					</button>
+					<button class="btn btn-sm btn-danger"
+						ng-click="remove(item, $event)">
 						<i class="glyphicon glyphicon-trash"></i>
 					</button>
 				</div>
 			</li>
 		</ul>
+
+		<div id="dialogForm" class="modal fade" tabindex="-1" role="dialog">
+			<div class="modal-dialog" role="document">
+				<div class="modal-content">
+					<div class="modal-header">
+						<button type="button" class="close" data-dismiss="modal"
+							aria-label="Close">
+							<span aria-hidden="true">&times;</span>
+						</button>
+						<h4 class="modal-title">
+							<span ng-if="formModel.id">Edit Application</span>
+							<span ng-if="!formModel.id">Register Application</span>
+						</h4>
+					</div>
+					<div class="modal-body">
+						<form name="form">
+							<md-input-container class="md-block">
+								<label>Name</label>
+								<input name="name" required ng-model="formModel.name" />
+								<div ng-messages="form.name.$error">
+									<div ng-message="required">This is required.</div>
+								</div>
+							</md-input-container>
+							<md-input-container class="md-block">
+								<label>Icon</label>
+								<input name="icon" ng-model="formModel.icon" />
+							</md-input-container>
+							<md-input-container class="md-block">
+								<label>Redirect Uri</label>
+								<input name="redirectUri" required ng-model="formModel.redirectUri" />
+								<div ng-messages="form.redirectUri.$error">
+									<div ng-message="required">This is required.</div>
+								</div>
+							</md-input-container>
+						</form>
+					</div>
+					<div class="modal-footer">
+						<button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+						<button type="button" class="btn btn-primary"
+								ng-disabled="form.$invalid"
+								ng-click="save()">Save
+							changes</button>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+
+	<div layout:fragment="scripts">
+		<script>
+			app.controller('SettingsApplicationsCtrl', [
+				'$scope', 'appDialog', '$http', 
+				function($scope, appDialog, $http) {
+					$scope.data = [];
+					$scope.init = function () {
+						$http.get('/api/v1/app/clients').then(function(res) {
+							$scope.data = res.data;
+						});
+					};
+					$scope.add = function() {
+						$('#dialogForm').modal('show');
+					};
+					$scope.edit = function(item) {
+						$scope.formModel = item;
+						$('#dialogForm').modal('show');
+					};
+					$scope.save = function() {
+						if ($scope.formModel.id) {
+							$http.put('/api/v1/app/clients/' + $scope.formModel.id, $scope.formModel).then(function(res){
+								$scope.formModel = null;
+								$('#dialogForm').modal('hide');
+								$scope.init();
+							});
+						} else {
+							$http.post('/api/v1/app/clients', $scope.formModel).then(function(res){
+								$scope.formModel = null;
+								$('#dialogForm').modal('hide');
+								$scope.init();
+							});
+						}
+					};
+					$scope.remove = function(item) {
+						appDialog.confirmDeletion(function(){
+							$http.delete('/api/v1/app/clients/' + item.id).then(function(){
+								$scope.data.splice($scope.data.indexOf(item), 1);
+								appDialog.success();
+							}, function() {
+								appDialog.error();
+							});
+						});
+					};
+					
+					$scope.init();
+			} ]);
+		</script>
 	</div>
 </body>
 </html>

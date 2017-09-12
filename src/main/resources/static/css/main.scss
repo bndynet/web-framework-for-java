@@ -8,6 +8,14 @@ html, body {
 	font-weight: 200;
 }
 
+.no-margin {
+	margin: 0;
+}
+
+no-padding {
+	padding: 0;
+}
+
 .btn:focus,
 .btn:active:focus {
 	outline: none;
@@ -118,5 +126,20 @@ html, body {
 	
 	footer {
 		text-align: center;
+	}
+}
+
+
+.page-header {
+	display: flex;
+
+	h2 {
+		flex: 1;
+		margin: 0;
+	}
+
+	.toolbox {
+		flex: 1;
+		text-align: right;
 	}
 }

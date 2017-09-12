@@ -7,15 +7,15 @@
 	Framework</title>
 <link rel="stylesheet" type="text/css"
 	href="/webjars/bootstrap/3.3.7/css/bootstrap.min.css" />
-<link rel="stylesheet" type="text/css" href="/static/css/main.css" />
+<link rel="stylesheet" type="text/css"
+	href="/webjars/angular-material/1.1.4/angular-material.min.css" />
+<link rel="stylesheet" type="text/css"
+	href="/webjars/toaster/0.4.15/toaster.min.css" />
 
-<script type="text/javascript"
-	src="/webjars/jquery/1.11.1/jquery.min.js"></script>
-<script type="text/javascript"
-	src="/webjars/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+<link rel="stylesheet" type="text/css" href="/static/css/main.css" />
 </head>
 <body>
-	<header class="bs-docs-nav navbar navbar-static-top" id="top">
+	<header class="navbar navbar-default navbar-static-top" id="top">
 		<div class="container">
 			<div class="navbar-header">
 				<button aria-controls="bs-navbar" aria-expanded="false"
@@ -50,5 +50,41 @@
 			<div th:replace="common/footer::footer"></div>
 		</div>
 	</footer>
+	
+	<toaster-container toaster-options="
+		{'limit': 5, 'close-button': true, 'position-class': 'toast-bottom-right' }">
+	</toaster-container>
+
+<script type="text/javascript"
+	src="/webjars/jquery/1.11.1/jquery.min.js"></script>
+<script type="text/javascript"
+	src="/webjars/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+
+<script type="text/javascript"
+	src="/webjars/angularjs/1.6.4/angular.min.js"></script>
+<script type="text/javascript"
+	src="/webjars/angularjs/1.6.4/angular-animate.min.js"></script>
+<script type="text/javascript"
+	src="/webjars/angularjs/1.6.4/angular-aria.min.js"></script>
+<script type="text/javascript"
+	src="/webjars/angularjs/1.6.4/angular-cookies.min.js"></script>
+<script type="text/javascript"
+	src="/webjars/angularjs/1.6.4/angular-message-format.min.js"></script>
+<script type="text/javascript"
+	src="/webjars/angularjs/1.6.4/angular-messages.min.js"></script>
+<script type="text/javascript"
+	src="/webjars/angularjs/1.6.4/angular-route.min.js"></script>
+<script type="text/javascript"
+	src="/webjars/angularjs/1.6.4/angular-sanitize.min.js"></script>
+<script type="text/javascript"
+	src="/webjars/angular-material/1.1.4/angular-material.min.js"></script>
+<script type="text/javascript"
+	src="/webjars/toaster/0.4.15/toaster.min.js"></script>
+	
+<script type="text/javascript"
+	src="/static/js/app.js"></script>
+
+<div layout:fragment="scripts"></div>
+
 </body>
 </html>

@@ -6,6 +6,14 @@ html, body {
   font-weight: 200;
 }
 
+.no-margin {
+  margin: 0;
+}
+
+no-padding {
+  padding: 0;
+}
+
 .btn:focus,
 .btn:active:focus {
   outline: none;
@@ -109,6 +117,20 @@ html, body {
 
 .page-onebox footer {
   text-align: center;
+}
+
+.page-header {
+  display: flex;
+}
+
+.page-header h2 {
+  flex: 1;
+  margin: 0;
+}
+
+.page-header .toolbox {
+  flex: 1;
+  text-align: right;
 }
  
 
