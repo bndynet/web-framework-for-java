@@ -9,6 +9,7 @@ import net.bndy.wf.lib.StringHelper;
 import net.bndy.wf.lib._BaseService;
 import net.bndy.wf.modules.app.models.Client;
 import net.bndy.wf.modules.app.services.repositories.ClientRepository;
+import net.bndy.wf.modules.app.services.repositories.ClientUserRepository;
 
 @Service
 @Transactional
@@ -16,6 +17,8 @@ public class ClientService extends _BaseService<Client> {
 
 	@Autowired
 	private ClientRepository clientRepository;
+	@Autowired
+	private ClientUserRepository clientUserRepository;
 
 	public Client registerApplication(String name, String icon, String redirectUri) {
 		Client client = new Client();
@@ -42,5 +45,14 @@ public class ClientService extends _BaseService<Client> {
 			entity = this.clientRepository.saveAndFlush(entity);
 		}
 		return entity;
+	}
+
+	@Override
+	public boolean delete(long id) {
+		Client client = this.clientRepository.findOne(id);
+		if (client != null) {
+			this.clientUserRepository.deleteByClientId(client.getClientId());
+		}
+		return super.delete(id);
 	}
 }

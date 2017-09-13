@@ -19,7 +19,7 @@ import org.springframework.transaction.annotation.Transactional;
 import net.bndy.wf.modules.app.models.*;
 import net.bndy.wf.modules.app.services.repositories.UserRepository;
 
-@Service
+@Service("userDetailsService")
 public class UserDetailsServiceImpl implements UserDetailsService {
 	
     @Autowired
@@ -35,6 +35,6 @@ public class UserDetailsServiceImpl implements UserDetailsService {
             grantedAuthorities.add(new SimpleGrantedAuthority(role.getName()));
         }
 
-        return new org.springframework.security.core.userdetails.User(user.getUsername(), user.getPassword(), grantedAuthorities);
+        return user; // new org.springframework.security.core.userdetails.User(user.getUsername(), user.getPassword(), grantedAuthorities);
     }
 }

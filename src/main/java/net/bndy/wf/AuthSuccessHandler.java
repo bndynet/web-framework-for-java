@@ -15,11 +15,12 @@ import org.springframework.security.web.RedirectStrategy;
 import org.springframework.security.web.authentication.AuthenticationSuccessHandler;
 import org.springframework.security.web.authentication.SimpleUrlAuthenticationSuccessHandler;
 import org.springframework.stereotype.Component;
+
 import org.springframework.security.core.Authentication;
 
 @Component
 public class AuthSuccessHandler extends SimpleUrlAuthenticationSuccessHandler implements AuthenticationSuccessHandler {
-
+	
 	private RedirectStrategy redirectStrategy = new DefaultRedirectStrategy();
 
 	public AuthSuccessHandler() {
@@ -33,7 +34,6 @@ public class AuthSuccessHandler extends SimpleUrlAuthenticationSuccessHandler im
 	@Override
 	public void onAuthenticationSuccess(HttpServletRequest request, HttpServletResponse response,
 			Authentication authentication) throws IOException, ServletException {
-
 		// oauth login
 		String clientId = (String) request.getSession().getAttribute(Constant.KEY_OAUTH_CLIENTID);
 		if (clientId != null) {

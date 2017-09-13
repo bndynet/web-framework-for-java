@@ -40,7 +40,6 @@
 
 	<div class="main">
 		<div class="container">
-			<div th:replace="common/header::default('Layout Main')"></div>
 			<div layout:fragment="content"></div>
 		</div>
 	</div>
@@ -84,7 +83,7 @@
 <script type="text/javascript"
 	src="/static/js/app.js"></script>
 
-<div layout:fragment="scripts"></div>
+<th:block layout:fragment="scripts"></th:block>
 
 </body>
 </html>

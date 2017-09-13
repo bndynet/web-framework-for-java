@@ -19,6 +19,7 @@ import org.springframework.transaction.annotation.Transactional;
 
 import net.bndy.wf.lib._BaseService;
 import net.bndy.wf.modules.app.models.*;
+import net.bndy.wf.modules.app.services.repositories.ClientUserRepository;
 import net.bndy.wf.modules.app.services.repositories.RoleRepository;
 import net.bndy.wf.modules.app.services.repositories.UserRepository;
 
@@ -30,6 +31,8 @@ public class UserService extends _BaseService<User> {
 	private UserRepository userRepo;
 	@Autowired
 	private RoleRepository roleRepository;
+	@Autowired
+	private ClientUserRepository clientUserRepository;
 
 	private Logger logger = LoggerFactory.getLogger(UserService.class);
 	private PasswordEncoder passwordEncoder = new BCryptPasswordEncoder();
@@ -76,9 +79,18 @@ public class UserService extends _BaseService<User> {
 	public User findByUsername(String username) {
 		return this.userRepo.findByUsername(username);
 	}
+	
+	public List<ClientUser> getClients(long userId) {
+		return this.clientUserRepository.findByUserId(userId);
+	}
+	
+	public void removeClient(String clientId, long userId){
+		this.clientUserRepository.deleteByUserIdAndClientId(userId, clientId);
+	}
 
 	@Override
 	public User save(User entity) {
+		entity.setEnabled(true);
 		entity.setPassword(passwordEncoder.encode(entity.getPassword()));
 		entity.setRoles(new HashSet<>(roleRepository.findAll()));
 		return super.save(entity);

@@ -23,6 +23,8 @@ import org.springframework.data.domain.Pageable;
 import org.springframework.data.domain.Sort;
 import org.springframework.data.web.PageableDefault;
 import org.springframework.http.MediaType;
+import org.springframework.security.core.Authentication;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -33,6 +35,7 @@ import org.springframework.web.multipart.MultipartFile;
 import io.swagger.annotations.ApiOperation;
 
 import net.bndy.wf.*;
+import net.bndy.wf.modules.app.models.User;
 import net.bndy.wf.modules.app.services.repositories.UserRepository;
 
 public abstract class _BaseApi<T extends _BaseEntity> {
@@ -43,6 +46,11 @@ public abstract class _BaseApi<T extends _BaseEntity> {
 	UserRepository userRepository;
 	@Autowired
 	ApplicationConfig appliationConfig;
+
+	public User getCurrentUser() {
+		Authentication auth = SecurityContextHolder.getContext().getAuthentication();
+		return (User)auth.getPrincipal();
+	}
 
 	@ApiOperation(value = "Get entity list")
 	@RequestMapping(method = RequestMethod.GET)
@@ -77,7 +85,7 @@ public abstract class _BaseApi<T extends _BaseEntity> {
 	}
 
 	@ApiOperation(value = "Delete an entity")
-	@RequestMapping(value="/{id}", method = RequestMethod.DELETE)
+	@RequestMapping(value = "/{id}", method = RequestMethod.DELETE)
 	public void delete(@PathVariable(name = "id") long id) {
 		this.service.delete(id);
 	}

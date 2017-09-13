@@ -4,6 +4,7 @@
  ******************************************************************************/
 package net.bndy.wf.modules.app.models;
 
+import java.util.Collection;
 import java.util.Set;
 
 import javax.persistence.Entity;
@@ -13,11 +14,14 @@ import javax.persistence.ManyToMany;
 import javax.persistence.Table;
 import javax.persistence.Transient;
 
+import org.springframework.security.core.GrantedAuthority;
+import org.springframework.security.core.userdetails.UserDetails;
+
 import net.bndy.wf.lib._BaseEntity;
 
 @Entity
 @Table(name="app_user")
-public class User extends _BaseEntity {
+public class User extends _BaseEntity implements UserDetails {
 	private static final long serialVersionUID = 1L;
 
 	private String username;
@@ -78,5 +82,29 @@ public class User extends _BaseEntity {
 
 	public void setPasswordConfirm(String passwordConfirm) {
 		this.passwordConfirm = passwordConfirm;
+	}
+
+	@Override
+	public Collection<? extends GrantedAuthority> getAuthorities() {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public boolean isAccountNonExpired() {
+		// TODO Auto-generated method stub
+		return true;
+	}
+
+	@Override
+	public boolean isAccountNonLocked() {
+		// TODO Auto-generated method stub
+		return true;
+	}
+
+	@Override
+	public boolean isCredentialsNonExpired() {
+		// TODO Auto-generated method stub
+		return true;
 	}
 }

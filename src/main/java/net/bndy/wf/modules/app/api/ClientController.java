@@ -15,6 +15,7 @@ import net.bndy.wf.modules.app.services.ClientService;;
 @RestController
 @RequestMapping("/api/v1/app/clients")
 public class ClientController extends _BaseApi<Client> {
+
 	@Autowired
 	private ClientService clientService;
 
@@ -29,4 +30,8 @@ public class ClientController extends _BaseApi<Client> {
 		return this.clientService.updateApplication(entity);
 	}
 
+	@Override
+	public void delete(@PathVariable(name="id") long id) {
+		this.clientService.delete(id);
+	}
 }
