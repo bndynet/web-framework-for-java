@@ -23,8 +23,6 @@ import org.springframework.data.domain.Pageable;
 import org.springframework.data.domain.Sort;
 import org.springframework.data.web.PageableDefault;
 import org.springframework.http.MediaType;
-import org.springframework.security.core.Authentication;
-import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -48,8 +46,7 @@ public abstract class _BaseApi<T extends _BaseEntity> {
 	ApplicationConfig appliationConfig;
 
 	public User getCurrentUser() {
-		Authentication auth = SecurityContextHolder.getContext().getAuthentication();
-		return (User)auth.getPrincipal();
+		return ApplicationContext.getCurrentUser();
 	}
 
 	@ApiOperation(value = "Get entity list")

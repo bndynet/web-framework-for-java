@@ -15,8 +15,7 @@ import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.servlet.ModelAndView;
 
-import net.bndy.wf.lib.AnnotationHelper;
-import net.bndy.wf.lib.Description;
+import net.bndy.wf.lib.annotation.*;
 
 @ControllerAdvice(annotations = { Controller.class })
 public class ControllerExceptionHandler {

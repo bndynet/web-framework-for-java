@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org"
 	xmlns:layout="http://www.ultraq.net.nz/web/thymeleaf/layout"
-	layout:decorator="common/layout_main">
+	layout:decorator="admin/layout_admin">
 <head>
 <title>Applications</title>
 </head>
@@ -22,7 +22,7 @@
 					</div>
 					<div class="media-body">
 						<h4 class="media-heading">
-							<span ng-bind="item.name"></span>
+							<a target="_blank" ng-href="{{item.accessUrl}}" ng-bind="item.name"></a>
 							<a class="label label-success" 
 								title="Click to cancel authorization"
 								ng-if="item.isAuthorized"

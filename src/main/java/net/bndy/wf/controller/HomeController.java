@@ -19,7 +19,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.multipart.MultipartFile;
 
 @Controller
-public class HomeController {
+public class HomeController extends _BaseController {
 	
 	@RequestMapping("/")
 	public String helloHtml(Map<String, Object> map) {
@@ -32,10 +32,14 @@ public class HomeController {
 		map.put("time", new Date());
 		map.put("urls", lst);
 		
-		Authentication auth = SecurityContextHolder.getContext().getAuthentication();
-		map.put("who", auth.getName());
+		map.put("who", this.getCurrentUser() != null ? this.getCurrentUser().getUsername() : "");
 
 		return "/index";
+	}
+	
+	@RequestMapping("/about")
+	public String about() {
+		return "/about";
 	}
 	
 	@RequestMapping("/test/upload")

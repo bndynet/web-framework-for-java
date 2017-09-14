@@ -1,0 +1,17 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+	xmlns:layout="http://www.ultraq.net.nz/web/thymeleaf/layout"
+	layout:decorator="admin/layout_admin">
+<head>
+<title>Admin Home</title>
+</head>
+<body>
+	<div layout:fragment="content">
+		<div class="page-header">
+			<h2>Welcome
+				<span th:text="${#authentication.getPrincipal().getUsername()}"></span>.
+			</h2>
+		</div>
+	</div>
+</body>
+</html>

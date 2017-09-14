@@ -4,7 +4,7 @@
  ******************************************************************************/
 package net.bndy.wf.exceptions;
 
-import net.bndy.wf.lib.Description;
+import net.bndy.wf.lib.annotation.*;
 
 public enum OAuthExceptionType {
 

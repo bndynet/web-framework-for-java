@@ -26,10 +26,12 @@ public class User extends _BaseEntity implements UserDetails {
 
 	private String username;
     private String password;
+    private boolean enabled;
+    private boolean isExpired;
+    private boolean isLocked;
 
     @Transient
     private String passwordConfirm;
-    private boolean enabled;
     
     @ManyToMany
     @JoinTable(name = "app_user_role", 
@@ -84,6 +86,22 @@ public class User extends _BaseEntity implements UserDetails {
 		this.passwordConfirm = passwordConfirm;
 	}
 
+	public boolean isExpired() {
+		return isExpired;
+	}
+
+	public void setExpired(boolean isExpired) {
+		this.isExpired = isExpired;
+	}
+
+	public boolean isLocked() {
+		return isLocked;
+	}
+
+	public void setLocked(boolean isLocked) {
+		this.isLocked = isLocked;
+	}
+
 	@Override
 	public Collection<? extends GrantedAuthority> getAuthorities() {
 		// TODO Auto-generated method stub
@@ -92,19 +110,16 @@ public class User extends _BaseEntity implements UserDetails {
 
 	@Override
 	public boolean isAccountNonExpired() {
-		// TODO Auto-generated method stub
-		return true;
+		return !this.isExpired();
 	}
 
 	@Override
 	public boolean isAccountNonLocked() {
-		// TODO Auto-generated method stub
-		return true;
+		return !this.isLocked();
 	}
 
 	@Override
 	public boolean isCredentialsNonExpired() {
-		// TODO Auto-generated method stub
 		return true;
 	}
 }

@@ -69,4 +69,9 @@ public class Client extends _BaseEntity {
 	public void setIcon(String icon) {
 		this.icon = icon;
 	}
+	
+	public String getAccessUrl() {
+		return String.format("/api/v1/oauth/authorize?response_type=code&client_id=%s&redirect_uri=%s&scope=normal", 
+				this.getClientId(), this.getRedirectUri());
+	}
 }

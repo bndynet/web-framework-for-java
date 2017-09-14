@@ -15,16 +15,22 @@ import net.bndy.wf.modules.app.models.Client;
 import net.bndy.wf.modules.app.services.repositories.ClientRepository;
 
 @Controller
-@RequestMapping(value="/settings")
-public class SettingsController {
-	
+@RequestMapping(value = "/admin")
+public class AdminController extends _BaseController {
+
 	@Autowired
 	ClientRepository clientRepository;
-	
-	@RequestMapping(value="/applications")
-	public String applications(Model model){
+
+	@RequestMapping(value = "/index")
+	public String home(Model model) {
+		model.addAttribute("who", this.getCurrentUser() != null ? this.getCurrentUser().getUsername() : "Unknown User");
+		return "admin/index";
+	}
+
+	@RequestMapping(value = "/applications")
+	public String applications(Model model) {
 		List<Client> list = this.clientRepository.findAll();
 		model.addAttribute("list", list);
-		return "settings/applications";
+		return "admin/applications";
 	}
 }
