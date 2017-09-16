@@ -6,6 +6,7 @@ package net.bndy.wf.modules.app.services;
 
 import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -17,6 +18,7 @@ import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import net.bndy.wf.Constant;
 import net.bndy.wf.lib._BaseService;
 import net.bndy.wf.modules.app.models.*;
 import net.bndy.wf.modules.app.services.repositories.ClientUserRepository;
@@ -40,7 +42,7 @@ public class UserService extends _BaseService<User> {
 	public Page<User> getUsers(Pageable pageable) {
 		return userRepo.findAll(pageable);
 	}
-	
+
 	public boolean hasUsers() {
 		return this.userRepo.count() > 0;
 	}
@@ -79,12 +81,12 @@ public class UserService extends _BaseService<User> {
 	public User findByUsername(String username) {
 		return this.userRepo.findByUsername(username);
 	}
-	
+
 	public List<ClientUser> getClients(long userId) {
 		return this.clientUserRepository.findByUserId(userId);
 	}
-	
-	public void removeClient(String clientId, long userId){
+
+	public void removeClient(String clientId, long userId) {
 		this.clientUserRepository.deleteByUserIdAndClientId(userId, clientId);
 	}
 
@@ -92,7 +94,17 @@ public class UserService extends _BaseService<User> {
 	public User save(User entity) {
 		entity.setEnabled(true);
 		entity.setPassword(passwordEncoder.encode(entity.getPassword()));
-		entity.setRoles(new HashSet<>(roleRepository.findAll()));
+		if (this.userRepo.findAll().size() == 0) {
+			Role adminRole = this.roleRepository.findByName(Constant.ADMIN_ROLE_NAME);
+			if (adminRole == null) {
+				adminRole = new Role();
+				adminRole.setName(Constant.ADMIN_ROLE_NAME);
+				adminRole = this.roleRepository.saveAndFlush(adminRole);
+			}
+			Set<Role> roles = new HashSet<Role>();
+			roles.add(adminRole);
+			entity.setRoles(roles);
+		}
 		return super.save(entity);
 	}
 

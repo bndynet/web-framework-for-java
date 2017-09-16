@@ -25,8 +25,8 @@ public class ClientService extends _BaseService<Client> {
 		client.setName(name);
 		client.setIcon(icon);
 		client.setRedirectUri(redirectUri);
-		client.setClientId(StringHelper.generateRandomString(Constant.LEN_CLIENT_ID));
-		client.setClientSecret(StringHelper.generateRandomString(Constant.LEN_CLIENT_SECRET));
+		client.setClientId(StringHelper.generateRandomString(Constant.CLIENT_ID_LEN));
+		client.setClientSecret(StringHelper.generateRandomString(Constant.CLIENT_SECRET_LEN));
 
 		return this.clientRepository.saveAndFlush(client);
 	}
@@ -39,8 +39,8 @@ public class ClientService extends _BaseService<Client> {
 			entity.setRedirectUri(client.getRedirectUri());
 
 			if (entity.getClientId() == null || "".equals(entity.getClientId())) {
-				entity.setClientId(StringHelper.generateRandomString(Constant.LEN_CLIENT_ID));
-				entity.setClientSecret(StringHelper.generateRandomString(Constant.LEN_CLIENT_SECRET));
+				entity.setClientId(StringHelper.generateRandomString(Constant.CLIENT_ID_LEN));
+				entity.setClientSecret(StringHelper.generateRandomString(Constant.CLIENT_SECRET_LEN));
 			}
 			entity = this.clientRepository.saveAndFlush(entity);
 		}

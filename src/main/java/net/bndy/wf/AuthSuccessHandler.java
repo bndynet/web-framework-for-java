@@ -37,7 +37,7 @@ public class AuthSuccessHandler extends SavedRequestAwareAuthenticationSuccessHa
 	public void onAuthenticationSuccess(HttpServletRequest request, HttpServletResponse response,
 			Authentication authentication) throws IOException, ServletException {
 		// oauth login
-		String clientId = (String) request.getSession().getAttribute(Constant.KEY_OAUTH_CLIENTID);
+		String clientId = (String) request.getSession().getAttribute(Constant.OAUTH_CLIENTID_KEY);
 		if (clientId != null) {
 			// go to authorization page
 			this.redirectStrategy.sendRedirect(request, response, "/sso/authorize");
@@ -45,7 +45,7 @@ public class AuthSuccessHandler extends SavedRequestAwareAuthenticationSuccessHa
 		}
 
 		// normal login and redirect to back url
-		String redirect = (String) request.getSession().getAttribute(Constant.KEY_OAUTH_REDIRECT);
+		String redirect = (String) request.getSession().getAttribute(Constant.OAUTH_REDIRECT_KEY);
 		if (redirect == null || "".equals(redirect)) {
 			SavedRequest savedRequest = this.requestCache.getRequest(request, response);
 			if (savedRequest != null) {

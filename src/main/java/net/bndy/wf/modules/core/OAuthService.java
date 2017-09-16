@@ -45,7 +45,7 @@ public class OAuthService {
 	}
 
 	public String newAuthCode() {
-		return StringHelper.generateRandomString(Constant.LEN_AUTH_CODE);
+		return StringHelper.generateRandomString(Constant.AUTH_CODE_LEN);
 	}
 
 	public ClientUser refreshAuthCode(String clientId, long userId) {
@@ -83,13 +83,13 @@ public class OAuthService {
 	}
 
 	public String getRedirectUri(HttpSession session, String authCode) throws OAuthException {
-		String clientId = (String) session.getAttribute(Constant.KEY_OAUTH_CLIENTID);
-		String redirectUri = (String) session.getAttribute(Constant.KEY_OAUTH_REDIRECT);
+		String clientId = (String) session.getAttribute(Constant.OAUTH_CLIENTID_KEY);
+		String redirectUri = (String) session.getAttribute(Constant.OAUTH_REDIRECT_KEY);
 
 		if (this.verifyClient(clientId, redirectUri)) {
-			session.removeAttribute(Constant.KEY_OAUTH_CLIENTID);
-			session.removeAttribute(Constant.KEY_OAUTH_REDIRECT);
-			session.removeAttribute(Constant.KEY_OAUTH_SCOPE);
+			session.removeAttribute(Constant.OAUTH_CLIENTID_KEY);
+			session.removeAttribute(Constant.OAUTH_REDIRECT_KEY);
+			session.removeAttribute(Constant.OAUTH_SCOPE_KEY);
 
 			redirectUri = String.format("%s?code=%s", redirectUri, authCode);
 			return redirectUri;

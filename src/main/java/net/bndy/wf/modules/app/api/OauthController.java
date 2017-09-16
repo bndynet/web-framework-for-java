@@ -42,9 +42,9 @@ public class OauthController {
 	public void authorize(HttpServletResponse response, @RequestParam(name = "response_type") String responseType,
 			@RequestParam(name = "client_id") String clientId, @RequestParam(name = "redirect_uri") String redirectUri,
 			@RequestParam(name = "scope") String scope, HttpSession session) throws IOException, OAuthException {
-		session.setAttribute(Constant.KEY_OAUTH_CLIENTID, clientId);
-		session.setAttribute(Constant.KEY_OAUTH_REDIRECT, redirectUri);
-		session.setAttribute(Constant.KEY_OAUTH_SCOPE, scope);
+		session.setAttribute(Constant.OAUTH_CLIENTID_KEY, clientId);
+		session.setAttribute(Constant.OAUTH_REDIRECT_KEY, redirectUri);
+		session.setAttribute(Constant.OAUTH_SCOPE_KEY, scope);
 		
 		// validate client id
 		if (!this.oauthService.verifyClient(clientId, redirectUri))  {

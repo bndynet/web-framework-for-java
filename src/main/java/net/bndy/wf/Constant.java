@@ -6,12 +6,15 @@ package net.bndy.wf;
 
 public class Constant {
 
-	public static final String KEY_OAUTH_REDIRECT = "redirect_uri";
-	public static final String KEY_OAUTH_SCOPE = "scope";
-	public static final String KEY_OAUTH_CLIENTID = "CLIENTID";
-	public static final String KEY_SESSION_USER = "USER";
+	public static final String OAUTH_REDIRECT_KEY = "redirect_uri";
+	public static final String OAUTH_SCOPE_KEY = "scope";
+	public static final String OAUTH_CLIENTID_KEY = "CLIENTID";
+
+	public static final String SESSION_USER_KEY = "USER";
 	
-	public static final int LEN_AUTH_CODE = 40;
-	public static final int LEN_CLIENT_ID = 40;
-	public static final int LEN_CLIENT_SECRET = 80;
+	public static final String ADMIN_ROLE_NAME = "ADMIN";
+	
+	public static final int AUTH_CODE_LEN = 40;
+	public static final int CLIENT_ID_LEN = 40;
+	public static final int CLIENT_SECRET_LEN = 80;
 }

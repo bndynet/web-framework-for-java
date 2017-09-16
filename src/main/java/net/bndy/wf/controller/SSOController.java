@@ -63,13 +63,18 @@ public class SSOController extends _BaseController {
 
 	@RequestMapping(value = "/login", method = RequestMethod.GET)
 	public String login(Model model, String error, String logout, String redirect_uri, HttpSession session) {
+		// create first user
+		if(!this.userService.hasUsers()) {
+			return "redirect:/sso/signup";
+		}
+		
 		// skip if user logged in
 		if (this.oauthService.getCurrentUser() != null) {
 			return "redirect:/sso/authorize";
 		}
 
 		if (redirect_uri != null && !"".equals(redirect_uri)) {
-			session.setAttribute(Constant.KEY_OAUTH_REDIRECT, redirect_uri);
+			session.setAttribute(Constant.OAUTH_REDIRECT_KEY, redirect_uri);
 		}
 
 		if (error != null)
@@ -83,7 +88,7 @@ public class SSOController extends _BaseController {
 
 	@RequestMapping(value = "/authorize", method = RequestMethod.GET)
 	public String authorize(Model model, HttpSession session) throws OAuthException {
-		String clientId = session.getAttribute(Constant.KEY_OAUTH_CLIENTID).toString();
+		String clientId = session.getAttribute(Constant.OAUTH_CLIENTID_KEY).toString();
 
 		// skip if current user has been authorized
 		Authentication auth = SecurityContextHolder.getContext().getAuthentication();
@@ -98,17 +103,17 @@ public class SSOController extends _BaseController {
 			}
 		}
 
-		String scope = session.getAttribute(Constant.KEY_OAUTH_SCOPE).toString();
+		String scope = session.getAttribute(Constant.OAUTH_SCOPE_KEY).toString();
 		model.addAttribute("scope", scope);
 
 		Client client = this.oauthService.getClient(clientId);
 		if (client != null) {
 			model.addAttribute("app", client);
-			model.addAttribute("redirectUri", session.getAttribute(Constant.KEY_OAUTH_REDIRECT));
+			model.addAttribute("redirectUri", session.getAttribute(Constant.OAUTH_REDIRECT_KEY));
 		} else {
-			session.removeAttribute(Constant.KEY_OAUTH_CLIENTID);
-			session.removeAttribute(Constant.KEY_OAUTH_REDIRECT);
-			session.removeAttribute(Constant.KEY_OAUTH_SCOPE);
+			session.removeAttribute(Constant.OAUTH_CLIENTID_KEY);
+			session.removeAttribute(Constant.OAUTH_REDIRECT_KEY);
+			session.removeAttribute(Constant.OAUTH_SCOPE_KEY);
 			model.addAttribute("error", OAuthExceptionType.InvalidClientIDOrRedirectUri.toString());
 		}
 		return "authorize";
@@ -116,8 +121,8 @@ public class SSOController extends _BaseController {
 
 	@RequestMapping(value = "/authorize", method = RequestMethod.POST)
 	public String postAuthorize(HttpSession session) throws OAuthException {
-		String scope = session.getAttribute(Constant.KEY_OAUTH_SCOPE).toString();
-		String clientId = session.getAttribute(Constant.KEY_OAUTH_CLIENTID).toString();
+		String scope = session.getAttribute(Constant.OAUTH_SCOPE_KEY).toString();
+		String clientId = session.getAttribute(Constant.OAUTH_CLIENTID_KEY).toString();
 		Authentication auth = SecurityContextHolder.getContext().getAuthentication();
 
 		if (auth != null && clientId != null && clientId != "") {

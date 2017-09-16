@@ -42,7 +42,7 @@ public class AuthenticationInterceptor extends HandlerInterceptorAdapter {
 		if (!request.getMethod().equalsIgnoreCase("OPTIONS")) {
 			String uri = request.getRequestURI();
 			logger.info("Request {}", uri);
-			Object user = request.getSession().getAttribute(Constant.KEY_SESSION_USER);
+			Object user = request.getSession().getAttribute(Constant.SESSION_USER_KEY);
 			if (user == null) {
 				return false;
 			}

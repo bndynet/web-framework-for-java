@@ -7,6 +7,7 @@ package net.bndy.wf.lib;
 import java.io.BufferedWriter;
 import java.io.FileWriter;
 import java.io.IOException;
+import java.io.UnsupportedEncodingException;
 import java.math.BigInteger;
 import java.security.SecureRandom;
 import java.text.ParseException;
@@ -15,6 +16,8 @@ import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 import java.util.UUID;
+
+import org.apache.xerces.impl.dv.util.Base64;
 
 public class StringHelper {
 
@@ -79,5 +82,13 @@ public class StringHelper {
 		}
 		
 		return result;
+	}
+	
+	public static String encodeBase64(String source) throws UnsupportedEncodingException {
+		return Base64.encode(source.getBytes("UTF-8"));
+	}
+	
+	public static String decodeBase64(String base64String) throws UnsupportedEncodingException {
+		return new String(Base64.decode(base64String), "UTF-8");
 	}
 }
