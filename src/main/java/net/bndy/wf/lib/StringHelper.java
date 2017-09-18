@@ -72,16 +72,16 @@ public class StringHelper {
 		}
 	}
 	
-	public static List<String> splitWithoutWhitespace(String source, String separator) {
+	public static String[] splitWithoutWhitespace(String source, String separator) {
 		List<String> result = new ArrayList<String>();
 		String[] items = source.split(separator);
 		for(String s: items) {
 			if(!"".equals(s.trim())) {
-				result.add(s);
+				result.add(s.trim());
 			}
 		}
 		
-		return result;
+		return result.toArray(new String[result.size()]);
 	}
 	
 	public static String encodeBase64(String source) throws UnsupportedEncodingException {

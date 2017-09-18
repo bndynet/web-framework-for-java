@@ -18,25 +18,25 @@ public class MvcConfig extends WebMvcConfigurerAdapter {
 
 	@Autowired
 	AuthenticationInterceptor authenticationInterceptor;
-	
+
 	@Override
 	public void addResourceHandlers(ResourceHandlerRegistry registry) {
 		registry.addResourceHandler("/webjars/**").addResourceLocations("classpath:/META-INF/resources/webjars/");
 		registry.addResourceHandler("/static/**").addResourceLocations("classpath:/static/");
 		super.addResourceHandlers(registry);
 	}
-	
-    @Override
+
+	@Override
 	public void addInterceptors(InterceptorRegistry registry) {
-    	//registry.addInterceptor(authenticationInterceptor);
+		// registry.addInterceptor(authenticationInterceptor);
 		super.addInterceptors(registry);
-	}	
-	
-    @Override
-    public void addViewControllers(ViewControllerRegistry registry) {
-    	// documentation for API
+	}
+
+	@Override
+	public void addViewControllers(ViewControllerRegistry registry) {
+		// documentation for API
 		registry.addRedirectViewController("/docs/api", "/docs/api/index.html");
 
-//        registry.addViewController("/login").setViewName("login");
-    }
+		// registry.addViewController("/login").setViewName("login");
+	}
 }

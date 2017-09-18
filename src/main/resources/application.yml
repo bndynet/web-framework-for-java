@@ -18,6 +18,7 @@ application:
   upload-path-url: http://files.bndy.net
   rename-upload-file: false
   mail-sender: zb@bndy.net
+  allowed-origins: http://localhost:3000, http://app.bndy.net
 
 # LOGGING  
 logging:
@@ -27,7 +28,7 @@ logging:
   level:
     org.springframework.web: DEBUG
     hibernate: DEBUG
-    
+
 # BANNER  
 banner:
   charset: UTF-8 # Banner file encoding.  

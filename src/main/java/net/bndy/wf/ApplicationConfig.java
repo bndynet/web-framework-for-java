@@ -15,6 +15,15 @@ public class ApplicationConfig {
 	private String uploadPath;
 	private String uploadPathUrl;
 	private String mailSender;
+	private String allowedOrigins;
+
+	public String getAllowedOrigins() {
+		return allowedOrigins;
+	}
+
+	public void setAllowedOrigins(String allowedOrigins) {
+		this.allowedOrigins = allowedOrigins;
+	}
 
 	public void setUploadPath(String uploadPath) {
 		this.uploadPath = uploadPath;

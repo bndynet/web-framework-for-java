@@ -4,6 +4,8 @@
  ******************************************************************************/
 package net.bndy.wf;
 
+import java.util.Arrays;
+
 import javax.sql.DataSource;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -16,7 +18,11 @@ import org.springframework.security.config.annotation.web.builders.WebSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
+import org.springframework.web.cors.CorsConfiguration;
+import org.springframework.web.cors.CorsConfigurationSource;
+import org.springframework.web.cors.UrlBasedCorsConfigurationSource;
 
+import net.bndy.wf.lib.StringHelper;
 import net.bndy.wf.modules.app.services.UserDetailsServiceImpl;
 
 @Configuration
@@ -25,6 +31,8 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 
 	@Autowired
 	DataSource dataSource;
+	@Autowired
+	ApplicationConfig applicationConfig;
 
 	@Autowired
 	private UserDetailsServiceImpl userDetailsService;
@@ -41,8 +49,9 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 
 	@Override
 	protected void configure(HttpSecurity http) throws Exception {
-		// TODO: remove before release
-		http.csrf().disable();
+		http
+			.cors().and()
+			.csrf().disable();
 		
 		http.authorizeRequests()
 			.antMatchers("/webjars/**", "/static/**", "/api/**", "/test/**", "/v2/api-docs",
@@ -79,5 +88,27 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 
 		// Solution 3
 		auth.userDetailsService(this.userDetailsService).passwordEncoder(this.bCryptPasswordEncoder());
+	}
+	
+	@Bean
+	CorsConfigurationSource corsConfigurationSource() {
+		// Global CORS configuration
+
+		// Solution 1
+		// add CrossOrigin annotation to Controller class or methods
+		
+		// Solution 2
+		// override addCorsMappings(CorsRegistry registry) method of WebMvcConfigurerAdapter class
+		
+		// Solution 3
+		CorsConfiguration configuration = new CorsConfiguration();
+		String origins = this.applicationConfig.getAllowedOrigins();
+		if (origins != null && !"".equals(origins)) {
+			configuration.setAllowedOrigins(Arrays.asList(StringHelper.splitWithoutWhitespace(origins, ",")));
+			configuration.setAllowedMethods(Arrays.asList("*"));
+		}
+		UrlBasedCorsConfigurationSource source = new UrlBasedCorsConfigurationSource();
+		source.registerCorsConfiguration("/**", configuration);
+		return source;
 	}
 }
