@@ -93,11 +93,13 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 	@Bean
 	CorsConfigurationSource corsConfigurationSource() {
 		// Global CORS configuration
+		// https://spring.io/blog/2015/06/08/cors-support-in-spring-framework
+		// https://docs.spring.io/spring-security/site/docs/current/reference/html/cors.html
 
-		// Solution 1
+		// Solution 1 (but does not set Access-Control-Allow-Origins header)
 		// add CrossOrigin annotation to Controller class or methods
 		
-		// Solution 2
+		// Solution 2 (but does not set Access-Control-Allow-Origins header)
 		// override addCorsMappings(CorsRegistry registry) method of WebMvcConfigurerAdapter class
 		
 		// Solution 3
