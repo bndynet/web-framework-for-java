@@ -10,6 +10,8 @@ import javax.persistence.Entity;
 import javax.persistence.ManyToMany;
 import javax.persistence.Table;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 import net.bndy.wf.lib._BaseEntity;
 
 @Entity
@@ -20,6 +22,7 @@ public class Role extends _BaseEntity {
 	private String name;
 
     @ManyToMany(mappedBy = "roles")
+    @JsonIgnore
     private Set<User> users;
   
     public Set<User> getUsers() {

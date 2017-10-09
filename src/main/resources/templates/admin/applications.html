@@ -6,7 +6,7 @@
 <title>Applications</title>
 </head>
 <body>
-	<div layout:fragment="content" ng-controller="SettingsApplicationsCtrl">
+	<div layout:fragment="content" ng-controller="ApplicationsCtrl">
 		<div class="page-header">
 			<h2>Installed Applications</h2>
 			<div class="toolbox">
@@ -93,7 +93,7 @@
 
 	<th:block layout:fragment="scripts">
 		<script>
-			app.controller('SettingsApplicationsCtrl', [
+			app.controller('ApplicationsCtrl', [
 				'$scope', 'appDialog', '$http', 
 				function($scope, appDialog, $http) {
 					$scope.data = [];

@@ -17,6 +17,8 @@ import javax.persistence.Transient;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 import net.bndy.wf.lib._BaseEntity;
 
 @Entity
@@ -25,12 +27,14 @@ public class User extends _BaseEntity implements UserDetails {
 	private static final long serialVersionUID = 1L;
 
 	private String username;
+    @JsonIgnore
     private String password;
     private boolean enabled;
     private boolean isExpired;
     private boolean isLocked;
 
     @Transient
+    @JsonIgnore
     private String passwordConfirm;
     
     @ManyToMany
