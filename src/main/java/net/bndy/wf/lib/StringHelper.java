@@ -19,6 +19,9 @@ import java.util.UUID;
 
 import org.apache.xerces.impl.dv.util.Base64;
 
+import com.fasterxml.jackson.core.JsonParseException;
+import com.fasterxml.jackson.databind.JsonMappingException;
+
 public class StringHelper {
 
 	public static String generateUUID() {
@@ -90,5 +93,9 @@ public class StringHelper {
 	
 	public static String decodeBase64(String base64String) throws UnsupportedEncodingException {
 		return new String(Base64.decode(base64String), "UTF-8");
+	}
+	
+	public static <T> T toJson(String content, Class<T> valueType) throws JsonParseException, JsonMappingException, IOException {
+		return JsonHelper.parse(content, valueType);
 	}
 }
