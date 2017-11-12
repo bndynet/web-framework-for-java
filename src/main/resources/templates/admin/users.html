@@ -10,8 +10,9 @@
 		<div class="page-header">
 			<h2>Users</h2>
 			<div class="toolbox">
-				<md-button class="md-primary no-margin" ng-click="add()">
-				Add User</md-button>
+                <md-button ng-href="/sso/signup" target="_blank">
+					Sign Up Account
+				</md-button>
 			</div>
 		</div>
 		
@@ -30,7 +31,12 @@
 				<tbody>
 					<tr ng-repeat="item in data">
 						<td ng-bind="item.username"></td>
-						<td ng-bind="item.roles[0].name"></td>
+						<td>
+							<a ng-click="editRoles(item)">
+								<span ng-bind="item.roles[0].name" ng-if="item.roles && item.roles.length > 0"></span>
+								<em ng-if="item.roles && item.roles.length == 0">No Roles</em>
+							</a>
+						</td>
 						<td ng-bind="item.createDate | date: 'yyyy-MM-dd HH:mm'"></td>
 						<td ng-bind="item.lastUpdate | date: 'yyyy-MM-dd HH:mm'"></td>
 						<td class="text-center">
@@ -48,6 +54,41 @@
 				</tbody>
 			</table>
 		</div>
+
+		<div id="rolesForm" class="modal fade" tabindex="-1" role="dialog">
+			<div class="modal-dialog" role="document">
+				<div class="modal-content">
+					<div class="modal-header">
+						<button type="button" class="close" data-dismiss="modal"
+								aria-label="Close">
+							<span aria-hidden="true">&times;</span>
+						</button>
+						<h4 class="modal-title">
+							<span>Roles for <b>{{userModel.username}}</b></span>
+						</h4>
+					</div>
+					<div class="modal-body">
+                        <div class="list-group">
+                            <a href="#" class="list-group-item"
+                               ng-click="changeRole(item)"
+                               ng-repeat="item in roles">
+                                <h4 class="list-group-item-heading">
+                                    {{ item.name }}
+                                    <i class="glyphicon glyphicon-ok-circle ng-cloak pull-right"
+                                       ng-if="userModel.currentRole == item"></i>
+                                </h4>
+                                <p class="list-group-item-text">{{ item.description }}</p>
+                            </a>
+                        </div>
+					</div>
+					<div class="modal-footer">
+						<button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+						<button type="button" class="btn btn-primary"
+								ng-click="saveRoles()">Save changes</button>
+					</div>
+				</div>
+			</div>
+		</div>
 	</div>
 
 	<th:block layout:fragment="scripts">
@@ -56,11 +97,40 @@
 				[ '$scope', 'appDialog', '$http', 
 				function($scope, appDialog, $http) { 
 					$scope.data = [];
-					
+					$scope.roles = null;
+
 					$scope.init = function() {
 						$http.get('/api/v1/app/users').then(function(res) {
 							$scope.data = res.data;
 						});
+						$http.get('/api/v1/app/config/roles').then(function(res) {
+							$scope.roles = res.data;
+						});
+					};
+
+					$scope.editRoles = function(item) {
+						$scope.userModel = angular.copy(item);
+						if ($scope.userModel.roles && $scope.userModel.roles.length > 0) {
+						    for (var idx in $scope.roles) {
+						        if ($scope.roles[idx].name == $scope.userModel.roles[0].name) {
+						            $scope.userModel.currentRole = $scope.roles[idx];
+						        }
+						    }
+						}
+						$('#rolesForm').modal('show');
+					};
+					$scope.changeRole = function(role) {
+					    $scope.userModel.currentRole = role;
+					};
+					$scope.saveRoles = function() {
+						if ($scope.userModel.id) {
+						    var roleId = $scope.userModel.currentRole.id;
+							$http.put('/api/v1/app/users/' + $scope.userModel.id + '/changerole?roleId=' + $scope.userModel.currentRole.id)
+							    .then(function(res) {
+							        $scope.init();
+							        $('#rolesForm').modal('hide');
+							    });
+						}
 					};
 					
 					$scope.remove = function(item) {
@@ -73,7 +143,7 @@
 					};
 					
 					$scope.toggleEnabled = function(item) {
-						$http.put('/api/v1/app/users/toggleenabled/' + item.id).then(function(res) {
+						$http.put('/api/v1/app/users/' + item.id + '/toggleenabled').then(function(res) {
 							item.enabled = !item.enabled;
 							appDialog.success();
 						});

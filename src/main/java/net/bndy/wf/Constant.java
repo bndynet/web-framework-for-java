@@ -12,8 +12,6 @@ public class Constant {
 
 	public static final String SESSION_USER_KEY = "USER";
 	
-	public static final String ADMIN_ROLE_NAME = "ADMIN";
-	
 	public static final int AUTH_CODE_LEN = 40;
 	public static final int CLIENT_ID_LEN = 40;
 	public static final int CLIENT_SECRET_LEN = 80;

@@ -1,6 +1,8 @@
 *.class
 *.log
+*.log.*
 .settings/
+.idea/
 target/
 
 .classpath

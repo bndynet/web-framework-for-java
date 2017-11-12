@@ -42,12 +42,18 @@ public class UserController extends _BaseApi<User> {
 	}
 
 	@ApiOperation(value = "Enable or disable user")
-	@RequestMapping(value = "/toggleenabled/{id}", method = RequestMethod.PUT)
+	@RequestMapping(value = "/{id}/toggleenabled", method = RequestMethod.PUT)
 	public void toggleEnabled(@PathVariable(name = "id") long id) {
 		User user = this.userService.get(id);
 		if (user != null) {
 			user.setEnabled(!user.isEnabled());
 			this.userService.save(user);
 		}
+	}
+
+	@ApiOperation(value = "Change role for user")
+	@RequestMapping(value = "/{id}/changerole", method = RequestMethod.PUT)
+	public void changeRole(@PathVariable(name = "id") long Id, @RequestParam(name = "roleId") long roleId) {
+        this.userService.changeRole(Id, roleId);
 	}
 }
