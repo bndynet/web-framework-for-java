@@ -20,7 +20,7 @@ import org.springframework.web.multipart.MultipartFile;
 public class HomeController extends _BaseController {
 	
 	@RequestMapping("/")
-	public String helloHtml(Map<String, Object> map) {
+	public String index(Map<String, Object> map) throws Exception {
 		List<String> lst = new ArrayList<String>();
 		lst.add("/");
 		lst.add("/v2/api-docs");
@@ -30,8 +30,6 @@ public class HomeController extends _BaseController {
 		map.put("time", new Date());
 		map.put("urls", lst);
 		
-		map.put("who", this.getCurrentUser() != null ? this.getCurrentUser().getUsername() : "");
-
 		return "/index";
 	}
 	
