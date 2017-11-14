@@ -109,10 +109,12 @@ public class UserService extends _BaseService<User> {
 
     @Override
     public User save(User entity) {
+        if (entity.getId() == null || entity.getId() <= 0) {
+            entity.setPassword(passwordEncoder.encode(entity.getPassword()));
+        }
+
         if (this.userRepo.findAll().size() == 0) {
             entity.setEnabled(true);
-            entity.setPassword(passwordEncoder.encode(entity.getPassword()));
-
             // initialize roles
             roleRepository.deleteAll();
             Role adminRole = null;

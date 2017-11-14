@@ -58,6 +58,7 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 						"/docs/*/**", "/error",
 						"/*",
 						"/sso/login*", "/sso/signup").permitAll()
+            .antMatchers("/admin/**").hasAnyAuthority(ApplicationUserRole.Admin.name())
 			.anyRequest().authenticated();
 
 		http

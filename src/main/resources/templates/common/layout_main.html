@@ -34,10 +34,20 @@
 					<li><a th:href="@{/docs/api}">API Documentation</a></li>
 				</ul>
 				<ul class="nav navbar-nav navbar-right">
-					<li>
-						<a th:href="@{/admin/index}">
-							Go to Admin Panel 
+					<li th:if="${#authorization.expression('isAuthenticated()')}">
+						<a data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+							<i class="glyphicon glyphicon-user"></i>
+                            <span th:text="${#authentication.getPrincipal().getUsername()}"></span>
+							[<span th:text="${#strings.listJoin(user.getRoleNames(),',')}"></span>]
+                            <span class="caret"></span>
 						</a>
+						<ul class="dropdown-menu" aria-labelledby="dLabel">
+							<li><a href="/admin/index">Admin Panel</a></li>
+							<li><a href="/sso/logout">Sign Out</a></li>
+						</ul>
+					</li>
+                    <li th:unless="${#authorization.expression('isAuthenticated()')}">
+						<a href="/admin/index">Admin Panel</a>
 					</li>
 				</ul>
 			</nav>

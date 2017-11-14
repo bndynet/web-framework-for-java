@@ -15,7 +15,7 @@
 				<h1 th:text="${title}"></h1>
 				<p th:utext="${message}"></p>
 					
-				<div th:inline="text" style="display:none;">
+				<div th:inline="text" style="display:none;" th:if="${exception!=null}">
 					Failed URL: [[${url}]] <br />
 					Exception: [[${exception.message}]] <br />
 					[[${exception.stackTrace}]]

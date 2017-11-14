@@ -1,42 +1,44 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org"
-	xmlns:layout="http://www.ultraq.net.nz/web/thymeleaf/layout"
-	layout:decorator="common/layout_main">
+      xmlns:layout="http://www.ultraq.net.nz/web/thymeleaf/layout"
+      layout:decorator="common/layout_main">
 <head>
-<title>Hello</title>
+    <title>Hello</title>
 </head>
 <body>
-	<div layout:fragment="content">
-		<br />
-		<div class="jumbotron">
-			<h1>Hello, world!</h1>
-			<p>This is a starter project with Spring Boot, Thymeleaf, MySQL,
-				RESTful API, Bootstrap, AngularJS and AngularJS Material.</p>
-			<p><a class="btn btn-primary btn-lg" href="#" role="button">Learn more</a></p>
-		</div>
-		<br />
-		<br />
-		<br />
-		<br />
-		<div class="text-center">
-			<section>
-				<h3>Used</h3>
-				<div class="img-list">
-					<img
-						src="http://blog.scottlogic.com/bjedrzejewski/assets/spring-boot.png" />
-					<img
-						src="https://upload.wikimedia.org/wikipedia/en/thumb/6/62/MySQL.svg/1200px-MySQL.svg.png" />
-					<img
-						src="https://upload.wikimedia.org/wikipedia/commons/thumb/c/ca/AngularJS_logo.svg/250px-AngularJS_logo.svg.png" />
-					<img src="https://getbootstrap.com/assets/img/bootstrap-stack.png" />
-					<img
-						src="https://raw.githubusercontent.com/thymeleaf/thymeleaf-dist/master/src/artwork/thymeleaf%202016/thymeleaf_logo_white.png" />
-					<img
-						src="https://upload.wikimedia.org/wikipedia/commons/thumb/d/d2/Oauth_logo.svg/180px-Oauth_logo.svg.png" />
-					<img src="" /> <img src="" />
-				</div>
-			</section>
-		</div>
-	</div>
+<div layout:fragment="content">
+    <br/>
+    <div class="jumbotron">
+        <h1>
+            Hello, <span th:text="${user!=null?user.username:'world'}"></span>!
+        </h1>
+        <p>This is a starter project with Spring Boot, Thymeleaf, MySQL,
+            RESTful API, Bootstrap, AngularJS and AngularJS Material.</p>
+        <p><a class="btn btn-primary btn-lg" href="#" role="button">Learn more</a></p>
+    </div>
+    <br/>
+    <br/>
+    <br/>
+    <br/>
+    <div class="text-center">
+        <section>
+            <h3>Used</h3>
+            <div class="img-list">
+                <img
+                        src="http://blog.scottlogic.com/bjedrzejewski/assets/spring-boot.png"/>
+                <img
+                        src="https://upload.wikimedia.org/wikipedia/en/thumb/6/62/MySQL.svg/1200px-MySQL.svg.png"/>
+                <img
+                        src="https://upload.wikimedia.org/wikipedia/commons/thumb/c/ca/AngularJS_logo.svg/250px-AngularJS_logo.svg.png"/>
+                <img src="https://getbootstrap.com/assets/img/bootstrap-stack.png"/>
+                <img
+                        src="https://raw.githubusercontent.com/thymeleaf/thymeleaf-dist/master/src/artwork/thymeleaf%202016/thymeleaf_logo_white.png"/>
+                <img
+                        src="https://upload.wikimedia.org/wikipedia/commons/thumb/d/d2/Oauth_logo.svg/180px-Oauth_logo.svg.png"/>
+                <img src=""/> <img src=""/>
+            </div>
+        </section>
+    </div>
+</div>
 </body>
 </html>

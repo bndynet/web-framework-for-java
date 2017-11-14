@@ -11,12 +11,12 @@ import net.bndy.wf.modules.app.models.User;
 
 public class ApplicationContext {
 
-	public static User getCurrentUser() {
-		Authentication auth = SecurityContextHolder.getContext().getAuthentication();
-		if (auth.getPrincipal() instanceof User) {
-			return (User)auth.getPrincipal();
-		}
-		
-		return null;
-	}
+    public static User getCurrentUser() {
+        Authentication auth = SecurityContextHolder.getContext().getAuthentication();
+        if (auth != null && (auth.getPrincipal() instanceof User)) {
+            return (User) auth.getPrincipal();
+        }
+
+        return null;
+    }
 }
