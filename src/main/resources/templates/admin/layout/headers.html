@@ -234,8 +234,7 @@
                     <a href="#" class="dropdown-toggle" data-toggle="dropdown">
                         <img src="/static/admin/adminlte/img/user2-160x160.jpg" class="user-image" alt="User Image">
                         <span class="hidden-xs">
-                            <span th:text="${#authentication.getPrincipal().getUsername()}"></span>
-                            [<span th:text="${#strings.listJoin(user.getRoleNames(),',')}"></span>]
+                            <span th:text="${user.username}"></span>
                         </span>
                     </a>
                     <ul class="dropdown-menu">
@@ -244,8 +243,8 @@
                             <img src="/static/admin/adminlte/img/user2-160x160.jpg" class="img-circle" alt="User Image">
 
                             <p>
-                                <span th:text="${#authentication.getPrincipal().getUsername()}"></span>
-                                <small th:text="${#strings.listJoin(user.getRoleNames(),',')}">Member since Nov. 2012</small>
+                                <span th:text="${user.username}"></span>
+                                <small th:text="${#strings.listJoin(user.getRoleNames(),',')}"></small>
                             </p>
                         </li>
                         <!-- Menu Body -->

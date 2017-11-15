@@ -1,0 +1,13 @@
+a {
+    cursor: pointer;
+}
+
+.list-group .list-group-item img.media-object {
+    width: 112px;
+}
+
+.list-group .list-group-item .pull-right {
+    position: absolute;
+    top: 1rem;
+    right: 1rem;
+}

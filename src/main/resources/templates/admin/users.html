@@ -22,8 +22,8 @@
                 <h3 class="box-title">Users</h3>
 
                 <div class="box-tools pull-right">
-                    <a class="btn btn-box-tool" href="/sso/signup" target="_blank">
-                        <i class="fa fa-plus"></i>
+                    <a class="btn btn-sm btn-primary" href="/sso/signup" target="_blank">
+                        Add User
                     </a>
                 </div>
             </div>
@@ -88,7 +88,7 @@
                            ng-repeat="item in roles">
                             <h4 class="list-group-item-heading">
                                 {{ item.name }}
-                                <i class="glyphicon glyphicon-ok-circle ng-cloak pull-right"
+                                <i class="glyphicon glyphicon-ok-circle ng-cloak text-success pull-right"
                                    ng-if="userModel.currentRole == item"></i>
                             </h4>
                             <p class="list-group-item-text">{{ item.description }}</p>
