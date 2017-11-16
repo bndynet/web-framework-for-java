@@ -7,9 +7,14 @@
 </head>
 <body>
 	<div layout:fragment="content">
-		<div class="text-center">
+		<br>
+		<br>
+        <br>
+		<div class="text-center fa-2x">
+			<img th:src="${user.avatar}" class="img-circle" style="width:260px;" />
+            <br />
 			Welcome
-            <span th:text="${#authentication.getPrincipal().getUsername()}"></span>.
+            <span th:text="${user.username}"></span>.
 		</div>
 	</div>
 </body>

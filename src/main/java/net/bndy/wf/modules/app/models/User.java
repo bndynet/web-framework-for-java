@@ -4,7 +4,8 @@
  ******************************************************************************/
 package net.bndy.wf.modules.app.models;
 
-import java.util.Collection;
+import java.util.HashSet;
+import java.util.Set;
 import java.util.List;
 import java.util.ArrayList;
 
@@ -24,6 +25,7 @@ public class User extends _BaseEntity implements UserDetails {
     private static final long serialVersionUID = 1L;
 
     private String username;
+    private String avatar;
     @JsonIgnore
     private String password;
     private boolean enabled;
@@ -39,7 +41,7 @@ public class User extends _BaseEntity implements UserDetails {
     @JoinTable(name = "app_user_role",
             joinColumns = @JoinColumn(name = "user_id"),
             inverseJoinColumns = @JoinColumn(name = "role_id"))
-    private Collection<Role> roles;
+    private Set<Role> roles;
 
     public User() {
     }
@@ -74,11 +76,11 @@ public class User extends _BaseEntity implements UserDetails {
         this.username = username;
     }
 
-    public Collection<Role> getRoles() {
+    public Set<Role> getRoles() {
         return roles;
     }
 
-    public void setRoles(Collection<Role> roles) {
+    public void setRoles(Set<Role> roles) {
         this.roles = roles;
     }
 
@@ -119,8 +121,8 @@ public class User extends _BaseEntity implements UserDetails {
     }
 
     @Override
-    public Collection<? extends GrantedAuthority> getAuthorities() {
-        List<GrantedAuthority> grantedAuthorities = new ArrayList<>();
+    public Set<? extends GrantedAuthority> getAuthorities() {
+        Set<GrantedAuthority> grantedAuthorities = new HashSet<>();
         for (Role role : this.getRoles()) {
             grantedAuthorities.add(new SimpleGrantedAuthority(role.getName()));
         }
@@ -140,5 +142,13 @@ public class User extends _BaseEntity implements UserDetails {
     @Override
     public boolean isCredentialsNonExpired() {
         return !this.isCredentialsExpired;
+    }
+
+    public String getAvatar() {
+        return avatar;
+    }
+
+    public void setAvatar(String avatar) {
+        this.avatar = avatar;
     }
 }

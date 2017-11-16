@@ -4,9 +4,7 @@
  ******************************************************************************/
 package net.bndy.wf.modules.app.services;
 
-import java.util.HashSet;
-import java.util.List;
-import java.util.Set;
+import java.util.*;
 
 import net.bndy.wf.ApplicationUserRole;
 import org.slf4j.Logger;
@@ -100,7 +98,7 @@ public class UserService extends _BaseService<User> {
         Role role = this.roleRepository.findOne(roleId);
         User user = this.userRepo.findOne(userId);
         if (user != null && role != null) {
-            Set<Role> roles = new HashSet<>();
+            HashSet<Role> roles = new HashSet<>();
             roles.add(role);
             user.setRoles(roles);
         }
@@ -111,6 +109,9 @@ public class UserService extends _BaseService<User> {
     public User save(User entity) {
         if (entity.getId() == null || entity.getId() <= 0) {
             entity.setPassword(passwordEncoder.encode(entity.getPassword()));
+        }
+        if (entity.getAvatar() == null || entity.getAvatar() == "") {
+            entity.setAvatar(applicationConfig.getDefaultUserAvatar());
         }
 
         if (this.userRepo.findAll().size() == 0) {

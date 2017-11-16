@@ -1,13 +1,22 @@
 a {
-    cursor: pointer;
+  cursor: pointer;
 }
 
 .list-group .list-group-item img.media-object {
-    width: 112px;
+  width: 112px;
 }
 
 .list-group .list-group-item .pull-right {
-    position: absolute;
-    top: 1rem;
-    right: 1rem;
+  position: absolute;
+  top: 1rem;
+  right: 1rem;
 }
+
+.table td img {
+  height: 28px;
+  position: relative;
+  top: -4px;
+}
+ 
+
+ /*# sourceMappingURL= style.css.map */

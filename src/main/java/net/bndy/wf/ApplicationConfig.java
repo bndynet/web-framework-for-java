@@ -16,6 +16,7 @@ public class ApplicationConfig {
 	private String uploadPathUrl;
 	private String mailSender;
 	private String allowedOrigins;
+	private String defaultUserAvatar;
 
 	public String getAllowedOrigins() {
 		return allowedOrigins;
@@ -59,5 +60,13 @@ public class ApplicationConfig {
 
 	public void setMailSender(String mailSender) {
 		this.mailSender = mailSender;
+	}
+
+	public String getDefaultUserAvatar() {
+		return defaultUserAvatar;
+	}
+
+	public void setDefaultUserAvatar(String defaultUserAvatar) {
+		this.defaultUserAvatar = defaultUserAvatar;
 	}
 }

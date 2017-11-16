@@ -19,6 +19,7 @@ application:
   rename-upload-file: false
   mail-sender: zb@bndy.net
   allowed-origins: http://localhost:3000, http://app.bndy.net
+  default-user-avatar: /static/img/me.png
 
 # LOGGING  
 logging:

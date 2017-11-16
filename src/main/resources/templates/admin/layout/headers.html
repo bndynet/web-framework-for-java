@@ -232,7 +232,7 @@
                 <!-- User Account: style can be found in dropdown.less -->
                 <li class="dropdown user user-menu">
                     <a href="#" class="dropdown-toggle" data-toggle="dropdown">
-                        <img src="/static/admin/adminlte/img/user2-160x160.jpg" class="user-image" alt="User Image">
+                        <img th:src="${user.avatar}" class="user-image" alt="User Image">
                         <span class="hidden-xs">
                             <span th:text="${user.username}"></span>
                         </span>
@@ -240,7 +240,7 @@
                     <ul class="dropdown-menu">
                         <!-- User image -->
                         <li class="user-header">
-                            <img src="/static/admin/adminlte/img/user2-160x160.jpg" class="img-circle" alt="User Image">
+                            <img th:src="${user.avatar}" class="img-circle" alt="User Image">
 
                             <p>
                                 <span th:text="${user.username}"></span>
@@ -268,6 +268,7 @@
                                 <a href="#" class="btn btn-default btn-flat">Profile</a>
                             </div>
                             <div class="pull-right">
+                                <a href="/admin/lock" class="btn btn-default btn-flat">Lock</a>
                                 <a href="#" class="btn btn-default btn-flat">Sign out</a>
                             </div>
                         </li>

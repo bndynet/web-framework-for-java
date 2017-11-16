@@ -51,14 +51,15 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 	protected void configure(HttpSecurity http) throws Exception {
 		http
 			.cors().and()
-			.csrf().disable();
+			.csrf().disable()
+            .headers().frameOptions().sameOrigin();
 		
 		http.authorizeRequests()
 			.antMatchers("/webjars/**", "/static/**", "/api/**", "/test/**", "/v2/api-docs",
-						"/docs/*/**", "/error",
+						"/docs/**", "/error",
 						"/*",
 						"/sso/login*", "/sso/signup").permitAll()
-            .antMatchers("/admin/*/**").hasAnyAuthority(ApplicationUserRole.Admin.name())
+            .antMatchers("/admin/**").hasAnyAuthority(ApplicationUserRole.Admin.name())
 			.anyRequest().authenticated();
 
 		http

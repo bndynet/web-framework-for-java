@@ -1,8 +1,8 @@
 package net.bndy.wf;
 
 public enum ApplicationUserRole {
-    Admin("Administrator"),
-    GenericUser("Generic User");
+    Admin("Administrator, control all resources."),
+    CommonUser("Common User, access all resources but can not modify.");
 
     private final String description;
 
