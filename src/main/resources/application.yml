@@ -14,6 +14,9 @@ application:
   title: Web Framework 
   version: 1.0.0.PRE
   # CUSTOM
+  app-name: Web Framework
+  app-logo:
+  app-short-name: WF
   upload-path: upload
   upload-path-url: http://files.bndy.net
   rename-upload-file: false
@@ -82,7 +85,7 @@ spring:
 
   # DATASOURCE (DataSourceAutoConfiguration & DataSourceProperties)  
   datasource:
-    url: jdbc:mysql://127.0.0.1:3306/test
+    url: jdbc:mysql://192.168.3.200:3306/test
     username: root
     password: 123456
     driver-class: com.mysql.jdbc.Driver

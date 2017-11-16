@@ -10,13 +10,16 @@ import org.springframework.stereotype.Component;
 @Component
 @ConfigurationProperties(prefix="application")
 public class ApplicationConfig {
-	
-	private boolean renameUploadFile;
+
+	private String appLogo;
+	private String appName;
+	private String appShortName;
 	private String uploadPath;
 	private String uploadPathUrl;
 	private String mailSender;
 	private String allowedOrigins;
 	private String defaultUserAvatar;
+	private boolean renameUploadFile;
 
 	public String getAllowedOrigins() {
 		return allowedOrigins;
@@ -68,5 +71,29 @@ public class ApplicationConfig {
 
 	public void setDefaultUserAvatar(String defaultUserAvatar) {
 		this.defaultUserAvatar = defaultUserAvatar;
+	}
+
+	public String getAppLogo() {
+		return appLogo;
+	}
+
+	public void setAppLogo(String appLogo) {
+		this.appLogo = appLogo;
+	}
+
+	public String getAppName() {
+		return appName;
+	}
+
+	public void setAppName(String appName) {
+		this.appName = appName;
+	}
+
+	public String getAppShortName() {
+		return appShortName;
+	}
+
+	public void setAppShortName(String appShortName) {
+		this.appShortName = appShortName;
 	}
 }
