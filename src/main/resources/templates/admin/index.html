@@ -1,21 +1,21 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org"
-	xmlns:layout="http://www.ultraq.net.nz/web/thymeleaf/layout"
-	layout:decorator="admin/layout/layout_adminlte">
-<head>
-<title>Admin Home</title>
-</head>
-<body>
-	<div layout:fragment="content">
-		<br>
-		<br>
-        <br>
-		<div class="text-center fa-2x">
-			<img th:src="${user.avatar}" class="img-circle" style="width:260px;" />
-            <br />
-			Welcome
-            <span th:text="${user.username}"></span>.
+	  xmlns:layout="http://www.ultraq.net.nz/web/thymeleaf/layout"
+	  layout:decorator="admin/partials/layout">
+<head></head>
+<body class="fixed hold-transition sidebar-mini sidebar-mini-expand-feature skin-blue">
+<th:block layout:fragment="body">
+	<div class="wrapper">
+		<div th:replace="admin/partials/headers::header"></div>
+		<div th:replace="admin/partials/sidebars::sidebar"></div>
+
+		<div class="content-wrapper">
+			<ui-view></ui-view>
 		</div>
+
+		<div th:replace="admin/partials/footers::footer"></div>
+		<div th:replace="admin/partials/controlSidebars::controlSidebar"></div>
 	</div>
+</th:block>
 </body>
 </html>

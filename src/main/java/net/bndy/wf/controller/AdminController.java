@@ -12,7 +12,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 @RequestMapping(value = "/admin")
 public class AdminController extends _BaseController {
 
-	@RequestMapping(value = "/index")
+	@RequestMapping(value = "/")
 	public String home(Model model) {
 		model.addAttribute("who", this.getCurrentUser() != null ? this.getCurrentUser().getUsername() : "Unknown User");
 		return "admin/index";

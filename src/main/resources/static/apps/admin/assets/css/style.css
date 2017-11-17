@@ -1,0 +1,34 @@
+html, body {
+  height: 100%;
+}
+
+a {
+  cursor: pointer;
+}
+
+/* AdminLTE */
+.lockscreen-wrapper {
+  margin-top: 0;
+  padding-top: 10%;
+  height: 100vh;
+}
+
+/* Bootstrap */
+.list-group .list-group-item img.media-object {
+  width: 112px;
+}
+
+.list-group .list-group-item .pull-right {
+  position: absolute;
+  top: 1rem;
+  right: 1rem;
+}
+
+.table td img {
+  height: 28px;
+  position: relative;
+  top: -4px;
+}
+ 
+
+ /*# sourceMappingURL= style.css.map */
