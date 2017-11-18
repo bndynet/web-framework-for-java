@@ -22,14 +22,4 @@ public class AdminController extends _BaseController {
 	public String lock(Model model) {
 		return "admin/lock";
 	}
-
-	@RequestMapping(value = "/applications")
-	public String applications(Model model) {
-		return "admin/applications";
-	}
-	
-	@RequestMapping(value = "/users")
-	public String users(Model model) {
-		return "admin/users";
-	}
 }

@@ -58,7 +58,7 @@
     <link rel="stylesheet" type="text/css"
           href="/static/apps/admin/assets/css/style.css"/>
 </head>
-<body class="fixed hold-transition sidebar-mini sidebar-mini-expand-feature skin-blue">
+<body class="fixed hold-transition sidebar-mini sidebar-mini-expand-feature skin-blue" ng-controller="LayoutCtrl">
 <th:block layout:fragment="body"></th:block>
 
 <!-- jQuery -->
@@ -142,8 +142,10 @@
         src="/webjars/toaster/0.4.15/toaster.min.js"></script>
 
 <script type="text/javascript" src="/static/apps/admin/app.js"></script>
+<script type="text/javascript" src="/static/apps/admin/lib/directives/ui-menu-messages.js"></script>
 <script type="text/javascript" src="/static/apps/admin/modules/applications.js"></script>
 <script type="text/javascript" src="/static/apps/admin/modules/users.js"></script>
+<script type="text/javascript" src="/static/apps/admin/modules/example/forms/editors.js"></script>
 
 <th:block layout:fragment="scripts"></th:block>
 

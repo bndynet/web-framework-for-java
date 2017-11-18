@@ -1,0 +1,7 @@
+[
+  { "img": "/static/apps/admin/assets/img/user1-128x128.jpg", "title": "new member joined", "subtitle": "Bendy", "description": "Bendy Zhang joined at 10:00 AM." },
+  { "img": "/static/apps/admin/assets/img/user2-160x160.jpg", "title": "new member joined", "subtitle": "Bendy", "description": "Bendy Zhang joined at 10:00 AM." },
+  { "img": "/static/apps/admin/assets/img/user3-128x128.jpg", "title": "new member joined", "subtitle": "Bendy", "description": "Bendy Zhang joined at 10:00 AM." },
+  { "img": "/static/apps/admin/assets/img/user4-128x128.jpg", "title": "new member joined", "subtitle": "Bendy", "description": "Bendy Zhang joined at 10:00 AM." },
+  { "img": "/static/apps/admin/assets/img/user5-128x128.jpg", "title": "new member joined", "subtitle": "Bendy", "description": "Bendy Zhang joined at 10:00 AM." }
+]

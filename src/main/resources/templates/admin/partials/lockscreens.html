@@ -1,11 +1,11 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org"
-      xmlns:layout="http://www.ultraq.net.nz/web/thymeleaf/layout"
-      layout:decorator="admin/partials/layout">
+      xmlns:layout="http://www.ultraq.net.nz/web/thymeleaf/layout">
 <head>
 </head>
-<body class="hold-transition lockscreen">
-<th:block layout:fragment="body">
+<body>
+<!-- adminlte -->
+<div th:fragment="lock" class="lockscreen">
     <div class="lockscreen-wrapper">
         <div class="lockscreen-logo">
             <a href="http://bndy.net"><b>BNDY</b>.NET</a>
@@ -17,12 +17,12 @@
                 <img th:src="${user.avatar}" alt="User Image">
             </div>
 
-            <form action="/sso/login" method="post" class="lockscreen-credentials">
+            <form method="post" class="lockscreen-credentials" ng-submit="unlockScreen()">
                 <div class="input-group">
                     <input type="password" class="form-control" placeholder="password">
 
                     <div class="input-group-btn">
-                        <button type="button" class="btn"><i class="fa fa-arrow-right text-muted"></i></button>
+                        <button type="submit" class="btn"><i class="fa fa-arrow-right text-muted"></i></button>
                     </div>
                 </div>
             </form>
@@ -37,6 +37,6 @@
             <th:block th:include="admin/partials/footers::footer-text"></th:block>
         </div>
     </div>
-</th:block>
+</div>
 </body>
 </html>

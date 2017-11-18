@@ -1,0 +1,28 @@
+<li class="dropdown messages-menu">
+    <a href="#" class="dropdown-toggle" data-toggle="dropdown">
+        <i class="fa {{menuIcon}}"></i>
+        <span class="label label-{{theme}}">{{data.length}}</span>
+    </a>
+    <ul class="dropdown-menu">
+        <li class="header">You have {{data.length}} messages.</li>
+        <li>
+            <ul class="menu">
+                <li ng-repeat="item in data">
+                    <a href="#" ng-click="itemClick({item: item})">
+                        <div class="pull-left" ng-if="item.img">
+                            <img class="img-circle" ng-src="{{item.img}}">
+                        </div>
+                        <h4>
+                            <span ng-bind="item.title"></span>
+                            <small ng-bind="item.subtitle"></small>
+                        </h4>
+                        <p ng-if="item.description" ng-bind="item.description"></p>
+                    </a>
+                </li>
+            </ul>
+        </li>
+        <li class="footer" ng-if="moreText">
+            <a href="#" ng-bind="moreText" ng-click="moreClick({ev: $event})"></a>
+        </li>
+    </ul>
+</li>

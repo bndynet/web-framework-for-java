@@ -1,6 +1,7 @@
 var app = angular.module('app', ['ngAnimate', 'ngMaterial', 'ui.router', 'toaster']);
 
-app.config(function ($stateProvider) {
+app.config(['$qProvider', '$stateProvider', function ($qProvider, $stateProvider) {
+    $qProvider.errorOnUnhandledRejections(false);
 	function registerState(name) {
 		var path = name.replace(/-/g, '/');
 		$stateProvider.state(name, {
@@ -9,14 +10,14 @@ app.config(function ($stateProvider) {
 		});
 	}
 
-	var pages = ['applications', 'users',
+	var pages = ['applications', 'users', 'lock',
 		'example-dashboard',
 		'example-dashboard1',
 		'example-calendar',
 		'example-widgets',
+		'example-forms-general',
 		'example-forms-advanced',
 		'example-forms-editors',
-		'example-general',
 		'example-mailbox-compose',
 		'example-mailbox-mailbox',
 		'example-mailbox-read-mail',
@@ -38,7 +39,7 @@ app.config(function ($stateProvider) {
 		var p = pages[idx];
 		registerState(p);
 	}
-});
+}]);
 
 app.factory('appDialog', [
 	'$mdDialog',
@@ -145,9 +146,58 @@ app.factory('appDialog', [
 	}
 ]);
 
-app.controller('LayoutCtrl', function(){
+app.controller('LayoutCtrl', ['$http', '$scope',
+    function($http, $scope) {
+        // menus
+        $scope.menus = [];
+        $http.get('/static/apps/admin/mockdata/menus.json').then(function(res) {
+            $scope.menus = res.data;
+        });
 
-});
+        // search
+        $scope.searchKeywords = '';
+        $scope.searchHandler = function() {
+            if ($scope.searchKeywords) {
+                // TODO
+                alert($scope.searchKeywords);
+            }
+        };
+
+        // messages
+        $scope.messages = [];
+        $http.get('/static/apps/admin/mockdata/messages.json').then(function(res) {
+            $scope.messages = res.data;
+            $scope.messages1 = angular.copy(res.data);
+            for (var idx = 0; idx < $scope.messages1.length; idx++) {
+                $scope.messages1[idx].img = null;
+            }
+            $scope.messages2 = angular.copy(res.data);
+            for (var idx = 0; idx < $scope.messages2.length; idx++) {
+                $scope.messages2[idx].img = null;
+                $scope.messages2[idx].description = null;
+            }
+        });
+        $scope.messageClick = function(item) {
+            // TODO
+            alert('You have viewed `' + item.title + '`.');
+        };
+        $scope.messageMoreClick = function() {
+            // TODO
+            alert('Link to more messages.');
+        };
+
+        // lock screen
+        $scope.lockScreen = function() {
+            $('.lockscreen').show();
+            $('body').addClass('no-scroll');
+        };
+
+        $scope.unlockScreen = function() {
+            $('body').removeClass('no-scroll');
+            $('.lockscreen').hide();
+        };
+    }
+]);
 
 angular.element(document).ready(function () {
 	angular.bootstrap(document, ['app']);
