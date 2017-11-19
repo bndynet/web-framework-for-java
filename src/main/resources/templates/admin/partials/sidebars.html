@@ -22,13 +22,13 @@
         </div>
 
         <!-- search form -->
-        <form action="#" method="get" class="sidebar-form" ng-if="searchHandler" ng-submit="searchHandler()">
+        <form class="sidebar-form" ng-if="searchOptions" ng-submit="searchOptions.search()">
             <div class="input-group">
-                <input type="text" name="q" class="form-control" placeholder="Search..." ng-model="searchKeywords">
+                <input type="text" class="form-control" placeholder="Search..." ng-model="searchOptions.value">
                 <span class="input-group-btn">
-                <button type="submit" name="search" id="search-btn" class="btn btn-flat">
-                    <i class="fa fa-search"></i>
-                </button>
+                    <button type="submit" name="search" id="search-btn" class="btn btn-flat">
+                        <i class="fa fa-search"></i>
+                    </button>
               </span>
             </div>
         </form>

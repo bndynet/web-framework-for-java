@@ -155,11 +155,13 @@ app.controller('LayoutCtrl', ['$http', '$scope',
         });
 
         // search
-        $scope.searchKeywords = '';
-        $scope.searchHandler = function() {
-            if ($scope.searchKeywords) {
-                // TODO
-                alert($scope.searchKeywords);
+        $scope.searchOptions = {
+            value: '',
+            search: function() {
+                if ($scope.searchOptions.value) {
+                    // TODO
+                    alert('TODO: search ' + $scope.searchOptions.value);
+                }
             }
         };
 
