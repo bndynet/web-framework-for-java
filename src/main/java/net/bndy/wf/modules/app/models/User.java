@@ -26,7 +26,6 @@ public class User extends _BaseEntity implements UserDetails {
 
     private String username;
     private String avatar;
-    @JsonIgnore
     private String password;
     private boolean enabled;
     private boolean isExpired;

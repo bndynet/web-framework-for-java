@@ -49,9 +49,8 @@ public class UserService extends _BaseService<User> {
     public User login(String account, String password) {
         User user = userRepo.findByUsername(account);
         if (user != null) {
-            String encodedPassword = passwordEncoder.encode(password);
-            if (user.getPassword().equals(password) && this.passwordEncoder.matches(password, encodedPassword)
-                    && !user.isEnabled()) {
+            if (this.passwordEncoder.matches(password, user.getPassword())
+                    && user.isEnabled()) {
                 logger.info("`{}` logged in", account);
                 return user;
             }

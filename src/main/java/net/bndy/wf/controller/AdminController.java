@@ -17,9 +17,4 @@ public class AdminController extends _BaseController {
 		model.addAttribute("who", this.getCurrentUser() != null ? this.getCurrentUser().getUsername() : "Unknown User");
 		return "admin/index";
 	}
-
-	@RequestMapping(value = "/lock")
-	public String lock(Model model) {
-		return "admin/lock";
-	}
 }

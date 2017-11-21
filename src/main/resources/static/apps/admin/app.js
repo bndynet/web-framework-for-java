@@ -190,13 +190,31 @@ app.controller('LayoutCtrl', ['$http', '$scope',
 
         // lock screen
         $scope.lockScreen = function() {
-            $('.lockscreen').show();
-            $('body').addClass('no-scroll');
+            $http.get('/api/v1/app/users/logout').then(function(){
+                $('.lockscreen').css('top', $(document).scrollTop()).show();
+                $('body').addClass('no-scroll');
+            });
         };
 
         $scope.unlockScreen = function() {
-            $('body').removeClass('no-scroll');
-            $('.lockscreen').hide();
+            if (!$scope.password) {
+                $scope.unlockScreenError = 'Please enter your password.';
+                return;
+            }
+
+            if ($scope.username && $scope.password) {
+                $http.post('/api/v1/app/users/login', { username: $scope.username, password: $scope.password }).then(function(res) {
+                    $scope.password = '';
+                    if (res.data === true) {
+                        $scope.unlockScreenError = '';
+                        $('.lockscreen').css('top', 0);
+                        $('body').removeClass('no-scroll');
+                        $('.lockscreen').hide();
+                    } else {
+                        $scope.unlockScreenError = 'Invalid Password';
+                    }
+                });
+            }
         };
     }
 ]);

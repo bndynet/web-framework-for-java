@@ -1,5 +1,5 @@
 <li class="dropdown messages-menu">
-    <a href="#" class="dropdown-toggle" data-toggle="dropdown">
+    <a class="dropdown-toggle" data-toggle="dropdown">
         <i class="fa {{menuIcon}}"></i>
         <span class="label label-{{theme}}">{{data.length}}</span>
     </a>
@@ -8,7 +8,7 @@
         <li>
             <ul class="menu">
                 <li ng-repeat="item in data">
-                    <a href="#" ng-click="itemClick({item: item})">
+                    <a ng-click="itemClick({item: item})">
                         <div class="pull-left" ng-if="item.img">
                             <img class="img-circle" ng-src="{{item.img}}">
                         </div>
@@ -22,7 +22,7 @@
             </ul>
         </li>
         <li class="footer" ng-if="moreText">
-            <a href="#" ng-bind="moreText" ng-click="moreClick({ev: $event})"></a>
+            <a ng-bind="moreText" ng-click="moreClick({ev: $event})"></a>
         </li>
     </ul>
 </li>
