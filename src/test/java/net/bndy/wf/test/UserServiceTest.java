@@ -20,13 +20,14 @@ public class UserServiceTest extends _Test {
 	public void registerAndLogin() {
 		String timestamp = new SimpleDateFormat("yyyyMMdd_hhmmss").format(new Date());
 		User u = new User();
+		String password = "P" + timestamp;
 		u.setUsername("Bendy" + timestamp);
-		u.setPassword("P" + timestamp);
+		u.setPassword(password);
 		u =  userService.register(u);
 		if (u.getId() <= 0) {
 			fail("failed to register new user");
 		}
-		u = userService.login(u.getUsername(), u.getPassword());
+		u = userService.login(u.getUsername(), password);
 		Assert.assertNotNull(u);
 	}
 }
