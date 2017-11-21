@@ -142,11 +142,10 @@ spring:
     
   # SPRING CACHE (CacheProperties)
   cache:
-    #type: # Cache type, auto-detected according to the environment by default.
+    #type:  # Cache type, auto-detected according to the environment by default.
     #cache-names: # Comma-separated list of cache names to create if supported by the underlying cache manager.
     #caffeine.spec: # The spec to use to create caches. Check CaffeineSpec for more details on the spec format.
-    ehcache:
+    jcache:
       config: classpath:config/ehcache.xml
-    #jcache.config: # The location of the configuration file to use to initialize the cache manager.
     #jcache.provider: # Fully qualified name of the CachingProvider implementation to use to retrieve the JSR-107 compliant cache manager. Only needed if more than one JSR-107 implementation is available on the classpath.
  
