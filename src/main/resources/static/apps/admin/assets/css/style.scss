@@ -76,6 +76,12 @@ a {
     }
 }
 
+/* angularjs material */
+// fix: dialog shadow lay need to cover sidebar and header
+.md-dialog-container {
+    z-index: 999;
+}
+
 
 /* misc */
 

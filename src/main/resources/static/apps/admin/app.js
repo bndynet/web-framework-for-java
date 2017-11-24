@@ -1,4 +1,4 @@
-var app = angular.module('app', ['ngAnimate', 'ngMaterial', 'ui.router', 'toaster']);
+var app = angular.module('app', ['ngAnimate', 'ngMaterial', 'ui.router', 'toaster', 'bn.ui']);
 
 app.config(['$qProvider', '$stateProvider', function ($qProvider, $stateProvider) {
     $qProvider.errorOnUnhandledRejections(false);

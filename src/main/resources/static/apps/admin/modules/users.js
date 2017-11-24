@@ -3,14 +3,24 @@ app.controller('UsersCtrl',
     function($scope, appDialog, $http) {
         $scope.data = [];
         $scope.roles = null;
+        $scope.pageUsers = function (page) {
+            $http.get('/api/v1/app/users/?page=' + page).then(function(res) {
+                $scope.data = res.data.content;
+                $scope.pager = {
+                    currentPage: page,
+                    pageSize: res.data.size,
+                    recordCount: res.data.totalElements,
+                    pageCount: res.data.totalPages,
+                };
+                console.debug($scope.pager);
+            });
+        };
 
         $scope.init = function() {
-            $http.get('/api/v1/app/users').then(function(res) {
-                $scope.data = res.data;
-            });
             $http.get('/api/v1/app/config/roles').then(function(res) {
                 $scope.roles = res.data;
             });
+            $scope.pageUsers(1);
         };
 
         $scope.editRoles = function(item) {
