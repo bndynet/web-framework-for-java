@@ -4,15 +4,13 @@ app.controller('UsersCtrl',
         $scope.data = [];
         $scope.roles = null;
         $scope.pageUsers = function (page) {
-            $http.get('/api/v1/app/users/?page=' + page).then(function(res) {
+            $http.get('/api/v1/app/users/?page=' + (page - 1)).then(function(res) {
                 $scope.data = res.data.content;
                 $scope.pager = {
                     currentPage: page,
-                    pageSize: res.data.size,
+                    pageSize:  res.data.size,
                     recordCount: res.data.totalElements,
-                    pageCount: res.data.totalPages,
                 };
-                console.debug($scope.pager);
             });
         };
 
