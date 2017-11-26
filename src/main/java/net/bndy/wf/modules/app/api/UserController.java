@@ -7,6 +7,10 @@ package net.bndy.wf.modules.app.api;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
+import org.springframework.data.domain.Sort;
+import org.springframework.data.web.PageableDefault;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.web.bind.annotation.*;
 
@@ -91,5 +95,10 @@ public class UserController extends _BaseApi<User> {
     @RequestMapping(value = "/{userId}/changerole", method = RequestMethod.PUT)
     public void changeRole(@PathVariable(name = "userId") long userId, @RequestParam(name = "roleId") long roleId) {
         this.userService.changeRole(userId, roleId);
+    }
+
+    @Override
+    public Page<User> get(@PageableDefault(value = 10, sort = { "id" }, direction = Sort.Direction.DESC) Pageable pageable) {
+        return super.get(pageable);
     }
 }

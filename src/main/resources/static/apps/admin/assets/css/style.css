@@ -62,6 +62,16 @@ a {
   top: -4px;
 }
 
+.table + .bn-ui-pager .summary {
+  margin-top: 3px;
+  margin-left: 8px;
+}
+
+.table + .bn-ui-pager .pagination > li > a,
+.table + .bn-ui-pager .pagination > li > span {
+  padding: 2px 8px;
+}
+
 /* angularjs material */
 .md-dialog-container {
   z-index: 999;

@@ -40,7 +40,7 @@ app.controller('UsersCtrl',
                 var roleId = $scope.userModel.currentRole.id;
                 $http.put('/api/v1/app/users/' + $scope.userModel.id + '/changerole?roleId=' + $scope.userModel.currentRole.id)
                     .then(function(res) {
-                        $scope.init();
+                        $scope.pageUsers($scope.pager.currentPage);
                         $('#rolesForm').modal('hide');
                     });
             }
