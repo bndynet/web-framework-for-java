@@ -43,7 +43,7 @@ public class SSOController extends _BaseController {
 		if(!this.userService.hasUsers()) {
 			model.addAttribute("admin", true);
 		}
-		return "signup";
+		return "sso/signup";
 	}
 
 	@RequestMapping(value = "/signup", method = RequestMethod.POST)
@@ -51,7 +51,7 @@ public class SSOController extends _BaseController {
 		userValidator.validate(user, bindingResult);
 
 		if (bindingResult.hasErrors()) {
-			return "signup";
+			return "sso/signup";
 		}
 
 		userService.save(user);
@@ -83,7 +83,7 @@ public class SSOController extends _BaseController {
 		if (logout != null)
 			model.addAttribute("logout", "You have been logged out successfully.");
 
-		return "login";
+		return "sso/login";
 	}
 
 	@RequestMapping(value = "/authorize", method = RequestMethod.GET)
@@ -116,7 +116,7 @@ public class SSOController extends _BaseController {
 			session.removeAttribute(Constant.OAUTH_SCOPE_KEY);
 			model.addAttribute("error", OAuthExceptionType.InvalidClientIDOrRedirectUri.toString());
 		}
-		return "authorize";
+		return "sso/authorize";
 	}
 
 	@RequestMapping(value = "/authorize", method = RequestMethod.POST)
@@ -134,6 +134,6 @@ public class SSOController extends _BaseController {
 			}
 		}
 
-		return "/authroize?error";
+		return "sso/authroize?error";
 	}
 }
