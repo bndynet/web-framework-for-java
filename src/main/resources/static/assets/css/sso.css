@@ -1,0 +1,14 @@
+.register-page .login-box, .register-page .register-box, .login-page .login-box, .login-page .register-box {
+  margin-bottom: 15px;
+}
+
+.register-page .login-box .login-logo img, .register-page .login-box .register-logo img, .register-page .register-box .login-logo img, .register-page .register-box .register-logo img, .login-page .login-box .login-logo img, .login-page .login-box .register-logo img, .login-page .register-box .login-logo img, .login-page .register-box .register-logo img {
+  width: 160px;
+}
+
+.register-page footer, .login-page footer {
+  text-align: center;
+}
+ 
+
+ /*# sourceMappingURL= sso.css.map */

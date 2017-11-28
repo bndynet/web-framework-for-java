@@ -4,6 +4,7 @@
  ******************************************************************************/
 package net.bndy.wf.modules.app.api;
 
+import com.sun.xml.internal.bind.v2.model.core.EnumConstant;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import net.bndy.wf.ApplicationUserRole;
@@ -28,9 +29,10 @@ public class ConfigController {
     public List<Role> getRoles() {
         List<Role> result = this.userService.getAllRoles();
         for (Role role : result) {
-            ApplicationUserRole appUserRole = ApplicationUserRole.valueOf(role.getName());
-            if (appUserRole != null) {
-                role.setDescription(appUserRole.getDescription());
+            for (ApplicationUserRole ur: ApplicationUserRole.values()) {
+                if (ur.name().equalsIgnoreCase(role.getName())) {
+                    role.setDescription(ur.getDescription());
+                }
             }
         }
         return result;

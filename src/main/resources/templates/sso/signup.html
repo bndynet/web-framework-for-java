@@ -1,44 +1,61 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org"
-	xmlns:layout="http://www.ultraq.net.nz/web/thymeleaf/layout"
-	layout:decorator="common/layout">
+      xmlns:layout="http://www.ultraq.net.nz/web/thymeleaf/layout"
+      layout:decorator="sso/layout">
 <head>
-<title>Sign Up</title>
+    <title>Sign Up</title>
 </head>
 <body>
-	<div layout:fragment="body" class="page-onebox">
-		<div class="panel panel-default login" th:if="!${param.logout}">
-			<div class="panel-body">
-				<div class="logo-block">
-					<img src="/static/assets/img/logo.png" />
-				</div>
-				<h3 th:if="!${admin}">Create your account</h3>
-				<h3 th:if="${admin}">Create First Admin User</h3>
-				<form th:action="@{/sso/signup}" th:object="${model}" method="post">
-					<div class="form-group">
-						<input type="text"
-							class="form-control" name="username" th:field="*{username}" placeholder="Username" />
-					</div>
-					<div class="form-group">
-						<input type="password"
-							class="form-control" name="password" th:field="*{password}" placeholder="Password" />
-					</div>
-					<div class="form-group">
-						<input type="password"
-							class="form-control" name="passwordConfirm" th:field="*{passwordConfirm}" placeholder="Re-type Password" />
-					</div>
-					<div class="form-group">
-						<input type="submit" class="btn btn-primary btn-block" value="Sign up now" />
-					</div>
-				</form>
-				<div th:replace="common/footer::footer"></div>
-			</div>
-		</div>
-		<div class="panel panel-default logout" th:if="${param.logout}">
-			<div class="panel-body">
-				You have been logged out.
-			</div>
-		</div>
-	</div>
+<div layout:fragment="body">
+    <div class="register-box">
+        <div class="register-box-body">
+            <div class="register-logo">
+                <img src="/static/assets/img/logo.png"/>
+            </div>
+
+            <div>
+                <p class="login-box-msg" th:if="!${admin}">Register a new account</p>
+                <p class="login-box-msg" th:if="${admin}">Create First Admin User</p>
+
+                <form th:action="@{/sso/signup}" th:object="${model}" method="post">
+                    <div class="form-group has-feedback">
+                        <input type="text"
+                               class="form-control" name="username" th:field="*{username}" placeholder="Username"/>
+                        <span class="glyphicon glyphicon-user form-control-feedback"></span>
+                    </div>
+                    <div class="form-group has-feedback">
+                        <input type="password"
+                               class="form-control" name="password" th:field="*{password}" placeholder="Password"/>
+                        <span class="glyphicon glyphicon-lock form-control-feedback"></span>
+                    </div>
+                    <div class="form-group has-feedback">
+                        <input type="password"
+                               class="form-control" name="passwordConfirm" th:field="*{passwordConfirm}"
+                               placeholder="Retype Password"/>
+                        <span class="glyphicon glyphicon-log-in form-control-feedback"></span>
+                    </div>
+                    <div class="row">
+                        <div class="col-xs-8">
+                            <div class="checkbox icheck">
+                                <label>
+                                    <input type="checkbox"> I agree to the <a href="#">terms</a>
+                                </label>
+                            </div>
+                        </div>
+                        <div class="col-xs-4">
+                            <button type="submit" class="btn btn-primary btn-block btn-flat">Register</button>
+                        </div>
+                    </div>
+                </form>
+
+                <div class="text-center">
+                    <a href="login">I already have an account</a>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div th:replace="common/footer::footer"></div>
+</div>
 </body>
 </html>
