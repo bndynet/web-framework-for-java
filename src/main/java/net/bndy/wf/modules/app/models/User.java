@@ -122,8 +122,11 @@ public class User extends _BaseEntity implements UserDetails {
     @Override
     public Set<? extends GrantedAuthority> getAuthorities() {
         Set<GrantedAuthority> grantedAuthorities = new HashSet<>();
-        for (Role role : this.getRoles()) {
-            grantedAuthorities.add(new SimpleGrantedAuthority(role.getName()));
+        Set<Role> roles = this.getRoles();
+        if (roles != null) {
+            for (Role role : this.getRoles()) {
+                grantedAuthorities.add(new SimpleGrantedAuthority(role.getName()));
+            }
         }
         return grantedAuthorities;
     }

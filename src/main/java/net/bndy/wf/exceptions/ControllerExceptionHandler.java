@@ -39,7 +39,11 @@ public class ControllerExceptionHandler {
 		// Otherwise setup and send the user to a default error-view.
 		ModelAndView mav = new ModelAndView();
 		mav.addObject("title", "OOPS!");
-		mav.addObject("message", "We're sorry - something has gone wrong on out end.");
+		if (e != null && e.getMessage() != null && e.getMessage() != "") {
+			mav.addObject("message", e.getMessage());
+		} else {
+			mav.addObject("message", "We're sorry - something has gone wrong on out end.");
+		}
 		mav.addObject("exception", e);
 		mav.addObject("url", req.getRequestURL());
 		mav.setViewName(DEFAULT_ERROR_VIEW);
