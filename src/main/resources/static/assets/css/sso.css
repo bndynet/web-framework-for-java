@@ -1,5 +1,13 @@
+.register-page .text-block, .login-page .text-block {
+  padding-top: 8px;
+}
+
 .register-page .login-box, .register-page .register-box, .login-page .login-box, .login-page .register-box {
   margin-bottom: 15px;
+}
+
+.register-page .login-box .register-box-body, .register-page .login-box .login-box-body, .register-page .register-box .register-box-body, .register-page .register-box .login-box-body, .login-page .login-box .register-box-body, .login-page .login-box .login-box-body, .login-page .register-box .register-box-body, .login-page .register-box .login-box-body {
+  padding-bottom: 30px;
 }
 
 .register-page .login-box .login-logo img, .register-page .login-box .register-logo img, .register-page .register-box .login-logo img, .register-page .register-box .register-logo img, .login-page .login-box .login-logo img, .login-page .login-box .register-logo img, .login-page .register-box .login-logo img, .login-page .register-box .register-logo img {

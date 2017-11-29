@@ -1,7 +1,15 @@
 .register-page, .login-page {
 
+    .text-block {
+        padding-top: 8px;
+    }
+
     .login-box, .register-box {
         margin-bottom: 15px;
+
+        .register-box-body, .login-box-body {
+            padding-bottom: 30px;
+        }
 
         .login-logo, .register-logo {
 
