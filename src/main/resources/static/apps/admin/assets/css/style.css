@@ -45,6 +45,10 @@ a {
   margin-left: 45px;
 }
 
+.control-sidebar .form-group {
+  clear: both;
+}
+
 /* Bootstrap */
 .list-group .list-group-item img.media-object {
   width: 112px;

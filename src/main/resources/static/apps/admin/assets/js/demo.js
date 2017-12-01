@@ -75,10 +75,10 @@ $(function () {
    */
   function changeLayout(cls) {
     $('body').toggleClass(cls)
-    $layout.fixSidebar()
+    if ($layout) $layout.fixSidebar()
     if ($('body').hasClass('fixed') && cls == 'fixed') {
       $pushMenu.expandOnHover()
-      $layout.activate()
+      if ($layout) $layout.activate()
     }
     $controlSidebar.fix()
   }
@@ -174,7 +174,7 @@ $(function () {
       + '</a>')
 
   // Add the tab button to the right sidebar tabs
-  $('[href="#control-sidebar-home-tab"]')
+  $('[href="#control-sidebar-settings-tab"]')
     .parent()
     .before($tabButton)
 
@@ -341,7 +341,7 @@ $(function () {
   $demoSettings.append($skinsList)
 
   $tabPane.append($demoSettings)
-  $('#control-sidebar-home-tab').after($tabPane)
+  $('#control-sidebar-settings-tab').before($tabPane)
 
   setup()
 
