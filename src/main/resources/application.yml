@@ -139,6 +139,10 @@ spring:
     encoding: UTF-8  
     content-type: text/html  
     cache: false
+
+  # i18n
+  messages:
+    basename: i18n/messages
     
   # SPRING CACHE (CacheProperties)
   cache:

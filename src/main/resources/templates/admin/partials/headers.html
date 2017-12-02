@@ -71,11 +71,11 @@
                         <!-- Menu Footer-->
                         <li class="user-footer">
                             <div class="pull-left">
-                                <a href="/admin/profile" class="btn btn-default btn-flat">Profile</a>
+                                <a href="/admin/profile" class="btn btn-default btn-flat" th:text="#{admin.btnProfile}"></a>
                             </div>
                             <div class="pull-right">
-                                <a class="btn btn-default btn-flat" ng-click="lockScreen()">Lock</a>
-                                <a href="/sso/logout" class="btn btn-default btn-flat">Sign out</a>
+                                <a class="btn btn-default btn-flat" ng-click="lockScreen()" th:text="#{admin.btnLock}"></a>
+                                <a href="/sso/logout" class="btn btn-default btn-flat" th:text="#{admin.btnLogout}"></a>
                             </div>
                         </li>
                     </ul>

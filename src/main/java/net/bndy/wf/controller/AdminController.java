@@ -4,6 +4,7 @@
  ******************************************************************************/
 package net.bndy.wf.controller;
 
+import org.springframework.context.i18n.LocaleContextHolder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -14,6 +15,7 @@ public class AdminController extends _BaseController {
 
 	@RequestMapping(value = "/")
 	public String home(Model model) {
+		model.addAttribute("locale", LocaleContextHolder.getLocale().toString());
 		model.addAttribute("who", this.getCurrentUser() != null ? this.getCurrentUser().getUsername() : "Unknown User");
 		return "admin/index";
 	}
