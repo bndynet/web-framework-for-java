@@ -16,7 +16,6 @@ public class AdminController extends _BaseController {
 	@RequestMapping(value = "/")
 	public String home(Model model) {
 		model.addAttribute("locale", LocaleContextHolder.getLocale().toString());
-		model.addAttribute("who", this.getCurrentUser() != null ? this.getCurrentUser().getUsername() : "Unknown User");
 		return "admin/index";
 	}
 }

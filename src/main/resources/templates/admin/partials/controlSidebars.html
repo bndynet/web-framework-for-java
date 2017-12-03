@@ -15,21 +15,21 @@
                 <form method="post">
                     <h3 class="control-sidebar-heading">General Settings</h3>
                     <div class="form-group">
-                        <label class="control-sidebar-subheading pull-left">
+                        <label class="control-sidebar-subheading">
                             Items per page
                         </label>
-                        <select class="form-control input-sm pull-right">
+                        <select class="form-control input-sm">
                             <option value="10">10</option>
-                            <option value="10">15</option>
-                            <option value="10">20</option>
-                            <option value="10">50</option>
+                            <option value="15">15</option>
+                            <option value="20">20</option>
+                            <option value="50">50</option>
                         </select>
                     </div>
                     <div class="form-group">
-                        <label class="control-sidebar-subheading pull-left">
-                            Language <small>Attention: Browser will be refreshed!</small>
+                        <label class="control-sidebar-subheading">
+                            Language <small>(!Browser will be refreshed)</small>
                         </label>
-                        <select id="LanguageOptions" class="form-control input-sm pull-right">
+                        <select id="LanguageOptions" class="form-control input-sm">
                             <option value="en_US" selected>English (Default)</option>
                             <option value="zh_CN" th:selected="${locale == 'zh_CN'}">简体中文</option>
                         </select>

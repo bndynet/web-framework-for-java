@@ -17,23 +17,21 @@
                 <img th:src="${user.avatar}" alt="User Image">
             </div>
 
-            <form method="post" class="lockscreen-credentials" ng-submit="unlockScreen()">
+            <form name="lockForm" method="post" class="lockscreen-credentials" ng-submit="unlockScreen()">
                 <div class="input-group">
                     <input type="hidden" ng-value="username" th:attr="ng-init=${'username=''' + user.username + ''''}">
-                    <input type="password" class="form-control" placeholder="password" ng-model="password">
+                    <input type="password" name="password" class="form-control" th:placeholder="#{sso.fieldPassword}" ng-model="password">
 
                     <div class="input-group-btn">
                         <button type="submit" class="btn"><i class="fa fa-arrow-right text-muted"></i></button>
                     </div>
                 </div>
-                <div class="error-message text-danger" ng-if="unlockScreenError" ng-bind="unlockScreenError"></div>
+                <div class="error-message text-danger" ng-if="unlockScreenError" th:text="#{sso.invalidPassword}"></div>
             </form>
         </div>
-        <div class="help-block text-center">
-            Enter your password to retrieve your session
-        </div>
+        <div class="help-block text-center" th:text="#{sso.lockScreenTip}"></div>
         <div class="text-center">
-            <a href="/sso/login">Or sign in as a different user</a>
+            <a href="/sso/login" th:text="#{sso.orSwitchUser}"></a>
         </div>
         <div class="lockscreen-footer text-center">
             <th:block th:include="admin/partials/footers::footer-text"></th:block>

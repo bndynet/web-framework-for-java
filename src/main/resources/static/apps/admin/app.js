@@ -196,22 +196,23 @@ app.controller('LayoutCtrl', ['$http', '$scope',
             });
         };
 
+        $scope.unlockScreenError = false;
         $scope.unlockScreen = function() {
             if (!$scope.password) {
-                $scope.unlockScreenError = 'Please enter your password.';
                 return;
             }
 
+            $scope.unlockScreenError = false;
             if ($scope.username && $scope.password) {
                 $http.post('/api/v1/app/users/login', { username: $scope.username, password: $scope.password }).then(function(res) {
                     $scope.password = '';
                     if (res.data === true) {
-                        $scope.unlockScreenError = '';
+                        $scope.unlockScreenError = false;
                         $('.lockscreen').css('top', 0);
                         $('body').removeClass('no-scroll');
                         $('.lockscreen').hide();
                     } else {
-                        $scope.unlockScreenError = 'Invalid Password';
+                        $scope.unlockScreenError = true;
                     }
                 });
             }
