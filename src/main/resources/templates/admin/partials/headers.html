@@ -44,7 +44,6 @@
                         </span>
                     </a>
                     <ul class="dropdown-menu">
-                        <!-- User image -->
                         <li class="user-header">
                             <img th:src="${user.avatar}" class="img-circle" alt="User Image">
 
@@ -53,22 +52,6 @@
                                 <small th:text="${#strings.listJoin(user.getRoleNames(),',')}"></small>
                             </p>
                         </li>
-                        <!-- Menu Body -->
-                        <li class="user-body">
-                            <div class="row">
-                                <div class="col-xs-4 text-center">
-                                    <a href="#">Followers</a>
-                                </div>
-                                <div class="col-xs-4 text-center">
-                                    <a href="#">Sales</a>
-                                </div>
-                                <div class="col-xs-4 text-center">
-                                    <a href="#">Friends</a>
-                                </div>
-                            </div>
-                            <!-- /.row -->
-                        </li>
-                        <!-- Menu Footer-->
                         <li class="user-footer">
                             <div class="pull-left">
                                 <a href="/admin/profile" class="btn btn-default btn-flat" th:text="#{admin.btnProfile}"></a>

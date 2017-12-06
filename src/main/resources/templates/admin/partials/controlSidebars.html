@@ -13,11 +13,9 @@
         <div class="tab-content">
             <div class="tab-pane" id="control-sidebar-settings-tab">
                 <form method="post">
-                    <h3 class="control-sidebar-heading">General Settings</h3>
+                    <h3 class="control-sidebar-heading" th:text="#{admin.controlSidebar.settings.general}"></h3>
                     <div class="form-group">
-                        <label class="control-sidebar-subheading">
-                            Items per page
-                        </label>
+                        <label class="control-sidebar-subheading" th:text="#{admin.controlSidebar.settings.general.page}"></label>
                         <select class="form-control input-sm">
                             <option value="10">10</option>
                             <option value="15">15</option>
@@ -27,10 +25,11 @@
                     </div>
                     <div class="form-group">
                         <label class="control-sidebar-subheading">
-                            Language <small>(!Browser will be refreshed)</small>
+                            <span th:text="#{admin.controlSidebar.settings.general.language}"></span> -
+                            <small th:text="#{admin.controlSidebar.settings.general.languageDes}"></small>
                         </label>
                         <select id="LanguageOptions" class="form-control input-sm">
-                            <option value="en_US" selected>English (Default)</option>
+                            <option value="en_US" selected>English</option>
                             <option value="zh_CN" th:selected="${locale == 'zh_CN'}">简体中文</option>
                         </select>
                     </div>

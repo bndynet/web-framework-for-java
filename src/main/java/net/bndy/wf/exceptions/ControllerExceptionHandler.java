@@ -6,6 +6,7 @@ package net.bndy.wf.exceptions;
 
 import javax.servlet.http.HttpServletRequest;
 
+import net.bndy.wf.ApplicationContext;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.core.annotation.AnnotationUtils;
@@ -38,11 +39,11 @@ public class ControllerExceptionHandler {
 
 		// Otherwise setup and send the user to a default error-view.
 		ModelAndView mav = new ModelAndView();
-		mav.addObject("title", "OOPS!");
+		mav.addObject("title", ApplicationContext.i18n().getString("error.title"));
 		if (e != null && e.getMessage() != null && e.getMessage() != "") {
 			mav.addObject("message", e.getMessage());
 		} else {
-			mav.addObject("message", "We're sorry - something has gone wrong on out end.");
+			mav.addObject("message", ApplicationContext.i18n().getString("error.description"));
 		}
 		mav.addObject("exception", e);
 		mav.addObject("url", req.getRequestURL());
