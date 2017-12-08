@@ -24,10 +24,13 @@ a {
     }
 }
 
-.navbar-nav>.messages-menu>.dropdown-menu>li .menu>li>a> {
-    h4,
-    p {
-        margin-left: 0;
+.navbar-nav {
+    display: inline-table;  // fix new line in safari
+    &>.messages-menu>.dropdown-menu>li .menu>li>a> {
+        h4,
+        p {
+            margin-left: 0;
+        }
     }
 }
 
@@ -55,12 +58,11 @@ a {
     .form-group {
         clear: both;
         .pull-right {
-            .input-sm {
-
-            }
+            .input-sm {}
         }
     }
 }
+
 
 /* Bootstrap */
 
