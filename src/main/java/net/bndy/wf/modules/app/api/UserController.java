@@ -4,9 +4,6 @@
  ******************************************************************************/
 package net.bndy.wf.modules.app.api;
 
-import java.net.MalformedURLException;
-import java.net.URL;
-import java.util.HashMap;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -42,20 +39,6 @@ public class UserController extends _BaseApi<User> {
     private UserService userService;
     @Autowired
     private AuthenticationManager authenticationManager;
-
-    @ApiOperation(value = "Gets current user")
-    @RequestMapping(value = "/me", method = RequestMethod.GET)
-    public HashMap<String, Object> me(HttpServletRequest request) throws MalformedURLException {
-        User u = getCurrentUser();
-        if (u != null) {
-            HashMap<String, Object> map = new HashMap<>();
-            map.put("name", u.getUsername());
-            map.put("avatar", new URL(new URL(request.getRequestURL().toString()), u.getAvatar()).toString());
-            map.put("roles", u.getRoles());
-            return map;
-        }
-        return null;
-    }
 
     @ApiOperation(value = "Login")
     @RequestMapping(value = "/login", method = RequestMethod.POST)

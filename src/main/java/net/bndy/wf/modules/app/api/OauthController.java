@@ -5,7 +5,11 @@
 package net.bndy.wf.modules.app.api;
 
 import java.io.IOException;
+import java.net.MalformedURLException;
+import java.net.URL;
+import java.util.HashMap;
 
+import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
@@ -17,7 +21,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
-
+import net.bndy.wf.ApplicationContext;
 import net.bndy.wf.Constant;
 import net.bndy.wf.exceptions.OAuthException;
 import net.bndy.wf.exceptions.OAuthExceptionType;
@@ -89,4 +93,18 @@ public class OauthController {
 			throw new OAuthException(OAuthExceptionType.InvalidUser);
 		}
 	}
+
+    @ApiOperation(value = "Gets current user")
+	@RequestMapping(value = "/me", method = RequestMethod.GET)
+	public HashMap<String, Object> me(HttpServletRequest request) throws MalformedURLException {
+		User u = ApplicationContext.getCurrentUser();
+        if (u != null) {
+            HashMap<String, Object> map = new HashMap<>();
+            map.put("name", u.getUsername());
+            map.put("avatar", new URL(new URL(request.getRequestURL().toString()), u.getAvatar()).toString());
+            map.put("roles", u.getRoles());
+            return map;
+        }
+        return null;
+    }
 }
