@@ -4,7 +4,6 @@
  ******************************************************************************/
 package net.bndy.wf.modules.app.api;
 
-import com.sun.xml.internal.bind.v2.model.core.EnumConstant;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import net.bndy.wf.ApplicationUserRole;
