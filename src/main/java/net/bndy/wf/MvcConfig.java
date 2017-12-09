@@ -54,6 +54,7 @@ public class MvcConfig extends WebMvcConfigurerAdapter {
 	public LocaleResolver localeResolver() {
 		// Options: SessionLocaleResolver, AcceptHeaderLocaleResolver, FixedLocaleResolver
 		CookieLocaleResolver lr = new CookieLocaleResolver();
+		lr.setCookieName("LOCALE");	// if not set, default `org.springframework.web.servlet.i18n.CookieLocaleResolver.LOCALE`
 		return lr;
 	}
 	@Bean
