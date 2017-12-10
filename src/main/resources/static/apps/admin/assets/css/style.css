@@ -70,6 +70,11 @@ a {
   top: -4px;
 }
 
+.table td a i {
+  font-size: 1rem;
+  padding: .25rem;
+}
+
 .table + .bn-ui-pager .summary {
   margin-top: 3px;
   margin-left: 8px;

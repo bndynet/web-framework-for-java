@@ -80,10 +80,19 @@ a {
 }
 
 .table {
-    td img {
-        height: 28px;
-        position: relative;
-        top: -4px;
+    td {
+        img {
+            height: 28px;
+            position: relative;
+            top: -4px;
+        }
+
+        a {
+            i {
+                font-size: 1rem;
+                padding: .25rem;
+            }
+        }
     }
     &+.bn-ui-pager {
         .summary {
