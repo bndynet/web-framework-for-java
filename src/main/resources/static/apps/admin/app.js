@@ -1,7 +1,11 @@
-var app = angular.module('app', ['ngAnimate', 'ngMaterial', 'ui.router', 'toaster', 'bn.ui']);
+var app = angular.module('app', ['pascalprecht.translate', 'ngAnimate', 'ngMaterial', 'ui.router', 'toaster', 'bn.ui']);
 
-app.config(['$qProvider', '$stateProvider', function ($qProvider, $stateProvider) {
+app.config(['$qProvider', '$stateProvider', '$translateProvider', function ($qProvider, $stateProvider, $translateProvider) {
     $qProvider.errorOnUnhandledRejections(false);
+
+    $translateProvider.useUrlLoader('/api/v1/app/i18n/');
+    $translateProvider.preferredLanguage('en');
+
 	function registerState(name) {
 		var path = name.replace(/-/g, '/');
 		$stateProvider.state(name, {
