@@ -1,10 +1,15 @@
-var app = angular.module('app', ['pascalprecht.translate', 'ngAnimate', 'ngMaterial', 'ui.router', 'toaster', 'bn.ui']);
+var app = angular.module('app', ['ngCookies', 'pascalprecht.translate', 'ngAnimate', 'ngMaterial', 'ui.router', 'toaster', 'bn.ui']);
 
 app.config(['$qProvider', '$stateProvider', '$translateProvider', function ($qProvider, $stateProvider, $translateProvider) {
     $qProvider.errorOnUnhandledRejections(false);
 
+    var $cookies;
+    angular.injector(['ngCookies']).invoke(['$cookies', function(_$cookies_) {
+        $cookies = _$cookies_;
+    }]);
+
     $translateProvider.useUrlLoader('/api/v1/app/i18n/');
-    $translateProvider.preferredLanguage('en');
+    $translateProvider.preferredLanguage($cookies.get("LOCALE")||'en');
 
 	function registerState(name) {
 		var path = name.replace(/-/g, '/');
@@ -252,13 +257,13 @@ $(function () {
 	    var lang = $(this).val();
 	    var url = location.href;
 	    var newUrl = ''
-	    if (url.indexOf('lang=') > 0) {
-	        newUrl = url.replace(/lang=[^#]*/g, 'lang=' + lang);
+	    if (url.indexOf('locale=') > 0) {
+	        newUrl = url.replace(/locale=[^#]*/g, 'locale=' + lang);
 	    } else if (url.indexOf('#') > 0) {
 	        newUrl = url.substring(0, url.indexOf('#'))
-	            + (url.indexOf('?') > 0 ? '&' : '?') + 'lang=' + lang + url.substring(url.indexOf('#'));
+	            + (url.indexOf('?') > 0 ? '&' : '?') + 'locale=' + lang + url.substring(url.indexOf('#'));
 	    } else {
-	        newUrl = url + (url.indexOf('?') > 0 ? '&' : '?') + 'lang=' + lang;
+	        newUrl = url + (url.indexOf('?') > 0 ? '&' : '?') + 'locale=' + lang;
 	    }
 	    location.href = newUrl;
 	});

@@ -16,7 +16,8 @@
             <div class="pull-left info">
                 <p th:text="${user.username}"></p>
                 <span>
-                    Role: <span th:text="${#strings.listJoin(user.getRoleNames(),',')}"></span>
+                    <span th:text="#{admin.role}"></span>:
+                    <span th:text="${#strings.listJoin(user.getRoleNames(),',')}"></span>
                 </span>
             </div>
         </div>
