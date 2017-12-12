@@ -6,50 +6,21 @@
         http://www.ehcache.org/v3 http://www.ehcache.org/schema/ehcache-core-3.0.xsd
         http://www.ehcache.org/v3/jsr107 http://www.ehcache.org/schema/ehcache-107-ext-3.0.xsd">
 
-	<service>
-		<jsr107:defaults default-template="tinyCache">
-			<jsr107:cache name="foos" template="clientCache"/>
-			<jsr107:cache name="byRefCache" template="byRefTemplate"/>
-			<jsr107:cache name="byValCache" template="byValueTemplate"/>
-			<jsr107:cache name="weirdCache1" template="mixedTemplate1"/>
-			<jsr107:cache name="weirdCache2" template="mixedTemplate2"/>
-		</jsr107:defaults>
-	</service>
+	<cache alias="default" uses-template="maxEntriesOnHeapCache"></cache>
 
-	<cache-template name="clientCache">
-		<key-type>java.lang.String</key-type>
-		<value-type>com.pany.domain.Client</value-type>
-		<expiry>
-			<ttl unit="minutes">2</ttl>
-		</expiry>
+	<cache-template name="maxEntriesOnHeapCache">
 		<heap unit="entries">2000</heap>
-	</cache-template>
-
-	<cache-template name="tinyCache">
-		<heap unit="entries">20</heap>
 	</cache-template>
 
 	<cache-template name="byRefTemplate">
 		<key-type copier="org.ehcache.impl.copy.IdentityCopier">java.lang.Long</key-type>
-		<value-type copier="org.ehcache.impl.copy.IdentityCopier">com.pany.domain.Client</value-type>
-		<heap unit="entries">10</heap>
+		<value-type copier="org.ehcache.impl.copy.IdentityCopier">java.lang.String</value-type>
+		<heap unit="entries">2000</heap>
 	</cache-template>
 
 	<cache-template name="byValueTemplate">
 		<key-type copier="org.ehcache.impl.copy.SerializingCopier">java.lang.Long</key-type>
-		<value-type copier="org.ehcache.impl.copy.SerializingCopier">com.pany.domain.Client</value-type>
-		<heap unit="entries">10</heap>
-	</cache-template>
-
-	<cache-template name="mixedTemplate1">
-		<key-type copier="org.ehcache.impl.copy.IdentityCopier">java.lang.Long</key-type>
-		<value-type copier="org.ehcache.impl.copy.SerializingCopier">com.pany.domain.Client</value-type>
-		<heap unit="entries">10</heap>
-	</cache-template>
-
-	<cache-template name="mixedTemplate2">
-		<key-type copier="org.ehcache.impl.copy.SerializingCopier">java.lang.Long</key-type>
-		<value-type copier="org.ehcache.impl.copy.IdentityCopier">com.pany.domain.Client</value-type>
-		<heap unit="entries">10</heap>
+		<value-type copier="org.ehcache.impl.copy.SerializingCopier">java.lang.String</value-type>
+		<heap unit="entries">2000</heap>
 	</cache-template>
 </config>
