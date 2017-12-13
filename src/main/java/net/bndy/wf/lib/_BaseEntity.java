@@ -35,11 +35,11 @@ public abstract class _BaseEntity implements Serializable {
 	protected Long id;
 
 	@Temporal(TemporalType.TIMESTAMP)
-	@JsonFormat(pattern = Application.DATETIE_FORMAT, timezone = Application.TIMEZONE)
+	@JsonFormat(pattern = Application.DATETIME_FORMAT, timezone = Application.TIMEZONE)
 	private Date createDate;
 
 	@Temporal(TemporalType.TIMESTAMP)
-	@JsonFormat(pattern = Application.DATETIE_FORMAT, timezone = Application.TIMEZONE)
+	@JsonFormat(pattern = Application.DATETIME_FORMAT, timezone = Application.TIMEZONE)
 	private Date lastUpdate;
 
 	@Override
