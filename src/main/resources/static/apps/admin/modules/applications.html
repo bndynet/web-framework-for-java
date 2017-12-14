@@ -1,23 +1,20 @@
 <div ng-controller="ApplicationsCtrl">
     <section class="content-header">
         <h1>
-            Applications
-            <small>Installed</small>
+            <span ng-bind="'admin.modules.application.title'|translate"></span>
+            <small ng-bind="'admin.modules.application.subtitle'|translate"></small>
         </h1>
         <ol class="breadcrumb">
-            <li><a href="#"><i class="fa fa-dashboard"></i> Home</a></li>
-            <li class="active">Applications</li>
+            <li><a href="#"><i class="fa fa-dashboard"></i><span ng-bind="'common.home'|translate"></span></a></li>
+            <li class="active" ng-bind="'admin.modules.application.title'|translate"></li>
         </ol>
     </section>
     <section class="content">
         <div class="box box-default">
             <div class="box-header with-border">
-                <h3 class="box-title">Applications</h3>
-
+                <h3 class="box-title"></h3>
                 <div class="box-tools pull-right">
-                    <button type="button" class="btn btn-sm btn-primary" ng-click="add()">
-                        Register Application
-                    </button>
+                    <button type="button" class="btn btn-sm btn-primary" ng-click="add()" ng-bind="'admin.modules.application.addApp'|translate"></button>
                 </div>
             </div>
             <div class="box-body">
@@ -33,7 +30,8 @@
                                     <a class="label label-success"
                                        title="Click to cancel authorization"
                                        ng-if="item.isAuthorized"
-                                       ng-click="unauthorize(item)">Authorized</a>
+                                       ng-bind="'common.authorized'|translate"
+                                       ng-click="unauthorize(item)"></a>
                                 </h4>
                                 <span>Client ID: {{item.clientId}}</span>
                             </div>
@@ -63,38 +61,38 @@
                         <span aria-hidden="true">&times;</span>
                     </button>
                     <h4 class="modal-title">
-                        <span ng-if="formModel.id">Edit Application</span>
-                        <span ng-if="!formModel.id">Register Application</span>
+                        <span ng-if="formModel.id" ng-bind="'admin.modules.application.editApp'|translate"></span>
+                        <span ng-if="!formModel.id" ng-bind="'admin.modules.application.addApp'|translate"></span>
                     </h4>
                 </div>
                 <div class="modal-body">
                     <form name="form">
                         <md-input-container class="md-block">
-                            <label>Name</label>
+                            <label ng-bind="'admin.modules.application.fieldName'|translate"></label>
                             <input name="name" required ng-model="formModel.name"/>
                             <div ng-messages="form.name.$error">
-                                <div ng-message="required">This is required.</div>
+                                <div ng-message="required" ng-bind="'common.msgRequired'|translate"></div>
                             </div>
                         </md-input-container>
                         <md-input-container class="md-block">
-                            <label>Icon</label>
+                            <label ng-bind="'admin.modules.application.fieldIcon'|translate"></label>
                             <input name="icon" ng-model="formModel.icon"/>
                         </md-input-container>
                         <md-input-container class="md-block">
-                            <label>Redirect Uri</label>
+                            <label ng-bind="'admin.modules.application.fieldRedirectUri'|translate"></label>
                             <input name="redirectUri" required ng-model="formModel.redirectUri"/>
                             <div ng-messages="form.redirectUri.$error">
-                                <div ng-message="required">This is required.</div>
+                                <div ng-message="required" ng-bind="'common.msgRequired'|translate"></div>
                             </div>
                         </md-input-container>
                     </form>
                 </div>
                 <div class="modal-footer">
-                    <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                    <button type="button" class="btn btn-default" data-dismiss="modal" ng-bind="'common.close'|translate"></button>
                     <button type="button" class="btn btn-primary"
                             ng-disabled="form.$invalid"
-                            ng-click="save()">Save
-                        changes
+                            ng-bind="'common.saveChanges'|translate"
+                            ng-click="save()">
                     </button>
                 </div>
             </div>
