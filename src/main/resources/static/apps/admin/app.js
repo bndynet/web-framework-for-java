@@ -1,6 +1,6 @@
 var app = angular.module('app', ['ngCookies', 'pascalprecht.translate', 'ngAnimate', 'ngMaterial', 'ui.router', 'toaster', 'bn.ui']);
 
-app.config(['$qProvider', '$stateProvider', '$translateProvider', function ($qProvider, $stateProvider, $translateProvider) {
+app.config(['$provide', '$qProvider', '$stateProvider', '$translateProvider', function ($provide, $qProvider, $stateProvider, $translateProvider) {
     $qProvider.errorOnUnhandledRejections(false);
 
     var $cookies;
@@ -10,6 +10,21 @@ app.config(['$qProvider', '$stateProvider', '$translateProvider', function ($qPr
 
     $translateProvider.useUrlLoader('/api/v1/app/i18n/');
     $translateProvider.preferredLanguage($cookies.get("LOCALE")||'en');
+
+    // override translateFilter for supporting java i18n format
+    $provide.decorator('translateFilter', ['$delegate', function($delegate) {
+        var srcFilter = $delegate;
+        return function() {
+            var lang = srcFilter.apply(this, arguments);
+            // arguments[0] is the KEY
+            if (angular.isArray(arguments[1])) {
+                for (var idx = 0; idx < arguments[1].length; idx++){
+                   lang = lang.replace('{' + idx + '}', arguments[1][idx]);
+                }
+            }
+            return lang;
+        };
+    }]);
 
 	function registerState(name) {
 		var path = name.replace(/-/g, '/');

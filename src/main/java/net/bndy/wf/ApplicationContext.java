@@ -46,11 +46,7 @@ public class ApplicationContext {
         return messageSource.getMessage(key, args, defaultValue, LocaleContextHolder.getLocale());
     }
 
-    public static String language(String key, Object[] args) {
+    public static String language(String key, Object... args) {
         return language(key, args, null);
-    }
-
-    public static String language(String key) {
-        return language(key, null);
     }
 }

@@ -69,7 +69,7 @@
                         <span aria-hidden="true">&times;</span>
                     </button>
                     <h4 class="modal-title">
-                        <span ng-bind="'admin.modules.user.rolesForUser'|translate:{username: userModel.username}"></span>
+                        <span ng-bind-html="'admin.modules.user.rolesForUser'|translate:[userModel.username]"></span>
                     </h4>
                 </div>
                 <div class="modal-body">
