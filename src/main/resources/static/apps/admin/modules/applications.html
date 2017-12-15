@@ -1,14 +1,7 @@
 <div ng-controller="ApplicationsCtrl">
-    <section class="content-header">
-        <h1>
-            <span ng-bind="'admin.modules.application.title'|translate"></span>
-            <small ng-bind="'admin.modules.application.subtitle'|translate"></small>
-        </h1>
-        <ol class="breadcrumb">
-            <li><a href="#"><i class="fa fa-dashboard"></i><span ng-bind="'common.home'|translate"></span></a></li>
-            <li class="active" ng-bind="'admin.modules.application.title'|translate"></li>
-        </ol>
-    </section>
+    <ui-page-header title="'admin.modules.application.title'"
+                    subtitle="'admin.modules.application.subtitle'"
+                    breadcrumbs="[{'text': 'admin.modules.application.title'}]"></ui-page-header>
     <section class="content">
         <div class="box box-default">
             <div class="box-header with-border">
@@ -27,13 +20,14 @@
                             <div class="media-body">
                                 <h4 class="media-heading">
                                     <a target="_blank" ng-href="{{item.accessUrl}}" ng-bind="item.name"></a>
-                                    <a class="label label-success"
+                                    <a class="badge bg-green"
                                        title="Click to cancel authorization"
                                        ng-if="item.isAuthorized"
                                        ng-bind="'common.authorized'|translate"
                                        ng-click="unauthorize(item)"></a>
                                 </h4>
-                                <span>Client ID: {{item.clientId}}</span>
+                                <span ng-bind="'admin.modules.application.fieldClientId'|translate"></span>:
+                                <span>{{item.clientId}}</span>
                             </div>
                         </div>
                         <div class="pull-right">

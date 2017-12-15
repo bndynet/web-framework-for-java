@@ -1,11 +1,7 @@
 <div ng-controller="UsersCtrl">
-    <section class="content-header">
-        <h1 ng-bind="'admin.modules.user.title'|translate"></h1>
-        <ol class="breadcrumb">
-            <li><a href="#"><i class="fa fa-dashboard"></i><span ng-bind="'common.home'|translate"></span></a></li>
-            <li class="active" ng-bind="'admin.modules.user.title'|translate"></li>
-        </ol>
-    </section>
+    <ui-page-header title="'admin.modules.user.title'"
+                    subtitle="'admin.modules.user.subtitle'"
+                    breadcrumbs="[{'text': 'admin.modules.user.title'}]"></ui-page-header>
     <section class="content">
         <div class="box box-default">
             <div class="box-header with-border">
