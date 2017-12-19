@@ -5,7 +5,7 @@
 package net.bndy.wf.lib;
 
 import java.io.Serializable;
-import java.util.Date;
+import java.sql.Timestamp;
 
 import javax.persistence.Basic;
 import javax.persistence.Column;
@@ -15,13 +15,8 @@ import javax.persistence.Id;
 import javax.persistence.MappedSuperclass;
 import javax.persistence.PrePersist;
 import javax.persistence.PreUpdate;
-import javax.persistence.Temporal;
-import javax.persistence.TemporalType;
 
-import com.fasterxml.jackson.annotation.JsonFormat;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
-
-import net.bndy.wf.Application;
 
 @MappedSuperclass()
 @JsonIgnoreProperties({ "hibernateLazyInitializer", "handler" })
@@ -34,13 +29,11 @@ public abstract class _BaseEntity implements Serializable {
 	@Column(nullable = false, columnDefinition = "BIGINT UNSIGNED")
 	protected Long id;
 
-	@Temporal(TemporalType.TIMESTAMP)
-	@JsonFormat(pattern = Application.DATETIME_FORMAT, timezone = Application.TIMEZONE)
-	private Date createDate;
+    @Column(nullable = false, columnDefinition = "TIMESTAMP DEFAULT CURRENT_TIMESTAMP")
+	private Timestamp createDate;
 
-	@Temporal(TemporalType.TIMESTAMP)
-	@JsonFormat(pattern = Application.DATETIME_FORMAT, timezone = Application.TIMEZONE)
-	private Date lastUpdate;
+	@Column(nullable = false, columnDefinition = "TIMESTAMP DEFAULT CURRENT_TIMESTAMP")
+	private Timestamp lastUpdate;
 
 	@Override
 	public int hashCode() {
@@ -49,19 +42,19 @@ public abstract class _BaseEntity implements Serializable {
 		return hash;
 	}
 
-	public Date getCreateDate() {
+	public Timestamp getCreateDate() {
 		return createDate;
 	}
 
-	public void setCreateDate(Date createDate) {
+	public void setCreateDate(Timestamp createDate) {
 		this.createDate = createDate;
 	}
 
-	public Date getLastUpdate() {
+	public Timestamp getLastUpdate() {
 		return lastUpdate;
 	}
 
-	public void setLastUpdate(Date lastUpdate) {
+	public void setLastUpdate(Timestamp lastUpdate) {
 		this.lastUpdate = lastUpdate;
 	}
 
@@ -96,11 +89,11 @@ public abstract class _BaseEntity implements Serializable {
 
 	@PrePersist
 	public void setCreateDate() {
-		this.lastUpdate = this.createDate = new Date();
+		this.lastUpdate = this.createDate = new Timestamp(System.currentTimeMillis());
 	}
 
 	@PreUpdate
 	public void setLastUpdate() {
-		this.lastUpdate = new Date();
+		this.lastUpdate = new Timestamp(System.currentTimeMillis());
 	}
 }

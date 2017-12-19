@@ -26,9 +26,6 @@ import springfox.documentation.swagger2.annotations.EnableSwagger2;
 @SpringBootApplication
 public class Application {
 	
-	public static final String DATETIME_FORMAT = "yyyy-MM-dd'T'HH:mm:ss.SSSZ";
-	public static final String TIMEZONE = "GMT+8";
-
 	public static void main(String[] args) {
 		SpringApplication.run(Application.class, args);
 	}
