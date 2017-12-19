@@ -45,15 +45,7 @@ public class OAuth2Config extends AuthorizationServerConfigurerAdapter {
 //            .scopes("read", "write")
 //            .authorizedGrantTypes("password","authorization_code", "refresh_token");
 
-        clients
-            .jdbc(dataSource)   // require table named oauth_client_details
-            .withClient("client").secret("secret")
-            .accessTokenValiditySeconds(10000)
-            .scopes("read", "write")
-            .authorizedGrantTypes("client_credentials", "password", "refresh_token")
-            .resourceIds("resource")
-            .autoApprove(true);
-
+        clients.jdbc(dataSource);   // require table named oauth_client_details
     }
 
     @Override

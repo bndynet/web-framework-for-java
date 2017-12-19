@@ -55,9 +55,15 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
             .headers().frameOptions().sameOrigin();
 		
 		http.authorizeRequests()
-			.antMatchers("/webjars/**", "/static/**", "/api/**", "/test/**", "/v2/api-docs",
+			.antMatchers("/webjars/**", "/static/**", "/test/**", "/v2/api-docs",
 						"/docs/**", "/error",
 						"/*",
+						"/oauth/authorize",
+                        "/oauth/token",
+						"/oauth/confirm_access",
+						"/oauth/check_token",
+						"/oauth/error",
+						"/oauth/token_key",
 						"/sso/login*", "/sso/signup").permitAll()
             .antMatchers("/admin/**").hasAnyAuthority(ApplicationUserRole.Admin.name())
 			.anyRequest().authenticated();
