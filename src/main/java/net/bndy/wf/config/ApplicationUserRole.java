@@ -1,4 +1,4 @@
-package net.bndy.wf;
+package net.bndy.wf.config;
 
 public enum ApplicationUserRole {
     Admin("Administrator, control all resources."),

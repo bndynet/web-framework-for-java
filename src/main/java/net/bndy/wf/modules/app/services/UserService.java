@@ -6,7 +6,7 @@ package net.bndy.wf.modules.app.services;
 
 import java.util.*;
 
-import net.bndy.wf.ApplicationUserRole;
+import net.bndy.wf.config.ApplicationUserRole;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -17,7 +17,6 @@ import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
-import net.bndy.wf.Constant;
 import net.bndy.wf.lib._BaseService;
 import net.bndy.wf.modules.app.models.*;
 import net.bndy.wf.modules.app.services.repositories.ClientUserRepository;

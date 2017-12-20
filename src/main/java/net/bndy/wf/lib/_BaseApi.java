@@ -17,6 +17,7 @@ import java.util.UUID;
 
 import javax.servlet.http.HttpServletRequest;
 
+import net.bndy.wf.config.ApplicationConfig;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
@@ -43,7 +44,7 @@ public abstract class _BaseApi<T extends _BaseEntity> {
 	@Autowired
 	UserRepository userRepository;
 	@Autowired
-	ApplicationConfig appliationConfig;
+    ApplicationConfig appliationConfig;
 
 	public User getCurrentUser() {
 		return ApplicationContext.getCurrentUser();

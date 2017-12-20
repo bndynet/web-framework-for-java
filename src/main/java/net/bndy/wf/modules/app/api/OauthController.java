@@ -22,7 +22,7 @@ import org.springframework.web.bind.annotation.RestController;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import net.bndy.wf.ApplicationContext;
-import net.bndy.wf.Constant;
+import net.bndy.wf.config.Constant;
 import net.bndy.wf.exceptions.OAuthException;
 import net.bndy.wf.exceptions.OAuthExceptionType;
 import net.bndy.wf.modules.app.models.ClientUser;
