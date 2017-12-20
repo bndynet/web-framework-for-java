@@ -2,7 +2,7 @@
  * Copyright (C) 2017 http://bndy.net
  * Created by Bendy (Bing Zhang)
  ******************************************************************************/
-package net.bndy.wf;
+package net.bndy.wf.config;
 
 import net.bndy.wf.modules.app.models.User;
 import net.bndy.wf.modules.app.services.UserDetailsServiceImpl;

@@ -11,10 +11,10 @@ import net.bndy.wf.lib.StringHelper;
 
 public class LibTest {
 	
-	@Test
-	public void createThumbnail() throws IOException{
-		IOHelper.createThumbnail("/Users/bendy/Downloads/logo.jpeg", 200, "/Users/bendy/Downloads/logo_s.jpeg");
-	}
+//	@Test
+//	public void createThumbnail() throws IOException{
+//		IOHelper.createThumbnail("/Users/bendy/Downloads/logo.jpeg", 200, "/Users/bendy/Downloads/logo_s.jpeg");
+//	}
 	
 	@Test
 	public void Base64() throws UnsupportedEncodingException {

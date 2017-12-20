@@ -6,7 +6,7 @@ package net.bndy.wf.modules.app.api;
 
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
-import net.bndy.wf.ApplicationUserRole;
+import net.bndy.wf.config.ApplicationUserRole;
 import net.bndy.wf.modules.app.models.Role;
 import net.bndy.wf.modules.app.services.UserService;
 import org.springframework.beans.factory.annotation.Autowired;

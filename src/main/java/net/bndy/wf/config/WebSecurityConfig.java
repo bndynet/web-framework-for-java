@@ -2,13 +2,14 @@
  * Copyright (C) 2017 http://bndy.net
  * Created by Bendy (Bing Zhang)
  ******************************************************************************/
-package net.bndy.wf;
+package net.bndy.wf.config;
 
 import java.util.Arrays;
 
 import javax.sql.DataSource;
 
 import com.google.common.collect.ImmutableList;
+import net.bndy.wf.AuthSuccessHandler;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.web.servlet.FilterRegistrationBean;
 import org.springframework.context.annotation.Bean;

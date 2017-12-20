@@ -11,7 +11,7 @@ import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.jpa.repository.JpaRepository;
 
-import net.bndy.wf.ApplicationConfig;
+import net.bndy.wf.config.ApplicationConfig;
 import net.bndy.wf.modules.core.MailService;
 
 public class _BaseService<T> {

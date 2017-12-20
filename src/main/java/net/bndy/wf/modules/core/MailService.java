@@ -9,7 +9,7 @@ import org.springframework.mail.SimpleMailMessage;
 import org.springframework.mail.javamail.JavaMailSender;
 import org.springframework.stereotype.Service;
 
-import net.bndy.wf.ApplicationConfig;
+import net.bndy.wf.config.ApplicationConfig;
 
 @Service
 public class MailService {
