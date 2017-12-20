@@ -24,7 +24,6 @@ import springfox.documentation.swagger2.annotations.EnableSwagger2;
 
 @EnableCaching
 @EnableSwagger2
-@EnableResourceServer
 @SpringBootApplication
 public class Application {
 	
@@ -35,19 +34,19 @@ public class Application {
 		SpringApplication.run(Application.class, args);
 	}
 
-	// Alternative Solution: add @CrossOrigin(origins = "http://localhost:8080")
-	// to the handler method
-	@Bean
-	public WebMvcConfigurer corsConfigurer() {
-		return new WebMvcConfigurerAdapter() {
-			@Override
-			public void addCorsMappings(CorsRegistry registry) {
-				registry.addMapping("/**").allowedOrigins("*");
-				// e.g.
-				// registry.addMapping("/home").allowedOrigins("http://localhost:8080");
-			}
-		};
-	}
+//	// Alternative Solution: add @CrossOrigin(origins = "http://localhost:8080")
+//	// to the handler method
+//	@Bean
+//	public WebMvcConfigurer corsConfigurer() {
+//		return new WebMvcConfigurerAdapter() {
+//			@Override
+//			public void addCorsMappings(CorsRegistry registry) {
+//				registry.addMapping("/**").allowedOrigins("*");
+//				// e.g.
+//				// registry.addMapping("/home").allowedOrigins("http://localhost:8080");
+//			}
+//		};
+//	}
 
 	// Document for API
 	@Bean
