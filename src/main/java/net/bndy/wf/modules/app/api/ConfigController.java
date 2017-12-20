@@ -18,7 +18,7 @@ import java.util.List;
 
 @Api(value = "Configurations API")
 @RestController
-@RequestMapping("/api/v1/app/config")
+@RequestMapping({"/api/app/config", "/api/v1/app/config"})
 public class ConfigController {
     @Autowired
     private UserService userService;

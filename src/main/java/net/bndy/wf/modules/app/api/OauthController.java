@@ -33,7 +33,7 @@ import net.bndy.wf.modules.core.TokenInfo;
 
 @Api(value = "Authorization and authentication")
 @RestController
-@RequestMapping("/api/v1/oauth")
+@RequestMapping({"/api/oauth", "/api/v1/oauth"})
 public class OauthController {
 
 	@Autowired

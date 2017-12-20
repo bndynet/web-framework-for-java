@@ -17,7 +17,7 @@ import net.bndy.wf.modules.app.services.ClientService;;
 
 @Api(value = "Registered Applications API")
 @RestController
-@RequestMapping("/api/v1/app/clients")
+@RequestMapping({"/api/app/clients", "/api/v1/app/clients"})
 public class ClientController extends _BaseApi<Client> {
 
 	@Autowired

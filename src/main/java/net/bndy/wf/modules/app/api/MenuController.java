@@ -20,7 +20,7 @@ import net.bndy.wf.modules.app.services.MenuService;
 
 @Api(value = "Menu API")
 @RestController
-@RequestMapping("/api/v1/app/menus")
+@RequestMapping({"/api/app/menus", "/api/v1/app/menus"})
 public class MenuController extends _BaseApi<Menu> {
 	@Autowired
 	private MenuService menuService;
