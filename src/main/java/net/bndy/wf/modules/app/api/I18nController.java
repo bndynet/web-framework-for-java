@@ -20,7 +20,7 @@ import java.util.Map;
 
 @Api(value = "i18n")
 @RestController
-@RequestMapping("/api/v1/app/i18n")
+@RequestMapping({"/api/app/i18n", "/api/v1/app/i18n"})
 public class I18nController {
 
     @ApiOperation(value = "Gets all messages of current locale")

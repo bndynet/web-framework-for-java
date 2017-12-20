@@ -35,7 +35,7 @@ import javax.servlet.http.HttpSession;
 
 @Api(value = "User API")
 @RestController
-@RequestMapping("/api/v1/app/users")
+@RequestMapping({"/api/app/users", "/api/v1/app/users"})
 public class UserController extends _BaseApi<User> {
 
     @Autowired

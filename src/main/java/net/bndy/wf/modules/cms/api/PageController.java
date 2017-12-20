@@ -22,7 +22,7 @@ import net.bndy.wf.modules.cms.services.PageService;
 
 @Api(value = "Page API")
 @RestController
-@RequestMapping("/api/v1/cms/pages")
+@RequestMapping({"/api/cms/pages", "/api/v1/cms/pages"})
 public class PageController extends _BaseApi<Page> {
 
 	@Autowired

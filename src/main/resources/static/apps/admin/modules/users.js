@@ -4,7 +4,7 @@ app.controller('UsersCtrl',
         $scope.data = [];
         $scope.roles = null;
         $scope.pageUsers = function (page) {
-            $http.get('/api/v1/app/users/?page=' + (page - 1)).then(function(res) {
+            $http.get('/api/app/users/?page=' + (page - 1)).then(function(res) {
                 $scope.data = res.data.content;
                 $scope.pager = {
                     currentPage: page,
@@ -15,7 +15,7 @@ app.controller('UsersCtrl',
         };
 
         $scope.init = function() {
-            $http.get('/api/v1/app/config/roles').then(function(res) {
+            $http.get('/api/app/config/roles').then(function(res) {
                 $scope.roles = res.data;
             });
             $scope.pageUsers(1);
@@ -38,7 +38,7 @@ app.controller('UsersCtrl',
         $scope.saveRoles = function() {
             if ($scope.userModel.id) {
                 var roleId = $scope.userModel.currentRole.id;
-                $http.put('/api/v1/app/users/' + $scope.userModel.id + '/changerole?roleId=' + $scope.userModel.currentRole.id)
+                $http.put('/api/app/users/' + $scope.userModel.id + '/changerole?roleId=' + $scope.userModel.currentRole.id)
                     .then(function(res) {
                         $scope.pageUsers($scope.pager.currentPage);
                         $('#rolesForm').modal('hide');
@@ -48,7 +48,7 @@ app.controller('UsersCtrl',
 
         $scope.remove = function(item) {
             appDialog.confirmDeletion(function(){
-                $http.delete('/api/v1/app/users/' + item.id).then(function(res) {
+                $http.delete('/api/app/users/' + item.id).then(function(res) {
                     $scope.data.splice($scope.data.indexOf(item), 1)
                     appDialog.success();
                 });
@@ -56,7 +56,7 @@ app.controller('UsersCtrl',
         };
 
         $scope.toggleEnabled = function(item) {
-            $http.put('/api/v1/app/users/' + item.id + '/toggleenabled').then(function(res) {
+            $http.put('/api/app/users/' + item.id + '/toggleenabled').then(function(res) {
                 item.enabled = !item.enabled;
                 appDialog.success();
             });
