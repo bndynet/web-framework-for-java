@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/web/thymeleaf/layout"
+      layout:decorator="sso/layout">
+<head>
+    <title>OAuth Approval</title>
+</head>
+<body>
+<div layout:fragment="body">
+    <div class="login-box">
+        <div class="login-box-body">
+            <div class="panel-body">
+                <br />
+                <div class="row middle">
+                    <div class="col-xs-5">
+                        <img src="/static/assets/img/logo.png" class="stretch radius shadow"/>
+                    </div>
+                    <div class="col-xs-2">
+                        <i class="fa fa-2x fa-exchange" aria-hidden="true"></i>
+                    </div>
+                    <div class="col-xs-5">
+                        <img th:src="${clientApp.icon}" class="stretch radius shadow"/>
+                    </div>
+                </div>
+                <br />
+                <form id="confirmationForm" name="confirmationForm" action="/oauth/authorize" method="post">
+                    <div class="text-center">
+                        <h4 th:utext="#{sso.confirmAuthClient(${clientApp.name})}"></h4>
+                        <span th:each="scope: ${authRequest.scope}">
+                            <input type="radio" th:name="${#strings.prepend(scope,'scope.')}" value="true" checked />
+                            <span th:text="${scope}"></span>
+                        </span>
+                    </div>
+                    <br />
+                    <input name="user_oauth_approval" value="true" type="hidden"/>
+                    <button type="submit" class="btn btn-success btn-block" th:text="#{common.authorize}"></button>
+                </form>
+                <br />
+                <form id="denialForm" name="denialForm" action="/oauth/authorize" method="post">
+                    <input name="user_oauth_approval" value="false" type="hidden"/>
+                    <button type="submit" name="deny" class="btn btn-default btn-block" th:text="#{common.deny}"></button>
+                </form>
+            </div>
+        </div>
+    </div>
+
+    <div th:replace="common/footer::footer"></div>
+</div>
+</body>
+</html>

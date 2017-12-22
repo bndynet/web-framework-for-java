@@ -20,6 +20,10 @@ public class ClientService extends _BaseService<Client> {
 	@Autowired
 	private ClientUserRepository clientUserRepository;
 
+	public Client getByClientId(String clientId){
+		return this.clientRepository.findByClientId(clientId);
+	}
+
 	public Client registerApplication(String name, String icon, String redirectUri) {
 		Client client = new Client();
 		client.setName(name);

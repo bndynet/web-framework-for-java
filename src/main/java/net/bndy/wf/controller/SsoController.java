@@ -26,7 +26,7 @@ import net.bndy.wf.modules.core.SecurityService;
 
 @Controller
 @RequestMapping("/sso")
-public class SSOController extends _BaseController {
+public class SsoController extends _BaseController {
 
 	@Autowired
 	private UserService userService;

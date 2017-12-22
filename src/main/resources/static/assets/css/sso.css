@@ -14,9 +14,11 @@
   width: 160px;
 }
 
+.register-page .login-box .fa-exchange, .register-page .register-box .fa-exchange, .login-page .login-box .fa-exchange, .login-page .register-box .fa-exchange {
+  margin-top: 30px;
+}
+
 .register-page footer, .login-page footer {
   text-align: center;
 }
- 
-
- /*# sourceMappingURL= sso.css.map */
+/*# sourceMappingURL=sso.css.map */
