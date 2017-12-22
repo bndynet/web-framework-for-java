@@ -97,7 +97,11 @@ spring:
     show-sql: true
     hibernate:
       ddl-auto: update
-      naming-strategy: org.hibernate.cfg.ImprovedNamingStrategy
+      naming:
+        implicit-strategy: net.bndy.wf.config.DatabaseImplicitNamingStrategy
+        # If not specified, default org.springframework.boot.orm.jpa.hibernate.SpringPhysicalNamingStrategy
+        # which will add underscores to names and convert to lowercase
+        physical-strategy: org.hibernate.boot.model.naming.PhysicalNamingStrategyStandardImpl   # This will use the logical names for database
     properties:
       hibernate:
         dialect: org.hibernate.dialect.MySQL5Dialect

@@ -20,6 +20,7 @@ import org.springframework.security.oauth2.config.annotation.web.configuration.R
 import org.springframework.security.oauth2.config.annotation.web.configurers.AuthorizationServerEndpointsConfigurer;
 import org.springframework.security.oauth2.config.annotation.web.configurers.AuthorizationServerSecurityConfigurer;
 import org.springframework.security.oauth2.provider.OAuth2Authentication;
+import org.springframework.security.oauth2.provider.approval.JdbcApprovalStore;
 import org.springframework.security.oauth2.provider.token.TokenEnhancer;
 import org.springframework.security.oauth2.provider.token.store.JdbcTokenStore;
 
@@ -65,6 +66,7 @@ public class OAuth2Config extends AuthorizationServerConfigurerAdapter {
             .tokenEnhancer(new AppTokenEnhancer())
             // require tables oauth_access_token, oauth_client_token, oauth_code, oauth_refresh_token
             .tokenStore(new JdbcTokenStore(dataSource))
+            .approvalStore(new JdbcApprovalStore(dataSource))
         ;
     }
 
