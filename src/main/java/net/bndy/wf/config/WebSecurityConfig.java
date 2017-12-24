@@ -9,7 +9,6 @@ import java.util.Arrays;
 import javax.sql.DataSource;
 
 import com.google.common.collect.ImmutableList;
-import net.bndy.wf.AuthSuccessHandler;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.web.servlet.FilterRegistrationBean;
 import org.springframework.context.annotation.Bean;
@@ -71,7 +70,6 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
         http
             .formLogin()
             .loginPage("/sso/login")
-            .successHandler(new AuthSuccessHandler())
             .permitAll()
             .and()
             .logout()
