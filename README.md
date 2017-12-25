@@ -24,3 +24,24 @@
 1. Install dependencies
 1. Run Application
 1. Browse http://localhost:9090
+
+## OAuth Endpoints
+
+1. /oauth/authorize | GET | response_type=code&scope&client_id&redirect_uri
+
+	Redirect to `redirect_uri?code=...`
+
+1. /oauth/token | POST | grant_type=authorization_code&client_id&client_secret&code&redirect_uri
+
+	```json
+	{
+	"access_token": "",
+	"token_type": "bearer",
+	"refresh_token": "",
+	"expires_in": 8363,
+	"scope": "",
+	"id": 22,
+	"avatar": ""
+	"username": "admin"
+	}
+	```
