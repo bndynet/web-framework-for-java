@@ -2,7 +2,7 @@
  * Copyright (C) 2017 http://bndy.net
  * Created by Bendy (Bing Zhang)
  ******************************************************************************/
-package net.bndy.wf.modules.app.models;
+package net.bndy.wf.modules.core.models;
 
 import java.util.ArrayList;
 import java.util.Collection;
@@ -17,7 +17,7 @@ import net.bndy.wf.lib.AppBoType;
 import net.bndy.wf.lib._BaseEntity;
 
 @Entity
-@Table(name="app_menu")
+@Table(name="core_menu")
 public class Menu extends _BaseEntity {
 
 	private static final long serialVersionUID = 1L;

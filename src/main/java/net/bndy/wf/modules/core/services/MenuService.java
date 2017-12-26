@@ -2,7 +2,7 @@
  * Copyright (C) 2017 http://bndy.net
  * Created by Bendy (Bing Zhang)
  ******************************************************************************/
-package net.bndy.wf.modules.app.services;
+package net.bndy.wf.modules.core.services;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -13,8 +13,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import net.bndy.wf.lib._BaseService;
-import net.bndy.wf.modules.app.models.Menu;
-import net.bndy.wf.modules.app.services.repositories.MenuRepository;
+import net.bndy.wf.modules.core.models.Menu;
+import net.bndy.wf.modules.core.services.repositories.MenuRepository;
 import net.bndy.wf.modules.cms.models.Page;
 import net.bndy.wf.modules.cms.services.ArticleService;
 import net.bndy.wf.modules.cms.services.repositories.PageRepository;

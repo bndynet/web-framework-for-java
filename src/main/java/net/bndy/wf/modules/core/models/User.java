@@ -2,7 +2,7 @@
  * Copyright (C) 2017 http://bndy.net
  * Created by Bendy (Bing Zhang)
  ******************************************************************************/
-package net.bndy.wf.modules.app.models;
+package net.bndy.wf.modules.core.models;
 
 import java.util.HashSet;
 import java.util.Set;
@@ -20,7 +20,7 @@ import com.fasterxml.jackson.annotation.JsonIgnore;
 import net.bndy.wf.lib._BaseEntity;
 
 @Entity
-@Table(name = "app_user")
+@Table(name = "core_user")
 public class User extends _BaseEntity implements UserDetails {
     private static final long serialVersionUID = 1L;
 
@@ -37,7 +37,7 @@ public class User extends _BaseEntity implements UserDetails {
     private String passwordConfirm;
 
     @ManyToMany(fetch = FetchType.EAGER)    // FetchType.EAGER: don't use lazy load.
-    @JoinTable(name = "app_user_role",
+    @JoinTable(name = "core_user_role",
             joinColumns = @JoinColumn(name = "user_id"),
             inverseJoinColumns = @JoinColumn(name = "role_id"))
     private Set<Role> roles;

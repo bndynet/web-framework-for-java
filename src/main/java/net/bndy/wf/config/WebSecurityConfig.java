@@ -23,7 +23,7 @@ import org.springframework.web.cors.CorsConfiguration;
 import org.springframework.web.cors.UrlBasedCorsConfigurationSource;
 
 import net.bndy.wf.lib.StringHelper;
-import net.bndy.wf.modules.app.services.UserDetailsServiceImpl;
+import net.bndy.wf.modules.core.services.UserDetailsServiceImpl;
 import org.springframework.web.filter.CorsFilter;
 
 @Configuration

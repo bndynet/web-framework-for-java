@@ -2,7 +2,7 @@
  * Copyright (C) 2017 http://bndy.net
  * Created by Bendy (Bing Zhang)
  ******************************************************************************/
-package net.bndy.wf.modules.app.services.repositories;
+package net.bndy.wf.modules.core.services.repositories;
 
 import java.util.List;
 
@@ -10,7 +10,7 @@ import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;
 
-import net.bndy.wf.modules.app.models.Menu;
+import net.bndy.wf.modules.core.models.Menu;
 
 public interface MenuRepository extends JpaRepository<Menu, Long> {
 	

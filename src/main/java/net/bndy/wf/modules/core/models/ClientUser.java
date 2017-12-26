@@ -2,7 +2,7 @@
  * Copyright (C) 2017 http://bndy.net
  * Created by Bendy (Bing Zhang)
  ******************************************************************************/
-package net.bndy.wf.modules.app.models;
+package net.bndy.wf.modules.core.models;
 
 import javax.persistence.Entity;
 import javax.persistence.Table;
@@ -10,7 +10,7 @@ import javax.persistence.Table;
 import net.bndy.wf.lib._BaseEntity;
 
 @Entity
-@Table(name = "app_client_user")
+@Table(name = "core_client_user")
 public class ClientUser extends _BaseEntity {
 
 	private static final long serialVersionUID = 1L;

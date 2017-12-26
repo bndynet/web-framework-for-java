@@ -6,6 +6,9 @@ package net.bndy.wf.controller;
 
 import javax.servlet.http.HttpSession;
 
+import net.bndy.wf.modules.core.models.User;
+import net.bndy.wf.modules.core.services.UserService;
+import net.bndy.wf.modules.core.services.UserValidator;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -14,8 +17,6 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
-import net.bndy.wf.modules.app.models.*;
-import net.bndy.wf.modules.app.services.*;
 import net.bndy.wf.modules.core.SecurityService;
 
 @Controller

@@ -4,9 +4,7 @@
  ******************************************************************************/
 package net.bndy.wf.controller;
 
-import net.bndy.wf.modules.app.models.Client;
-import net.bndy.wf.modules.app.services.ClientService;
-import net.bndy.wf.modules.core.models.OauthClientDetails;
+import net.bndy.wf.modules.core.services.ClientService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.oauth2.provider.AuthorizationRequest;
 import org.springframework.stereotype.Controller;

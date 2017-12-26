@@ -2,7 +2,7 @@
  * Copyright (C) 2017 http://bndy.net
  * Created by Bendy (Bing Zhang)
  ******************************************************************************/
-package net.bndy.wf.modules.app.api;
+package net.bndy.wf.modules.core.api;
 
 import java.util.List;
 
@@ -15,12 +15,12 @@ import org.springframework.web.bind.annotation.RestController;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import net.bndy.wf.lib._BaseApi;
-import net.bndy.wf.modules.app.models.Menu;
-import net.bndy.wf.modules.app.services.MenuService;
+import net.bndy.wf.modules.core.models.Menu;
+import net.bndy.wf.modules.core.services.MenuService;
 
 @Api(value = "Menu API")
 @RestController
-@RequestMapping({"/api/app/menus", "/api/v1/app/menus"})
+@RequestMapping({"/api/core/menus", "/api/v1/core/menus"})
 public class MenuController extends _BaseApi<Menu> {
 	@Autowired
 	private MenuService menuService;

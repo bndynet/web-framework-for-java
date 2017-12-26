@@ -2,13 +2,13 @@
  * Copyright (C) 2017 http://bndy.net
  * Created by Bendy (Bing Zhang)
  ******************************************************************************/
-package net.bndy.wf.modules.app.services.repositories;
+package net.bndy.wf.modules.core.services.repositories;
 
 import java.util.List;
 
 import org.springframework.data.jpa.repository.JpaRepository;
 
-import net.bndy.wf.modules.app.models.ClientUser;
+import net.bndy.wf.modules.core.models.ClientUser;
 
 public interface ClientUserRepository extends JpaRepository<ClientUser, Long> {
 

@@ -4,10 +4,11 @@
  ******************************************************************************/
 package net.bndy.wf.modules.core;
 
-import java.util.Arrays;
-
-import javax.servlet.http.HttpSession;
-
+import net.bndy.wf.modules.core.models.ClientUser;
+import net.bndy.wf.modules.core.models.User;
+import net.bndy.wf.modules.core.services.repositories.ClientRepository;
+import net.bndy.wf.modules.core.services.repositories.ClientUserRepository;
+import net.bndy.wf.modules.core.services.repositories.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
@@ -15,23 +16,19 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import net.bndy.wf.config.Constant;
-import net.bndy.wf.exceptions.OAuthException;
-import net.bndy.wf.exceptions.OAuthExceptionType;
 import net.bndy.wf.lib.StringHelper;
-import net.bndy.wf.modules.app.models.*;
-import net.bndy.wf.modules.app.services.UserService;
-import net.bndy.wf.modules.app.services.repositories.*;
+import net.bndy.wf.modules.core.services.UserService;
 
 @Service
 @Transactional
 public class OAuthService {
 
 	@Autowired
-	UserRepository userRepository;
+    UserRepository userRepository;
 	@Autowired
-	ClientRepository clientRepository;
+    ClientRepository clientRepository;
 	@Autowired
-	ClientUserRepository clientUserRepository;
+    ClientUserRepository clientUserRepository;
 
 	@Autowired
 	UserService userService;

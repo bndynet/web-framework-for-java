@@ -3,10 +3,10 @@ app.controller('ApplicationsCtrl', [
     function($scope, appDialog, $http) {
         $scope.data = [];
         $scope.init = function () {
-            $http.get('/api/app/clients').then(function(res) {
+            $http.get('/api/core/clients').then(function(res) {
                 $scope.data = res.data;
 
-                $http.get('/api/app/users/clients').then(function(res){
+                $http.get('/api/core/users/clients').then(function(res){
                     for(var idx in res.data) {
                         for(var idx1 in $scope.data) {
                             if(res.data[idx].clientId === $scope.data[idx1].clientId) {
@@ -27,13 +27,13 @@ app.controller('ApplicationsCtrl', [
         };
         $scope.save = function() {
             if ($scope.formModel.id) {
-                $http.put('/api/app/clients/' + $scope.formModel.id, $scope.formModel).then(function(res){
+                $http.put('/api/core/clients/' + $scope.formModel.id, $scope.formModel).then(function(res){
                     $scope.formModel = null;
                     $('#dialogForm').modal('hide');
                     $scope.init();
                 });
             } else {
-                $http.post('/api/app/clients', $scope.formModel).then(function(res){
+                $http.post('/api/core/clients', $scope.formModel).then(function(res){
                     $scope.formModel = null;
                     $('#dialogForm').modal('hide');
                     $scope.init();
@@ -42,7 +42,7 @@ app.controller('ApplicationsCtrl', [
         };
         $scope.remove = function(item) {
             appDialog.confirmDeletion(function(){
-                $http.delete('/api/app/clients/' + item.id).then(function(){
+                $http.delete('/api/core/clients/' + item.id).then(function(){
                     $scope.data.splice($scope.data.indexOf(item), 1);
                     appDialog.success();
                 }, function() {
@@ -52,7 +52,7 @@ app.controller('ApplicationsCtrl', [
         };
         $scope.unauthorize = function(item) {
             appDialog.confirm('Cancel Authorization', 'Are you sure to cancel authorization for this application?', function() {
-                $http.put('/api/app/users/removeapp?clientId=' + item.clientId).then(function(res) {
+                $http.put('/api/core/users/removeapp?clientId=' + item.clientId).then(function(res) {
                     item.isAuthorized = false;
                 });
             });

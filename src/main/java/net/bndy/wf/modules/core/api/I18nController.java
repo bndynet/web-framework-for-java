@@ -2,7 +2,7 @@
  * Copyright (C) 2017 http://bndy.net
  * Created by Bendy (Bing Zhang)
  ******************************************************************************/
-package net.bndy.wf.modules.app.api;
+package net.bndy.wf.modules.core.api;
 
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
@@ -20,7 +20,7 @@ import java.util.Map;
 
 @Api(value = "i18n")
 @RestController
-@RequestMapping({"/api/app/i18n", "/api/v1/app/i18n"})
+@RequestMapping({"/api/core/i18n", "/api/v1/core/i18n"})
 public class I18nController {
 
     @ApiOperation(value = "Gets all messages of current locale")

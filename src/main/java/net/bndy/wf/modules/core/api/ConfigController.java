@@ -2,13 +2,13 @@
  * Copyright (C) 2017 http://bndy.net
  * Created by Bendy (Bing Zhang)
  ******************************************************************************/
-package net.bndy.wf.modules.app.api;
+package net.bndy.wf.modules.core.api;
 
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import net.bndy.wf.config.ApplicationUserRole;
-import net.bndy.wf.modules.app.models.Role;
-import net.bndy.wf.modules.app.services.UserService;
+import net.bndy.wf.modules.core.models.Role;
+import net.bndy.wf.modules.core.services.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
@@ -18,7 +18,7 @@ import java.util.List;
 
 @Api(value = "Configurations API")
 @RestController
-@RequestMapping({"/api/app/config", "/api/v1/app/config"})
+@RequestMapping({"/api/core/config", "/api/v1/core/config"})
 public class ConfigController {
     @Autowired
     private UserService userService;

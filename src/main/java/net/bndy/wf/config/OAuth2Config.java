@@ -4,8 +4,8 @@
  ******************************************************************************/
 package net.bndy.wf.config;
 
-import net.bndy.wf.modules.app.models.User;
-import net.bndy.wf.modules.app.services.UserDetailsServiceImpl;
+import net.bndy.wf.modules.core.models.User;
+import net.bndy.wf.modules.core.services.UserDetailsServiceImpl;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.security.authentication.AuthenticationManager;

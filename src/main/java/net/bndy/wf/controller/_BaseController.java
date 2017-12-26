@@ -10,7 +10,7 @@ import org.springframework.web.bind.annotation.ControllerAdvice;
 import org.springframework.web.bind.annotation.ModelAttribute;
 
 import net.bndy.wf.ApplicationContext;
-import net.bndy.wf.modules.app.models.User;
+import net.bndy.wf.modules.core.models.User;
 
 @ControllerAdvice
 public abstract class _BaseController {

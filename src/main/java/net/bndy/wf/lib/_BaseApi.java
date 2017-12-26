@@ -34,8 +34,8 @@ import org.springframework.web.multipart.MultipartFile;
 import io.swagger.annotations.ApiOperation;
 
 import net.bndy.wf.*;
-import net.bndy.wf.modules.app.models.User;
-import net.bndy.wf.modules.app.services.repositories.UserRepository;
+import net.bndy.wf.modules.core.models.User;
+import net.bndy.wf.modules.core.services.repositories.UserRepository;
 
 public abstract class _BaseApi<T extends _BaseEntity> {
 

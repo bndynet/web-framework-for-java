@@ -2,7 +2,7 @@
  * Copyright (C) 2017 http://bndy.net
  * Created by Bendy (Bing Zhang)
  ******************************************************************************/
-package net.bndy.wf.modules.app.api;
+package net.bndy.wf.modules.core.api;
 
 import java.net.MalformedURLException;
 import java.net.URL;
@@ -21,8 +21,8 @@ import io.swagger.annotations.ApiOperation;
 import net.bndy.wf.ApplicationContext;
 import net.bndy.wf.exceptions.OAuthException;
 import net.bndy.wf.exceptions.OAuthExceptionType;
-import net.bndy.wf.modules.app.models.User;
-import net.bndy.wf.modules.app.services.UserService;
+import net.bndy.wf.modules.core.models.User;
+import net.bndy.wf.modules.core.services.UserService;
 import net.bndy.wf.modules.core.OAuthService;
 import net.bndy.wf.modules.core.TokenInfo;
 

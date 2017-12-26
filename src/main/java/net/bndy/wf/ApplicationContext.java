@@ -10,7 +10,7 @@ import org.springframework.context.i18n.LocaleContextHolder;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
 
-import net.bndy.wf.modules.app.models.User;
+import net.bndy.wf.modules.core.models.User;
 import org.springframework.stereotype.Component;
 
 import javax.annotation.PostConstruct;

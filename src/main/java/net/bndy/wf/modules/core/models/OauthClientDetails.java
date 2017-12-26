@@ -8,7 +8,6 @@ import javax.persistence.*;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import net.bndy.wf.lib._BaseEntity;
-import net.bndy.wf.modules.app.models.Client;
 
 @Entity
 @Table(name = "oauth_client_details")

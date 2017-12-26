@@ -1,4 +1,4 @@
-package net.bndy.wf.modules.app.services;
+package net.bndy.wf.modules.core.services;
 
 import net.bndy.wf.modules.core.models.OauthClientDetails;
 import net.bndy.wf.modules.core.services.repositories.OauthClientDetailsRepository;
@@ -9,9 +9,9 @@ import org.springframework.transaction.annotation.Transactional;
 import net.bndy.wf.config.Constant;
 import net.bndy.wf.lib.StringHelper;
 import net.bndy.wf.lib._BaseService;
-import net.bndy.wf.modules.app.models.Client;
-import net.bndy.wf.modules.app.services.repositories.ClientRepository;
-import net.bndy.wf.modules.app.services.repositories.ClientUserRepository;
+import net.bndy.wf.modules.core.models.Client;
+import net.bndy.wf.modules.core.services.repositories.ClientRepository;
+import net.bndy.wf.modules.core.services.repositories.ClientUserRepository;
 
 @Service
 @Transactional

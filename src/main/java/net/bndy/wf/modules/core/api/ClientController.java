@@ -2,7 +2,7 @@
  * Copyright (C) 2017 http://bndy.net
  * Created by Bendy (Bing Zhang)
  ******************************************************************************/
-package net.bndy.wf.modules.app.api;
+package net.bndy.wf.modules.core.api;
 
 import net.bndy.wf.modules.core.models.OauthClientDetails;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -13,12 +13,12 @@ import org.springframework.web.bind.annotation.RestController;
 
 import io.swagger.annotations.Api;
 import net.bndy.wf.lib._BaseApi;
-import net.bndy.wf.modules.app.models.Client;
-import net.bndy.wf.modules.app.services.ClientService;
+import net.bndy.wf.modules.core.models.Client;
+import net.bndy.wf.modules.core.services.ClientService;
 
 @Api(value = "Registered Applications API")
 @RestController
-@RequestMapping({"/api/app/clients", "/api/v1/app/clients"})
+@RequestMapping({"/api/core/clients", "/api/v1/core/clients"})
 public class ClientController extends _BaseApi<Client> {
 
 	@Autowired

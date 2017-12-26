@@ -2,13 +2,15 @@
  * Copyright (C) 2017 http://bndy.net
  * Created by Bendy (Bing Zhang)
  ******************************************************************************/
-package net.bndy.wf.modules.app.api;
+package net.bndy.wf.modules.core.api;
 
 import java.net.MalformedURLException;
 import java.net.URL;
 import java.util.HashMap;
 import java.util.List;
 
+import net.bndy.wf.modules.core.models.ClientUser;
+import net.bndy.wf.modules.core.models.User;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
@@ -20,8 +22,7 @@ import org.springframework.web.bind.annotation.*;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import net.bndy.wf.lib._BaseApi;
-import net.bndy.wf.modules.app.models.*;
-import net.bndy.wf.modules.app.services.UserService;
+import net.bndy.wf.modules.core.services.UserService;
 
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.Authentication;
@@ -35,7 +36,7 @@ import javax.servlet.http.HttpSession;
 
 @Api(value = "User API")
 @RestController
-@RequestMapping({"/api/app/users", "/api/v1/app/users"})
+@RequestMapping({"/api/core/users", "/api/v1/core/users"})
 public class UserController extends _BaseApi<User> {
 
     @Autowired

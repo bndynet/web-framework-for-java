@@ -16,7 +16,7 @@ import org.springframework.web.servlet.handler.HandlerInterceptorAdapter;
 import net.bndy.wf.ApplicationContext;
 import net.bndy.wf.config.Constant;
 import net.bndy.wf.lib.annotation.Role;
-import net.bndy.wf.modules.app.models.User;
+import net.bndy.wf.modules.core.models.User;
 
 @Component
 public class AuthenticationInterceptor extends HandlerInterceptorAdapter {

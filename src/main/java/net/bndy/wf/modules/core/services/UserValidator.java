@@ -2,15 +2,14 @@
  * Copyright (C) 2017 http://bndy.net
  * Created by Bendy (Bing Zhang)
  ******************************************************************************/
-package net.bndy.wf.modules.app.services;
+package net.bndy.wf.modules.core.services;
 
+import net.bndy.wf.modules.core.models.User;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 import org.springframework.validation.Errors;
 import org.springframework.validation.ValidationUtils;
 import org.springframework.validation.Validator;
-
-import net.bndy.wf.modules.app.models.*;
 
 @Component
 public class UserValidator implements Validator {

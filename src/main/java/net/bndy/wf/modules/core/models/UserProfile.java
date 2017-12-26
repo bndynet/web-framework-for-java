@@ -2,7 +2,7 @@
  * Copyright (C) 2017 http://bndy.net
  * Created by Bendy (Bing Zhang)
  ******************************************************************************/
-package net.bndy.wf.modules.app.models;
+package net.bndy.wf.modules.core.models;
 
 import java.util.Date;
 
@@ -12,7 +12,7 @@ import javax.persistence.Table;
 import net.bndy.wf.lib._BaseEntity;
 
 @Entity
-@Table(name="app_user_profile")
+@Table(name="core_user_profile")
 public class UserProfile extends _BaseEntity {
 	private static final long serialVersionUID = 1L;
 	private Long userId;
