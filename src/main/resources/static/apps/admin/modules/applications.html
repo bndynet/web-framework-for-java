@@ -19,15 +19,18 @@
                             </div>
                             <div class="media-body">
                                 <h4 class="media-heading">
-                                    <a target="_blank" ng-href="{{item.accessUrl}}" ng-bind="item.name"></a>
+                                    <a target="_blank" ng-href="/oauth/authorize?response_type=code&scope=read&client_id={{item.details.clientId}}&redirect_uri={{item.details.webServerRedirectUri}}" ng-bind="item.name"></a>
                                     <a class="badge bg-green"
                                        title="Click to cancel authorization"
                                        ng-if="item.isAuthorized"
                                        ng-bind="'common.authorized'|translate"
                                        ng-click="unauthorize(item)"></a>
                                 </h4>
-                                <span ng-bind="'admin.modules.application.fieldClientId'|translate"></span>:
-                                <span>{{item.clientId}}</span>
+                                <label ng-bind="'admin.modules.application.fieldClientId'|translate"></label>:
+                                <span>{{item.details.clientId}}</span>
+                                &nbsp;&nbsp;&nbsp;&nbsp;
+                                <label ng-bind="'admin.modules.application.fieldClientSecret'|translate"></label>:
+                                <span>{{item.details.clientSecret}}</span>
                             </div>
                         </div>
                         <div class="pull-right">
@@ -74,7 +77,7 @@
                         </md-input-container>
                         <md-input-container class="md-block">
                             <label ng-bind="'admin.modules.application.fieldRedirectUri'|translate"></label>
-                            <input name="redirectUri" required ng-model="formModel.redirectUri"/>
+                            <input name="redirectUri" required ng-model="formModel.details.webServerRedirectUri"/>
                             <div ng-messages="form.redirectUri.$error">
                                 <div ng-message="required" ng-bind="'common.msgRequired'|translate"></div>
                             </div>

@@ -13,6 +13,6 @@ public class Constant {
 	public static final String SESSION_USER_KEY = "USER";
 	
 	public static final int AUTH_CODE_LEN = 40;
-	public static final int CLIENT_ID_LEN = 40;
-	public static final int CLIENT_SECRET_LEN = 80;
+	public static final int CLIENT_ID_LEN = 10;
+	public static final int CLIENT_SECRET_LEN = 30;
 }

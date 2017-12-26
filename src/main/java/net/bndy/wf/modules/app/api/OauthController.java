@@ -4,14 +4,11 @@
  ******************************************************************************/
 package net.bndy.wf.modules.app.api;
 
-import java.io.IOException;
 import java.net.MalformedURLException;
 import java.net.URL;
 import java.util.HashMap;
 
 import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpServletResponse;
-import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -22,10 +19,8 @@ import org.springframework.web.bind.annotation.RestController;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import net.bndy.wf.ApplicationContext;
-import net.bndy.wf.config.Constant;
 import net.bndy.wf.exceptions.OAuthException;
 import net.bndy.wf.exceptions.OAuthExceptionType;
-import net.bndy.wf.modules.app.models.ClientUser;
 import net.bndy.wf.modules.app.models.User;
 import net.bndy.wf.modules.app.services.UserService;
 import net.bndy.wf.modules.core.OAuthService;
@@ -41,32 +36,6 @@ public class OauthController {
 	@Autowired
 	OAuthService oauthService;
 	
-	@ApiOperation(value = "Get authorization code by client id")
-	@RequestMapping(value = "/authorize", method = RequestMethod.GET)
-	public void authorize(HttpServletResponse response, @RequestParam(name = "response_type") String responseType,
-			@RequestParam(name = "client_id") String clientId, @RequestParam(name = "redirect_uri") String redirectUri,
-			@RequestParam(name = "scope") String scope, HttpSession session) throws IOException, OAuthException {
-		session.setAttribute(Constant.OAUTH_CLIENTID_KEY, clientId);
-		session.setAttribute(Constant.OAUTH_REDIRECT_KEY, redirectUri);
-		session.setAttribute(Constant.OAUTH_SCOPE_KEY, scope);
-		
-		// validate client id
-		if (!this.oauthService.verifyClient(clientId, redirectUri))  {
-			throw new OAuthException(OAuthExceptionType.InvalidClientIDOrRedirectUri);
-		}
-		
-		User user = this.oauthService.getCurrentUser();
-		if (user != null) {
-			ClientUser cu = this.oauthService.getAuthInfo(clientId, user.getId());
-			if (cu != null) {
-				cu = this.oauthService.refreshAuthCode(cu);
-				response.sendRedirect(this.oauthService.getRedirectUri(session, cu.getAuthorizationCode()));
-				return;
-			}
-		}
-
-		response.sendRedirect("/sso/login");
-	}
 
 	@ApiOperation(value = "Get access token by authorization code")
 	@RequestMapping(value = "/token", method = RequestMethod.POST)
