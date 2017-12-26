@@ -26,11 +26,12 @@ public class OauthClientDetails extends _BaseEntity {
     private String additionalInformation;
     private String autoapprove;
 
+    @Column(columnDefinition = "BIGINT UNSIGNED", unique = true, nullable = false)
     private Long appClientId;
 
     @JsonIgnore
     @OneToOne(optional = false)
-    @JoinColumn(name = "app_client_id", updatable = false, insertable = false)
+    @JoinColumn(name = "app_client_id", insertable = false, updatable = false)
     private Client appClient;
 
     public String getClientId() {
