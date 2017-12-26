@@ -4,10 +4,11 @@
  ******************************************************************************/
 package net.bndy.wf.modules.core.models;
 
-import javax.persistence.Entity;
-import javax.persistence.Table;
+import javax.persistence.*;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import net.bndy.wf.lib._BaseEntity;
+import net.bndy.wf.modules.app.models.Client;
 
 @Entity
 @Table(name = "oauth_client_details")
@@ -24,6 +25,13 @@ public class OauthClientDetails extends _BaseEntity {
     private Integer refreshTokenValidity;
     private String additionalInformation;
     private String autoapprove;
+
+    private Long appClientId;
+
+    @JsonIgnore
+    @OneToOne(optional = false)
+    @JoinColumn(name = "app_client_id", updatable = false, insertable = false)
+    private Client appClient;
 
     public String getClientId() {
         return clientId;
@@ -112,4 +120,21 @@ public class OauthClientDetails extends _BaseEntity {
     public void setAutoapprove(String autoapprove) {
         this.autoapprove = autoapprove;
     }
+
+    public Client getAppClient() {
+        return appClient;
+    }
+
+    public void setAppClient(Client appClient) {
+        this.appClient = appClient;
+    }
+
+    public Long getAppClientId() {
+        return appClientId;
+    }
+
+    public void setAppClientId(Long appClientId) {
+        this.appClientId = appClientId;
+    }
+
 }

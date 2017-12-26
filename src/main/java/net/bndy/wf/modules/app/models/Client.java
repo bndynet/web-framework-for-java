@@ -4,10 +4,10 @@
  ******************************************************************************/
 package net.bndy.wf.modules.app.models;
 
-import javax.persistence.Entity;
-import javax.persistence.Table;
+import javax.persistence.*;
 
 import net.bndy.wf.lib._BaseEntity;
+import net.bndy.wf.modules.core.models.OauthClientDetails;
 
 @Entity
 @Table(name = "app_client")
@@ -17,10 +17,9 @@ public class Client extends _BaseEntity {
 
 	private String name;
 	private String icon;
-	private String clientId;
-	private String clientSecret;
-	private String redirectUri;
-	private String scope;
+
+	@OneToOne(mappedBy = "appClient", fetch = FetchType.LAZY, cascade = CascadeType.ALL)
+	private OauthClientDetails details;
 
 	public String getName() {
 		return name;
@@ -30,38 +29,6 @@ public class Client extends _BaseEntity {
 		this.name = name;
 	}
 
-	public String getClientSecret() {
-		return clientSecret;
-	}
-
-	public void setClientSecret(String clientSecret) {
-		this.clientSecret = clientSecret;
-	}
-
-	public String getClientId() {
-		return clientId;
-	}
-
-	public void setClientId(String clientId) {
-		this.clientId = clientId;
-	}
-
-	public String getRedirectUri() {
-		return redirectUri;
-	}
-
-	public void setRedirectUri(String redirectUri) {
-		this.redirectUri = redirectUri;
-	}
-
-	public String getScope() {
-		return scope;
-	}
-
-	public void setScope(String scope) {
-		this.scope = scope;
-	}
-
 	public String getIcon() {
 		return icon;
 	}
@@ -69,9 +36,12 @@ public class Client extends _BaseEntity {
 	public void setIcon(String icon) {
 		this.icon = icon;
 	}
-	
-	public String getAccessUrl() {
-		return String.format("/api/v1/oauth/authorize?response_type=code&client_id=%s&redirect_uri=%s&scope=normal", 
-				this.getClientId(), this.getRedirectUri());
+
+	public OauthClientDetails getDetails() {
+		return details;
+	}
+
+	public void setDetails(OauthClientDetails details) {
+		this.details = details;
 	}
 }

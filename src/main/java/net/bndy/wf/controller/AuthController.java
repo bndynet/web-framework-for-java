@@ -6,6 +6,7 @@ package net.bndy.wf.controller;
 
 import net.bndy.wf.modules.app.models.Client;
 import net.bndy.wf.modules.app.services.ClientService;
+import net.bndy.wf.modules.core.models.OauthClientDetails;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.oauth2.provider.AuthorizationRequest;
 import org.springframework.stereotype.Controller;
@@ -31,13 +32,12 @@ public class AuthController {
     public String oauthConfirmAccess(
         @ModelAttribute AuthorizationRequest authRequest,
         Model viewModel
-    ) throws Exception {
-        ClientDetails client = clientDetailsService.loadClientByClientId(authRequest.getClientId());
+    ) {
+        ClientDetails clientDetails = clientDetailsService.loadClientByClientId(authRequest.getClientId());
         viewModel.addAttribute("authRequest", authRequest);
-        viewModel.addAttribute("client", client);
+        viewModel.addAttribute("client", clientDetails);
         if(!authRequest.getClientId().isEmpty()) {
-            Client clientApp = this.clientService.getByClientId(authRequest.getClientId());
-            viewModel.addAttribute("clientApp", clientApp);
+            viewModel.addAttribute("clientApp", clientService.findByClientId(clientDetails.getClientId()));
         }
         viewModel.addAttribute("scopes", String.join(",", authRequest.getScope()));
         return "auth/confirm_access";

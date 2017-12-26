@@ -1,5 +1,7 @@
 package net.bndy.wf.modules.app.services;
 
+import net.bndy.wf.modules.core.models.OauthClientDetails;
+import net.bndy.wf.modules.core.services.repositories.OauthClientDetailsRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -15,48 +17,49 @@ import net.bndy.wf.modules.app.services.repositories.ClientUserRepository;
 @Transactional
 public class ClientService extends _BaseService<Client> {
 
-	@Autowired
-	private ClientRepository clientRepository;
-	@Autowired
-	private ClientUserRepository clientUserRepository;
+    @Autowired
+    private ClientRepository clientRepository;
+    @Autowired
+    private OauthClientDetailsRepository oauthClientDetailsRepository;
+    @Autowired
+    private ClientUserRepository clientUserRepository;
 
-	public Client getByClientId(String clientId){
-		return this.clientRepository.findByClientId(clientId);
-	}
+    public Client findByClientId(String clientId) {
+        OauthClientDetails details = oauthClientDetailsRepository.findByClientId(clientId);
+        if (details != null) {
+            return details.getAppClient();
+        }
+        return null;
+    }
 
-	public Client registerApplication(String name, String icon, String redirectUri) {
-		Client client = new Client();
-		client.setName(name);
-		client.setIcon(icon);
-		client.setRedirectUri(redirectUri);
-		client.setClientId(StringHelper.generateRandomString(Constant.CLIENT_ID_LEN));
-		client.setClientSecret(StringHelper.generateRandomString(Constant.CLIENT_SECRET_LEN));
+    public Client saveClient(Long appClientId, String name, String icon, String redirectUri, String scope) {
+        Client client = null;
+        if (appClientId != null) {
+            client = clientRepository.findOne(appClientId);
+        }
+        if (client == null) {
+            client = new Client();
+        }
 
-		return this.clientRepository.saveAndFlush(client);
-	}
+        client.setName(name);
+        client.setIcon(icon);
 
-	public Client updateApplication(Client client) {
-		Client entity = this.clientRepository.findOne(client.getId());
-		if (entity != null) {
-			entity.setName(client.getName());
-			entity.setIcon(client.getIcon());
-			entity.setRedirectUri(client.getRedirectUri());
+        OauthClientDetails details = client.getDetails();
+        if (details == null) {
+            details = new OauthClientDetails();
+        }
+        details.setScope(scope);
+        details.setWebServerRedirectUri(redirectUri);
 
-			if (entity.getClientId() == null || "".equals(entity.getClientId())) {
-				entity.setClientId(StringHelper.generateRandomString(Constant.CLIENT_ID_LEN));
-				entity.setClientSecret(StringHelper.generateRandomString(Constant.CLIENT_SECRET_LEN));
-			}
-			entity = this.clientRepository.saveAndFlush(entity);
-		}
-		return entity;
-	}
-
-	@Override
-	public boolean delete(long id) {
-		Client client = this.clientRepository.findOne(id);
-		if (client != null) {
-			this.clientUserRepository.deleteByClientId(client.getClientId());
-		}
-		return super.delete(id);
-	}
+        if (details.getClientId() == null || details.getClientId() == "") {
+            details.setClientId(StringHelper.generateRandomString(Constant.CLIENT_ID_LEN));
+        }
+        if (details.getClientSecret() == null || details.getClientSecret() == "") {
+            details.setClientSecret(StringHelper.generateRandomString(Constant.CLIENT_SECRET_LEN));
+        }
+        client = this.clientRepository.saveAndFlush(client);
+        details.setAppClientId(client.getId());
+        this.oauthClientDetailsRepository.saveAndFlush(details);
+        return client;
+    }
 }

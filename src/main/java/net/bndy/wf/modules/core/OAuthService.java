@@ -68,36 +68,6 @@ public class OAuthService {
 		return cu;
 	}
 
-	public boolean verifyClient(String clientId, String redirectUri) {
-		if (clientId == null || "".equals(clientId) || redirectUri == null || "".equals(redirectUri)) {
-			return false;
-		}
-
-		Client c = this.clientRepository.findByClientId(clientId);
-		if (c != null && c.getRedirectUri() != null && !"".equals(c.getRedirectUri())) {
-			if (Arrays.asList(c.getRedirectUri().toLowerCase().split(";")).indexOf(redirectUri.toLowerCase()) >= 0) {
-				return true;
-			}
-		}
-		return false;
-	}
-
-	public String getRedirectUri(HttpSession session, String authCode) throws OAuthException {
-		String clientId = (String) session.getAttribute(Constant.OAUTH_CLIENTID_KEY);
-		String redirectUri = (String) session.getAttribute(Constant.OAUTH_REDIRECT_KEY);
-
-		if (this.verifyClient(clientId, redirectUri)) {
-			session.removeAttribute(Constant.OAUTH_CLIENTID_KEY);
-			session.removeAttribute(Constant.OAUTH_REDIRECT_KEY);
-			session.removeAttribute(Constant.OAUTH_SCOPE_KEY);
-
-			redirectUri = String.format("%s?code=%s", redirectUri, authCode);
-			return redirectUri;
-		}
-
-		throw new OAuthException(OAuthExceptionType.InvalidClientIDOrRedirectUri);
-	}
-
 	public void login(String username, String password, String clientId) {
 		User user = this.userService.login(username, password);
 		if (user != null) {
@@ -137,10 +107,6 @@ public class OAuthService {
 		}
 
 		return null;
-	}
-
-	public Client getClient(String clientId) {
-		return this.clientRepository.findByClientId(clientId);
 	}
 
 	public ClientUser getAuthInfo(String clientId, long userId) {

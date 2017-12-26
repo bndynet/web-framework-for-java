@@ -4,6 +4,7 @@
  ******************************************************************************/
 package net.bndy.wf.modules.app.api;
 
+import net.bndy.wf.modules.core.models.OauthClientDetails;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -13,7 +14,7 @@ import org.springframework.web.bind.annotation.RestController;
 import io.swagger.annotations.Api;
 import net.bndy.wf.lib._BaseApi;
 import net.bndy.wf.modules.app.models.Client;
-import net.bndy.wf.modules.app.services.ClientService;;
+import net.bndy.wf.modules.app.services.ClientService;
 
 @Api(value = "Registered Applications API")
 @RestController
@@ -25,17 +26,23 @@ public class ClientController extends _BaseApi<Client> {
 
 	@Override
 	public Client post(@RequestBody Client entity) {
-		return this.clientService.registerApplication(entity.getName(), entity.getIcon(), entity.getRedirectUri());
+		if (entity.getDetails() == null) {
+			entity.setDetails(new OauthClientDetails());
+		}
+		return this.clientService.saveClient(entity.getId(), entity.getName(), entity.getIcon(),
+			entity.getDetails().getWebServerRedirectUri(),
+			entity.getDetails().getScope()
+		);
 	}
 
 	@Override
 	public Client put(@PathVariable(name = "id") long id, @RequestBody Client entity) {
-		entity.setId(id);
-		return this.clientService.updateApplication(entity);
-	}
-
-	@Override
-	public void delete(@PathVariable(name="id") long id) {
-		this.clientService.delete(id);
+		if (entity.getDetails() == null) {
+			entity.setDetails(new OauthClientDetails());
+		}
+		return this.clientService.saveClient(id, entity.getName(), entity.getIcon(),
+			entity.getDetails().getWebServerRedirectUri(),
+			entity.getDetails().getScope()
+		);
 	}
 }
