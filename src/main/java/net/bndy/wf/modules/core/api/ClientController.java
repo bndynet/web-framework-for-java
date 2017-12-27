@@ -4,17 +4,19 @@
  ******************************************************************************/
 package net.bndy.wf.modules.core.api;
 
+import io.swagger.annotations.ApiOperation;
+import net.bndy.wf.modules.core.models.OauthApprovals;
 import net.bndy.wf.modules.core.models.OauthClientDetails;
+import net.bndy.wf.modules.core.services.OauthService;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import io.swagger.annotations.Api;
 import net.bndy.wf.lib._BaseApi;
 import net.bndy.wf.modules.core.models.Client;
 import net.bndy.wf.modules.core.services.ClientService;
+
+import java.util.Collection;
 
 @Api(value = "Registered Applications API")
 @RestController
@@ -23,6 +25,8 @@ public class ClientController extends _BaseApi<Client> {
 
 	@Autowired
 	private ClientService clientService;
+	@Autowired
+	private OauthService oauthService;
 
 	@Override
 	public Client post(@RequestBody Client entity) {
@@ -44,5 +48,11 @@ public class ClientController extends _BaseApi<Client> {
 			entity.getDetails().getWebServerRedirectUri(),
 			entity.getDetails().getScope()
 		);
+	}
+
+	@ApiOperation(value = "Get my approvals")
+	@RequestMapping( value= "/myapprovals", method = RequestMethod.GET)
+	public Collection<OauthApprovals> getMyClientApprovals() {
+		return this.oauthService.getApprovalsByUser(getCurrentUser().getUsername());
 	}
 }

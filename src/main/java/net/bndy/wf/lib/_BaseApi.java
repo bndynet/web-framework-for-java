@@ -64,13 +64,13 @@ public abstract class _BaseApi<T extends _BaseEntity> {
 	}
 
 	@ApiOperation(value = "Get entity by id")
-	@RequestMapping(value = "/{id}", method = RequestMethod.GET)
+	@RequestMapping(value = "/{id:\\d+}", method = RequestMethod.GET)
 	public T get(@PathVariable(name = "id") long id) {
 		return this.service.get(id);
 	}
 
 	@ApiOperation(value = "Update an existing entity")
-	@RequestMapping(value = "/{id}", method = RequestMethod.PUT)
+	@RequestMapping(value = "/{id:\\d+}", method = RequestMethod.PUT)
 	public T put(@PathVariable(name = "id") long id, @RequestBody T entity) {
 		entity.setId(id);
 		return this.service.save(entity);
@@ -83,7 +83,7 @@ public abstract class _BaseApi<T extends _BaseEntity> {
 	}
 
 	@ApiOperation(value = "Delete an entity")
-	@RequestMapping(value = "/{id}", method = RequestMethod.DELETE)
+	@RequestMapping(value = "/{id:\\d+}", method = RequestMethod.DELETE)
 	public void delete(@PathVariable(name = "id") long id) {
 		this.service.delete(id);
 	}

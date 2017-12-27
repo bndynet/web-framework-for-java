@@ -19,18 +19,33 @@
                             </div>
                             <div class="media-body">
                                 <h4 class="media-heading">
-                                    <a target="_blank" ng-href="/oauth/authorize?response_type=code&scope=read&client_id={{item.details.clientId}}&redirect_uri={{item.details.webServerRedirectUri}}" ng-bind="item.name"></a>
-                                    <a class="badge bg-green"
-                                       title="Click to cancel authorization"
-                                       ng-if="item.isAuthorized"
-                                       ng-bind="'common.authorized'|translate"
-                                       ng-click="unauthorize(item)"></a>
+                                    <span ng-bind="item.name"></span>
                                 </h4>
-                                <label ng-bind="'admin.modules.application.fieldClientId'|translate"></label>:
-                                <span>{{item.details.clientId}}</span>
-                                &nbsp;&nbsp;&nbsp;&nbsp;
-                                <label ng-bind="'admin.modules.application.fieldClientSecret'|translate"></label>:
-                                <span>{{item.details.clientSecret}}</span>
+
+                                <div ng-if="item.details.scope">
+                                    <label ng-bind="'admin.modules.application.fieldScope'|translate"></label>:
+                                    <span class="btn-group">
+                                        <a target="_blank" class="btn btn-default btn-xs btn-flag" ng-href="/oauth/authorize?response_type=code&scope={{scope}}&client_id={{item.details.clientId}}&redirect_uri={{item.details.webServerRedirectUri}}"
+                                           ng-repeat="scope in item.details.scope.split(',')" ng-bind="scope"></a>
+                                    </span>
+                                </div>
+
+                                <div>
+                                    <label ng-bind="'admin.modules.application.fieldClientId'|translate"></label>:
+                                    <span>{{item.details.clientId}}</span>
+                                    &nbsp;&nbsp;&nbsp;&nbsp;
+                                    <label ng-bind="'admin.modules.application.fieldClientSecret'|translate"></label>:
+                                    <span>{{item.details.clientSecret}}</span>
+                                </div>
+
+                                <div ng-if="item.approvals.length > 0">
+                                    <span class="badge"
+                                          title="{{'admin.modules.application.iAuthorized'|translate}}"
+                                          ng-class="{'bg-green': approval.status == 'APPROVED', 'bg-red': approval.status == 'DENIED'}"
+                                          ng-repeat="approval in item.approvals" >
+                                        {{approval.scope}}: {{approval.status}}
+                                    </span>
+                                </div>
                             </div>
                         </div>
                         <div class="pull-right">
@@ -68,6 +83,13 @@
                             <label ng-bind="'admin.modules.application.fieldName'|translate"></label>
                             <input name="name" required ng-model="formModel.name"/>
                             <div ng-messages="form.name.$error">
+                                <div ng-message="required" ng-bind="'common.msgRequired'|translate"></div>
+                            </div>
+                        </md-input-container>
+                        <md-input-container class="md-block">
+                            <label ng-bind="'admin.modules.application.fieldScope'|translate"></label>
+                            <input name="scope" required ng-model="formModel.details.scope"/>
+                            <div ng-messages="form.scope.$error">
                                 <div ng-message="required" ng-bind="'common.msgRequired'|translate"></div>
                             </div>
                         </md-input-container>

@@ -6,11 +6,12 @@ app.controller('ApplicationsCtrl', [
             $http.get('/api/core/clients').then(function(res) {
                 $scope.data = res.data;
 
-                $http.get('/api/core/users/clients').then(function(res){
-                    for(var idx in res.data) {
-                        for(var idx1 in $scope.data) {
-                            if(res.data[idx].clientId === $scope.data[idx1].clientId) {
-                                $scope.data[idx1].isAuthorized = true;
+                $http.get('/api/core/clients/myapprovals').then(function(res){
+                    for(var idx in $scope.data) {
+                        $scope.data[idx].approvals = [];
+                        for(var idx1 in res.data) {
+                            if(res.data[idx1].clientId === $scope.data[idx].details.clientId) {
+                                $scope.data[idx].approvals.push(res.data[idx1]);
                             }
                         }
                     }

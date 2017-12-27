@@ -4,11 +4,14 @@
  ******************************************************************************/
 package net.bndy.wf.modules.core.services.repositories;
 
-import net.bndy.wf.modules.core.models.OauthClientDetails;
+import net.bndy.wf.modules.core.models.OauthApprovals;
 import org.springframework.data.jpa.repository.JpaRepository;
-import org.springframework.data.jpa.repository.Modifying;
 
-public interface OauthClientDetailsRepository extends JpaRepository<OauthClientDetails, Long> {
+import java.util.Collection;
 
-    OauthClientDetails findByClientId(String clientId);
+public interface OauthApprovalsRepository extends JpaRepository<OauthApprovals, Long> {
+
+    OauthApprovals findByUserIdAndClientId(String userId, String clientId);
+
+    Collection<OauthApprovals> findByUserId(String userId);
 }
