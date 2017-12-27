@@ -35,6 +35,7 @@ app.config(['$provide', '$qProvider', '$stateProvider', '$translateProvider', fu
 	}
 
 	var pages = ['applications', 'users', 'lock',
+	    'core-userProfile',
 		'example-dashboard',
 		'example-dashboard1',
 		'example-calendar',

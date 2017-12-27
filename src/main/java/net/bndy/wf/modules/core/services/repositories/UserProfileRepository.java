@@ -10,4 +10,5 @@ import net.bndy.wf.modules.core.models.UserProfile;
 
 public interface UserProfileRepository extends JpaRepository<UserProfile, Long> {
 
+    UserProfile findByUserId(Long userId);
 }

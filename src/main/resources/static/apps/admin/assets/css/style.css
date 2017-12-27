@@ -53,6 +53,10 @@ a {
   clear: both;
 }
 
+.box-body > form {
+  padding: 1rem 2rem;
+}
+
 /* Bootstrap */
 .list-group .list-group-item img.media-object {
   width: 112px;
@@ -94,6 +98,4 @@ a {
 .no-scroll {
   overflow: hidden;
 }
- 
-
- /*# sourceMappingURL= style.css.map */
+/*# sourceMappingURL=style.css.map */

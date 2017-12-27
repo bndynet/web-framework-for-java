@@ -11,6 +11,7 @@ import java.util.List;
 
 import net.bndy.wf.modules.core.models.ClientUser;
 import net.bndy.wf.modules.core.models.User;
+import net.bndy.wf.modules.core.models.UserProfile;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
@@ -118,5 +119,10 @@ public class UserController extends _BaseApi<User> {
     @Override
     public Page<User> get(@PageableDefault(value = 10, sort = {"id"}, direction = Sort.Direction.DESC) Pageable pageable) {
         return super.get(pageable);
+    }
+
+    @RequestMapping(value = "/profile", method = RequestMethod.GET)
+    public UserProfile getUserProfile() {
+        return this.userService.getUserProfile(getCurrentUser().getId());
     }
 }

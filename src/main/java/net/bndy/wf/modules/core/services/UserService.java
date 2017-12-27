@@ -10,6 +10,8 @@ import net.bndy.wf.config.ApplicationUserRole;
 import net.bndy.wf.modules.core.models.ClientUser;
 import net.bndy.wf.modules.core.models.Role;
 import net.bndy.wf.modules.core.models.User;
+import net.bndy.wf.modules.core.models.UserProfile;
+import net.bndy.wf.modules.core.services.repositories.UserProfileRepository;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -32,6 +34,8 @@ public class UserService extends _BaseService<User> {
     @Autowired
     private UserRepository userRepo;
     @Autowired
+    private UserProfileRepository userProfileRepository;
+    @Autowired
     private RoleRepository roleRepository;
     @Autowired
     private ClientUserRepository clientUserRepository;
@@ -45,6 +49,10 @@ public class UserService extends _BaseService<User> {
 
     public boolean hasUsers() {
         return this.userRepo.count() > 0;
+    }
+
+    public UserProfile getUserProfile(long userId) {
+        return this.userProfileRepository.findByUserId(userId);
     }
 
     public User login(String account, String password) {
