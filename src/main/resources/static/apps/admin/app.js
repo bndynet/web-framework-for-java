@@ -34,8 +34,10 @@ app.config(['$provide', '$qProvider', '$stateProvider', '$translateProvider', fu
 		});
 	}
 
-	var pages = ['applications', 'users', 'lock',
+	var pages = [
 	    'core-userProfile',
+	    'core-users',
+	    'core-applications',
 		'example-dashboard',
 		'example-dashboard1',
 		'example-calendar',
