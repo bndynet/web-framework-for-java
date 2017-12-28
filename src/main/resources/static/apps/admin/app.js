@@ -1,6 +1,6 @@
 var app = angular.module('app', ['ngCookies', 'pascalprecht.translate', 'ngAnimate', 'ngMaterial', 'ui.router', 'toaster', 'bn.ui']);
 
-app.config(['$provide', '$qProvider', '$stateProvider', '$translateProvider', function ($provide, $qProvider, $stateProvider, $translateProvider) {
+app.config(['$provide', '$qProvider', '$httpProvider', '$stateProvider', '$translateProvider', function ($provide, $qProvider, $httpProvider, $stateProvider, $translateProvider) {
     $qProvider.errorOnUnhandledRejections(false);
 
     var $cookies;
@@ -26,6 +26,46 @@ app.config(['$provide', '$qProvider', '$stateProvider', '$translateProvider', fu
         };
     }]);
 
+
+    // http interceptor
+    $provide.factory('appHttpInterceptor', ['$q', '$injector', function($q, $injector) {
+        console.debug($injector);
+        var toaster = $injector.get('toaster');
+        return {
+            'request': function(config) {
+                return config;
+            },
+            'requestError': function(rejection) {
+                toaster.pop({
+                    type: 'error',
+                    body: JSON.stringify(rejection)
+                });
+                return $q.reject(rejection);
+            },
+            'response': function(response) {
+                return response;
+            },
+           'responseError': function(rejection) {
+                var title = rejection.error;
+                var message = rejection.message;
+                switch(rejection.status) {
+                    case 401:
+                    default:
+                }
+                console.error(rejection);
+                toaster.pop({
+                    type: 'error',
+                    title: title,
+                    body: message,
+                });
+                return $q.reject(rejection);
+            }
+        };
+    }]);
+    $httpProvider.interceptors.push('appHttpInterceptor');
+
+
+    // register ui-states
 	function registerState(name) {
 		var path = name.replace(/-/g, '/');
 		$stateProvider.state(name, {
@@ -33,7 +73,6 @@ app.config(['$provide', '$qProvider', '$stateProvider', '$translateProvider', fu
 			templateUrl: '/static/apps/admin/modules/' + path + '.html',
 		});
 	}
-
 	var pages = [
 	    'core-userProfile',
 	    'core-users',
@@ -57,7 +96,6 @@ app.config(['$provide', '$qProvider', '$stateProvider', '$translateProvider', fu
 		'example-ui-sliders',
 		'example-ui-timeline',
 	];
-
 	$stateProvider.state('default', {
 		url: '',
 		redirectTo: 'example-dashboard'
