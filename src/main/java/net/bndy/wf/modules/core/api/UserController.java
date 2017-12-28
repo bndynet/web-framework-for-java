@@ -7,9 +7,7 @@ package net.bndy.wf.modules.core.api;
 import java.net.MalformedURLException;
 import java.net.URL;
 import java.util.HashMap;
-import java.util.List;
 
-import net.bndy.wf.modules.core.models.ClientUser;
 import net.bndy.wf.modules.core.models.User;
 import net.bndy.wf.modules.core.models.UserProfile;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -84,20 +82,6 @@ public class UserController extends _BaseApi<User> {
     @RequestMapping(value = "/logout", method = RequestMethod.GET)
     public void logout(HttpServletRequest request) throws ServletException {
         request.logout();
-    }
-
-    @ApiOperation(value = "Get all authorized apps for current user")
-    @RequestMapping(value = "/clients", method = RequestMethod.GET)
-    public List<ClientUser> getClients() {
-        return this.userService.getClients(this.getCurrentUser().getId());
-    }
-
-    @ApiOperation(value = "Cancel authorization for specified app")
-    @RequestMapping(value = "/removeapp", method = RequestMethod.PUT)
-    public void removeClient(@RequestParam(name = "clientId") String clientId) {
-        if (this.getCurrentUser() != null) {
-            this.userService.removeClient(clientId, this.getCurrentUser().getId());
-        }
     }
 
     @ApiOperation(value = "Enable or disable user")

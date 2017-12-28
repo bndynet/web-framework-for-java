@@ -51,13 +51,6 @@ app.controller('ApplicationsCtrl', [
                 });
             });
         };
-        $scope.unauthorize = function(item) {
-            appDialog.confirm('Cancel Authorization', 'Are you sure to cancel authorization for this application?', function() {
-                $http.put('/api/core/users/removeapp?clientId=' + item.clientId).then(function(res) {
-                    item.isAuthorized = false;
-                });
-            });
-        };
 
         $scope.init();
 } ]);

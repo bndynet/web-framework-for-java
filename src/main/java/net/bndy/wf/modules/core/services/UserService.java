@@ -7,7 +7,6 @@ package net.bndy.wf.modules.core.services;
 import java.util.*;
 
 import net.bndy.wf.config.ApplicationUserRole;
-import net.bndy.wf.modules.core.models.ClientUser;
 import net.bndy.wf.modules.core.models.Role;
 import net.bndy.wf.modules.core.models.User;
 import net.bndy.wf.modules.core.models.UserProfile;
@@ -23,7 +22,6 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import net.bndy.wf.lib._BaseService;
-import net.bndy.wf.modules.core.services.repositories.ClientUserRepository;
 import net.bndy.wf.modules.core.services.repositories.RoleRepository;
 import net.bndy.wf.modules.core.services.repositories.UserRepository;
 
@@ -37,8 +35,6 @@ public class UserService extends _BaseService<User> {
     private UserProfileRepository userProfileRepository;
     @Autowired
     private RoleRepository roleRepository;
-    @Autowired
-    private ClientUserRepository clientUserRepository;
 
     private Logger logger = LoggerFactory.getLogger(UserService.class);
     private PasswordEncoder passwordEncoder = new BCryptPasswordEncoder();
@@ -91,14 +87,6 @@ public class UserService extends _BaseService<User> {
 
     public User findByUsername(String username) {
         return this.userRepo.findByUsername(username);
-    }
-
-    public List<ClientUser> getClients(long userId) {
-        return this.clientUserRepository.findByUserId(userId);
-    }
-
-    public void removeClient(String clientId, long userId) {
-        this.clientUserRepository.deleteByUserIdAndClientId(userId, clientId);
     }
 
     public User changeRole(long userId, long roleId) {

@@ -11,7 +11,6 @@ import net.bndy.wf.lib.StringHelper;
 import net.bndy.wf.lib._BaseService;
 import net.bndy.wf.modules.core.models.Client;
 import net.bndy.wf.modules.core.services.repositories.ClientRepository;
-import net.bndy.wf.modules.core.services.repositories.ClientUserRepository;
 
 @Service
 @Transactional
@@ -21,8 +20,6 @@ public class ClientService extends _BaseService<Client> {
     private ClientRepository clientRepository;
     @Autowired
     private OauthClientDetailsRepository oauthClientDetailsRepository;
-    @Autowired
-    private ClientUserRepository clientUserRepository;
 
     public Client findByClientId(String clientId) {
         OauthClientDetails details = oauthClientDetailsRepository.findByClientId(clientId);
