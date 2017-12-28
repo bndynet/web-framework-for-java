@@ -17,6 +17,7 @@ import java.util.UUID;
 
 import javax.servlet.http.HttpServletRequest;
 
+import net.bndy.wf.config.ApplicationConfig;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
@@ -33,8 +34,8 @@ import org.springframework.web.multipart.MultipartFile;
 import io.swagger.annotations.ApiOperation;
 
 import net.bndy.wf.*;
-import net.bndy.wf.modules.app.models.User;
-import net.bndy.wf.modules.app.services.repositories.UserRepository;
+import net.bndy.wf.modules.core.models.User;
+import net.bndy.wf.modules.core.services.repositories.UserRepository;
 
 public abstract class _BaseApi<T extends _BaseEntity> {
 
@@ -43,7 +44,7 @@ public abstract class _BaseApi<T extends _BaseEntity> {
 	@Autowired
 	UserRepository userRepository;
 	@Autowired
-	ApplicationConfig appliationConfig;
+    ApplicationConfig appliationConfig;
 
 	public User getCurrentUser() {
 		return ApplicationContext.getCurrentUser();
@@ -63,13 +64,13 @@ public abstract class _BaseApi<T extends _BaseEntity> {
 	}
 
 	@ApiOperation(value = "Get entity by id")
-	@RequestMapping(value = "/{id}", method = RequestMethod.GET)
+	@RequestMapping(value = "/{id:\\d+}", method = RequestMethod.GET)
 	public T get(@PathVariable(name = "id") long id) {
 		return this.service.get(id);
 	}
 
 	@ApiOperation(value = "Update an existing entity")
-	@RequestMapping(value = "/{id}", method = RequestMethod.PUT)
+	@RequestMapping(value = "/{id:\\d+}", method = RequestMethod.PUT)
 	public T put(@PathVariable(name = "id") long id, @RequestBody T entity) {
 		entity.setId(id);
 		return this.service.save(entity);
@@ -82,7 +83,7 @@ public abstract class _BaseApi<T extends _BaseEntity> {
 	}
 
 	@ApiOperation(value = "Delete an entity")
-	@RequestMapping(value = "/{id}", method = RequestMethod.DELETE)
+	@RequestMapping(value = "/{id:\\d+}", method = RequestMethod.DELETE)
 	public void delete(@PathVariable(name = "id") long id) {
 		this.service.delete(id);
 	}

@@ -1,7 +1,31 @@
-var app = angular.module('app', ['ngAnimate', 'ngMaterial', 'ui.router', 'toaster', 'bn.ui']);
+var app = angular.module('app', ['ngCookies', 'pascalprecht.translate', 'ngAnimate', 'ngMaterial', 'ui.router', 'toaster', 'bn.ui']);
 
-app.config(['$qProvider', '$stateProvider', function ($qProvider, $stateProvider) {
+app.config(['$provide', '$qProvider', '$stateProvider', '$translateProvider', function ($provide, $qProvider, $stateProvider, $translateProvider) {
     $qProvider.errorOnUnhandledRejections(false);
+
+    var $cookies;
+    angular.injector(['ngCookies']).invoke(['$cookies', function(_$cookies_) {
+        $cookies = _$cookies_;
+    }]);
+
+    $translateProvider.useUrlLoader('/api/core/i18n/');
+    $translateProvider.preferredLanguage($cookies.get("LOCALE")||'en');
+
+    // override translateFilter for supporting java i18n format
+    $provide.decorator('translateFilter', ['$delegate', function($delegate) {
+        var srcFilter = $delegate;
+        return function() {
+            var lang = srcFilter.apply(this, arguments);
+            // arguments[0] is the KEY
+            if (angular.isArray(arguments[1])) {
+                for (var idx = 0; idx < arguments[1].length; idx++){
+                   lang = lang.replace('{' + idx + '}', arguments[1][idx]);
+                }
+            }
+            return lang;
+        };
+    }]);
+
 	function registerState(name) {
 		var path = name.replace(/-/g, '/');
 		$stateProvider.state(name, {
@@ -10,7 +34,10 @@ app.config(['$qProvider', '$stateProvider', function ($qProvider, $stateProvider
 		});
 	}
 
-	var pages = ['applications', 'users', 'lock',
+	var pages = [
+	    'core-userProfile',
+	    'core-users',
+	    'core-applications',
 		'example-dashboard',
 		'example-dashboard1',
 		'example-calendar',
@@ -248,13 +275,13 @@ $(function () {
 	    var lang = $(this).val();
 	    var url = location.href;
 	    var newUrl = ''
-	    if (url.indexOf('lang=') > 0) {
-	        newUrl = url.replace(/lang=[^#]*/g, 'lang=' + lang);
+	    if (url.indexOf('locale=') > 0) {
+	        newUrl = url.replace(/locale=[^#]*/g, 'locale=' + lang);
 	    } else if (url.indexOf('#') > 0) {
 	        newUrl = url.substring(0, url.indexOf('#'))
-	            + (url.indexOf('?') > 0 ? '&' : '?') + 'lang=' + lang + url.substring(url.indexOf('#'));
+	            + (url.indexOf('?') > 0 ? '&' : '?') + 'locale=' + lang + url.substring(url.indexOf('#'));
 	    } else {
-	        newUrl = url + (url.indexOf('?') > 0 ? '&' : '?') + 'lang=' + lang;
+	        newUrl = url + (url.indexOf('?') > 0 ? '&' : '?') + 'locale=' + lang;
 	    }
 	    location.href = newUrl;
 	});

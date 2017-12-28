@@ -23,6 +23,10 @@ a {
   margin-top: .5rem;
 }
 
+.navbar-nav {
+  display: inline-table;
+}
+
 .navbar-nav > .messages-menu > .dropdown-menu > li .menu > li > a > h4,
 .navbar-nav > .messages-menu > .dropdown-menu > li .menu > li > a > p {
   margin-left: 0;
@@ -49,6 +53,10 @@ a {
   clear: both;
 }
 
+.box-body > form {
+  padding: 1rem 2rem;
+}
+
 /* Bootstrap */
 .list-group .list-group-item img.media-object {
   width: 112px;
@@ -64,6 +72,11 @@ a {
   height: 28px;
   position: relative;
   top: -4px;
+}
+
+.table td a i {
+  font-size: 1rem;
+  padding: .25rem;
 }
 
 .table + .bn-ui-pager .summary {
@@ -85,6 +98,4 @@ a {
 .no-scroll {
   overflow: hidden;
 }
- 
-
- /*# sourceMappingURL= style.css.map */
+/*# sourceMappingURL=style.css.map */

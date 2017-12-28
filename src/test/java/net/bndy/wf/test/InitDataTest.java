@@ -7,8 +7,8 @@ import org.junit.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 
 import net.bndy.wf.lib.AppBoType;
-import net.bndy.wf.modules.app.models.Menu;
-import net.bndy.wf.modules.app.services.MenuService;
+import net.bndy.wf.modules.core.models.Menu;
+import net.bndy.wf.modules.core.services.MenuService;
 import net.bndy.wf.modules.cms.models.Article;
 import net.bndy.wf.modules.cms.models.Comment;
 import net.bndy.wf.modules.cms.models.Page;

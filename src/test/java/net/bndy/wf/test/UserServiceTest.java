@@ -5,12 +5,12 @@ import static org.junit.Assert.*;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 
+import net.bndy.wf.modules.core.models.User;
 import org.junit.Assert;
 import org.junit.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 
-import net.bndy.wf.modules.app.models.*;
-import net.bndy.wf.modules.app.services.UserService;
+import net.bndy.wf.modules.core.services.UserService;
 
 public class UserServiceTest extends _Test {
 	@Autowired

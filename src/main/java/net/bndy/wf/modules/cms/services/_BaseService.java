@@ -10,7 +10,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 
-import net.bndy.wf.ApplicationConfig;
+import net.bndy.wf.config.ApplicationConfig;
 import net.bndy.wf.modules.cms.models.Attachment;
 import net.bndy.wf.modules.cms.models.Comment;
 import net.bndy.wf.modules.cms.services.repositories.AttachmentRepository;

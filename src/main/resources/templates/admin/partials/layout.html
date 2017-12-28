@@ -7,6 +7,7 @@
     <!-- Tell the browser to be responsive to screen width -->
     <meta content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" name="viewport">
     <title th:text="${app.appName}"></title>
+    <link href="/static/assets/img/logo.png" rel="shortcut icon">
     <!-- Bootstrap 3.3.7 -->
     <link rel="stylesheet" href="/webjars/bootstrap/3.3.7/css/bootstrap.min.css">
     <!-- Font Awesome -->
@@ -143,6 +144,10 @@
         src="/webjars/angular-ui-router/1.0.3/angular-ui-router.min.js"></script>
 
 <script type="text/javascript"
+        src="/static/plugins/angular/angular-translate.min.js"></script>
+<script type="text/javascript"
+        src="/static/plugins/angular/angular-translate-loader-url.min.js"></script>
+<script type="text/javascript"
         src="/static/plugins/angular-bootstrap-datetimepicker/src/js/datetimepicker.js"></script>
 <script type="text/javascript"
         src="/static/plugins/angular-bootstrap-datetimepicker/src/js/datetimepicker.templates.js"></script>
@@ -156,8 +161,12 @@
 
 <script type="text/javascript" src="/static/apps/admin/app.js"></script>
 <script type="text/javascript" src="/static/apps/admin/lib/directives/ui-menu-messages.js"></script>
-<script type="text/javascript" src="/static/apps/admin/modules/applications.js"></script>
-<script type="text/javascript" src="/static/apps/admin/modules/users.js"></script>
+<script type="text/javascript" src="/static/apps/admin/lib/directives/ui-page-header.js"></script>
+
+<script type="text/javascript" src="/static/apps/admin/modules/core/userProfile.js"></script>
+<script type="text/javascript" src="/static/apps/admin/modules/core/applications.js"></script>
+<script type="text/javascript" src="/static/apps/admin/modules/core/users.js"></script>
+
 <script type="text/javascript" src="/static/apps/admin/modules/example/forms/editors.js"></script>
 
 <th:block layout:fragment="scripts"></th:block>

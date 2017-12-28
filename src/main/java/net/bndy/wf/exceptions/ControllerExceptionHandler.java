@@ -39,11 +39,11 @@ public class ControllerExceptionHandler {
 
 		// Otherwise setup and send the user to a default error-view.
 		ModelAndView mav = new ModelAndView();
-		mav.addObject("title", ApplicationContext.i18n().getString("error.title"));
+		mav.addObject("title", ApplicationContext.language("error.title"));
 		if (e != null && e.getMessage() != null && e.getMessage() != "") {
 			mav.addObject("message", e.getMessage());
 		} else {
-			mav.addObject("message", ApplicationContext.i18n().getString("error.description"));
+			mav.addObject("message", ApplicationContext.language("error.description"));
 		}
 		mav.addObject("exception", e);
 		mav.addObject("url", req.getRequestURL());

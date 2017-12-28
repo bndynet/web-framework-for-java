@@ -4,34 +4,31 @@
  ******************************************************************************/
 package net.bndy.wf.modules.core;
 
-import java.util.Arrays;
-
-import javax.servlet.http.HttpSession;
-
+import net.bndy.wf.modules.core.models.ClientUser;
+import net.bndy.wf.modules.core.models.User;
+import net.bndy.wf.modules.core.services.repositories.ClientRepository;
+import net.bndy.wf.modules.core.services.repositories.ClientUserRepository;
+import net.bndy.wf.modules.core.services.repositories.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
-import net.bndy.wf.Constant;
-import net.bndy.wf.exceptions.OAuthException;
-import net.bndy.wf.exceptions.OAuthExceptionType;
+import net.bndy.wf.config.Constant;
 import net.bndy.wf.lib.StringHelper;
-import net.bndy.wf.modules.app.models.*;
-import net.bndy.wf.modules.app.services.UserService;
-import net.bndy.wf.modules.app.services.repositories.*;
+import net.bndy.wf.modules.core.services.UserService;
 
 @Service
 @Transactional
 public class OAuthService {
 
 	@Autowired
-	UserRepository userRepository;
+    UserRepository userRepository;
 	@Autowired
-	ClientRepository clientRepository;
+    ClientRepository clientRepository;
 	@Autowired
-	ClientUserRepository clientUserRepository;
+    ClientUserRepository clientUserRepository;
 
 	@Autowired
 	UserService userService;
@@ -66,36 +63,6 @@ public class OAuthService {
 			cu = this.clientUserRepository.saveAndFlush(cu);
 		}
 		return cu;
-	}
-
-	public boolean verifyClient(String clientId, String redirectUri) {
-		if (clientId == null || "".equals(clientId) || redirectUri == null || "".equals(redirectUri)) {
-			return false;
-		}
-
-		Client c = this.clientRepository.findByClientId(clientId);
-		if (c != null && c.getRedirectUri() != null && !"".equals(c.getRedirectUri())) {
-			if (Arrays.asList(c.getRedirectUri().toLowerCase().split(";")).indexOf(redirectUri.toLowerCase()) >= 0) {
-				return true;
-			}
-		}
-		return false;
-	}
-
-	public String getRedirectUri(HttpSession session, String authCode) throws OAuthException {
-		String clientId = (String) session.getAttribute(Constant.OAUTH_CLIENTID_KEY);
-		String redirectUri = (String) session.getAttribute(Constant.OAUTH_REDIRECT_KEY);
-
-		if (this.verifyClient(clientId, redirectUri)) {
-			session.removeAttribute(Constant.OAUTH_CLIENTID_KEY);
-			session.removeAttribute(Constant.OAUTH_REDIRECT_KEY);
-			session.removeAttribute(Constant.OAUTH_SCOPE_KEY);
-
-			redirectUri = String.format("%s?code=%s", redirectUri, authCode);
-			return redirectUri;
-		}
-
-		throw new OAuthException(OAuthExceptionType.InvalidClientIDOrRedirectUri);
 	}
 
 	public void login(String username, String password, String clientId) {
@@ -137,10 +104,6 @@ public class OAuthService {
 		}
 
 		return null;
-	}
-
-	public Client getClient(String clientId) {
-		return this.clientRepository.findByClientId(clientId);
 	}
 
 	public ClientUser getAuthInfo(String clientId, long userId) {

@@ -6,11 +6,10 @@ package net.bndy.wf;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
+import org.springframework.boot.builder.SpringApplicationBuilder;
+import org.springframework.boot.web.support.SpringBootServletInitializer;
 import org.springframework.cache.annotation.EnableCaching;
 import org.springframework.context.annotation.Bean;
-import org.springframework.web.servlet.config.annotation.CorsRegistry;
-import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
-import org.springframework.web.servlet.config.annotation.WebMvcConfigurerAdapter;
 
 import static springfox.documentation.builders.PathSelectors.regex;
 import springfox.documentation.builders.ApiInfoBuilder;
@@ -24,27 +23,15 @@ import springfox.documentation.swagger2.annotations.EnableSwagger2;
 @EnableCaching
 @EnableSwagger2
 @SpringBootApplication
-public class Application {
-	
-	public static final String DATETIE_FORMAT = "yyyy-MM-dd'T'HH:mm:ss.SSSZ";
-	public static final String TIMEZONE = "GMT+8";
-	
+public class Application extends SpringBootServletInitializer {
+
 	public static void main(String[] args) {
 		SpringApplication.run(Application.class, args);
 	}
 
-	// Alternative Solution: add @CrossOrigin(origins = "http://localhost:8080")
-	// to the handler method
-	@Bean
-	public WebMvcConfigurer corsConfigurer() {
-		return new WebMvcConfigurerAdapter() {
-			@Override
-			public void addCorsMappings(CorsRegistry registry) {
-				registry.addMapping("/**").allowedOrigins("*");
-				// e.g.
-				// registry.addMapping("/home").allowedOrigins("http://localhost:8080");
-			}
-		};
+	@Override
+	protected SpringApplicationBuilder configure(SpringApplicationBuilder builder) {
+		return builder.sources(Application.class);
 	}
 
 	// Document for API

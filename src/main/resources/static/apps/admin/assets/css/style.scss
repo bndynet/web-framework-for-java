@@ -24,10 +24,13 @@ a {
     }
 }
 
-.navbar-nav>.messages-menu>.dropdown-menu>li .menu>li>a> {
-    h4,
-    p {
-        margin-left: 0;
+.navbar-nav {
+    display: inline-table;  // fix new line in safari
+    &>.messages-menu>.dropdown-menu>li .menu>li>a> {
+        h4,
+        p {
+            margin-left: 0;
+        }
     }
 }
 
@@ -55,10 +58,14 @@ a {
     .form-group {
         clear: both;
         .pull-right {
-            .input-sm {
-
-            }
+            .input-sm {}
         }
+    }
+}
+
+.box-body {
+    & > form {
+        padding: 1rem 2rem;
     }
 }
 
@@ -78,10 +85,19 @@ a {
 }
 
 .table {
-    td img {
-        height: 28px;
-        position: relative;
-        top: -4px;
+    td {
+        img {
+            height: 28px;
+            position: relative;
+            top: -4px;
+        }
+
+        a {
+            i {
+                font-size: 1rem;
+                padding: .25rem;
+            }
+        }
     }
     &+.bn-ui-pager {
         .summary {

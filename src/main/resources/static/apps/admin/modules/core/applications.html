@@ -1,0 +1,120 @@
+<div ng-controller="ApplicationsCtrl">
+    <ui-page-header title="'admin.modules.application.title'"
+                    subtitle="'admin.modules.application.subtitle'"
+                    breadcrumbs="[{'text': 'admin.modules.application.title'}]"></ui-page-header>
+    <section class="content">
+        <div class="box box-default">
+            <div class="box-header with-border">
+                <h3 class="box-title"></h3>
+                <div class="box-tools pull-right">
+                    <button type="button" class="btn btn-sm btn-primary" ng-click="add()" ng-bind="'admin.modules.application.addApp'|translate"></button>
+                </div>
+            </div>
+            <div class="box-body">
+                <ul class="list-group">
+                    <li class="list-group-item" ng-repeat="item in data">
+                        <div class="media">
+                            <div class="media-left">
+                                <img class="media-object" ng-src="{{item.icon}}"/>
+                            </div>
+                            <div class="media-body">
+                                <h4 class="media-heading">
+                                    <span ng-bind="item.name"></span>
+                                </h4>
+
+                                <div ng-if="item.details.scope">
+                                    <label ng-bind="'admin.modules.application.fieldScope'|translate"></label>:
+                                    <span class="btn-group">
+                                        <a target="_blank" class="btn btn-default btn-xs btn-flag" ng-href="/oauth/authorize?response_type=code&scope={{scope}}&client_id={{item.details.clientId}}&redirect_uri={{item.details.webServerRedirectUri}}"
+                                           ng-repeat="scope in item.details.scope.split(',')" ng-bind="scope"></a>
+                                    </span>
+                                </div>
+
+                                <div>
+                                    <label ng-bind="'admin.modules.application.fieldClientId'|translate"></label>:
+                                    <span>{{item.details.clientId}}</span>
+                                    &nbsp;&nbsp;&nbsp;&nbsp;
+                                    <label ng-bind="'admin.modules.application.fieldClientSecret'|translate"></label>:
+                                    <span>{{item.details.clientSecret}}</span>
+                                </div>
+
+                                <div ng-if="item.approvals.length > 0">
+                                    <span class="badge"
+                                          title="{{'admin.modules.application.iAuthorized'|translate}}"
+                                          ng-class="{'bg-green': approval.status == 'APPROVED', 'bg-red': approval.status == 'DENIED'}"
+                                          ng-repeat="approval in item.approvals" >
+                                        {{approval.scope}}: {{approval.status}}
+                                    </span>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="pull-right">
+                            <button class="btn btn-xs btn-primary"
+                                    ng-click="edit(item)">
+                                <i class="glyphicon glyphicon-edit"></i>
+                            </button>
+                            <button class="btn btn-xs btn-danger"
+                                    ng-click="remove(item, $event)">
+                                <i class="glyphicon glyphicon-trash"></i>
+                            </button>
+                        </div>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </section>
+
+    <div id="dialogForm" class="modal fade" tabindex="-1" role="dialog">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal"
+                            aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                    <h4 class="modal-title">
+                        <span ng-if="formModel.id" ng-bind="'admin.modules.application.editApp'|translate"></span>
+                        <span ng-if="!formModel.id" ng-bind="'admin.modules.application.addApp'|translate"></span>
+                    </h4>
+                </div>
+                <div class="modal-body">
+                    <form name="form">
+                        <md-input-container class="md-block">
+                            <label ng-bind="'admin.modules.application.fieldName'|translate"></label>
+                            <input name="name" required ng-model="formModel.name"/>
+                            <div ng-messages="form.name.$error">
+                                <div ng-message="required" ng-bind="'common.msgRequired'|translate"></div>
+                            </div>
+                        </md-input-container>
+                        <md-input-container class="md-block">
+                            <label ng-bind="'admin.modules.application.fieldScope'|translate"></label>
+                            <input name="scope" required ng-model="formModel.details.scope"/>
+                            <div ng-messages="form.scope.$error">
+                                <div ng-message="required" ng-bind="'common.msgRequired'|translate"></div>
+                            </div>
+                        </md-input-container>
+                        <md-input-container class="md-block">
+                            <label ng-bind="'admin.modules.application.fieldIcon'|translate"></label>
+                            <input name="icon" ng-model="formModel.icon"/>
+                        </md-input-container>
+                        <md-input-container class="md-block">
+                            <label ng-bind="'admin.modules.application.fieldRedirectUri'|translate"></label>
+                            <input name="redirectUri" required ng-model="formModel.details.webServerRedirectUri"/>
+                            <div ng-messages="form.redirectUri.$error">
+                                <div ng-message="required" ng-bind="'common.msgRequired'|translate"></div>
+                            </div>
+                        </md-input-container>
+                    </form>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-default" data-dismiss="modal" ng-bind="'common.close'|translate"></button>
+                    <button type="button" class="btn btn-primary"
+                            ng-disabled="form.$invalid"
+                            ng-bind="'common.saveChanges'|translate"
+                            ng-click="save()">
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

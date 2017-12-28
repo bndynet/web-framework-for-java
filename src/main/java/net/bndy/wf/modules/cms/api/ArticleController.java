@@ -24,7 +24,7 @@ import net.bndy.wf.modules.cms.services.ArticleService;
 
 @Api(value = "Article API")
 @RestController
-@RequestMapping("/api/v1/cms/articles")
+@RequestMapping({"/api/cms/articles", "/api/v1/cms/articles"})
 public class ArticleController extends _BaseApi<Article> {
 
 	@Autowired

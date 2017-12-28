@@ -6,12 +6,12 @@
       {
         "name": "Applications",
         "icon": "fa fa-fw fa-tag",
-        "url": "applications"
+        "url": "core-applications"
       },
       {
         "name": "Users",
         "icon": "fa fa-fw fa-users",
-        "url": "users"
+        "url": "core-users"
       }
     ]
   },
