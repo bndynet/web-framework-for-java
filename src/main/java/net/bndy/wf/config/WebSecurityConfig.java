@@ -4,11 +4,10 @@
  ******************************************************************************/
 package net.bndy.wf.config;
 
-import java.util.Arrays;
-
-import javax.sql.DataSource;
-
 import com.google.common.collect.ImmutableList;
+import net.bndy.wf.ApplicationContext;
+import net.bndy.wf.lib.StringHelper;
+import net.bndy.wf.modules.core.services.UserDetailsServiceImpl;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.web.servlet.FilterRegistrationBean;
 import org.springframework.context.annotation.Bean;
@@ -18,13 +17,19 @@ import org.springframework.security.config.annotation.authentication.builders.Au
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
+import org.springframework.security.core.AuthenticationException;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
+import org.springframework.security.web.AuthenticationEntryPoint;
+import org.springframework.security.web.util.matcher.AntPathRequestMatcher;
 import org.springframework.web.cors.CorsConfiguration;
 import org.springframework.web.cors.UrlBasedCorsConfigurationSource;
-
-import net.bndy.wf.lib.StringHelper;
-import net.bndy.wf.modules.core.services.UserDetailsServiceImpl;
 import org.springframework.web.filter.CorsFilter;
+
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+import javax.sql.DataSource;
+import java.io.IOException;
+import java.util.Arrays;
 
 @Configuration
 @EnableWebSecurity
@@ -52,7 +57,15 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
             .csrf().disable()
             .headers().frameOptions().sameOrigin();
 
-        http.authorizeRequests()
+        http.
+            // Purpose: return 401 if non-authorized api access
+            // Actually Spring already configures default AuthenticationEntryPoint - LoginUrlAuthenticationEntryPoint
+            // This one is REST-specific addition to default one, that is based on PathRequest
+            exceptionHandling()
+            .defaultAuthenticationEntryPointFor(this.restAuthenticationEntryPoint(), new AntPathRequestMatcher("/api/**"))
+
+            .and()
+            .authorizeRequests()
             .antMatchers("/webjars/**", "/static/**", "/test/**", "/v2/api-docs",
                 "/docs/**", "/error",
                 "/*",
@@ -139,5 +152,15 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
         FilterRegistrationBean bean = new FilterRegistrationBean(new CorsFilter(source));
         bean.setOrder(Ordered.HIGHEST_PRECEDENCE);
         return bean;
+    }
+
+    @Bean
+    public AuthenticationEntryPoint restAuthenticationEntryPoint() {
+        return new AuthenticationEntryPoint() {
+            @Override
+            public void commence(HttpServletRequest request, HttpServletResponse response, AuthenticationException authException) throws IOException {
+                response.sendError(HttpServletResponse.SC_UNAUTHORIZED, ApplicationContext.language("error.msgUnauthorized"));
+            }
+        };
     }
 }
