@@ -112,6 +112,7 @@ public class UserService extends _BaseService<User> {
 
         if (this.userRepo.findAll().size() == 0) {
             entity.setEnabled(true);
+            entity.setSuperAdmin(true);
             // initialize roles
             roleRepository.deleteAll();
             Role adminRole = null;

@@ -31,6 +31,7 @@ public class User extends _BaseEntity implements UserDetails {
     private boolean isExpired;
     private boolean isLocked;
     private boolean isCredentialsExpired;
+    private boolean isSuperAdmin;
 
     @Transient
     @JsonIgnore
@@ -152,5 +153,13 @@ public class User extends _BaseEntity implements UserDetails {
 
     public void setAvatar(String avatar) {
         this.avatar = avatar;
+    }
+
+    public boolean isSuperAdmin() {
+        return isSuperAdmin;
+    }
+
+    public void setSuperAdmin(boolean superAdmin) {
+        isSuperAdmin = superAdmin;
     }
 }

@@ -37,13 +37,13 @@
                         <td ng-bind="item.createDate | date: 'yyyy-MM-dd HH:mm'"></td>
                         <td ng-bind="item.lastUpdate | date: 'yyyy-MM-dd HH:mm'"></td>
                         <td class="text-center">
-                            <a ng-click="toggleEnabled(item)">
+                            <a ng-click="toggleEnabled(item)" ng-if="!item.superAdmin">
                                 <i class="glyphicon glyphicon-check text-success ng-cloak" ng-if="item.enabled"></i>
                                 <i class="glyphicon glyphicon-unchecked ng-cloak" ng-if="!item.enabled"></i>
                             </a>
                         </td>
                         <td class="text-center">
-                            <a ng-click="remove(item)">
+                            <a ng-click="remove(item)" ng-if="!item.superAdmin">
                                 <i class="glyphicon glyphicon-trash text-danger"></i>
                             </a>
                         </td>
