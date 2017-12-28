@@ -29,7 +29,6 @@ app.config(['$provide', '$qProvider', '$httpProvider', '$stateProvider', '$trans
 
     // http interceptor
     $provide.factory('appHttpInterceptor', ['$q', '$injector', function($q, $injector) {
-        console.debug($injector);
         var toaster = $injector.get('toaster');
         return {
             'request': function(config) {
@@ -46,8 +45,10 @@ app.config(['$provide', '$qProvider', '$httpProvider', '$stateProvider', '$trans
                 return response;
             },
            'responseError': function(rejection) {
-                var title = rejection.error;
-                var message = rejection.message;
+                var title = rejection.data.error;
+                var message = rejection.data.message;
+
+                // do something here
                 switch(rejection.status) {
                     case 401:
                     default:
