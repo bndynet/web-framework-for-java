@@ -9,11 +9,11 @@
 <div layout:fragment="body">
     <div class="login-box">
         <div class="login-box-body">
-            <div class="login-logo">
-                <img src="/static/assets/img/logo.png" />
-            </div>
-
             <div th:if="!${param.logout}">
+                <div class="login-logo">
+                    <img src="/static/assets/img/logo.png" />
+                </div>
+
                 <p class="login-box-msg" th:text="#{sso.titleLogin}"></p>
 
                 <div class="alert alert-danger alert-dismissible" th:if="${param.error}">
@@ -41,10 +41,15 @@
                 </form>
             </div>
 
-            <div th:if="${param.logout}">
-                <div class="alert alert-success text-center">
-                    <p><i class="icon fa fa-check"></i> <span th:text="#{sso.loggedOut}"></span></p>
+            <div class="text-center padding-lg" th:if="${param.logout}">
+                <br />
+                <div class="login-logo">
+                    <i class="icon fa fa-check-circle-o fa-2x text-green"></i>
                 </div>
+                <h4 th:text="#{sso.loggedOut}"></h4>
+                <br />
+                <a href="/" th:text="#{common.backHome}"></a> &nbsp;&nbsp; | &nbsp;&nbsp; <a href="/sso/login" th:text="#{common.relogin}"></a>
+                <br />
             </div>
         </div>
     </div>
