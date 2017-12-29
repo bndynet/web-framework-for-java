@@ -26,8 +26,7 @@ application:
 
 # LOGGING  
 logging:
-  path: /var/logs  
-  file: app.log  
+  file: logs/app.log
   config: 
   level:
     org.springframework.web: DEBUG
