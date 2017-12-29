@@ -2,12 +2,12 @@
  * Copyright (C) 2017 http://bndy.net
  * Created by Bendy (Bing Zhang)
  ******************************************************************************/
-package net.bndy.wf.modules.core.services;
+package net.bndy.wf.modules.oauth.services;
 
 import net.bndy.wf.lib._BaseService;
-import net.bndy.wf.modules.core.models.OauthApprovals;
-import net.bndy.wf.modules.core.models.OauthClientDetails;
-import net.bndy.wf.modules.core.services.repositories.OauthApprovalsRepository;
+import net.bndy.wf.modules.oauth.models.OauthApprovals;
+import net.bndy.wf.modules.oauth.models.OauthClientDetails;
+import net.bndy.wf.modules.oauth.repositories.OauthApprovalsRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.oauth2.provider.approval.Approval;
 import org.springframework.stereotype.Service;

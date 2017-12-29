@@ -5,9 +5,9 @@
 package net.bndy.wf.modules.core.api;
 
 import io.swagger.annotations.ApiOperation;
-import net.bndy.wf.modules.core.models.OauthApprovals;
-import net.bndy.wf.modules.core.models.OauthClientDetails;
-import net.bndy.wf.modules.core.services.OauthService;
+import net.bndy.wf.modules.oauth.models.OauthApprovals;
+import net.bndy.wf.modules.oauth.models.OauthClientDetails;
+import net.bndy.wf.modules.oauth.services.OauthService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 

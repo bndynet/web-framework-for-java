@@ -17,7 +17,7 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
-import net.bndy.wf.modules.core.SecurityService;
+import net.bndy.wf.modules.core.services.SecurityService;
 
 @Controller
 @RequestMapping("/sso")

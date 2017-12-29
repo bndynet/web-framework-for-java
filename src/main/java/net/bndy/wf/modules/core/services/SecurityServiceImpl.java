@@ -2,7 +2,7 @@
  * Copyright (C) 2017 http://bndy.net
  * Created by Bendy (Bing Zhang)
  ******************************************************************************/
-package net.bndy.wf.modules.core;
+package net.bndy.wf.modules.core.services;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
