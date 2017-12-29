@@ -8,7 +8,7 @@ app.config(['$provide', '$qProvider', '$httpProvider', '$stateProvider', '$trans
         $cookies = _$cookies_;
     }]);
 
-    $translateProvider.useUrlLoader('/api/core/i18n/');
+    $translateProvider.useUrlLoader('/api/core/config/lang');
     $translateProvider.preferredLanguage($cookies.get("LOCALE")||'en');
 
     // override translateFilter for supporting java i18n format

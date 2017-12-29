@@ -7,7 +7,7 @@ package net.bndy.wf.modules.core.models;
 import javax.persistence.*;
 
 import net.bndy.wf.lib._BaseEntity;
-import net.bndy.wf.modules.core.models.OauthClientDetails;
+import net.bndy.wf.modules.oauth.models.OauthClientDetails;
 
 @Entity
 @Table(name = "core_client")

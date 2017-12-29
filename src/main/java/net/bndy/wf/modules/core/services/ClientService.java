@@ -1,7 +1,7 @@
 package net.bndy.wf.modules.core.services;
 
-import net.bndy.wf.modules.core.models.OauthClientDetails;
-import net.bndy.wf.modules.core.services.repositories.OauthClientDetailsRepository;
+import net.bndy.wf.modules.oauth.models.OauthClientDetails;
+import net.bndy.wf.modules.oauth.repositories.OauthClientDetailsRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
