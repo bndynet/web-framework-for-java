@@ -256,7 +256,7 @@ app.controller('LayoutCtrl', ['$http', '$scope',
 
         // lock screen
         $scope.lockScreen = function() {
-            $http.get('/api/v1/app/users/logout').then(function(){
+            $http.get('/api/core/users/logout').then(function(){
                 $('.lockscreen').css('top', $(document).scrollTop()).show();
                 $('body').addClass('no-scroll');
             });
@@ -270,7 +270,7 @@ app.controller('LayoutCtrl', ['$http', '$scope',
 
             $scope.unlockScreenError = false;
             if ($scope.username && $scope.password) {
-                $http.post('/api/v1/app/users/login', { username: $scope.username, password: $scope.password }).then(function(res) {
+                $http.post('/api/core/users/login', { username: $scope.username, password: $scope.password }).then(function(res) {
                     $scope.password = '';
                     if (res.data === true) {
                         $scope.unlockScreenError = false;

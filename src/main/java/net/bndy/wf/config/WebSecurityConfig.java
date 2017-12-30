@@ -76,6 +76,8 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 //                "/oauth/check_token",
 //                "/oauth/error",
 //                "/oauth/token_key",
+                "/api/core/users/login",
+                "/api/v1/core/users/login",
                 "/sso/login*", "/sso/signup").permitAll()
             .antMatchers("/admin/**").hasAnyAuthority(ApplicationUserRole.Admin.name())
             .anyRequest().authenticated();
