@@ -53,6 +53,42 @@ a {
   clear: both;
 }
 
+.control-sidebar ul.skin-list > li {
+  float: left;
+  width: 50%;
+  padding: 5px 10px;
+}
+
+.control-sidebar ul.skin-list > li > a {
+  display: block;
+  box-shadow: 0 0 3px rgba(0, 0, 0, 0.4);
+}
+
+.control-sidebar ul.skin-list > li > a > div > span:first-child {
+  display: block;
+  width: 20%;
+  float: left;
+}
+
+.control-sidebar ul.skin-list > li > a > div > span:last-child {
+  display: block;
+  width: 80%;
+  float: left;
+}
+
+.control-sidebar ul.skin-list > li > a > div:first-child > span {
+  height: 7px;
+}
+
+.control-sidebar ul.skin-list > li > a > div:last-child > span {
+  height: 33px;
+}
+
+.control-sidebar.control-sidebar-dark ul.skin-list > li > a {
+  box-shadow: none;
+  border: solid 1px #cacaca;
+}
+
 .box-body > form {
   padding: 1rem 2rem;
 }
