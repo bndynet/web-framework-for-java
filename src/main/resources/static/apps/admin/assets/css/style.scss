@@ -1,114 +1,157 @@
 html,
 body {
-    height: 100%;
+  height: 100%;
 }
 
 a {
-    cursor: pointer;
+  cursor: pointer;
 }
 
 
 /* AdminLTE */
 
 .lockscreen {
-    display: none;
+  display: none;
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  z-index: 9999;
+  .error-message {
     position: absolute;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    z-index: 9999;
-    .error-message {
-        position: absolute;
-        margin-top: .5rem;
-    }
+    margin-top: .5rem;
+  }
 }
 
 .navbar-nav {
-    display: inline-table;  // fix new line in safari
-    &>.messages-menu>.dropdown-menu>li .menu>li>a> {
-        h4,
-        p {
-            margin-left: 0;
-        }
+  display: inline-table; // fix new line in safari
+  &>.messages-menu>.dropdown-menu>li .menu>li>a> {
+    h4,
+    p {
+      margin-left: 0;
     }
+  }
 }
 
 .messages-menu {
-    li {
-        h3 {
-            margin: 0 0 10px 0;
-            font-size: 14px;
-        }
-        .progress {
-            margin-bottom: 0;
-        }
-        .pull-left {
-            &+h4 {
-                margin-left: 45px;
-                &+p {
-                    margin-left: 45px;
-                }
-            }
-        }
+  li {
+    h3 {
+      margin: 0 0 10px 0;
+      font-size: 14px;
     }
+    .progress {
+      margin-bottom: 0;
+    }
+    .pull-left {
+      &+h4 {
+        margin-left: 45px;
+        &+p {
+          margin-left: 45px;
+        }
+      }
+    }
+  }
 }
 
 .control-sidebar {
-    .form-group {
-        clear: both;
-        .pull-right {
-            .input-sm {}
-        }
+  .form-group {
+    clear: both;
+    .pull-right {
+      .input-sm {}
     }
+  }
+  ul.skin-list {
+    &>li {
+      float: left;
+      width: 50%;
+      padding: 5px 10px;
+      &>a {
+        display: block;
+        box-shadow: 0 0 3px rgba(0, 0, 0, 0.4);
+        &>div {
+          &>span:first-child {
+            display: block;
+            width: 20%;
+            float: left;
+          }
+          &>span:last-child {
+            display: block;
+            width: 80%;
+            float: left;
+          }
+          &:first-child {
+            &>span {
+              height: 7px;
+            }
+          }
+          &:last-child {
+            &>span {
+              height: 33px;
+            }
+          }
+        }
+      }
+    }
+  }
+  &.control-sidebar-dark {
+    ul.skin-list {
+      &>li {
+        &>a {
+            box-shadow: none;
+            border: solid 1px #cacaca;
+        }
+      }
+    }
+  }
 }
 
 .box-body {
-    & > form {
-        padding: 1rem 2rem;
-    }
+  &>form {
+    padding: 1rem 2rem;
+  }
 }
+
 
 /* Bootstrap */
 
 .list-group {
-    .list-group-item {
-        img.media-object {
-            width: 112px;
-        }
-        .pull-right {
-            position: absolute;
-            top: 1rem;
-            right: 1rem;
-        }
+  .list-group-item {
+    img.media-object {
+      width: 112px;
     }
+    .pull-right {
+      position: absolute;
+      top: 1rem;
+      right: 1rem;
+    }
+  }
 }
 
 .table {
-    td {
-        img {
-            height: 28px;
-            position: relative;
-            top: -4px;
-        }
-
-        a {
-            i {
-                font-size: 1rem;
-                padding: .25rem;
-            }
-        }
+  td {
+    img {
+      height: 28px;
+      position: relative;
+      top: -4px;
     }
-    &+.bn-ui-pager {
-        .summary {
-            margin-top: 3px;
-            margin-left: 8px;
-        }
-        .pagination>li>a,
-        .pagination>li>span {
-            padding: 2px 8px;
-        }
+    a {
+      i {
+        font-size: 1rem;
+        padding: .25rem;
+      }
     }
+  }
+  &+.bn-ui-pager {
+    .summary {
+      margin-top: 3px;
+      margin-left: 8px;
+    }
+    .pagination>li>a,
+    .pagination>li>span {
+      padding: 2px 8px;
+    }
+  }
 }
 
 
@@ -116,12 +159,12 @@ a {
 
 // fix: dialog shadow lay need to cover sidebar and header
 .md-dialog-container {
-    z-index: 999;
+  z-index: 999;
 }
 
 
 /* misc */
 
 .no-scroll {
-    overflow: hidden;
+  overflow: hidden;
 }
