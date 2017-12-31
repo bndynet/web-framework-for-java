@@ -17,5 +17,9 @@
 	</div>
 	<div th:replace="sso/lockscreens::lock"></div>
 </th:block>
+
+<th:block layout:fragment="scripts">
+	<script type="text/javascript" th:src="${jsFile}" th:each="jsFile: ${moduleJsFiles}"></script>
+</th:block>
 </body>
 </html>
