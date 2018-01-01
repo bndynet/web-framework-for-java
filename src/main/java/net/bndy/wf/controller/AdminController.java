@@ -22,9 +22,20 @@ public class AdminController extends _BaseController {
     public String home(Model model) {
         model.addAttribute("locale", LocaleContextHolder.getLocale().toString());
 
+        List<String> jsFiles = new ArrayList<>();
+        // load all angularjs directives
+        for(File f : FileUtil.listFiles(new File(this.getClass().getResource("/static/apps/admin/lib/directives").getFile()),
+                (pathname) -> pathname.getName().toLowerCase().endsWith(".js"))) {
+            jsFiles.add(f.getPath().replace(new File(this.getClass().getResource("/").getFile()).getPath(), "/")
+                    // fix path separator issue on WinOS
+                    .replace("\\", "/")
+                    .replace("//", "/")
+            );
+        }
+
         File rootModule = new File(this.getClass().getResource("/static/apps/admin/modules").getFile());
 
-        List<String> jsFiles = new ArrayList<>();
+        // load all js files in modules
         for (File f : FileUtil.listFiles(rootModule,
             (pathname) -> pathname.getName().toLowerCase().endsWith(".js"))) {
 
@@ -34,8 +45,9 @@ public class AdminController extends _BaseController {
                 .replace("//", "/")
             );
         }
-        model.addAttribute("moduleJsFiles", jsFiles);
+        model.addAttribute("jsFiles", jsFiles);
 
+        // load all html files as modules
         List<String> modules = new ArrayList<>();
         for (File f: FileUtil.listFiles(rootModule, (pathname -> pathname.getName().toLowerCase().endsWith(".html")))) {
             String moduleName = f.getPath()
