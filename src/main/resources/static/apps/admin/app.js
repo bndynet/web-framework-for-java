@@ -74,29 +74,7 @@ app.config(['$provide', '$qProvider', '$httpProvider', '$stateProvider', '$trans
 			templateUrl: '/static/apps/admin/modules/' + path + '.html',
 		});
 	}
-	var pages = [
-	    'core-userProfile',
-	    'core-users',
-	    'core-applications',
-		'example-dashboard',
-		'example-dashboard1',
-		'example-calendar',
-		'example-widgets',
-		'example-forms-general',
-		'example-forms-advanced',
-		'example-forms-editors',
-		'example-mailbox-compose',
-		'example-mailbox-mailbox',
-		'example-mailbox-read-mail',
-		'example-tables-data',
-		'example-tables-simple',
-		'example-ui-buttons',
-		'example-ui-general',
-		'example-ui-icons',
-		'example-ui-modals',
-		'example-ui-sliders',
-		'example-ui-timeline',
-	];
+	var pages = appModules || [];   // appModules is from backend
 	$stateProvider.state('default', {
 		url: '',
 		redirectTo: 'example-dashboard'

@@ -159,6 +159,9 @@
 
 <script type="text/javascript" src="/static/apps/admin/assets/js/angular-more.min.js"></script>
 
+<script th:inline="javascript">
+   var appModules = [[${modules}]];
+</script>
 <script type="text/javascript" src="/static/apps/admin/app.js"></script>
 <script type="text/javascript" src="/static/apps/admin/lib/directives/ui-menu-messages.js"></script>
 <script type="text/javascript" src="/static/apps/admin/lib/directives/ui-page-header.js"></script>

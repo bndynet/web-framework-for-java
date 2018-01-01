@@ -22,16 +22,33 @@ public class AdminController extends _BaseController {
     public String home(Model model) {
         model.addAttribute("locale", LocaleContextHolder.getLocale().toString());
 
-        List<String> jsFiles = new ArrayList<>();
         File rootModule = new File(this.getClass().getResource("/static/apps/admin/modules").getFile());
+
+        List<String> jsFiles = new ArrayList<>();
         for (File f : FileUtil.listFiles(rootModule,
             (pathname) -> pathname.getName().toLowerCase().endsWith(".js"))) {
 
-            if (f.getName().toLowerCase().endsWith(".js")) {
-                jsFiles.add(f.getPath().replace(this.getClass().getResource("/").getFile(), "/"));
-            }
+            jsFiles.add(f.getPath().replace( new File(this.getClass().getResource("/").getFile()).getPath(), "/")
+                // fix path separator issue on WinOS
+                .replace("\\", "/")
+                .replace("//", "/")
+            );
         }
         model.addAttribute("moduleJsFiles", jsFiles);
+
+        List<String> modules = new ArrayList<>();
+        for (File f: FileUtil.listFiles(rootModule, (pathname -> pathname.getName().toLowerCase().endsWith(".html")))) {
+            String moduleName = f.getPath()
+                .replace(".html", "")
+                .replace(
+                    new File(this.getClass().getResource("/static/apps/admin/modules").getFile()).getPath(), "")
+                .replaceAll("[\\\\/]+", "-")
+                .replaceAll("^-", "")
+                ;
+
+            modules.add(moduleName);
+        }
+        model.addAttribute("modules", modules);
 
         return "admin/index";
     }
