@@ -6,11 +6,13 @@ package net.bndy.wf.controller;
 
 import org.aspectj.util.FileUtil;
 import org.springframework.context.i18n.LocaleContextHolder;
+import org.springframework.core.io.ClassPathResource;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 import java.io.File;
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -19,27 +21,29 @@ import java.util.List;
 public class AdminController extends _BaseController {
 
     @RequestMapping(value = "/")
-    public String home(Model model) {
+    public String home(Model model) throws IOException {
         model.addAttribute("locale", LocaleContextHolder.getLocale().toString());
 
+        File resourcesRoot = new ClassPathResource("/").getFile();
+
         List<String> jsFiles = new ArrayList<>();
+        File angularDirectiveDir = new ClassPathResource("/static/apps/admin/lib/directives").getFile();
         // load all angularjs directives
-        for(File f : FileUtil.listFiles(new File(this.getClass().getResource("/static/apps/admin/lib/directives").getFile()),
-                (pathname) -> pathname.getName().toLowerCase().endsWith(".js"))) {
-            jsFiles.add(f.getPath().replace(new File(this.getClass().getResource("/").getFile()).getPath(), "/")
-                    // fix path separator issue on WinOS
-                    .replace("\\", "/")
-                    .replace("//", "/")
+        for (File f : FileUtil.listFiles(angularDirectiveDir, (pathname) -> pathname.getName().toLowerCase().endsWith(".js"))) {
+            jsFiles.add(f.getAbsolutePath().replace(resourcesRoot.getAbsolutePath(), "/")
+                // fix path separator issue on WinOS
+                .replace("\\", "/")
+                .replace("//", "/")
             );
         }
 
-        File rootModule = new File(this.getClass().getResource("/static/apps/admin/modules").getFile());
+        File rootModule = new ClassPathResource("/static/apps/admin/modules").getFile();
 
         // load all js files in modules
         for (File f : FileUtil.listFiles(rootModule,
             (pathname) -> pathname.getName().toLowerCase().endsWith(".js"))) {
 
-            jsFiles.add(f.getPath().replace( new File(this.getClass().getResource("/").getFile()).getPath(), "/")
+            jsFiles.add(f.getAbsolutePath().replace(resourcesRoot.getAbsolutePath(), "/")
                 // fix path separator issue on WinOS
                 .replace("\\", "/")
                 .replace("//", "/")
@@ -49,14 +53,12 @@ public class AdminController extends _BaseController {
 
         // load all html files as modules
         List<String> modules = new ArrayList<>();
-        for (File f: FileUtil.listFiles(rootModule, (pathname -> pathname.getName().toLowerCase().endsWith(".html")))) {
+        for (File f : FileUtil.listFiles(rootModule, (pathname -> pathname.getName().toLowerCase().endsWith(".html")))) {
             String moduleName = f.getPath()
                 .replace(".html", "")
-                .replace(
-                    new File(this.getClass().getResource("/static/apps/admin/modules").getFile()).getPath(), "")
+                .replace(rootModule.getAbsolutePath(), "")
                 .replaceAll("[\\\\/]+", "-")
-                .replaceAll("^-", "")
-                ;
+                .replaceAll("^-", "");
 
             modules.add(moduleName);
         }
