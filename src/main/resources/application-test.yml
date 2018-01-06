@@ -1,7 +1,7 @@
 spring:
   # DATASOURCE (DataSourceAutoConfiguration & DataSourceProperties)  
   datasource:
-    url: jdbc:mysql://localhost:3306/test?useSSL=false
+    url: jdbc:mysql://localhost:3306/wf?useSSL=false
     username: root
     password: 123456
     driver-class: com.mysql.jdbc.Driver

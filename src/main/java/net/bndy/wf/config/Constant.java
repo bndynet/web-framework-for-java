@@ -10,4 +10,5 @@ public class Constant {
 	
 	public static final int CLIENT_ID_LEN = 10;
 	public static final int CLIENT_SECRET_LEN = 30;
+	public static final int CLIENT_TOKEN_EXPIRE_IN = 10000;
 }

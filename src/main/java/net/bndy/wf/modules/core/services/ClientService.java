@@ -2,7 +2,9 @@ package net.bndy.wf.modules.core.services;
 
 import net.bndy.wf.modules.oauth.models.OauthClientDetails;
 import net.bndy.wf.modules.oauth.repositories.OauthClientDetailsRepository;
+import org.codehaus.groovy.util.StringUtil;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.oauth2.provider.code.AuthorizationCodeTokenGranter;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -11,6 +13,8 @@ import net.bndy.wf.lib.StringHelper;
 import net.bndy.wf.lib._BaseService;
 import net.bndy.wf.modules.core.models.Client;
 import net.bndy.wf.modules.core.services.repositories.ClientRepository;
+
+import javax.annotation.Resource;
 
 @Service
 @Transactional
@@ -29,7 +33,12 @@ public class ClientService extends _BaseService<Client> {
         return null;
     }
 
+
     public Client saveClient(Long appClientId, String name, String icon, String redirectUri, String scope) {
+        return saveClient(appClientId, name, icon, redirectUri, scope, null, null);
+    }
+
+    public Client saveClient(Long appClientId, String name, String icon, String redirectUri, String scope, String clientId, String clientSecret) {
         Client client = null;
         if (appClientId != null) {
             client = clientRepository.findOne(appClientId);
@@ -48,11 +57,28 @@ public class ClientService extends _BaseService<Client> {
         details.setScope(scope);
         details.setWebServerRedirectUri(redirectUri);
 
+        if(details.getAccessTokenValidity() == null || details.getAccessTokenValidity() == 0) {
+            details.setAccessTokenValidity(Constant.CLIENT_TOKEN_EXPIRE_IN);
+        }
+        if(details.getRefreshTokenValidity() == null || details.getRefreshTokenValidity() == 0) {
+            details.setRefreshTokenValidity(Constant.CLIENT_TOKEN_EXPIRE_IN);
+        }
+        if (details.getAuthorizedGrantTypes() == null || details.getAuthorizedGrantTypes() == "") {
+            details.setAuthorizedGrantTypes("authorization_code");
+        }
         if (details.getClientId() == null || details.getClientId() == "") {
-            details.setClientId(StringHelper.generateRandomString(Constant.CLIENT_ID_LEN));
+            if (clientId == null || clientId == "") {
+                details.setClientId(StringHelper.generateRandomString(Constant.CLIENT_ID_LEN));
+            } else {
+                details.setClientId(clientId);
+            }
         }
         if (details.getClientSecret() == null || details.getClientSecret() == "") {
-            details.setClientSecret(StringHelper.generateRandomString(Constant.CLIENT_SECRET_LEN));
+            if (clientSecret == null || clientSecret == "") {
+                details.setClientSecret(StringHelper.generateRandomString(Constant.CLIENT_SECRET_LEN));
+            } else {
+                details.setClientSecret(clientSecret);
+            }
         }
         client = this.clientRepository.saveAndFlush(client);
         details.setAppClientId(client.getId());

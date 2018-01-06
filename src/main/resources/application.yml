@@ -21,7 +21,7 @@ application:
   upload-path-url: http://files.bndy.net
   rename-upload-file: false
   mail-sender: zb@bndy.net
-  allowed-origins: http://localhost:3000, http://app.bndy.net, http://localhost:5500
+  allowed-origins: http://bndy.net, http://localhost:5500
   default-user-avatar: /static/assets/img/me.png
 
 # LOGGING  
