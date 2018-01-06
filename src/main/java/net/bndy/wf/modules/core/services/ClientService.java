@@ -1,10 +1,12 @@
+/*******************************************************************************
+ * Copyright (C) 2017 http://bndy.net
+ * Created by Bendy (Bing Zhang)
+ ******************************************************************************/
 package net.bndy.wf.modules.core.services;
 
 import net.bndy.wf.modules.oauth.models.OauthClientDetails;
 import net.bndy.wf.modules.oauth.repositories.OauthClientDetailsRepository;
-import org.codehaus.groovy.util.StringUtil;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.security.oauth2.provider.code.AuthorizationCodeTokenGranter;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -13,8 +15,6 @@ import net.bndy.wf.lib.StringHelper;
 import net.bndy.wf.lib._BaseService;
 import net.bndy.wf.modules.core.models.Client;
 import net.bndy.wf.modules.core.services.repositories.ClientRepository;
-
-import javax.annotation.Resource;
 
 @Service
 @Transactional
@@ -28,7 +28,7 @@ public class ClientService extends _BaseService<Client> {
     public Client findByClientId(String clientId) {
         OauthClientDetails details = oauthClientDetailsRepository.findByClientId(clientId);
         if (details != null) {
-            return details.getAppClient();
+            return details.getClient();
         }
         return null;
     }
@@ -81,7 +81,7 @@ public class ClientService extends _BaseService<Client> {
             }
         }
         client = this.clientRepository.saveAndFlush(client);
-        details.setAppClientId(client.getId());
+        details.setCoreClientId(client.getId());
         this.oauthClientDetailsRepository.saveAndFlush(details);
         return client;
     }

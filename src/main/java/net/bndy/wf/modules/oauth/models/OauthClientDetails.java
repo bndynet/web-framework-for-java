@@ -27,12 +27,12 @@ public class OauthClientDetails extends _BaseEntity {
     private String autoapprove;
 
     @Column(columnDefinition = "BIGINT UNSIGNED", unique = true, nullable = false)
-    private Long appClientId;
+    private Long coreClientId;
 
     @JsonIgnore
     @OneToOne(optional = false)
-    @JoinColumn(name = "app_client_id", insertable = false, updatable = false)
-    private Client appClient;
+    @JoinColumn(name = "core_client_id", insertable = false, updatable = false)
+    private Client client;
 
     public String getClientId() {
         return clientId;
@@ -122,20 +122,20 @@ public class OauthClientDetails extends _BaseEntity {
         this.autoapprove = autoapprove;
     }
 
-    public Client getAppClient() {
-        return appClient;
+    public Client getClient() {
+        return client;
     }
 
-    public void setAppClient(Client appClient) {
-        this.appClient = appClient;
+    public void setClient(Client client) {
+        this.client = client;
     }
 
-    public Long getAppClientId() {
-        return appClientId;
+    public Long getCoreClientId() {
+        return coreClientId;
     }
 
-    public void setAppClientId(Long appClientId) {
-        this.appClientId = appClientId;
+    public void setCoreClientId(Long coreClientId) {
+        this.coreClientId= coreClientId;
     }
 
 }

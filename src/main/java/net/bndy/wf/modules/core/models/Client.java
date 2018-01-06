@@ -18,7 +18,7 @@ public class Client extends _BaseEntity {
 	private String name;
 	private String icon;
 
-	@OneToOne(mappedBy = "appClient", fetch = FetchType.LAZY, cascade = CascadeType.ALL)
+	@OneToOne(mappedBy = "client", fetch = FetchType.LAZY, cascade = CascadeType.ALL)
 	private OauthClientDetails details;
 
 	public String getName() {
