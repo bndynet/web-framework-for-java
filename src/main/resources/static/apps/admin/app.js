@@ -1,4 +1,4 @@
-var app = angular.module('app', ['ngCookies', 'pascalprecht.translate', 'ngAnimate', 'ngMaterial', 'ui.router', 'toaster', 'bn.ui']);
+var app = angular.module('app', ['ngCookies', 'pascalprecht.translate', 'ngAnimate', 'ngMaterial', 'ui.router', 'toaster', 'bn.ui', 'ngFileUpload']);
 
 app.config(['$provide', '$qProvider', '$httpProvider', '$stateProvider', '$translateProvider', function ($provide, $qProvider, $httpProvider, $stateProvider, $translateProvider) {
     $qProvider.errorOnUnhandledRejections(false);
@@ -269,7 +269,17 @@ angular.element(document).ready(function () {
 });
 
 
+// MISC
+function initUI() {
+    $('.icheck, .iradio').iCheck({ checkboxClass: 'icheckbox_flat-green', radioClass   : 'iradio_flat-green'});
+    $('.colorpicker').colorpicker();
+    $('.timepicker').timepicker({ showInputs: false });
+    $('.datepicker').datepicker({ autoclose: true });
+}
+
 $(function () {
+    initUI();
+
 	// fix the actions of AdminLTE in AngularJS
 	$('body').on('click', '[data-widget=collapse]', function (event) {
 		var iconTag = $(this).find('i');
@@ -288,6 +298,8 @@ $(function () {
 		$(this).closest('.box').slideToggle();
 		event.preventDefault();
 	});
+
+	// language
 	$('#LanguageOptions').change(function(){
 	    var lang = $(this).val();
 	    var url = location.href;

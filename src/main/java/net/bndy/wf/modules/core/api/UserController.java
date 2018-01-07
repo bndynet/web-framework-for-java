@@ -8,6 +8,7 @@ import java.net.MalformedURLException;
 import java.net.URL;
 import java.util.HashMap;
 
+import net.bndy.wf.ApplicationContext;
 import net.bndy.wf.modules.core.models.User;
 import net.bndy.wf.modules.core.models.UserProfile;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -63,7 +64,7 @@ public class UserController extends _BaseApi<User> {
         User u = this.userService.login(user.getUsername(), user.getPassword());
         if (u != null) {
             UsernamePasswordAuthenticationToken authRequest = new UsernamePasswordAuthenticationToken(
-                    user.getUsername(), user.getPassword());
+                user.getUsername(), user.getPassword());
 
             // Authenticate the user
             Authentication authentication = authenticationManager.authenticate(authRequest);
@@ -108,5 +109,14 @@ public class UserController extends _BaseApi<User> {
     @RequestMapping(value = "/profile", method = RequestMethod.GET)
     public UserProfile getUserProfile() {
         return this.userService.getUserProfile(getCurrentUser().getId());
+    }
+
+    @RequestMapping(value = "/updateavatar", method = RequestMethod.GET)
+    public void updateAvatar(String name) {
+        User u = this.userService.get(ApplicationContext.getCurrentUser().getId());
+        if (u != null) {
+            u.setAvatar(name);
+            this.userService.save(u);
+        }
     }
 }

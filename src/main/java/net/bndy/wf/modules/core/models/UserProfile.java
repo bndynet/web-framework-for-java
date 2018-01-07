@@ -14,9 +14,13 @@ import net.bndy.wf.lib._BaseEntity;
 @Entity
 @Table(name="core_user_profile")
 public class UserProfile extends _BaseEntity {
+
 	private static final long serialVersionUID = 1L;
 	private Long userId;
 	private String email;
+	private String realName;
+	private String gender;
+	private Date birthday;
 
 	public Long getUserId() {
 		return userId;
@@ -57,8 +61,4 @@ public class UserProfile extends _BaseEntity {
 	public void setBirthday(Date birthday) {
 		this.birthday = birthday;
 	}
-
-	private String realName;
-	private String gender;
-	private Date birthday;
 }

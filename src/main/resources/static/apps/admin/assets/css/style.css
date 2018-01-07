@@ -104,6 +104,11 @@ a {
   right: 1rem;
 }
 
+.form-control-static.iradio {
+  position: relative;
+  top: -3px;
+}
+
 .table td img {
   height: 28px;
   position: relative;
@@ -133,5 +138,9 @@ a {
 /* misc */
 .no-scroll {
   overflow: hidden;
+}
+
+.img-radius {
+  border-radius: 5px;
 }
 /*# sourceMappingURL=style.css.map */

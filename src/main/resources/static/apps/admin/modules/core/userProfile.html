@@ -3,26 +3,54 @@
                     breadcrumbs="[{'text': 'admin.modules.core.userProfile.title'}]"></ui-page-header>
     <section class="content">
         <div class="box box-default">
-            <div class="box-header with-border">
-                <h3 class="box-title"></h3>
-                <div class="box-tools pull-right">
-                    <button type="button" class="btn btn-sm btn-primary" ng-bind="'common.saveChanges'|translate"></button>
-                </div>
-            </div>
             <div class="box-body">
-                <form>
+                <form class="col-sm-8 col-sm-offset-2">
                     <div class="row">
-                        <div class="col-xs-6">
-                            <div class="form-group">
-                                <label ng-bind="'admin.modules.core.userProfile.labelRealName'|translate"></label>
-                                <input type="email" class="form-control" ng-model="viewModel.realName" />
+                        <div class="col-xs-7">
+                            <div class="row">
+                                <div class="form-group col-xs-8">
+                                    <label ng-bind="'admin.modules.core.userProfile.labelRealName'|translate"></label>
+                                    <input type="email" class="form-control" ng-model="viewModel.realName" />
+                                </div>
+                                <div class="form-group col-xs-4">
+                                    <label>&nbsp;</label>
+                                    <div class="form-control-static">
+                                        <label class="iradio">
+                                            <input type="radio" name="gender" ng-model="viewModel.gender" value="{{'admin.modules.core.userProfile.valueMale'|translate}}" />
+                                            <span>{{'admin.modules.core.userProfile.valueMale'|translate}}</span>
+                                        </label>
+                                        &nbsp;
+                                        <label class="iradio">
+                                            <input type="radio" name="gender" ng-model="viewModel.gender" value="{{'admin.modules.core.userProfile.valueFemale'|translate}}" />
+                                            <span>{{'admin.modules.core.userProfile.valueFemale'|translate}}</span>
+                                        </label>
+                                    </div>
+                                </div>
                             </div>
                             <div class="form-group">
                                 <label ng-bind="'admin.modules.core.userProfile.labelEmail'|translate"></label>
                                 <input type="email" class="form-control" ng-model="viewModel.email" />
                             </div>
+                            <div class="form-group">
+                                <label ng-bind="'admin.modules.core.userProfile.labelBirthday'|translate"></label>
+                                <input type="text" class="datepicker form-control" ng-model="viewModel.birthday" />
+                            </div>
+                            <button class="btn btn-primary">
+                                {{'admin.modules.core.userProfile.updateProfile'|translate}}
+                            </button>
                         </div>
-                        <div class="col-xs-6">
+                        <div class="col-xs-5">
+                            <div class="text-center">
+                                <a ngf-select="uploadAvatar($file, $invalidFiles)"
+                                        accept="image/*" ngf-max-height="1000" ngf-max-size="1MB">
+                                    <img alt="User Image" class="img-radius" ng-src="{{user.avatar}}" style="width: 200px;">
+                                </a>
+                                <br />
+                                <br />
+                                <button class="btn btn-default">
+                                    {{'admin.modules.core.userProfile.uploadAvatar'|translate}}
+                                </button>
+                            </div>
                         </div>
                     </div>
                 </form>
