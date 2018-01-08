@@ -4,13 +4,20 @@
  ******************************************************************************/
 package net.bndy.wf.modules.core.services;
 
+import java.io.IOException;
+import java.nio.file.Paths;
 import java.util.*;
 
+import net.bndy.wf.ApplicationContext;
+import net.bndy.wf.config.ApplicationConfig;
 import net.bndy.wf.config.ApplicationUserRole;
+import net.bndy.wf.modules.core.models.File;
 import net.bndy.wf.modules.core.models.Role;
 import net.bndy.wf.modules.core.models.User;
 import net.bndy.wf.modules.core.models.UserProfile;
+import net.bndy.wf.modules.core.services.repositories.FileRepository;
 import net.bndy.wf.modules.core.services.repositories.UserProfileRepository;
+import org.apache.tomcat.util.http.fileupload.FileUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -30,21 +37,25 @@ import net.bndy.wf.modules.core.services.repositories.UserRepository;
 public class UserService extends _BaseService<User> {
 
     @Autowired
-    private UserRepository userRepo;
+    private UserRepository userRepository;
     @Autowired
     private UserProfileRepository userProfileRepository;
     @Autowired
     private RoleRepository roleRepository;
+    @Autowired
+    private FileRepository fileRepository;
+    @Autowired
+    private ApplicationConfig applicationConfig;
 
     private Logger logger = LoggerFactory.getLogger(UserService.class);
     private PasswordEncoder passwordEncoder = new BCryptPasswordEncoder();
 
     public Page<User> getUsers(Pageable pageable) {
-        return userRepo.findAll(pageable);
+        return userRepository.findAll(pageable);
     }
 
     public boolean hasUsers() {
-        return this.userRepo.count() > 0;
+        return this.userRepository.count() > 0;
     }
 
     public UserProfile getUserProfile(long userId) {
@@ -52,10 +63,10 @@ public class UserService extends _BaseService<User> {
     }
 
     public User login(String account, String password) {
-        User user = userRepo.findByUsername(account);
+        User user = userRepository.findByUsername(account);
         if (user != null) {
             if (this.passwordEncoder.matches(password, user.getPassword())
-                    && user.isEnabled()) {
+                && user.isEnabled()) {
                 logger.info("`{}` logged in", account);
                 return user;
             }
@@ -68,17 +79,17 @@ public class UserService extends _BaseService<User> {
     public User register(User user) {
         user.setPassword(passwordEncoder.encode(user.getPassword()));
         user.setEnabled(true);
-        return userRepo.saveAndFlush(user);
+        return userRepository.saveAndFlush(user);
     }
 
     public User disable(Long id) {
-        User u = userRepo.findOne(id);
+        User u = userRepository.findOne(id);
         u.setEnabled(false);
-        return userRepo.saveAndFlush(u);
+        return userRepository.saveAndFlush(u);
     }
 
     public List<User> getAll() {
-        return userRepo.findAll();
+        return userRepository.findAll();
     }
 
     public List<Role> getAllRoles() {
@@ -86,13 +97,13 @@ public class UserService extends _BaseService<User> {
     }
 
     public User findByUsername(String username) {
-        return this.userRepo.findByUsername(username);
+        return this.userRepository.findByUsername(username);
     }
 
     public User changeRole(long userId, long roleId) {
-        this.userRepo.deleteRolesByUserId(userId);
+        this.userRepository.deleteRolesByUserId(userId);
         Role role = this.roleRepository.findOne(roleId);
-        User user = this.userRepo.findOne(userId);
+        User user = this.userRepository.findOne(userId);
         if (user != null && role != null) {
             HashSet<Role> roles = new HashSet<>();
             roles.add(role);
@@ -110,7 +121,7 @@ public class UserService extends _BaseService<User> {
             entity.setAvatar(applicationConfig.getDefaultUserAvatar());
         }
 
-        if (this.userRepo.findAll().size() == 0) {
+        if (this.userRepository.findAll().size() == 0) {
             entity.setEnabled(true);
             entity.setSuperAdmin(true);
             // initialize roles
@@ -132,4 +143,22 @@ public class UserService extends _BaseService<User> {
         return super.save(entity);
     }
 
+    public User updateAvatar(long userId, File newFile) throws IOException {
+        User u = this.get(userId);
+        if (u != null && newFile != null && u.getAvatar() != null) {
+            File originFile = this.fileRepository.findByUuid(u.getAvatar());
+
+            u.setAvatar(newFile.getUuid());
+            u = this.save(u);
+            ApplicationContext.updateCurrentUserAvatar(u.getAvatar());
+
+            // delete origin avatar
+            if (originFile != null) {
+                FileUtils.forceDelete(new java.io.File(
+                    Paths.get(this.applicationConfig.getUploadPath(), originFile.getPath()).toAbsolutePath().toString()));
+                this.fileRepository.delete(originFile.getId());
+            }
+        }
+        return u;
+    }
 }

@@ -4,18 +4,22 @@
  ******************************************************************************/
 package net.bndy.wf.modules.core.api;
 
+import java.io.IOException;
 import java.net.MalformedURLException;
-import java.net.URL;
 import java.util.HashMap;
 
 import net.bndy.wf.ApplicationContext;
+import net.bndy.wf.lib.HttpHelper;
+import net.bndy.wf.modules.core.models.File;
 import net.bndy.wf.modules.core.models.User;
 import net.bndy.wf.modules.core.models.UserProfile;
+import net.bndy.wf.modules.core.services.FileService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.domain.Sort;
 import org.springframework.data.web.PageableDefault;
+import org.springframework.http.MediaType;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.web.bind.annotation.*;
 
@@ -28,6 +32,7 @@ import org.springframework.security.authentication.UsernamePasswordAuthenticatio
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContext;
 import org.springframework.security.core.context.SecurityContextHolder;
+import org.springframework.web.multipart.MultipartFile;
 
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
@@ -43,6 +48,8 @@ public class UserController extends _BaseApi<User> {
     private UserService userService;
     @Autowired
     private AuthenticationManager authenticationManager;
+    @Autowired
+    private FileService fileService;
 
     @ApiOperation(value = "Gets current user")
     @RequestMapping(value = "/me", method = RequestMethod.GET)
@@ -51,7 +58,7 @@ public class UserController extends _BaseApi<User> {
         if (u != null) {
             HashMap<String, Object> map = new HashMap<>();
             map.put("name", u.getUsername());
-            map.put("avatar", new URL(new URL(request.getRequestURL().toString()), u.getAvatar()).toString());
+            map.put("avatar", u.getAvatar());
             map.put("roles", u.getRoles());
             return map;
         }
@@ -86,7 +93,7 @@ public class UserController extends _BaseApi<User> {
     }
 
     @ApiOperation(value = "Enable or disable user")
-    @RequestMapping(value = "/{userId}/toggleenabled", method = RequestMethod.PUT)
+    @RequestMapping(value = "/{userId}/toggleEnabled", method = RequestMethod.PUT)
     public void toggleEnabled(@PathVariable(name = "userId") long userId) {
         User user = this.userService.get(userId);
         if (user != null) {
@@ -96,7 +103,7 @@ public class UserController extends _BaseApi<User> {
     }
 
     @ApiOperation(value = "Change role for user")
-    @RequestMapping(value = "/{userId}/changerole", method = RequestMethod.PUT)
+    @RequestMapping(value = "/{userId}/changeRole", method = RequestMethod.PUT)
     public void changeRole(@PathVariable(name = "userId") long userId, @RequestParam(name = "roleId") long roleId) {
         this.userService.changeRole(userId, roleId);
     }
@@ -106,17 +113,16 @@ public class UserController extends _BaseApi<User> {
         return super.get(pageable);
     }
 
+    @Override
+    @RequestMapping(value = "/updateAvatar", method = RequestMethod.POST, headers = ("content-type=multipart/*"), consumes = MediaType.APPLICATION_FORM_URLENCODED_VALUE)
+    public File upload(MultipartFile file, HttpServletRequest request) throws IllegalStateException, IOException {
+        File f = super.upload(file, request);
+        this.userService.updateAvatar(ApplicationContext.getCurrentUser().getId(), f);
+        return f;
+    }
+
     @RequestMapping(value = "/profile", method = RequestMethod.GET)
     public UserProfile getUserProfile() {
         return this.userService.getUserProfile(getCurrentUser().getId());
-    }
-
-    @RequestMapping(value = "/updateavatar", method = RequestMethod.GET)
-    public void updateAvatar(String name) {
-        User u = this.userService.get(ApplicationContext.getCurrentUser().getId());
-        if (u != null) {
-            u.setAvatar(name);
-            this.userService.save(u);
-        }
     }
 }

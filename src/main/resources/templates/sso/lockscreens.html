@@ -14,7 +14,7 @@
 
         <div class="lockscreen-item">
             <div class="lockscreen-image">
-                <img th:src="${user.avatar}" alt="User Image">
+                <img th:src="${user.avatar}" alt="User Image" class="user-avatar">
             </div>
 
             <form name="lockForm" method="post" class="lockscreen-credentials" ng-submit="unlockScreen()">

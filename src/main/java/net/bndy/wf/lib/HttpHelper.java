@@ -4,6 +4,7 @@
  ******************************************************************************/
 package net.bndy.wf.lib;
 
+import javax.servlet.http.HttpServletRequest;
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStream;
@@ -170,5 +171,13 @@ public class HttpHelper {
 			connection = url.openConnection();
 		}
 		return connection;
+	}
+
+	public static String getRootUrl(HttpServletRequest request) {
+		return request.getScheme() + "://" + request.getServerName() + ":" + request.getServerPort() + request.getContextPath();
+	}
+
+	public static String getFileUrl(HttpServletRequest request, String fileUUID) {
+		return getRootUrl(request) + "/files/" + fileUUID;
 	}
 }

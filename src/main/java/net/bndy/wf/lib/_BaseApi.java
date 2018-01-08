@@ -18,6 +18,7 @@ import java.util.UUID;
 import javax.servlet.http.HttpServletRequest;
 
 import net.bndy.wf.config.ApplicationConfig;
+import net.bndy.wf.modules.core.services.FileService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
@@ -41,6 +42,8 @@ public abstract class _BaseApi<T extends _BaseEntity> {
 
 	@Autowired
 	_BaseService<T> service;
+	@Autowired
+	FileService fileService;
 	@Autowired
 	UserRepository userRepository;
 	@Autowired
@@ -90,20 +93,25 @@ public abstract class _BaseApi<T extends _BaseEntity> {
 
 	@ApiOperation(value = "Upload files")
 	@RequestMapping(value = "/upload", method = RequestMethod.POST, headers = ("content-type=multipart/*"), consumes = MediaType.APPLICATION_FORM_URLENCODED_VALUE)
-	public Object upload(@RequestPart(required = true) MultipartFile file, HttpServletRequest request)
+	public net.bndy.wf.modules.core.models.File upload(@RequestPart(required = true) MultipartFile file, HttpServletRequest request)
 			throws IllegalStateException, IOException {
 
-		String destRelativePath = Paths.get(File.separator, new SimpleDateFormat("yyyy-MM").format(new Date()))
-				.toString();
-		String extensionName = file.getOriginalFilename().substring(file.getOriginalFilename().indexOf("."));
+		net.bndy.wf.modules.core.models.File f = new net.bndy.wf.modules.core.models.File();
+		f.setName(file.getOriginalFilename());
+		f.setSize(file.getSize());
+
+		f.setPath(Paths.get(File.separator, new SimpleDateFormat("yyyy-MM").format(new Date()))
+				.toString());
+		f.setExtName(file.getOriginalFilename().substring(file.getOriginalFilename().indexOf(".")));
+		f.setType(FileInfo.getTypeByName(f.getName()));
 
 		if (this.appliationConfig.isRenameUploadFile()) {
-			destRelativePath = Paths.get(destRelativePath, UUID.randomUUID().toString() + extensionName).toString();
+			f.setPath(Paths.get(f.getPath(), f.getUuid() + f.getExtName()).toString());
 		} else {
-			destRelativePath = Paths.get(destRelativePath, file.getOriginalFilename()).toString();
+			f.setPath(Paths.get(f.getPath(), file.getOriginalFilename()).toString());
 		}
 
-		String destAbsPath = this.appliationConfig.getUploadPath() + destRelativePath;
+		String destAbsPath = this.appliationConfig.getUploadPath() + f.getPath();
 
 		File destAbsFile = new File(destAbsPath);
 		if (!destAbsFile.getParentFile().exists()) {
@@ -119,13 +127,8 @@ public abstract class _BaseApi<T extends _BaseEntity> {
 		out.flush();
 		out.close();
 
-		FileInfo fi = new FileInfo();
-		fi.setExtensionName(extensionName);
-		fi.setPath(destAbsPath);
-		fi.setName(file.getOriginalFilename());
-		fi.setRelativePath(destRelativePath);
-		fi.setSize(file.getSize());
+		f = this.fileService.save(f);
 
-		return fi;
+		return f;
 	}
 }

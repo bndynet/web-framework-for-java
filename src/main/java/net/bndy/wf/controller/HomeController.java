@@ -5,19 +5,27 @@
 package net.bndy.wf.controller;
 
 import java.io.*;
+import java.nio.file.Paths;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 import java.util.Map;
 
+import net.bndy.wf.modules.core.services.FileService;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.MediaType;
 import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.util.FileCopyUtils;
+import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
+
+import javax.servlet.http.HttpServletResponse;
 
 @Controller
 public class HomeController extends _BaseController {
+
+	@Autowired
+	private FileService fileService;
 	
 	@RequestMapping("/")
 	public String index(Map<String, Object> map) throws Exception {
@@ -31,6 +39,16 @@ public class HomeController extends _BaseController {
 		map.put("urls", lst);
 		
 		return "/index";
+	}
+
+	@RequestMapping(value = "/files/{uuid:[\\w-]{36}}", method = RequestMethod.GET, produces = {MediaType.APPLICATION_OCTET_STREAM_VALUE})
+	public void get(@PathVariable(name = "uuid") String uuid, HttpServletResponse resp) throws IOException {
+		net.bndy.wf.modules.core.models.File f = this.fileService.getByUuid(uuid);
+		if (f != null && this.applicationConfig.getUploadPath() != null && !applicationConfig.getUploadPath().isEmpty()) {
+			String filePath = Paths.get(this.applicationConfig.getUploadPath(), f.getPath()).toAbsolutePath().toString();
+			FileCopyUtils.copy(new FileInputStream(filePath), resp.getOutputStream());
+			resp.flushBuffer();
+		}
 	}
 	
 	@RequestMapping("/about")

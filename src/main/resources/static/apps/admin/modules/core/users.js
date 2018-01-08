@@ -38,7 +38,7 @@ app.controller('UsersCtrl',
         $scope.saveRoles = function() {
             if ($scope.userModel.id) {
                 var roleId = $scope.userModel.currentRole.id;
-                $http.put('/api/core/users/' + $scope.userModel.id + '/changerole?roleId=' + $scope.userModel.currentRole.id)
+                $http.put('/api/core/users/' + $scope.userModel.id + '/changeRole?roleId=' + $scope.userModel.currentRole.id)
                     .then(function(res) {
                         $scope.pageUsers($scope.pager.currentPage);
                         $('#rolesForm').modal('hide');
@@ -56,7 +56,7 @@ app.controller('UsersCtrl',
         };
 
         $scope.toggleEnabled = function(item) {
-            $http.put('/api/core/users/' + item.id + '/toggleenabled').then(function(res) {
+            $http.put('/api/core/users/' + item.id + '/toggleEnabled').then(function(res) {
                 item.enabled = !item.enabled;
                 appDialog.success();
             });

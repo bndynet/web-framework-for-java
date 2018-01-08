@@ -41,15 +41,13 @@
                         </div>
                         <div class="col-xs-5">
                             <div class="text-center">
-                                <a ngf-select="uploadAvatar($file, $invalidFiles)"
-                                        accept="image/*" ngf-max-height="1000" ngf-max-size="1MB">
-                                    <img alt="User Image" class="img-radius" ng-src="{{user.avatar}}" style="width: 200px;">
-                                </a>
+                                <img alt="User Image" class="img-radius" ng-src="{{user.avatar}}" style="width: 200px;">
                                 <br />
                                 <br />
-                                <button class="btn btn-default">
+                                <a class="btn btn-default" ngf-select="uploadAvatar($file, $invalidFiles)"
+                                   accept="image/*" ngf-max-height="1000" ngf-max-size="1MB">
                                     {{'admin.modules.core.userProfile.uploadAvatar'|translate}}
-                                </button>
+                                </a>
                             </div>
                         </div>
                     </div>

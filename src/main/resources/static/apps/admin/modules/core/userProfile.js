@@ -12,17 +12,17 @@ app.controller('UserProfileCtrl', [ '$scope', 'appDialog', '$http', '$timeout', 
             $scope.errFile = errFiles && errFiles[0];
             if (file) {
                 file.upload = Upload.upload({
-                   url: '/api/core/users/upload',
+                   url: '/api/core/users/updateAvatar',
                    data: {file: file}
                 });
 
                 file.upload.then(function (response) {
                    $timeout(function () {
                        file.result = response.data;
-                       $http.get('/api/core/users/updateavatar?name=' + file.result.relativePath).then(function() {
-                           $scope.user.avatar = file.result.relativePath;
-                           appDialog.success();
-                       });
+                       $scope.user.avatar = $scope.user.avatar.substring(0, $scope.user.avatar.lastIndexOf('/') + 1) + file.result.uuid;
+                       // update all user avatar on page
+                       $('img.user-avatar').attr('src', $scope.user.avatar);
+                       appDialog.success();
                    });
                 }, function (response) {
                    if (response.status > 0)
