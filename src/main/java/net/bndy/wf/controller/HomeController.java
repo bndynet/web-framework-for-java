@@ -13,6 +13,7 @@ import java.util.Map;
 
 import net.bndy.wf.modules.core.services.FileService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.core.io.ClassPathResource;
 import org.springframework.http.MediaType;
 import org.springframework.stereotype.Controller;
 import org.springframework.util.FileCopyUtils;
@@ -49,6 +50,13 @@ public class HomeController extends _BaseController {
 			FileCopyUtils.copy(new FileInputStream(filePath), resp.getOutputStream());
 			resp.flushBuffer();
 		}
+	}
+
+	@RequestMapping(value = "/files/defaultAvatar", method = RequestMethod.GET, produces = {MediaType.IMAGE_PNG_VALUE})
+	public void get(HttpServletResponse resp) throws IOException {
+        String filePath = Paths.get(new ClassPathResource("/").getFile().getAbsolutePath(), this.applicationConfig.getDefaultUserAvatar()).toAbsolutePath().toString();
+        FileCopyUtils.copy(new FileInputStream(filePath), resp.getOutputStream());
+        resp.flushBuffer();
 	}
 	
 	@RequestMapping("/about")

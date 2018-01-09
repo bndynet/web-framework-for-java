@@ -35,7 +35,7 @@
                                 <label ng-bind="'admin.modules.core.userProfile.labelBirthday'|translate"></label>
                                 <input type="text" class="datepicker form-control" ng-model="viewModel.birthday" />
                             </div>
-                            <button class="btn btn-primary">
+                            <button class="btn btn-flat btn-primary">
                                 {{'admin.modules.core.userProfile.updateProfile'|translate}}
                             </button>
                         </div>
@@ -44,7 +44,7 @@
                                 <img alt="User Image" class="img-radius" ng-src="{{user.avatar}}" style="width: 200px;">
                                 <br />
                                 <br />
-                                <a class="btn btn-default" ngf-select="uploadAvatar($file, $invalidFiles)"
+                                <a class="btn btn-flat btn-default" ngf-select="uploadAvatar($file, $invalidFiles)"
                                    accept="image/*" ngf-max-height="1000" ngf-max-size="1MB">
                                     {{'admin.modules.core.userProfile.uploadAvatar'|translate}}
                                 </a>

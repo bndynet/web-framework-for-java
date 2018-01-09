@@ -4,9 +4,8 @@
  ******************************************************************************/
 package net.bndy.wf;
 
+import net.bndy.wf.config.ApplicationConfig;
 import net.bndy.wf.lib.HttpHelper;
-import org.apache.http.protocol.HttpContext;
-import org.apache.http.protocol.RequestContent;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.MessageSource;
 import org.springframework.context.i18n.LocaleContextHolder;
@@ -15,36 +14,42 @@ import org.springframework.security.core.context.SecurityContextHolder;
 
 import net.bndy.wf.modules.core.models.User;
 import org.springframework.stereotype.Component;
-import org.springframework.web.servlet.support.RequestContext;
 
 import javax.annotation.PostConstruct;
-import javax.servlet.ServletContext;
 import javax.servlet.http.HttpServletRequest;
 import java.util.*;
 
 @Component
 public class ApplicationContext {
 
-    private static MessageSource messageSource;
     private static HttpServletRequest request;
+    private static MessageSource messageSource;
+    private static ApplicationConfig applicationConfig;
 
+    @Autowired
+    private HttpServletRequest _request;
     @Autowired
     private MessageSource _messageSource;
     @Autowired
-    private HttpServletRequest _request;
+    private ApplicationConfig _applicationConfig;
 
     @PostConstruct
     private void init() {
-        messageSource = _messageSource;
         request = _request;
+        messageSource = _messageSource;
+        applicationConfig = _applicationConfig;
     }
 
     public static User getCurrentUser() {
         Authentication auth = SecurityContextHolder.getContext().getAuthentication();
         if (auth != null && (auth.getPrincipal() instanceof User)) {
             User u = (User) auth.getPrincipal();
-            if (request != null && u.getAvatar() != null && !u.getAvatar().toLowerCase().startsWith("http")) {
-                u.setAvatar(HttpHelper.getFileUrl(request, u.getAvatar()));
+            if (u.getAvatar() != null && !u.getAvatar().isEmpty()) {
+                if (request != null && !u.getAvatar().toLowerCase().startsWith("http") && u.getAvatar().indexOf("/") < 0) {
+                    u.setAvatar(HttpHelper.getFileUrl(request, u.getAvatar()));
+                }
+            } else {
+                u.setAvatar(HttpHelper.getFileUrl(request, "defaultAvatar"));
             }
             return u;
         }
