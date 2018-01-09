@@ -9,7 +9,6 @@ import java.net.MalformedURLException;
 import java.util.HashMap;
 
 import net.bndy.wf.ApplicationContext;
-import net.bndy.wf.lib.HttpHelper;
 import net.bndy.wf.modules.core.models.File;
 import net.bndy.wf.modules.core.models.User;
 import net.bndy.wf.modules.core.models.UserProfile;

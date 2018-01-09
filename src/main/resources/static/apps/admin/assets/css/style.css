@@ -135,6 +135,11 @@ a {
   z-index: 999;
 }
 
+/* override others */
+.datepicker {
+  padding: 6px 12px;
+}
+
 /* misc */
 .no-scroll {
   overflow: hidden;

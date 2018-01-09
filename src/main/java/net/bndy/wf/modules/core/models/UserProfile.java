@@ -6,6 +6,7 @@ package net.bndy.wf.modules.core.models;
 
 import java.util.Date;
 
+import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Table;
 
@@ -20,6 +21,7 @@ public class UserProfile extends _BaseEntity {
 	private String email;
 	private String realName;
 	private String gender;
+	@Column(columnDefinition = "DATE")
 	private Date birthday;
 
 	public Long getUserId() {

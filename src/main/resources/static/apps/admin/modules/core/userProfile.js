@@ -4,7 +4,22 @@ app.controller('UserProfileCtrl', [ '$scope', 'appDialog', '$http', '$timeout', 
             $scope.user = res.data;
         });
         $http.get('/api/core/users/profile').then(function(res) {
-            $scope.viewModel = res;
+            $scope.viewModel = res.data;
+            if ($scope.viewModel.birthday) {
+                $scope.viewModel.birthday = moment($scope.viewModel.birthday).format('YYYY-MM-DD');
+            }
+
+            $timeout(function(){
+                initUI();
+                $('input[name=gender]').each(function(){
+                    $(this).on('ifChecked', function(event) {
+                        $scope.viewModel.gender = event.target.value;
+                    });
+                    if ($(this).val() == $scope.viewModel.gender) {
+                        $(this).iCheck('check');
+                    }
+                })
+            });
         });
 
         $scope.uploadAvatar = function(file, errFiles) {
@@ -34,8 +49,20 @@ app.controller('UserProfileCtrl', [ '$scope', 'appDialog', '$http', '$timeout', 
             }
         };
 
-        $timeout(function(){
-            initUI();
-        });
+        $scope.updateProfile = function() {
+            if ($scope.viewModel.id) {
+                $http.put('/api/core/userProfiles/' + $scope.viewModel.id, $scope.viewModel).then(function(res) {
+                    appDialog.success();
+                }, function() {
+                    appDialog.error();
+                });
+            } else {
+                $http.post('/api/core/userProfiles', $scope.viewModel).then(function(res) {
+                    appDialog.success();
+                }, function() {
+                    appDialog.error();
+                });
+            }
+        };
     }
 ]);

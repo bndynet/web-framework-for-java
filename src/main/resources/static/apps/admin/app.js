@@ -274,7 +274,7 @@ function initUI() {
     $('.icheck, .iradio').iCheck({ checkboxClass: 'icheckbox_flat-green', radioClass   : 'iradio_flat-green'});
     $('.colorpicker').colorpicker();
     $('.timepicker').timepicker({ showInputs: false });
-    $('.datepicker').datepicker({ autoclose: true });
+    $('.datepicker').datepicker({ autoclose: true, format: 'yyyy-mm-dd' });
 }
 
 $(function () {
