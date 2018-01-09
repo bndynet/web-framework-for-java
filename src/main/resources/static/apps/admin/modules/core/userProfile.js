@@ -4,7 +4,12 @@ app.controller('UserProfileCtrl', [ '$scope', 'appDialog', '$http', '$timeout', 
             $scope.user = res.data;
         });
         $http.get('/api/core/users/profile').then(function(res) {
-            $scope.viewModel = res.data;
+            if (res.data) {
+                $scope.viewModel = res.data;
+            } else {
+                $scope.viewModel = {};
+            }
+
             if ($scope.viewModel.birthday) {
                 $scope.viewModel.birthday = moment($scope.viewModel.birthday).format('YYYY-MM-DD');
             }

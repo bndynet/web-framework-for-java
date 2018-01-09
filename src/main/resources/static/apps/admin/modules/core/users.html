@@ -29,23 +29,30 @@
                     <tr ng-repeat="item in data">
                         <td ng-bind="item.username"></td>
                         <td>
-                            <a ng-click="editRoles(item)">
+                            <a ng-click="editRoles(item)" ng-if="!item.superAdmin">
                                 <span ng-bind="item.roles[0].name" ng-if="item.roles && item.roles.length > 0"></span>
                                 <em ng-if="item.roles && item.roles.length == 0" ng-bind="'admin.modules.user.noRoles'|translate"></em>
                             </a>
+                            <span ng-if="item.superAdmin">
+                                <span ng-bind="item.roles[0].name" ng-if="item.roles && item.roles.length > 0"></span>
+                                <em ng-if="item.roles && item.roles.length == 0" ng-bind="'admin.modules.user.noRoles'|translate"></em>
+                            </span>
                         </td>
                         <td ng-bind="item.createDate | date: 'yyyy-MM-dd HH:mm'"></td>
                         <td ng-bind="item.lastUpdate | date: 'yyyy-MM-dd HH:mm'"></td>
-                        <td class="text-center">
-                            <a ng-click="toggleEnabled(item)" ng-if="!item.superAdmin">
+                        <td class="text-center" ng-if="!item.superAdmin">
+                            <a ng-click="toggleEnabled(item)">
                                 <i class="glyphicon glyphicon-check text-success ng-cloak" ng-if="item.enabled"></i>
                                 <i class="glyphicon glyphicon-unchecked ng-cloak" ng-if="!item.enabled"></i>
                             </a>
                         </td>
-                        <td class="text-center">
-                            <a ng-click="remove(item)" ng-if="!item.superAdmin">
+                        <td class="text-center" ng-if="!item.superAdmin">
+                            <a ng-click="remove(item)">
                                 <i class="glyphicon glyphicon-trash text-danger"></i>
                             </a>
+                        </td>
+                        <td class="text-center" colspan="2" ng-if="item.superAdmin">
+                            {{'admin.modules.user.disableEditForSuperAdmin'|translate}}
                         </td>
                     </tr>
                     </tbody>
