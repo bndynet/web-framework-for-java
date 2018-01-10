@@ -51,7 +51,15 @@ public class UserService extends _BaseService<User> {
     private PasswordEncoder passwordEncoder = new BCryptPasswordEncoder();
 
     public Page<User> getUsers(Pageable pageable) {
-        return userRepository.findAll(pageable);
+        return this.userRepository.findAll(pageable);
+    }
+
+    public Page<User> searchUsers(String keywords, Pageable pageable) {
+        if (keywords != null && !keywords.isEmpty()) {
+            return this.userRepository.search(keywords, pageable);
+        } else {
+            return this.getUsers(pageable);
+        }
     }
 
     public boolean hasUsers() {

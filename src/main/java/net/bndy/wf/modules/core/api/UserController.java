@@ -91,6 +91,15 @@ public class UserController extends _BaseApi<User> {
         request.logout();
     }
 
+    @ApiOperation(value = "Search by keywords")
+    @RequestMapping(value = "/search", method = RequestMethod.GET)
+    public Page<User> search(
+        @RequestParam(name = "keywords", required = false) String keywords,
+        @PageableDefault(value = 10, sort = {"id"}, direction = Sort.Direction.DESC) Pageable pageable) {
+
+        return this.userService.searchUsers(keywords, pageable);
+    }
+
     @ApiOperation(value = "Enable or disable user")
     @RequestMapping(value = "/{userId}/toggleEnabled", method = RequestMethod.PUT)
     public void toggleEnabled(@PathVariable(name = "userId") long userId) {

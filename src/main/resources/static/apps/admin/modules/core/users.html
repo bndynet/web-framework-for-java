@@ -5,7 +5,15 @@
     <section class="content">
         <div class="box box-default">
             <div class="box-header with-border">
-                <h3 class="box-title"></h3>
+                <div class="pull-left">
+                    <div class="input-group input-group-sm search-box pull-left">
+                        <input type="text" class="form-control" ng-model="searchKeywords" placeholder="{{'admin.modules.user.searchTips'|translate}}">
+                        <span class="input-group-btn">
+                          <button type="button" class="btn btn-primary" ng-click="search()">{{'common.search'|translate}}</button>
+                        </span>
+                    </div>
+                    <button type="button" class="btn btn-sm btn-warning" ng-click="cancelSearch()" ng-show="searchKeywords">{{'common.cancelSearch'|translate}}</button>
+                </div>
 
                 <div class="box-tools pull-right">
                     <a class="btn btn-sm btn-primary" href="/sso/signup" target="_blank" ng-bind="'admin.modules.user.addUser'|translate"></a>

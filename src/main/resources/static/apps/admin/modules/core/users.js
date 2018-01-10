@@ -4,7 +4,11 @@ app.controller('UsersCtrl',
         $scope.data = [];
         $scope.roles = null;
         $scope.pageUsers = function (page) {
-            $http.get('/api/core/users/?page=' + (page - 1)).then(function(res) {
+            var url = '/api/core/users/search?page=' + (page - 1);
+            if ($scope.searchKeywords) {
+                url += '&keywords=' + $scope.searchKeywords;
+            }
+            $http.get(url).then(function(res) {
                 $scope.data = res.data.content;
                 $scope.pager = {
                     currentPage: page,
@@ -62,6 +66,16 @@ app.controller('UsersCtrl',
             });
         };
 
+        $scope.search = function() {
+            if ($scope.searchKeywords) {
+                $scope.pageUsers(1);
+            }
+        };
+
+        $scope.cancelSearch = function() {
+            $scope.searchKeywords = null;
+            $scope.pageUsers(1);
+        };
 
         $scope.init();
     }]);
