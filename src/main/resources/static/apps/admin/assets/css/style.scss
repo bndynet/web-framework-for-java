@@ -106,6 +106,13 @@ a {
   }
 }
 
+.content {
+  & > .box-default {
+    margin-bottom: 0;
+    min-height: calc(100vh - 175px);
+  }
+}
+
 .box-body {
   &>form {
     padding: 1rem 2rem;
@@ -161,12 +168,23 @@ a {
   }
 }
 
+.modal-dialog {
+  margin-top: 150px;
+}
+
 
 /* angularjs material */
 
 // fix: dialog shadow lay need to cover sidebar and header
+md-backdrop.md-dialog-backdrop {
+  z-index: 1200;
+}
 .md-dialog-container {
-  z-index: 999;
+  z-index: 9999;
+
+  md-dialog {
+    margin-top: -100px;
+  }
 }
 
 /* override others */
@@ -175,7 +193,6 @@ a {
 }
 
 /* misc */
-
 .no-scroll {
   overflow: hidden;
 }
@@ -190,5 +207,6 @@ a {
 }
 
 .no-data-box {
-  padding: 3rem;
+  padding: 5rem;
+  color: #666666;
 }

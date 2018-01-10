@@ -89,6 +89,11 @@ a {
   border: solid 1px #cacaca;
 }
 
+.content > .box-default {
+  margin-bottom: 0;
+  min-height: calc(100vh - 175px);
+}
+
 .box-body > form {
   padding: 1rem 2rem;
 }
@@ -130,9 +135,21 @@ a {
   padding: 2px 8px;
 }
 
+.modal-dialog {
+  margin-top: 150px;
+}
+
 /* angularjs material */
+md-backdrop.md-dialog-backdrop {
+  z-index: 1200;
+}
+
 .md-dialog-container {
-  z-index: 999;
+  z-index: 9999;
+}
+
+.md-dialog-container md-dialog {
+  margin-top: -100px;
 }
 
 /* override others */
@@ -155,6 +172,7 @@ a {
 }
 
 .no-data-box {
-  padding: 3rem;
+  padding: 5rem;
+  color: #666666;
 }
 /*# sourceMappingURL=style.css.map */

@@ -65,7 +65,7 @@
                     </tr>
                     </tbody>
                 </table>
-
+                <ui-no-data ng-if="data.length==0"></ui-no-data>
                 <bn-ui-pager ng-model="pager" on-page="pageUsers(page)"></bn-ui-pager>
             </div>
         </div>
