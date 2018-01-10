@@ -28,7 +28,7 @@ app.config(['$provide', '$qProvider', '$httpProvider', '$stateProvider', '$trans
 
 
     // http interceptor
-    $provide.factory('appHttpInterceptor', ['$q', '$injector', function($q, $injector) {
+    $provide.factory('appHttpInterceptor', ['$q', '$injector', '$timeout', function($q, $injector, $timeout) {
         var toaster = $injector.get('toaster');
         return {
             'request': function(config) {
@@ -51,6 +51,10 @@ app.config(['$provide', '$qProvider', '$httpProvider', '$stateProvider', '$trans
                 // do something here
                 switch(rejection.status) {
                     case 401:
+                    $timeout(function() {
+                        location.href = '/sso/login';
+                    }, 3000);
+                    message = 'You will be redirected to login page in 3 seconds.';
                     default:
                 }
                 console.error(rejection);
