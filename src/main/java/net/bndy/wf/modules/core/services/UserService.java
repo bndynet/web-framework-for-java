@@ -152,7 +152,7 @@ public class UserService extends _BaseService<User> {
         return super.save(entity);
     }
 
-    public User updateAvatar(long userId, File newFile) throws IOException {
+    public User updateAvatar(long userId, File newFile) {
         User u = this.get(userId);
         if (u != null && newFile != null && u.getAvatar() != null) {
             File originFile = this.fileRepository.findByUuid(u.getAvatar());
@@ -166,8 +166,8 @@ public class UserService extends _BaseService<User> {
                 java.io.File f = new java.io.File(Paths.get(this.applicationConfig.getUploadPath(), originFile.getPath()).toAbsolutePath().toString());
                 if (f.exists() && f.isFile()) {
                     f.delete();
-                    this.fileRepository.delete(originFile.getId());
                 }
+                this.fileRepository.delete(originFile.getId());
             }
         }
         return u;
