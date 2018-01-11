@@ -1,97 +1,11 @@
 @import "variables";
 
-.page-onebox {
-	padding-top: 50px;
-	background-color: #efefef;
-	height: 100%;
+.img-list {
+	margin: 0 -1rem;
 
-	img.media-object {
-		max-width: 60px;
-	}
-	
-	.logo-block {
-		text-align: center;
-		margin-bottom: 30px;
-
-		img {
-			width: 126px;
-			height: 126px;
-			border-radius: 50%;
-		}
-	}
-
-	.error-block {
-		margin-bottom: 3rem;
-	}
-
-	.panel {
-		width: 360px;
-		margin: 0 auto;
-
-		.panel-body {
-			padding: 30px 30px 15px 30px;
-
-			form {
-				margin-top: 30px;
-				
-				.form-group {
-					margin-bottom: 25px;
-
-					.btn {
-						margin: 1rem 0;
-					}
-				}
-			}
-
-			.validation-messages {
-				background-color: $color-danger;
-				color: #ffffff;
-				margin: 0 -30px;
-				padding: 5px 15px;
-			}
-		}
-
-		.panel-footer {
-			text-align: center;
-			border-top: none;
-			background-color: transparent;
-			padding-bottom: 2rem;
-		}
-
-		&.panel-default {
-			border: none;
-			box-shadow: 0 3px 5px #dddddd;
-		}
-		
-		&.logout {
-			.panel-body {
-				padding: 5rem 0;
-				font-size: 1.5rem;
-				text-align: center;
-
-				footer {
-					margin-top: 2rem;
-					font-size: 1rem;
-				}
-			}
-		}
-	}
-	
-	footer {
-		text-align: center;
-	}
-}
-
-.page-header {
-	display: flex;
-
-	h2 {
-		flex: 1;
-		margin: 0;
-	}
-
-	.toolbox {
-		flex: 1;
-		text-align: right;
+	img {
+		display: inline-block;
+		height: 40px;
+		margin: 1rem;
 	}
 }

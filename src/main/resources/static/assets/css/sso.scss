@@ -5,7 +5,9 @@
     }
 
     .login-box, .register-box {
-        margin-bottom: 15px;
+        margin: 0 auto;
+        padding-top: 10%;
+        padding-bottom: 20px;
 
         .register-box-body, .login-box-body {
             padding-bottom: 30px;
@@ -25,4 +27,8 @@
     footer {
         text-align: center;
     }
+}
+
+.lockscreen-wrapper {
+    margin-top: 20%;
 }

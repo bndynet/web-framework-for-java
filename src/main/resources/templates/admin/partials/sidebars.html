@@ -25,7 +25,7 @@
         <!-- search form -->
         <form class="sidebar-form" ng-if="searchOptions" ng-submit="searchOptions.search()">
             <div class="input-group">
-                <input type="text" class="form-control" placeholder="Search..." ng-model="searchOptions.value">
+                <input type="text" class="form-control" th:placeholder="#{common.searchPlaceHolder}" ng-model="searchOptions.value">
                 <span class="input-group-btn">
                     <button type="submit" name="search" id="search-btn" class="btn btn-flat">
                         <i class="fa fa-search"></i>
@@ -58,7 +58,7 @@
             </ul>
         </script>
         <ul class="sidebar-menu" data-widget="tree">
-            <li class="header">MAIN NAVIGATION</li>
+            <li class="header" th:text="#{common.menu}"></li>
             <li ng-repeat="menu in menus track by $index"
                 ng-include="'MainMenuItem'"
                 ng-class="{'treeview': menu.children && menu.children.length > 0}"></li>

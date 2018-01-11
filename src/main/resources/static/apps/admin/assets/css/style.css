@@ -1,12 +1,3 @@
-html,
-body {
-  height: 100%;
-}
-
-a {
-  cursor: pointer;
-}
-
 /* AdminLTE */
 .lockscreen {
   display: none;
@@ -158,14 +149,6 @@ md-backdrop.md-dialog-backdrop {
 }
 
 /* misc */
-.no-scroll {
-  overflow: hidden;
-}
-
-.img-radius {
-  border-radius: 5px;
-}
-
 .search-box {
   width: 260px;
   margin-right: 1rem;
