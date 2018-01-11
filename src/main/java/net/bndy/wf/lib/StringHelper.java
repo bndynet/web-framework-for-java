@@ -26,10 +26,15 @@ public class StringHelper {
     }
 
     public static String generateRandomString(int length) {
-        SecureRandom secureRandom = new SecureRandom();
-        byte[] token = new byte[length / 2];
-        secureRandom.nextBytes(token);
-        return new BigInteger(1, token).toString(16).toUpperCase();
+        String chars = "0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz";
+        int count = chars.length();
+        Random rnd = new Random();
+        StringBuilder sb = new StringBuilder();
+        for (int i = 0; i < length; i++) {
+            sb.append(chars.charAt(rnd.nextInt(count)));
+        }
+
+        return sb.toString();
     }
 
     public static String cut(String source, int length) {
@@ -112,5 +117,35 @@ public class StringHelper {
 
     public static String toLowerCase(String text) {
         return text.toLowerCase(Locale.ROOT);
+    }
+
+    public static String insertBefore(String source, int index, String content) {
+        if (source == null)
+            source = "";
+
+        if (index <= 0) {
+            return content + source;
+        }
+
+        if (index >= source.length()) {
+            return source + content;
+        }
+
+        return source.substring(0, index) + content + source.substring(index);
+    }
+
+    public static String insertAfter(String source, int index, String content) {
+        if (source == null)
+            source = "";
+
+        if (index < 0) {
+            return content + source;
+        }
+
+        if (index + 1 >= source.length()) {
+            return source + content;
+        }
+
+        return source.substring(0, index + 1) + content + source.substring(index + 1);
     }
 }

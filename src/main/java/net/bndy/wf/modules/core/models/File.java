@@ -24,8 +24,6 @@ public class File extends _BaseEntity {
 
     @Enumerated(EnumType.ORDINAL)
     private FileType type;
-    @Transient
-    private String url;
 
     public String getUuid() {
         return uuid;
@@ -68,7 +66,7 @@ public class File extends _BaseEntity {
     }
 
     public String getUrl() {
-        return url;
+        return "/files/" + this.getUuid();
     }
 
     public FileType getType() {
@@ -77,10 +75,6 @@ public class File extends _BaseEntity {
 
     public void setType(FileType type) {
         this.type = type;
-    }
-
-    public void setUrl(String url) {
-        this.url = url;
     }
 
     public File() {

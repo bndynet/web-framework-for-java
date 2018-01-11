@@ -15,7 +15,6 @@ public class ApplicationConfig {
 	private String appName;
 	private String appShortName;
 	private String uploadPath;
-	private String uploadPathUrl;
 	private String mailSender;
 	private String allowedOrigins;
 	private String defaultUserAvatar;
@@ -35,18 +34,6 @@ public class ApplicationConfig {
 
 	public String getUploadPath() {
 		return uploadPath;
-	}
-
-	public String getUploadPathUrl() {
-		return uploadPathUrl;
-	}
-	
-	public String getUploadPathUrl(String relativePath) {
-		return this.getUploadPathUrl() + relativePath;
-	}
-
-	public void setUploadPathUrl(String uploadPathUrl) {
-		this.uploadPathUrl = uploadPathUrl;
 	}
 
 	public boolean isRenameUploadFile() {

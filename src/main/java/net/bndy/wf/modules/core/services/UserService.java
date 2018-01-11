@@ -5,6 +5,7 @@
 package net.bndy.wf.modules.core.services;
 
 import java.io.IOException;
+import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.util.*;
 
@@ -162,9 +163,11 @@ public class UserService extends _BaseService<User> {
 
             // delete origin avatar
             if (originFile != null) {
-                FileUtils.forceDelete(new java.io.File(
-                    Paths.get(this.applicationConfig.getUploadPath(), originFile.getPath()).toAbsolutePath().toString()));
-                this.fileRepository.delete(originFile.getId());
+                java.io.File f = new java.io.File(Paths.get(this.applicationConfig.getUploadPath(), originFile.getPath()).toAbsolutePath().toString());
+                if (f.exists() && f.isFile()) {
+                    f.delete();
+                    this.fileRepository.delete(originFile.getId());
+                }
             }
         }
         return u;

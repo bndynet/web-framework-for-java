@@ -97,18 +97,34 @@ public abstract class _BaseApi<T extends _BaseEntity> {
 			throws IllegalStateException, IOException {
 
 		net.bndy.wf.modules.core.models.File f = new net.bndy.wf.modules.core.models.File();
-		f.setName(file.getOriginalFilename());
 		f.setSize(file.getSize());
+		f.setType(FileInfo.getTypeByName(file.getOriginalFilename()));
+		f.setExtName("");
 
-		f.setPath(Paths.get(File.separator, new SimpleDateFormat("yyyy-MM").format(new Date()))
-				.toString());
-		f.setExtName(file.getOriginalFilename().substring(file.getOriginalFilename().indexOf(".")));
-		f.setType(FileInfo.getTypeByName(f.getName()));
+		if (file.getOriginalFilename().indexOf(".") >= 0) {
+			f.setExtName(file.getOriginalFilename().substring(file.getOriginalFilename().lastIndexOf(".")).replace(".", ""));
+			f.setName(file.getOriginalFilename().replace("." + f.getExtName(), ""));
+		}
 
+		f.setPath(Paths.get(File.separator, new SimpleDateFormat("yyyy-MM").format(new Date())).toString());
 		if (this.appliationConfig.isRenameUploadFile()) {
-			f.setPath(Paths.get(f.getPath(), f.getUuid() + f.getExtName()).toString());
+			if (f.getExtName() != null && f.getExtName() != "") {
+				f.setPath(Paths.get(f.getPath(), f.getUuid() + "." + f.getExtName()).toString());
+			} else {
+				f.setPath(Paths.get(f.getPath(), f.getUuid()).toString());
+			}
 		} else {
-			f.setPath(Paths.get(f.getPath(), file.getOriginalFilename()).toString());
+			if (f.getExtName() != null && f.getExtName() != "") {
+				f.setPath(Paths.get(f.getPath(),
+					StringHelper.insertBefore(file.getOriginalFilename(),
+						file.getOriginalFilename().lastIndexOf("."),
+						"_" + StringHelper.generateRandomString(5))
+				).toString());
+			} else {
+				f.setPath(Paths.get(f.getPath(),
+					f.getName() + "_" + StringHelper.generateRandomString(5)
+				).toString());
+			}
 		}
 
 		String destAbsPath = this.appliationConfig.getUploadPath() + f.getPath();
