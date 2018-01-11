@@ -19,6 +19,7 @@ public class ApplicationConfig {
 	private String allowedOrigins;
 	private String defaultUserAvatar;
 	private boolean renameUploadFile;
+	private String adminSkin;
 
 	public String getAllowedOrigins() {
 		return allowedOrigins;
@@ -82,5 +83,13 @@ public class ApplicationConfig {
 
 	public void setAppShortName(String appShortName) {
 		this.appShortName = appShortName;
+	}
+
+	public String getAdminSkin() {
+		return adminSkin;
+	}
+
+	public void setAdminSkin(String adminSkin) {
+		this.adminSkin = adminSkin;
 	}
 }

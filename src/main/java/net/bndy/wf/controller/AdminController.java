@@ -20,8 +20,10 @@ import java.util.List;
 @RequestMapping(value = "/admin")
 public class AdminController extends _BaseController {
 
+
     @RequestMapping(value = "/")
     public String home(Model model) throws IOException {
+        model.addAttribute("skin", applicationConfig.getAdminSkin());
         model.addAttribute("locale", LocaleContextHolder.getLocale().toString());
 
         File resourcesRoot = new ClassPathResource("/").getFile();

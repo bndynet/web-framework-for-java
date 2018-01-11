@@ -64,8 +64,12 @@
           href="/static/assets/css/common.css"/>
     <link rel="stylesheet" type="text/css"
           href="/static/apps/admin/assets/css/style.css"/>
+
+    <script th:inline="javascript">
+       var defaultSkin = [[${skin}]];
+    </script>
 </head>
-<body class="fixed hold-transition sidebar-mini sidebar-mini-expand-feature skin-blue" ng-controller="LayoutCtrl">
+<body class="fixed hold-transition sidebar-mini sidebar-mini-expand-feature" ng-controller="LayoutCtrl">
 <th:block layout:fragment="body"></th:block>
 
 <!-- jQuery -->

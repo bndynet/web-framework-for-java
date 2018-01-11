@@ -93,6 +93,14 @@ $(function () {
       $('body').removeClass(mySkins[i])
     })
 
+    if (cls.indexOf('light') > 0) {
+        $('.control-sidebar').removeClass('control-sidebar-dark');
+        $('.control-sidebar').addClass('control-sidebar-light');
+    } else {
+        $('.control-sidebar').removeClass('control-sidebar-light');
+        $('.control-sidebar').addClass('control-sidebar-dark');
+    }
+
     $('body').addClass(cls)
     store('skin', cls)
     return false
@@ -105,6 +113,12 @@ $(function () {
    */
   function setup() {
     var tmp = get('skin')
+    if (!tmp) {
+        if (typeof(defaultSkin) !== 'undefined' && defaultSkin)
+            tmp = defaultSkin;
+        else
+            tmp = 'skin-black-light';
+    }
     if (tmp && $.inArray(tmp, mySkins))
       changeSkin(tmp)
 
