@@ -3,7 +3,9 @@
 }
 
 .register-page .login-box, .register-page .register-box, .login-page .login-box, .login-page .register-box {
-  margin-bottom: 15px;
+  margin: 0 auto;
+  padding-top: 10%;
+  padding-bottom: 20px;
 }
 
 .register-page .login-box .register-box-body, .register-page .login-box .login-box-body, .register-page .register-box .register-box-body, .register-page .register-box .login-box-body, .login-page .login-box .register-box-body, .login-page .login-box .login-box-body, .login-page .register-box .register-box-body, .login-page .register-box .login-box-body {
@@ -20,5 +22,9 @@
 
 .register-page footer, .login-page footer {
   text-align: center;
+}
+
+.lockscreen-wrapper {
+  margin-top: 20%;
 }
 /*# sourceMappingURL=sso.css.map */
