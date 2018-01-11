@@ -22,6 +22,7 @@ application:
   mail-sender: zb@bndy.net
   allowed-origins: http://bndy.net, http://localhost:5500
   default-user-avatar: /static/assets/img/me.png
+  admin-skin: skin-blue-light
 
 # LOGGING  
 logging:
