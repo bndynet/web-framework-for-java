@@ -1,0 +1,31 @@
+<div class="form-group"
+     ng-class="{'has-success': hasSuccess, 'has-warning': hasWarning, 'has-error': hasError || isFormInvalid()}">
+    <ng-form name="fieldForm">
+        <div>
+            <label class="control-label" for="{{name}}">
+                {{label|translate}}
+            </label>
+            <span class="pull-right help-block no-margin">
+                <span class="help-message" ng-if="tips && !(hasSuccess || hasWarning || hasError || isFormInvalid())">{{tips|translate}}</span>
+                <span class="success-message" ng-if="successMessage && hasSuccess">{{successMessage|translate}}</span>
+                <span class="warning-message" ng-if="warningMessage && hasWarning">{{warningMessage|translate}}</span>
+                <span class="error-message"
+                      ng-if="errorMessage && (hasError || isFormInvalid())">{{errorMessage|translate}}</span>
+            </span>
+        </div>
+
+        <div ng-class="{'input-group': prefix || suffix}">
+            <span class="input-group-addon" ng-if="prefix">
+                <span ng-if="prefixIcon"><i class="{{prefixIcon}}"></i></span>
+                <span ng-if="!prefixIcon">{{prefix|translate}}</span>
+            </span>
+            <input type="{{type||'text'}}" class="form-control" id="{{name}}" name="{{name}}"
+                   placeholder="{{placeholder|translate}}"
+                   ng-model="model" ng-required="required">
+            <span class="input-group-addon" ng-if="suffix">
+                <span ng-if="suffixIcon"><i class="{{suffixIcon}}"></i></span>
+                <span ng-if="!suffixIcon">{{suffix|translate}}</span>
+            </span>
+        </div>
+    </ng-form>
+</div>

@@ -8,9 +8,10 @@
                     <div class="row">
                         <div class="col-xs-7">
                             <div class="row">
-                                <div class="form-group col-xs-6">
-                                    <label ng-bind="'admin.modules.core.userProfile.labelRealName'|translate"></label>
-                                    <input type="text" class="form-control" ng-model="viewModel.realName" />
+                                <div class="col-xs-6">
+                                    <ui-input name="realName"
+                                              label="admin.modules.core.userProfile.labelRealName"
+                                              ng-model="viewModel.realName"></ui-input>
                                 </div>
                                 <div class="form-group col-xs-6">
                                     <label>&nbsp;</label>
@@ -27,10 +28,13 @@
                                     </div>
                                 </div>
                             </div>
-                            <div class="form-group">
-                                <label ng-bind="'admin.modules.core.userProfile.labelEmail'|translate"></label>
-                                <input type="email" class="form-control" ng-model="viewModel.email" />
-                            </div>
+
+                            <ui-input label="admin.modules.core.userProfile.labelEmail"
+                                      name="email"
+                                      type="email"
+                                      error-message="common.msgInvalidEmail"
+                                      ng-model="viewModel.email"></ui-input>
+
                             <div class="form-group">
                                 <label ng-bind="'admin.modules.core.userProfile.labelBirthday'|translate"></label>
                                 <input type="text" class="datepicker form-control" ng-model="viewModel.birthday" />
