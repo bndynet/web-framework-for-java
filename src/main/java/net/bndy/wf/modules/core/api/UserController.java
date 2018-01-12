@@ -135,6 +135,8 @@ public class UserController extends _BaseApi<User> {
         User u = this.getCurrentUser();
         if (this.userService.comparePassword(data.get("oldPassword"), u.getPassword())) {
             this.userService.changePassword(u.getId(), data.get("newPassword"));
+        } else {
+            // TODO: throw an exception
         }
     }
 
