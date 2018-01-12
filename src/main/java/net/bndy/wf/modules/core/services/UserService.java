@@ -172,4 +172,16 @@ public class UserService extends _BaseService<User> {
         }
         return u;
     }
+
+    public boolean comparePassword(String pwd, String encodedPassword) {
+       return this.passwordEncoder.matches(pwd, encodedPassword);
+    }
+
+    public void changePassword(long userId, String newPassword) {
+        User u = this.userRepository.getOne(userId);
+        if (u != null) {
+            u.setPassword(this.passwordEncoder.encode(newPassword));
+            this.userRepository.saveAndFlush(u);
+        }
+    }
 }

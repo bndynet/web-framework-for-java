@@ -69,5 +69,18 @@ app.controller('UserProfileCtrl', [ '$scope', 'appDialog', '$http', '$timeout', 
                 });
             }
         };
+
+        $scope.changePassword = function() {
+            if ($scope.pwdModel.oldPassword && $scope.pwdModel.newPassword) {
+                $http.post('/api/core/users/changePassword', {
+                    oldPassword: $scope.pwdModel.oldPassword,
+                    newPassword: $scope.pwdModel.newPassword
+                }).then(function() {
+                    $scope.pwdModel = null;
+                    $scope.pwdForm.$setPristine();
+                    appDialog.success();
+                });
+            }
+        };
     }
 ]);
