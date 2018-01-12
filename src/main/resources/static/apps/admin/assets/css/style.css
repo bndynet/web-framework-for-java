@@ -90,6 +90,14 @@
 }
 
 /* Bootstrap */
+.form-group .error-block {
+  display: none;
+}
+
+.form-group.has-error .error-block {
+  display: block;
+}
+
 .list-group .list-group-item img.media-object {
   width: 112px;
 }

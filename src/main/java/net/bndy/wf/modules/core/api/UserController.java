@@ -7,6 +7,7 @@ package net.bndy.wf.modules.core.api;
 import java.io.IOException;
 import java.net.MalformedURLException;
 import java.util.HashMap;
+import java.util.Map;
 
 import net.bndy.wf.ApplicationContext;
 import net.bndy.wf.modules.core.models.File;
@@ -127,6 +128,14 @@ public class UserController extends _BaseApi<User> {
         File f = super.upload(file, request);
         this.userService.updateAvatar(ApplicationContext.getCurrentUser().getId(), f);
         return f;
+    }
+
+    @RequestMapping(value = "/changePassword", method = RequestMethod.POST)
+    public void changePassword(@RequestBody Map<String, String> data) {
+        User u = this.getCurrentUser();
+        if (this.userService.comparePassword(data.get("oldPassword"), u.getPassword())) {
+            this.userService.changePassword(u.getId(), data.get("newPassword"));
+        }
     }
 
     @RequestMapping(value = "/profile", method = RequestMethod.GET)
