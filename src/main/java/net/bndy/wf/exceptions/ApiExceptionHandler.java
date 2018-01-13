@@ -31,13 +31,15 @@ public class ApiExceptionHandler {
 
         ApiError error = new ApiError(e);
 
-        if (e instanceof DataNotFoundException) {
+        if (e instanceof NoResourceFoundException) {
             error.setStatus(HttpStatus.NOT_FOUND);
         } else if (e instanceof OAuthException) {
             error.setStatus(HttpStatus.UNAUTHORIZED);
             OAuthException ex = (OAuthException) e;
             error.setMessage(AnnotationHelper
                 .getFieldAnnotation(Description.class, OAuthExceptionType.class, ex.getType().name()).value());
+        } else {
+            error.setStatus(HttpStatus.INTERNAL_SERVER_ERROR);
         }
 
         return error.toResponse();

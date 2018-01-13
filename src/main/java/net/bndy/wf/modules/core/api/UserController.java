@@ -10,6 +10,7 @@ import java.util.HashMap;
 import java.util.Map;
 
 import net.bndy.wf.ApplicationContext;
+import net.bndy.wf.exceptions.AppException;
 import net.bndy.wf.modules.core.models.File;
 import net.bndy.wf.modules.core.models.User;
 import net.bndy.wf.modules.core.models.UserProfile;
@@ -131,12 +132,12 @@ public class UserController extends _BaseApi<User> {
     }
 
     @RequestMapping(value = "/changePassword", method = RequestMethod.POST)
-    public void changePassword(@RequestBody Map<String, String> data) {
+    public void changePassword(@RequestBody Map<String, String> data) throws AppException {
         User u = this.getCurrentUser();
         if (this.userService.comparePassword(data.get("oldPassword"), u.getPassword())) {
             this.userService.changePassword(u.getId(), data.get("newPassword"));
         } else {
-            // TODO: throw an exception
+            throw new AppException("admin.modules.core.userProfile.incorrectOldPassword");
         }
     }
 

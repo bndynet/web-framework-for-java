@@ -30,6 +30,7 @@ app.config(['$provide', '$qProvider', '$httpProvider', '$stateProvider', '$trans
     // http interceptor
     $provide.factory('appHttpInterceptor', ['$q', '$injector', '$timeout', function($q, $injector, $timeout) {
         var toaster = $injector.get('toaster');
+        var translate = $injector.get('$translate');
         return {
             'request': function(config) {
                 return config;
@@ -45,19 +46,21 @@ app.config(['$provide', '$qProvider', '$httpProvider', '$stateProvider', '$trans
                 return response;
             },
            'responseError': function(rejection) {
-                var title = rejection.data.error;
+                console.error(rejection);
+
+                var title = rejection.data.error || rejection.data.title;
                 var message = rejection.data.message;
 
-                // do something here
                 switch(rejection.status) {
                     case 401:
                     $timeout(function() {
                         location.href = '/sso/login';
                     }, 3000);
-                    message = 'You will be redirected to login page in 3 seconds.';
+                    title = translate.instant('error.msgUnauthorized');
+                    message = translate.instant('common.msgRedirectToLogin');
                     default:
                 }
-                console.error(rejection);
+
                 toaster.pop({
                     type: 'error',
                     title: title,
@@ -120,6 +123,8 @@ app.factory('appDialog', [
 			toaster.clear(null, wait);
 		};
 		service.warning = function (title, msg) {
+            if (title) title = $translate.instant(title);
+            if (msg) msg = $translate.instant(msg);
 			toaster.pop({
 				type: 'warning',
 				title: title,
@@ -129,7 +134,8 @@ app.factory('appDialog', [
 		};
 		service.success = function (title, msg) {
 			if (!title) title = 'common.msgSuccess';
-            title = $translate.instant(title);
+            if (title) title = $translate.instant(title);
+            if (msg) msg = $translate.instant(msg);
 			toaster.pop({
 				type: 'success',
 				title: title,
@@ -139,9 +145,9 @@ app.factory('appDialog', [
 		};
 		service.error = function (title, msg) {
 			if (!title) title = 'error.title';
-            title = $translate.instant(title);
             if (!msg) msg = 'error.description';
-            msg =$translate.instant(msg);
+            if (title) title = $translate.instant(title);
+            if (msg) msg = $translate.instant(msg);
 			toaster.pop({
 				type: 'error',
 				title: title,
@@ -151,11 +157,15 @@ app.factory('appDialog', [
 		};
 
 		service.alert = function (title, msg) {
+            if (title) title = $translate.instant(title);
+            if (msg) msg = $translate.instant(msg);
 			$mdDialog.alert().clickOutsideToClose(true).title(title)
 				.textContent(msg).ok($translate.instant('common.ok'));
 		};
 
 		service.confirm = function (title, msg, fnOK, fnCancel) {
+            if (title) title = $translate.instant(title);
+            if (msg) msg = $translate.instant(msg);
 			var confirm = $mdDialog.confirm().title(title).textContent(msg)
 				.ok($translate.instant('common.ok')).cancel($translate.instant('common.cancel'));
 
