@@ -90,9 +90,10 @@ app.config(['$provide', '$qProvider', '$httpProvider', '$stateProvider', '$trans
 }]);
 
 app.factory('appDialog', [
+    '$translate',
 	'$mdDialog',
 	'toaster',
-	function ($mdDialog, toaster) {
+	function ($translate, $mdDialog, toaster) {
 		var service = {};
 
 		service.info = function (title, msg) {
@@ -127,8 +128,8 @@ app.factory('appDialog', [
 			});
 		};
 		service.success = function (title, msg) {
-			if (!title)
-				title = 'Success';
+			if (!title) title = 'common.msgSuccess';
+            title = $translate.instant(title);
 			toaster.pop({
 				type: 'success',
 				title: title,
@@ -137,8 +138,10 @@ app.factory('appDialog', [
 			});
 		};
 		service.error = function (title, msg) {
-			if (!title)
-				title = 'Operation Failed';
+			if (!title) title = 'error.title';
+            title = $translate.instant(title);
+            if (!msg) msg = 'error.description';
+            msg =$translate.instant(msg);
 			toaster.pop({
 				type: 'error',
 				title: title,
@@ -149,12 +152,12 @@ app.factory('appDialog', [
 
 		service.alert = function (title, msg) {
 			$mdDialog.alert().clickOutsideToClose(true).title(title)
-				.textContent(msg).ok('OK')
+				.textContent(msg).ok($translate.instant('common.ok'));
 		};
 
 		service.confirm = function (title, msg, fnOK, fnCancel) {
 			var confirm = $mdDialog.confirm().title(title).textContent(msg)
-				.ok('OK').cancel('Cancel');
+				.ok($translate.instant('common.ok')).cancel($translate.instant('common.cancel'));
 
 			$mdDialog.show(confirm).then(function () {
 				if (fnOK)
@@ -166,8 +169,7 @@ app.factory('appDialog', [
 		};
 
 		service.confirmDeletion = function (fnOK) {
-			service.confirm('Delete?',
-				'Are you sure you want to remove this item?', fnOK);
+			service.confirm($translate.instant('common.confirmDeleteTitle'), $translate.instant('common.confirmDeleteDescription'), fnOK);
 		};
 
 		// TODO: need to test
