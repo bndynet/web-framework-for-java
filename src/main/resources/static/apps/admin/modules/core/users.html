@@ -23,8 +23,11 @@
                 <table class="table table-striped table-hover">
                     <thead>
                     <tr>
+                        <th class="col-icon"></th>
                         <th ng-bind="'admin.modules.user.fieldUsername'|translate"></th>
                         <th ng-bind="'admin.modules.user.fieldRoles'|translate"></th>
+                        <th ng-bind="'admin.modules.core.userProfile.fieldRealName'|translate"></th>
+                        <th ng-bind="'admin.modules.core.userProfile.fieldEmail'|translate"></th>
                         <th ng-bind="'admin.modules.user.fieldCreatedAt'|translate"></th>
                         <th ng-bind="'admin.modules.user.fieldLastUpdate'|translate"></th>
                         <th class="text-center"
@@ -35,6 +38,11 @@
                     </thead>
                     <tbody>
                     <tr ng-repeat="item in data">
+                        <td>
+                            <span class="fa"
+                                  title="{{ item.userProfile.gender == '1' ? 'admin.modules.core.userProfile.valueMale' : (item.userProfile.gender == '0' ? 'admin.modules.core.userProfile.valueFemale' : '') |translate}}"
+                                  ng-class="{'fa-mars text-blue': item.userProfile.gender == '1', 'fa-venus text-red': item.userProfile.gender == '0'}"></span>
+                        </td>
                         <td ng-bind="item.username"></td>
                         <td>
                             <a ng-click="editRoles(item)" ng-if="!item.superAdmin">
@@ -45,6 +53,12 @@
                                 <span ng-bind="item.roles[0].name" ng-if="item.roles && item.roles.length > 0"></span>
                                 <em ng-if="item.roles && item.roles.length == 0" ng-bind="'admin.modules.user.noRoles'|translate"></em>
                             </span>
+                        </td>
+                        <td>
+                            <span ng-bind="item.userProfile.realName"></span>
+                        </td>
+                        <td>
+                            <span ng-bind="item.userProfile.email"></span>
                         </td>
                         <td ng-bind="item.createDate | date: 'yyyy-MM-dd HH:mm'"></td>
                         <td ng-bind="item.lastUpdate | date: 'yyyy-MM-dd HH:mm'"></td>

@@ -43,6 +43,14 @@ public class User extends _BaseEntity implements UserDetails {
             inverseJoinColumns = @JoinColumn(name = "role_id"))
     private Set<Role> roles;
 
+    @OneToOne(mappedBy = "user", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
+    private UserProfile userProfile;
+
+    public UserProfile getUserProfile() {
+        return userProfile;
+    }
+
+
     public User() {
     }
 

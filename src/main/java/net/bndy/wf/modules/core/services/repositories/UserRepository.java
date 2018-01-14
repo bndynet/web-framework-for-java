@@ -20,8 +20,10 @@ public interface UserRepository extends JpaRepository<User, Long> {
 
     @Query(
         nativeQuery = true,
-        value = "SELECT * FROM core_user WHERE username LIKE %:keywords% ORDER BY ?#{#pageable}",
-        countQuery = "SELECT count(*) FROM core_user WHERE username LIKE %:keywords%"
+        value = "SELECT * FROM core_user a LEFT JOIN core_user_profile b ON b.user_id = a.id " +
+            "WHERE a.username LIKE %:keywords% OR b.real_name LIKE %:keywords% OR b.email LIKE %:keywords% ORDER BY ?#{#pageable}",
+        countQuery = "SELECT count(*) FROM core_user a LEFT JOIN core_user_profile b ON b.user_id = a.id " +
+            "WHERE a.username LIKE %:keywords% OR b.real_name LIKE %:keywords% OR b.email LIKE %:keywords%"
     )
     Page<User> search(@Param(value = "keywords") String keywords, Pageable pageable);
 

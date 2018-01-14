@@ -6,9 +6,7 @@ package net.bndy.wf.modules.core.models;
 
 import java.util.Date;
 
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.Table;
+import javax.persistence.*;
 
 import net.bndy.wf.lib._BaseEntity;
 
@@ -17,12 +15,16 @@ import net.bndy.wf.lib._BaseEntity;
 public class UserProfile extends _BaseEntity {
 
 	private static final long serialVersionUID = 1L;
+	@Column(columnDefinition = "BIGINT UNSIGNED", unique = true, nullable = false)
 	private Long userId;
 	private String email;
 	private String realName;
 	private String gender;
 	@Column(columnDefinition = "DATE")
 	private Date birthday;
+	@OneToOne(fetch = FetchType.LAZY, optional = false)
+	@JoinColumn(name = "user_id", insertable = false, updatable = false)
+	private User user;
 
 	public Long getUserId() {
 		return userId;
