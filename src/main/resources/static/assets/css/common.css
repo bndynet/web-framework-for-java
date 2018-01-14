@@ -4,7 +4,6 @@ body {
   padding: 0;
   height: 100%;
   font-size: 14px;
-  font-weight: 200;
 }
 
 h1.with-border, h2.with-border, h3.with-border, h4.with-border, h5.with-border, h6.with-border {
