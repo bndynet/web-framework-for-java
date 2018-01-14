@@ -1,4 +1,4 @@
-app.directive('uiMenuMessages', ['$http', function($http){
+app.directive('uiMenuMessages', ['$http', '$translate', function($http, $translate) {
 
     return {
         restrict: 'E',

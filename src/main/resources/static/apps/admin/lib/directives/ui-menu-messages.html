@@ -4,7 +4,7 @@
         <span class="label label-{{theme}}">{{data.length}}</span>
     </a>
     <ul class="dropdown-menu">
-        <li class="header">You have {{data.length}} messages.</li>
+        <li class="header" ng-bind="'admin.messageBar.title'|translate: [data.length]"></li>
         <li>
             <ul class="menu">
                 <li ng-repeat="item in data">
@@ -22,7 +22,7 @@
             </ul>
         </li>
         <li class="footer" ng-if="moreText">
-            <a ng-bind="moreText" ng-click="moreClick({ev: $event})"></a>
+            <a ng-click="moreClick({ev: $event})" ng-bind="moreText|translate"></a>
         </li>
     </ul>
 </li>
