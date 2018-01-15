@@ -138,6 +138,10 @@
   margin-top: 150px;
 }
 
+.modal-dialog .modal-content {
+  border-radius: 4px;
+}
+
 /* angularjs material */
 md-backdrop.md-dialog-backdrop {
   z-index: 1200;
@@ -149,6 +153,11 @@ md-backdrop.md-dialog-backdrop {
 
 .md-dialog-container md-dialog {
   margin-top: -100px;
+  min-width: 360px;
+}
+
+.md-dialog-container md-dialog .md-dialog-content h3 {
+  margin-top: 0;
 }
 
 /* override others */

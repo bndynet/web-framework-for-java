@@ -169,6 +169,9 @@
 
 .modal-dialog {
   margin-top: 150px;
+  .modal-content {
+    border-radius: 4px;
+  }
 }
 
 
@@ -183,6 +186,13 @@ md-backdrop.md-dialog-backdrop {
 
   md-dialog {
     margin-top: -100px;
+    min-width: 360px;
+
+    .md-dialog-content {
+      h3 {
+        margin-top: 0;
+      }
+    }
   }
 }
 

@@ -1,0 +1,29 @@
+<md-dialog>
+    <form ng-cloak>
+        <md-toolbar>
+            <div class="md-toolbar-tools">
+                <h2>
+                    <i class="{{options.icon}}" ng-if="options.icon"></i>
+                    {{vm.title}}
+                </h2>
+                <span flex></span>
+                <md-button class="md-icon-button" ng-click="closeDialog()">
+                    <i class="fa fa-close"></i>
+                </md-button>
+            </div>
+        </md-toolbar>
+
+        <md-dialog-content>
+            <div class="md-dialog-content">
+                <h3 ng-bind="vm.subtitle" ng-if="vm.subtitle"></h3>
+                <p>{{vm.description}}</p>
+            </div>
+        </md-dialog-content>
+
+        <md-dialog-actions layout="row">
+            <md-button ng-click="closeDialog()" md-autofocus>
+                {{'common.close'|translate}}
+            </md-button>
+        </md-dialog-actions>
+    </form>
+</md-dialog>

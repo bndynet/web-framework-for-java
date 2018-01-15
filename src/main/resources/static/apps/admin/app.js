@@ -159,8 +159,15 @@ app.factory('appDialog', [
 		service.alert = function (title, msg) {
             if (title) title = $translate.instant(title);
             if (msg) msg = $translate.instant(msg);
-			$mdDialog.alert().clickOutsideToClose(true).title(title)
-				.textContent(msg).ok($translate.instant('common.ok'));
+            var alert = $mdDialog.alert({
+                title: title,
+                textContent: msg,
+                ok: $translate.instant('common.ok'),
+                clickOutsideToClose: false
+            });
+            $mdDialog.show(alert).finally(function() {
+                alert = null;
+            });
 		};
 
 		service.confirm = function (title, msg, fnOK, fnCancel) {
@@ -182,23 +189,20 @@ app.factory('appDialog', [
 			service.confirm($translate.instant('common.confirmDeleteTitle'), $translate.instant('common.confirmDeleteDescription'), fnOK);
 		};
 
-		// TODO: need to test
-		service.showWin = function (data, controller, templateUrl, fnOK,
-			fnCancel) {
+		service.showWin = function (data, controller, templateUrl, fnOK, fnCancel, options) {
 			$mdDialog.show({
 				locals: {
-					data: data
+					vm: data,
+					options: options,
 				},
 				controller: controller,
 				templateUrl: templateUrl,
 				parent: angular.element(document.body),
 				clickOutsideToClose: false
 			}).then(function (result) {
-				if (fnOK)
-					fnOK(result);
+				if (fnOK) fnOK(result);
 			}, function () {
-				if (fnCancel)
-					fnCancel();
+				if (fnCancel) fnCancel();
 			});
 		};
 
@@ -206,8 +210,8 @@ app.factory('appDialog', [
 	}
 ]);
 
-app.controller('LayoutCtrl', ['$http', '$scope',
-    function($http, $scope) {
+app.controller('LayoutCtrl', ['$http', '$scope', 'appDialog',
+    function($http, $scope, appDialog) {
         // menus
         $scope.menus = [];
         $http.get('/static/apps/admin/mockdata/menus.json').then(function(res) {
@@ -220,12 +224,13 @@ app.controller('LayoutCtrl', ['$http', '$scope',
             search: function() {
                 if ($scope.searchOptions.value) {
                     // TODO
-                    alert('TODO: search ' + $scope.searchOptions.value);
+                    appDialog.alert('TODO', 'search ' + $scope.searchOptions.value);
                 }
             }
         };
 
         // messages
+        // TODO: get messages from backend
         $scope.messages = [];
         $http.get('/static/apps/admin/mockdata/messages.json').then(function(res) {
             $scope.messages = res.data;
@@ -240,12 +245,15 @@ app.controller('LayoutCtrl', ['$http', '$scope',
             }
         });
         $scope.messageClick = function(item) {
-            // TODO
-            alert('You have viewed `' + item.title + '`.');
+            // TODO: remove item from message bar
+            appDialog.showWin(item, DialogMessageCtrl, '/static/apps/admin/modules/shared/dialogMessage.html',
+                null, null, {
+                    icon: 'fa fa-fw fa-user'
+                });
         };
         $scope.messageMoreClick = function() {
             // TODO
-            alert('Link to more messages.');
+            appDialog.alert('TODO', 'Link to more messages.');
         };
 
         // lock screen
