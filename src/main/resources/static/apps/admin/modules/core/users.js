@@ -44,7 +44,17 @@ app.controller('UsersCtrl',
                 var roleId = $scope.userModel.currentRole.id;
                 $http.put('/api/core/users/' + $scope.userModel.id + '/changeRole?roleId=' + $scope.userModel.currentRole.id)
                     .then(function(res) {
-                        $scope.pageUsers($scope.pager.currentPage);
+                        appDialog.success();
+                        var curItem = _.find($scope.data, function(item) { return item.id == $scope.userModel.id});
+                        if (curItem) {
+                            curItem.roles.length = 0;
+                            curItem.roleNames.length = 0;
+                            curItem.roles.push($scope.userModel.currentRole);
+                            curItem.roleNames.push($scope.userModel.currentRole.name);
+                        } else {
+                            $scope.pageUsers($scope.pager.currentPage);
+                        }
+                        $scope.userModel = null
                         $('#rolesForm').modal('hide');
                     });
             }
