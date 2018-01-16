@@ -142,6 +142,11 @@
   border-radius: 4px;
 }
 
+/* toaster */
+.toast-close-button {
+  top: -10px;
+}
+
 /* angularjs material */
 md-backdrop.md-dialog-backdrop {
   z-index: 1200;
