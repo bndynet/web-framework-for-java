@@ -93,6 +93,9 @@ $(function () {
       $('body').removeClass(mySkins[i])
     })
 
+    $('.skin-list').find('a.active').removeClass('active');
+    $('.skin-list').find('a[data-skin=' + cls + ']').addClass('active');
+
     if (cls.indexOf('light') > 0) {
         $('.control-sidebar').removeClass('control-sidebar-dark');
         $('.control-sidebar').addClass('control-sidebar-light');
