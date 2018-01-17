@@ -58,6 +58,10 @@
       &>a {
         display: block;
         box-shadow: 0 0 3px rgba(0, 0, 0, 0.4);
+        &.active {
+          box-shadow: 0 0 5px rgba(0, 0, 0, 1);
+          opacity: 1;
+        }
         &>div {
           &>span:first-child {
             display: block;
@@ -174,6 +178,10 @@
   }
 }
 
+/* toaster */
+.toast-close-button {
+  top: -10px;
+}
 
 /* angularjs material */
 .layout-row{

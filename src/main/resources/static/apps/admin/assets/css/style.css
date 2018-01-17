@@ -55,6 +55,11 @@
   box-shadow: 0 0 3px rgba(0, 0, 0, 0.4);
 }
 
+.control-sidebar ul.skin-list > li > a.active {
+  box-shadow: 0 0 5px black;
+  opacity: 1;
+}
+
 .control-sidebar ul.skin-list > li > a > div > span:first-child {
   display: block;
   width: 20%;
@@ -140,6 +145,11 @@
 
 .modal-dialog .modal-content {
   border-radius: 4px;
+}
+
+/* toaster */
+.toast-close-button {
+  top: -10px;
 }
 
 /* angularjs material */
