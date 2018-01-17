@@ -4,13 +4,11 @@
  ******************************************************************************/
 package net.bndy.wf.modules.core.api;
 
+import java.io.IOException;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
@@ -27,11 +25,21 @@ public class MenuController extends _BaseApi<Menu> {
 
 	@ApiOperation(value = "Get menus with children")
 	@RequestMapping(value = "/tree", method = RequestMethod.GET)
-	public List<Menu> get(@RequestParam(name = "all", required = false, defaultValue = "false") boolean all) {
+	public List<Menu> get(@RequestParam(name = "all", required = false, defaultValue = "false") boolean all) throws IOException {
+	    List<Menu> result = null;
 		if (all) {
-			return this.menuService.getMenus();
+			result = this.menuService.getMenus();
 		} else {
-			return this.menuService.getUserMenus();
+			result = this.menuService.getUserMenus();
 		}
+		// TODO: append Menu Management for Admin User
+        result.add(this.menuService.getMenuManagementEntry());
+		return  result;
+	}
+
+	@ApiOperation(value = "Toggle menu visible")
+	@RequestMapping(value = "/{id}/toggleVisible", method = RequestMethod.PUT)
+	public void toggleVisible(@PathVariable(name = "id") long id) {
+		this.menuService.toggleVisible(id);
 	}
 }

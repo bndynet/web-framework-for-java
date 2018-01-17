@@ -49,6 +49,12 @@ img {
   width: 26px;
 }
 
+.hover {
+  &:hover {
+    background-color: #f5f5f5;
+  }
+}
+
 /* bootstrap */
 
 .navbar {
@@ -73,8 +79,8 @@ img {
 }
 
 .row {
-  display: flex;
   &.middle {
+    display: flex;
     &>div {
       vertical-align: middle;
     }
@@ -96,5 +102,40 @@ img {
     position: absolute;
     right: 1rem;
     top: 15px;
+  }
+}
+
+/* others */
+.tree {
+  .tree-item {
+    padding: 5px 0;
+
+    &.with-border {
+      border-bottom: solid 1px #dedede;
+    }
+
+    &.disabled {
+      color: #aaaaaa;
+    }
+    
+    &.active {
+      background-color: #3c8dbc;
+      color: #ffffff;
+
+      a {
+        color: #ffffff;
+      }
+    }
+
+    & + .child-box {
+      margin-left: 2rem;
+    }
+  }
+}
+
+.icon-group {
+  i {
+    padding: 2px 3px;
+    margin: 0 5px;
   }
 }

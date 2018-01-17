@@ -1,13 +1,13 @@
 <div ng-controller="UsersCtrl">
-    <ui-page-header title="'admin.modules.user.title'"
-                    subtitle="'admin.modules.user.subtitle'"
-                    breadcrumbs="[{'text': 'admin.modules.user.title'}]"></ui-page-header>
+    <ui-page-header title="'admin.modules.core.users.title'"
+                    subtitle="'admin.modules.core.users.subtitle'"
+                    breadcrumbs="[{'text': 'admin.modules.core.users.title'}]"></ui-page-header>
     <section class="content">
         <div class="box box-default">
             <div class="box-header with-border">
                 <div class="pull-left">
                     <div class="input-group input-group-sm search-box pull-left">
-                        <input type="text" class="form-control" ng-model="searchKeywords" placeholder="{{'admin.modules.user.searchTips'|translate}}">
+                        <input type="text" class="form-control" ng-model="searchKeywords" placeholder="{{'admin.modules.core.users.searchTips'|translate}}">
                         <span class="input-group-btn">
                           <button type="button" class="btn btn-primary" ng-click="search()">{{'common.search'|translate}}</button>
                         </span>
@@ -16,7 +16,7 @@
                 </div>
 
                 <div class="box-tools pull-right">
-                    <a class="btn btn-sm btn-primary" href="/sso/signup" target="_blank" ng-bind="'admin.modules.user.addUser'|translate"></a>
+                    <a class="btn btn-sm btn-primary" href="/sso/signup" target="_blank" ng-bind="'admin.modules.core.users.addUser'|translate"></a>
                 </div>
             </div>
             <div class="box-body">
@@ -24,12 +24,12 @@
                     <thead>
                     <tr>
                         <th class="col-icon"></th>
-                        <th ng-bind="'admin.modules.user.fieldUsername'|translate"></th>
-                        <th ng-bind="'admin.modules.user.fieldRoles'|translate"></th>
+                        <th ng-bind="'admin.modules.core.users.fieldUsername'|translate"></th>
+                        <th ng-bind="'admin.modules.core.users.fieldRoles'|translate"></th>
                         <th ng-bind="'admin.modules.core.userProfile.fieldRealName'|translate"></th>
                         <th ng-bind="'admin.modules.core.userProfile.fieldEmail'|translate"></th>
-                        <th ng-bind="'admin.modules.user.fieldCreatedAt'|translate"></th>
-                        <th ng-bind="'admin.modules.user.fieldLastUpdate'|translate"></th>
+                        <th ng-bind="'admin.modules.core.users.fieldCreatedAt'|translate"></th>
+                        <th ng-bind="'admin.modules.core.users.fieldLastUpdate'|translate"></th>
                         <th class="text-center"
                             ng-bind="'common.enable'|translate"></th>
                         <th class="text-center"
@@ -47,11 +47,11 @@
                         <td>
                             <a ng-click="editRoles(item)" ng-if="!item.superAdmin">
                                 <span ng-bind="item.roles[0].name" ng-if="item.roles && item.roles.length > 0"></span>
-                                <em ng-if="item.roles && item.roles.length == 0" ng-bind="'admin.modules.user.noRoles'|translate"></em>
+                                <em ng-if="item.roles && item.roles.length == 0" ng-bind="'admin.modules.core.users.noRoles'|translate"></em>
                             </a>
                             <span ng-if="item.superAdmin">
                                 <span ng-bind="item.roles[0].name" ng-if="item.roles && item.roles.length > 0"></span>
-                                <em ng-if="item.roles && item.roles.length == 0" ng-bind="'admin.modules.user.noRoles'|translate"></em>
+                                <em ng-if="item.roles && item.roles.length == 0" ng-bind="'admin.modules.core.users.noRoles'|translate"></em>
                             </span>
                         </td>
                         <td>
@@ -74,7 +74,7 @@
                             </a>
                         </td>
                         <td class="text-center" colspan="2" ng-if="item.superAdmin">
-                            {{'admin.modules.user.disableEditForSuperAdmin'|translate}}
+                            {{'admin.modules.core.users.disableEditForSuperAdmin'|translate}}
                         </td>
                     </tr>
                     </tbody>
@@ -94,7 +94,7 @@
                         <span aria-hidden="true">&times;</span>
                     </button>
                     <h4 class="modal-title">
-                        <span ng-bind-html="'admin.modules.user.rolesForUser'|translate:[userModel.username]"></span>
+                        <span ng-bind-html="'admin.modules.core.users.rolesForUser'|translate:[userModel.username]"></span>
                     </h4>
                 </div>
                 <div class="modal-body">

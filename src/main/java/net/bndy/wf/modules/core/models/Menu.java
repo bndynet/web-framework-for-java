@@ -22,21 +22,19 @@ public class Menu extends _BaseEntity {
 
 	private static final long serialVersionUID = 1L;
 	
-	private long boTypeId;
-	private long parentId;
-
+	private Long parentId;
 	private String icon;
 	private String name;
-	private String description;
-	private boolean isHidden;
+	private String link;
+	private String parents;
+	private String linkParams;
+	private boolean isVisible;
 	private int displayOrder;
-	
-	@Enumerated(EnumType.ORDINAL)
-	private AppBoType boType;
 	
 	@Transient
 	private Collection<Menu> children;
-	
+
+
 	public Menu() {
 		this.setChildren(new ArrayList<Menu>());
 	}
@@ -47,10 +45,10 @@ public class Menu extends _BaseEntity {
 	public void setChildren(Collection<Menu> children) {
 		this.children = children;
 	}
-	public long getParentId() {
+	public Long getParentId() {
 		return parentId;
 	}
-	public void setParentId(long parentId) {
+	public void setParentId(Long parentId) {
 		this.parentId = parentId;
 	}
 	public String getIcon() {
@@ -65,35 +63,34 @@ public class Menu extends _BaseEntity {
 	public void setName(String name) {
 		this.name = name;
 	}
-	public String getDescription() {
-		return description;
+	public String getLink() {
+		return link;
 	}
-	public void setDescription(String description) {
-		this.description = description;
+	public void setLink(String link) {
+		this.link = link;
 	}
-
-	public AppBoType getBoType() {
-		return boType;
+	public String getLinkParams() {
+		return linkParams;
 	}
-	public void setBoType(AppBoType boType) {
-		this.boType = boType;
+	public void setLinkParams(String linkParams) {
+		this.linkParams = linkParams;
 	}
-	public long getBoTypeId() {
-		return boTypeId;
+	public boolean isVisible() {
+		return isVisible;
 	}
-	public void setBoTypeId(long boTypeId) {
-		this.boTypeId = boTypeId;
-	}
-	public boolean isHidden() {
-		return isHidden;
-	}
-	public void setHidden(boolean isHidden) {
-		this.isHidden = isHidden;
+	public void setVisible(boolean isVisible) {
+		this.isVisible = isVisible;
 	}
 	public int getDisplayOrder() {
 		return displayOrder;
 	}
 	public void setDisplayOrder(int displayOrder) {
 		this.displayOrder = displayOrder;
+	}
+	public String getParents() {
+		return parents;
+	}
+	public void setParents(String parents) {
+		this.parents = parents;
 	}
 }

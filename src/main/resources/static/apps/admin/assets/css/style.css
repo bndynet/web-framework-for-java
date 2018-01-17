@@ -143,6 +143,15 @@
 }
 
 /* angularjs material */
+.layout-row md-input-container {
+  margin-bottom: 0;
+}
+
+.md-input-container md-switch {
+  margin-left: 0;
+  margin-bottom: 0;
+}
+
 md-backdrop.md-dialog-backdrop {
   z-index: 1200;
 }

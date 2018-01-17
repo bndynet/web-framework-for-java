@@ -48,6 +48,10 @@ img.circle {
   width: 26px;
 }
 
+.hover:hover {
+  background-color: #f5f5f5;
+}
+
 /* bootstrap */
 .navbar .nav li a img {
   position: relative;
@@ -62,7 +66,7 @@ img.circle {
   font-size: 60%;
 }
 
-.row {
+.row.middle {
   display: flex;
 }
 
@@ -84,5 +88,36 @@ img.circle {
   position: absolute;
   right: 1rem;
   top: 15px;
+}
+
+/* others */
+.tree .tree-item {
+  padding: 5px 0;
+}
+
+.tree .tree-item.with-border {
+  border-bottom: solid 1px #dedede;
+}
+
+.tree .tree-item.disabled {
+  color: #aaaaaa;
+}
+
+.tree .tree-item.active {
+  background-color: #3c8dbc;
+  color: #ffffff;
+}
+
+.tree .tree-item.active a {
+  color: #ffffff;
+}
+
+.tree .tree-item + .child-box {
+  margin-left: 2rem;
+}
+
+.icon-group i {
+  padding: 2px 3px;
+  margin: 0 5px;
 }
 /*# sourceMappingURL=common.css.map */

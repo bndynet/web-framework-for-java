@@ -12,6 +12,11 @@
         "name": "Users",
         "icon": "fa fa-fw fa-users",
         "url": "core-users"
+      },
+      {
+        "name": "Menus",
+        "icon": "fa fa-fw fa-users",
+        "url": "core-menus"
       }
     ]
   },

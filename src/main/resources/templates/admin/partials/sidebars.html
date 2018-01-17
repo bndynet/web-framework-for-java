@@ -36,9 +36,9 @@
 
         <!-- sidebar menus -->
         <script type="text/ng-template" id="MainMenuItem">
-            <a ui-sref="{{menu.url}}" ui-sref-active="active">
+            <a ui-sref="{{menu.link}}" ui-sref-active="active">
                 <i class="{{menu.icon}}"></i>
-                <span ng-bind="menu.name"></span>
+                <span ng-bind="menu.name|translate"></span>
 
                 <span class="pull-right-container" ng-show="menu.children && menu.children.length > 0">
                     <i class="fa fa-angle-left pull-right"></i>
@@ -52,14 +52,14 @@
                 </span>
             </a>
             <ul class="treeview-menu" ng-if="menu.children.length > 0">
-                <li ng-repeat="menu in menu.children track by $index"
+                <li ng-repeat="menu in menu.children | orderBy: 'displayOrder' track by $index"
                     ng-include="'MainMenuItem'"
                     ng-class="{'treeview': menu.children}"></li>
             </ul>
         </script>
         <ul class="sidebar-menu" data-widget="tree">
             <li class="header" th:text="#{common.menu}"></li>
-            <li ng-repeat="menu in menus track by $index"
+            <li ng-repeat="menu in menus | orderBy: 'displayOrder' track by $index"
                 ng-include="'MainMenuItem'"
                 ng-class="{'treeview': menu.children && menu.children.length > 0}"></li>
         </ul>

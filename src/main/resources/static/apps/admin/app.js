@@ -214,7 +214,7 @@ app.controller('LayoutCtrl', ['$http', '$scope', 'appDialog',
     function($http, $scope, appDialog) {
         // menus
         $scope.menus = [];
-        $http.get('/static/apps/admin/mockdata/menus.json').then(function(res) {
+        $http.get('/api/core/menus/tree').then(function(res) {
             $scope.menus = res.data;
         });
 

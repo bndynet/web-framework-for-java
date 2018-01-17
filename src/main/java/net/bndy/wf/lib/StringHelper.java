@@ -14,6 +14,7 @@ import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.*;
 
+import com.google.common.primitives.Longs;
 import org.apache.xerces.impl.dv.util.Base64;
 
 import com.fasterxml.jackson.core.JsonParseException;
@@ -147,5 +148,29 @@ public class StringHelper {
         }
 
         return source.substring(0, index + 1) + content + source.substring(index + 1);
+    }
+
+    public static List<String> stairSplit(String source, String separator) {
+        List<String> result = new ArrayList();
+        String path = null;
+        for (String item: source.split(separator)) {
+            if (path == null) {
+                path = item;
+            } else {
+                path += separator + item;
+            }
+            result.add(path);
+        }
+        return result;
+    }
+
+    public static List<Long> splitToLong(String source, String separator) {
+        List<Long> result = new ArrayList<>();
+        String[] tmp = splitWithoutWhitespace(source, separator);
+        for (String s: tmp) {
+            result.add(Long.parseLong(s));
+        }
+
+        return result;
     }
 }
