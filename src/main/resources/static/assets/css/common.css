@@ -71,6 +71,37 @@ img.circle {
   font-size: 60%;
 }
 
+.input-group .input-group-btn:first-child .btn {
+  position: relative;
+  margin-right: -1px;
+}
+
+.form-control + .inline-btn {
+  position: absolute;
+  margin: 6px 0 0 -24px;
+  padding: 0;
+  z-index: 999;
+  background: none;
+  border: none;
+  width: 18px;
+  height: 18px;
+  border-radius: 50%;
+}
+
+.form-control + .inline-btn:hover {
+  background-color: #dedede;
+}
+
+.form-control + .inline-btn span, .form-control + .inline-btn i {
+  display: block;
+  position: relative;
+  margin-top: -2px;
+}
+
+.form-control + .inline-btn i {
+  font-size: .75rem;
+}
+
 .row.middle {
   display: flex;
 }
