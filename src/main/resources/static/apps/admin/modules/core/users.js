@@ -1,6 +1,6 @@
 app.controller('UsersCtrl',
-    [ '$scope', 'appDialog', '$http',
-    function($scope, appDialog, $http) {
+    [ '$scope', 'appDialog', '$http', '$timeout',
+    function($scope, appDialog, $http, $timeout) {
         $scope.data = [];
         $scope.roles = null;
         $scope.pageUsers = function (page) {
@@ -15,6 +15,12 @@ app.controller('UsersCtrl',
                     pageSize:  res.data.size,
                     recordCount: res.data.totalElements,
                 };
+
+                if ($scope.searchKeywords) {
+                    $timeout(function() {
+                        highlightText($scope.searchKeywords, 'table > tbody > tr > td, table > tbody > tr > td > span');
+                    }, 100);
+                }
             });
         };
 

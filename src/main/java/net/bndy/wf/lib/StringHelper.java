@@ -8,13 +8,10 @@ import java.io.BufferedWriter;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.io.UnsupportedEncodingException;
-import java.math.BigInteger;
-import java.security.SecureRandom;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.*;
 
-import com.google.common.primitives.Longs;
 import org.apache.xerces.impl.dv.util.Base64;
 
 import com.fasterxml.jackson.core.JsonParseException;
