@@ -1,4 +1,4 @@
-var app = angular.module('app', ['ngCookies', 'pascalprecht.translate', 'ngAnimate', 'ngMaterial', 'ui.router', 'toaster', 'bn.ui', 'ngFileUpload']);
+var app = angular.module('app', ['ngCookies', 'ngMessages', 'pascalprecht.translate', 'ngAnimate', 'ngMaterial', 'ui.router', 'toaster', 'bn.ui', 'ngFileUpload']);
 
 app.config(['$provide', '$qProvider', '$httpProvider', '$stateProvider', '$translateProvider', function ($provide, $qProvider, $httpProvider, $stateProvider, $translateProvider) {
     $qProvider.errorOnUnhandledRejections(false);
@@ -294,6 +294,20 @@ angular.element(document).ready(function () {
 
 
 // MISC
+function resetNgForm(scopeDotFormName) {
+    var ngForm = scopeDotFormName;
+    ngForm.$setPristine();
+    ngForm.$setUntouched();
+    ngForm.$error = {};
+    for (var item in ngForm) {
+        if (item.indexOf('$') < 0) {
+            if (ngForm[item]) {
+                ngForm[item].$error = { };
+            }
+        }
+    }
+}
+
 function initUI() {
     $('.icheck, .iradio').iCheck({ checkboxClass: 'icheckbox_flat-green', radioClass   : 'iradio_flat-green'});
     $('.colorpicker').colorpicker();

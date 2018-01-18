@@ -19,10 +19,12 @@ app.controller('ApplicationsCtrl', [
             });
         };
         $scope.add = function() {
+            resetNgForm($scope.form);
             $scope.formModel = null;
             $('#dialogForm').modal('show');
         };
         $scope.edit = function(item) {
+            resetNgForm($scope.form);
             $scope.formModel = angular.copy(item);
             $('#dialogForm').modal('show');
         };

@@ -9,6 +9,7 @@ app.controller('MenusCtrl',
         }
 
         $scope.add = function(parent) {
+            resetNgForm($scope.form);
             if (parent) {
                 $scope.formModel = { parentId: parent.id };
             } else {
@@ -18,6 +19,7 @@ app.controller('MenusCtrl',
         };
 
         $scope.edit = function(menu) {
+            resetNgForm($scope.form);
             $scope.formModel = angular.copy(menu);
             $('#dialogForm').modal('show');
         };
