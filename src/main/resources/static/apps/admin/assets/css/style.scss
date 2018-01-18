@@ -175,6 +175,11 @@
   margin-top: 150px;
   .modal-content {
     border-radius: 4px;
+    .modal-body {
+      & > form {
+        margin-top: 15px;
+      }
+    }
   }
 }
 
