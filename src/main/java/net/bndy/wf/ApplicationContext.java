@@ -5,11 +5,13 @@
 package net.bndy.wf;
 
 import net.bndy.wf.config.ApplicationConfig;
+import net.bndy.wf.config.ApplicationUserRole;
 import net.bndy.wf.lib.HttpHelper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.MessageSource;
 import org.springframework.context.i18n.LocaleContextHolder;
 import org.springframework.security.core.Authentication;
+import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.context.SecurityContextHolder;
 
 import net.bndy.wf.modules.core.models.User;
@@ -55,6 +57,15 @@ public class ApplicationContext {
         }
 
         return null;
+    }
+
+    public static boolean isUserInRole(ApplicationUserRole role) {
+        for (GrantedAuthority ga: getCurrentUser().getAuthorities()) {
+            if (ga.getAuthority().equals(role.name())) {
+                return true;
+            }
+        }
+        return false;
     }
 
     public static User updateCurrentUserAvatar(String fileUUID) {

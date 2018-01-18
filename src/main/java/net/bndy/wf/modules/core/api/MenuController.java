@@ -7,6 +7,8 @@ package net.bndy.wf.modules.core.api;
 import java.io.IOException;
 import java.util.List;
 
+import net.bndy.wf.ApplicationContext;
+import net.bndy.wf.config.ApplicationUserRole;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
@@ -20,20 +22,24 @@ import net.bndy.wf.modules.core.services.MenuService;
 @RestController
 @RequestMapping({"/api/core/menus", "/api/v1/core/menus"})
 public class MenuController extends _BaseApi<Menu> {
+
 	@Autowired
 	private MenuService menuService;
 
 	@ApiOperation(value = "Get menus with children")
 	@RequestMapping(value = "/tree", method = RequestMethod.GET)
 	public List<Menu> get(@RequestParam(name = "all", required = false, defaultValue = "false") boolean all) throws IOException {
-	    List<Menu> result = null;
+	    List<Menu> result;
 		if (all) {
 			result = this.menuService.getMenus();
 		} else {
 			result = this.menuService.getUserMenus();
 		}
-		// TODO: append Menu Management for Admin User
-        result.add(this.menuService.getMenuManagementEntry());
+
+		// Append menu management entry for Admin user
+        if (ApplicationContext.isUserInRole(ApplicationUserRole.Admin)) {
+            result.add(this.menuService.getMenuManagementEntry());
+        }
 		return  result;
 	}
 
