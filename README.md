@@ -14,6 +14,8 @@
 
 # Web Framework - A Maven Project
 
+**NOTE** : If JDBC exception occurred, please drop all tables and let it recreate automatically.
+
 ![](https://raw.githubusercontent.com/bndynet/web-framework-for-java/master/docs/img/home.png)
 
 ![](https://raw.githubusercontent.com/bndynet/web-framework-for-java/master/docs/img/admin-dashboard.png)
