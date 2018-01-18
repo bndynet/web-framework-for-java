@@ -83,9 +83,7 @@ app.controller('UsersCtrl',
         };
 
         $scope.search = function() {
-            if ($scope.searchKeywords) {
-                $scope.pageUsers(1);
-            }
+            $scope.pageUsers(1);
         };
 
         $scope.cancelSearch = function() {
