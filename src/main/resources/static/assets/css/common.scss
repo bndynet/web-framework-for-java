@@ -111,6 +111,26 @@ img {
 }
 
 /* others */
+.page-onebox {
+  height: 100vh;
+  overflow: hidden;
+  background-color: #d2d6de;
+
+  .panel {
+    width: 360px;
+    margin: 10% auto 0 auto;
+    border: none;
+
+    img.logo {
+      width: 50%;
+    }
+
+    &.panel-danger {
+      box-shadow: 0 0 5px rgba(255, 0, 0, .4);
+    }
+  }
+}
+
 .tree {
   .tree-item {
     padding: 5px 0;
