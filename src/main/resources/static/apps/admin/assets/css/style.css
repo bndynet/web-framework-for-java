@@ -147,6 +147,10 @@
   border-radius: 4px;
 }
 
+.modal-dialog .modal-content .modal-body > form {
+  margin-top: 15px;
+}
+
 /* toaster */
 .toast-close-button {
   top: -10px;
