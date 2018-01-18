@@ -96,6 +96,26 @@ img.circle {
 }
 
 /* others */
+.page-onebox {
+  height: 100vh;
+  overflow: hidden;
+  background-color: #d2d6de;
+}
+
+.page-onebox .panel {
+  width: 360px;
+  margin: 10% auto 0 auto;
+  border: none;
+}
+
+.page-onebox .panel img.logo {
+  width: 50%;
+}
+
+.page-onebox .panel.panel-danger {
+  box-shadow: 0 0 5px rgba(255, 0, 0, 0.4);
+}
+
 .tree .tree-item {
   padding: 5px 0;
 }
