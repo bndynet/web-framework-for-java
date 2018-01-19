@@ -32,6 +32,10 @@ img.circle {
   border-radius: 50%;
 }
 
+:focus {
+  outline: none;
+}
+
 .no-margin {
   margin: 0;
 }

@@ -6,17 +6,7 @@
         <div class="box box-default">
             <div class="box-header with-border">
                 <div class="pull-left">
-                    <div class="input-group input-group-sm search-box">
-                        <input type="text" class="form-control" ng-model="searchKeywords" placeholder="{{'admin.modules.core.users.searchTips'|translate}}">
-                        <button type="button" class="inline-btn" ng-click="cancelSearch()" ng-if="searchKeywords">
-                            <span>&times;</span>
-                        </button>
-                        <span class="input-group-btn">
-                          <button type="button" class="btn btn-default" ng-click="search()">
-                              <i class="fa fa-search"></i>
-                          </button>
-                        </span>
-                    </div>
+                    <ui-search ng-model="searchKeywords" on-cancel="cancelSearch()" on-search="search()"></ui-search>
                 </div>
 
                 <div class="box-tools pull-right">
