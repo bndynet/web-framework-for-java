@@ -12,7 +12,7 @@
 	                              $$    $$/                                   
 	                               $$$$$$/                                    
 
-# Web Framework - A Maven Project
+# Web Framework - A Starter Project for Spring Boot
 
 **NOTE** : If JDBC exception occurred, please drop all tables and let it recreate automatically.
 
