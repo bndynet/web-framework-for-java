@@ -304,31 +304,6 @@ angular.element(document).ready(function () {
 
 
 // MISC
-function resetNgForm(scopeDotFormName) {
-    var ngForm = scopeDotFormName;
-    ngForm.$setPristine();
-    ngForm.$setUntouched();
-    ngForm.$error = {};
-    for (var item in ngForm) {
-        if (item.indexOf('$') < 0) {
-            if (ngForm[item]) {
-                ngForm[item].$error = { };
-            }
-        }
-    }
-}
-
-function highlightText(text, targetSelector) {
-    $(targetSelector).each(function() {
-        if ($(this).children().length === 0) {
-            $(this).html($(this).text().replace(
-                new RegExp('(' + text + ')', "ig"),
-                '<span class="highlight">$1</span>'
-            ));
-        }
-    });
-}
-
 function initUI() {
     $('.icheck, .iradio').iCheck({ checkboxClass: 'icheckbox_flat-green', radioClass   : 'iradio_flat-green'});
     $('.colorpicker').colorpicker();

@@ -1,0 +1,3 @@
+[submodule "src/main/resources/static/plugins/jslib"]
+	path = src/main/resources/static/plugins/jslib
+	url = https://github.com/bndynet/jslib.git

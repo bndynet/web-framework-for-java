@@ -18,7 +18,7 @@ app.controller('UsersCtrl',
 
                 if ($scope.searchKeywords) {
                     $timeout(function() {
-                        highlightText($scope.searchKeywords, 'table > tbody > tr > td, table > tbody > tr > td > span');
+                        $('table > tbody > tr > td, table > tbody > tr > td > span').highlightText($scope.searchKeywords);
                     }, 100);
                 }
             });
