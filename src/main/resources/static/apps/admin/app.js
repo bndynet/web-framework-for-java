@@ -189,6 +189,15 @@ app.factory('appDialog', [
 			service.confirm($translate.instant('common.confirmDeleteTitle'), $translate.instant('common.confirmDeleteDescription'), fnOK);
 		};
 
+		service.show = function(selector, ev) {
+            $mdDialog.show({
+                contentElement: selector,
+                parent: angular.element(document.body),
+                targetEvent: ev,
+                clickOutsideToClose: true
+            });
+		};
+
 		service.showWin = function (data, controller, templateUrl, fnOK, fnCancel, options) {
 			$mdDialog.show({
 				locals: {
@@ -198,6 +207,7 @@ app.factory('appDialog', [
 				controller: controller,
 				templateUrl: templateUrl,
 				parent: angular.element(document.body),
+				disableParentScroll: true,
 				clickOutsideToClose: false
 			}).then(function (result) {
 				if (fnOK) fnOK(result);
