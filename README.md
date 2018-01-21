@@ -18,7 +18,7 @@
 
 ![](https://raw.githubusercontent.com/bndynet/web-framework-for-java/master/docs/img/home.png)
 
-![](https://raw.githubusercontent.com/bndynet/web-framework-for-java/master/docs/img/admin-dashboard.png)
+![](https://raw.githubusercontent.com/bndynet/web-framework-for-java/master/docs/img/admin-home.png)
 	
 ## Getting Started
 
