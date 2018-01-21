@@ -85,9 +85,28 @@
   border: solid 1px #cacaca;
 }
 
-.content > .box-default {
+.content-wrapper ui-view {
+  display: block;
+  height: calc(100vh - 102px);
+  overflow-y: auto;
+  overflow-x: hidden;
+}
+
+.content-wrapper ui-view .content-header + .content > .box-default {
   margin-bottom: 0;
-  min-height: calc(100vh - 175px);
+}
+
+.content-wrapper ui-view .content-header + .content > .box-default .box-body {
+  height: calc(100vh - 177px);
+  overflow: auto;
+}
+
+.content-wrapper ui-view .content-header + .content > .box-default.with-header .box-body {
+  height: calc(100vh - 177px - 41px);
+}
+
+.content-wrapper ui-view .content-header + .content > .box-default.with-header.with-footer .box-body {
+  height: calc(100vh - 177px - 41px - 62px);
 }
 
 .box-body > form {
@@ -129,16 +148,6 @@
   padding: .25rem;
 }
 
-.table + .bn-ui-pager .summary {
-  margin-top: 3px;
-  margin-left: 8px;
-}
-
-.table + .bn-ui-pager .pagination > li > a,
-.table + .bn-ui-pager .pagination > li > span {
-  padding: 2px 8px;
-}
-
 .modal-dialog {
   margin-top: 150px;
 }
@@ -175,7 +184,6 @@ md-backdrop.md-dialog-backdrop {
 }
 
 .md-dialog-container md-dialog {
-  margin-top: -100px;
   min-width: 360px;
 }
 
@@ -186,6 +194,20 @@ md-backdrop.md-dialog-backdrop {
 /* override others */
 .datepicker {
   padding: 6px 12px;
+}
+
+.bn-ui-pager {
+  margin: 0;
+}
+
+.bn-ui-pager .summary {
+  margin-top: 3px;
+  margin-left: 8px;
+}
+
+.bn-ui-pager .pagination > li > a,
+.bn-ui-pager .pagination > li > span {
+  padding: 2px 8px;
 }
 
 /* misc */

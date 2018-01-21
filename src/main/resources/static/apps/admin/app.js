@@ -165,8 +165,10 @@ app.factory('appDialog', [
                 ok: $translate.instant('common.ok'),
                 clickOutsideToClose: false
             });
+            angular.element(document.querySelector('body')).attr('style', 'overflow-y: hidden');
             $mdDialog.show(alert).finally(function() {
                 alert = null;
+                angular.element(document.querySelector('body')).attr('style', 'overflow-y: auto');
             });
 		};
 
@@ -176,12 +178,15 @@ app.factory('appDialog', [
 			var confirm = $mdDialog.confirm().title(title).textContent(msg)
 				.ok($translate.instant('common.ok')).cancel($translate.instant('common.cancel'));
 
+            angular.element(document.querySelector('body')).attr('style', 'overflow-y: hidden');
 			$mdDialog.show(confirm).then(function () {
 				if (fnOK)
 					fnOK();
 			}, function () {
 				if (fnCancel)
 					fnCancel();
+			}).finally(function() {
+                angular.element(document.querySelector('body')).attr('style', 'overflow-y: auto');
 			});
 		};
 
@@ -190,15 +195,19 @@ app.factory('appDialog', [
 		};
 
 		service.show = function(selector, ev) {
+            angular.element(document.querySelector('body')).attr('style', 'overflow-y: hidden');
             $mdDialog.show({
                 contentElement: selector,
                 parent: angular.element(document.body),
                 targetEvent: ev,
                 clickOutsideToClose: true
+            }).finally(function() {
+                angular.element(document.querySelector('body')).attr('style', 'overflow-y: auto');
             });
 		};
 
 		service.showWin = function (data, controller, templateUrl, fnOK, fnCancel, options) {
+            angular.element(document.querySelector('body')).attr('style', 'overflow-y: hidden');
 			$mdDialog.show({
 				locals: {
 					vm: data,
@@ -213,6 +222,8 @@ app.factory('appDialog', [
 				if (fnOK) fnOK(result);
 			}, function () {
 				if (fnCancel) fnCancel();
+			}).finally(function() {
+                angular.element(document.querySelector('body')).attr('style', 'overflow-y: auto');
 			});
 		};
 

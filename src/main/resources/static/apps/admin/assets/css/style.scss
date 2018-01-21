@@ -1,4 +1,5 @@
 /* AdminLTE */
+
 .lockscreen {
   display: none;
   position: absolute;
@@ -12,6 +13,8 @@
     margin-top: .5rem;
   }
 }
+
+.dashboard {}
 
 .navbar-nav {
   display: inline-table; // fix new line in safari
@@ -46,9 +49,6 @@
 .control-sidebar {
   .form-group {
     clear: both;
-    .pull-right {
-      .input-sm {}
-    }
   }
   ul.skin-list {
     &>li {
@@ -91,18 +91,41 @@
     ul.skin-list {
       &>li {
         &>a {
-            box-shadow: none;
-            border: solid 1px #cacaca;
+          box-shadow: none;
+          border: solid 1px #cacaca;
         }
       }
     }
   }
 }
 
-.content {
-  & > .box-default {
-    margin-bottom: 0;
-    min-height: calc(100vh - 175px);
+.content-wrapper {
+  ui-view {
+    display: block;
+    height: calc(100vh - 102px);
+    overflow-y: auto;
+    overflow-x: hidden;
+    .content-header {
+      &+.content {
+        &>.box-default {
+          margin-bottom: 0;
+          .box-body {
+            height: calc(100vh - 177px);
+            overflow: auto;
+          }
+          &.with-header {
+            .box-body {
+              height: calc(100vh - 177px - 41px);
+            }
+            &.with-footer {
+              .box-body {
+                height: calc(100vh - 177px - 41px - 62px);
+              }
+            }
+          }
+        }
+      }
+    }
   }
 }
 
@@ -114,17 +137,18 @@
 
 
 /* Bootstrap */
+
 .form-group {
   .error-block {
     display: none;
   }
-
   &.has-error {
     .error-block {
       display: block;
     }
   }
 }
+
 .list-group {
   .list-group-item {
     img.media-object {
@@ -159,16 +183,6 @@
       }
     }
   }
-  &+.bn-ui-pager {
-    .summary {
-      margin-top: 3px;
-      margin-left: 8px;
-    }
-    .pagination>li>a,
-    .pagination>li>span {
-      padding: 2px 8px;
-    }
-  }
 }
 
 .modal-dialog {
@@ -176,41 +190,45 @@
   .modal-content {
     border-radius: 4px;
     .modal-body {
-      & > form {
+      &>form {
         margin-top: 15px;
       }
     }
   }
 }
 
+
 /* toaster */
+
 .toast-close-button {
   top: -10px;
 }
 
+
 /* angularjs material */
-.layout-row{
+
+.layout-row {
   md-input-container {
     margin-bottom: 0;
   }
 }
+
 .md-input-container {
   md-switch {
     margin-left: 0;
     margin-bottom: 0;
   }
 }
+
 // fix: dialog shadow lay need to cover sidebar and header
 md-backdrop.md-dialog-backdrop {
   z-index: 1200;
 }
+
 .md-dialog-container {
   z-index: 9999;
-
   md-dialog {
-    margin-top: -100px;
     min-width: 360px;
-
     .md-dialog-content {
       h3 {
         margin-top: 0;
@@ -219,12 +237,28 @@ md-backdrop.md-dialog-backdrop {
   }
 }
 
+
 /* override others */
+
 .datepicker {
   padding: 6px 12px;
 }
 
+.bn-ui-pager {
+  margin: 0;
+  .summary {
+    margin-top: 3px;
+    margin-left: 8px;
+  }
+  .pagination>li>a,
+  .pagination>li>span {
+    padding: 2px 8px;
+  }
+}
+
+
 /* misc */
+
 .search-box {
   width: 260px;
   margin-right: 1rem;

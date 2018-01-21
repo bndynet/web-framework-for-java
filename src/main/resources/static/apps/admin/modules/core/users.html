@@ -3,7 +3,7 @@
                     subtitle="'admin.modules.core.users.subtitle'"
                     breadcrumbs="[{'text': 'admin.modules.core.users.title'}]"></ui-page-header>
     <section class="content">
-        <div class="box box-default">
+        <div class="box box-default with-header with-footer">
             <div class="box-header with-border">
                 <div class="pull-left">
                     <ui-search ng-model="searchKeywords" on-cancel="cancelSearch()" on-search="search()"></ui-search>
@@ -74,6 +74,8 @@
                     </tbody>
                 </table>
                 <ui-no-data ng-if="data.length==0"></ui-no-data>
+            </div>
+            <div class="box-footer">
                 <bn-ui-pager ng-model="pager" on-page="pageUsers(page)"></bn-ui-pager>
             </div>
         </div>
