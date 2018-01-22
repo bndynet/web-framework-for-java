@@ -1,4 +1,33 @@
 /* AdminLTE */
+.skin-blue md-toolbar.md-default-theme:not(.md-menu-toolbar), .skin-blue md-toolbar:not(.md-menu-toolbar), .skin-blue-light md-toolbar.md-default-theme:not(.md-menu-toolbar), .skin-blue-light md-toolbar:not(.md-menu-toolbar) {
+  background-color: #3c8dbc;
+}
+
+.skin-red md-toolbar.md-default-theme:not(.md-menu-toolbar), .skin-red md-toolbar:not(.md-menu-toolbar), .skin-red-light md-toolbar.md-default-theme:not(.md-menu-toolbar), .skin-red-light md-toolbar:not(.md-menu-toolbar) {
+  background-color: #dd4b39;
+}
+
+.skin-yellow md-toolbar.md-default-theme:not(.md-menu-toolbar), .skin-yellow md-toolbar:not(.md-menu-toolbar), .skin-yellow-light md-toolbar.md-default-theme:not(.md-menu-toolbar), .skin-yellow-light md-toolbar:not(.md-menu-toolbar) {
+  background-color: #f39c12;
+}
+
+.skin-purple md-toolbar.md-default-theme:not(.md-menu-toolbar), .skin-purple md-toolbar:not(.md-menu-toolbar), .skin-purple-light md-toolbar.md-default-theme:not(.md-menu-toolbar), .skin-purple-light md-toolbar:not(.md-menu-toolbar) {
+  background-color: #605ca8;
+}
+
+.skin-green md-toolbar.md-default-theme:not(.md-menu-toolbar), .skin-green md-toolbar:not(.md-menu-toolbar), .skin-green-light md-toolbar.md-default-theme:not(.md-menu-toolbar), .skin-green-light md-toolbar:not(.md-menu-toolbar) {
+  background-color: #00a65a;
+}
+
+.skin-black md-toolbar.md-default-theme:not(.md-menu-toolbar), .skin-black md-toolbar:not(.md-menu-toolbar) {
+  background-color: #222d32;
+}
+
+.skin-black-light md-toolbar.md-default-theme:not(.md-menu-toolbar), .skin-black-light md-toolbar:not(.md-menu-toolbar) {
+  background-color: #ecf0f5;
+  color: #333333;
+}
+
 .lockscreen {
   display: none;
   position: absolute;
