@@ -1,4 +1,40 @@
 /* AdminLTE */
+.skin-blue, .skin-blue-light {
+  md-toolbar.md-default-theme:not(.md-menu-toolbar), md-toolbar:not(.md-menu-toolbar) {
+    background-color: #3c8dbc;
+  }
+}
+.skin-red, .skin-red-light {
+  md-toolbar.md-default-theme:not(.md-menu-toolbar), md-toolbar:not(.md-menu-toolbar) {
+    background-color: #dd4b39;
+  }
+}
+.skin-yellow, .skin-yellow-light {
+  md-toolbar.md-default-theme:not(.md-menu-toolbar), md-toolbar:not(.md-menu-toolbar) {
+    background-color: #f39c12;
+  }
+}
+.skin-purple, .skin-purple-light {
+  md-toolbar.md-default-theme:not(.md-menu-toolbar), md-toolbar:not(.md-menu-toolbar) {
+    background-color: #605ca8;
+  }
+}
+.skin-green, .skin-green-light {
+  md-toolbar.md-default-theme:not(.md-menu-toolbar), md-toolbar:not(.md-menu-toolbar) {
+    background-color: #00a65a;
+  }
+}
+.skin-black {
+  md-toolbar.md-default-theme:not(.md-menu-toolbar), md-toolbar:not(.md-menu-toolbar) {
+    background-color: #222d32;
+  }
+}
+.skin-black-light {
+  md-toolbar.md-default-theme:not(.md-menu-toolbar), md-toolbar:not(.md-menu-toolbar) {
+    background-color: #ecf0f5;
+    color: #333333;
+  }
+}
 
 .lockscreen {
   display: none;
@@ -13,8 +49,6 @@
     margin-top: .5rem;
   }
 }
-
-.dashboard {}
 
 .navbar-nav {
   display: inline-table; // fix new line in safari
@@ -206,7 +240,6 @@
 
 
 /* angularjs material */
-
 .layout-row {
   md-input-container {
     margin-bottom: 0;
