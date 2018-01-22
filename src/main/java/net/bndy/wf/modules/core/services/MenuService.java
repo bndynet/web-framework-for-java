@@ -142,9 +142,19 @@ public class MenuService extends _BaseService<Menu> {
         return result;
     }
 
+    @Override
+    public boolean delete(long id) {
+        Menu m = this.menuRepo.findOne(id);
+        if (m != null) {
+            this.menuRepo.deleteByParents(m.getParents() + m.getId() + "/");
+            return super.delete(id);
+        }
+        return false;
+    }
+
     public void toggleVisible(long id) {
         Menu m = this.get(id);
-        if (m!=null) {
+        if (m != null) {
             m.setVisible(!m.isVisible());
             m = this.menuRepo.saveAndFlush(m);
             if (m.isVisible()) {

@@ -29,4 +29,9 @@ public interface MenuRepository extends JpaRepository<Menu, Long> {
 	@Transactional
 	@Query(value="UPDATE core_menu SET is_visible=(SELECT t.is_visible FROM (SELECT is_visible FROM core_menu WHERE id = :id) as t) WHERE id IN (:parentIds)", nativeQuery=true)
 	void syncParentsVisible(@Param("id") long id, @Param("parentIds") List<Long> parentIds);
+
+	@Modifying
+	@Transactional
+	@Query(value = "DELETE FROM core_menu WHERE parents LIKE :parents%", nativeQuery = true)
+	void deleteByParents(@Param("parents") String parents);
 }
