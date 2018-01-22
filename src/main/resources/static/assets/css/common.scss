@@ -64,6 +64,11 @@ img {
   font-weight: bold;
 }
 
+/* angularjs */
+[ng\:cloak], [ng-cloak], [data-ng-cloak], [x-ng-cloak], .ng-cloak, .x-ng-cloak {
+  display: none !important;
+}
+
 /* bootstrap */
 
 .navbar {
@@ -84,7 +89,7 @@ img {
   position: relative;
   top: -.2em;
   font-weight: normal;
-  font-size: 60%;
+  font-size: 80%;
 }
 
 .input-group {

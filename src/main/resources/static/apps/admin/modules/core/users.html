@@ -40,12 +40,15 @@
                         <td ng-bind="item.username"></td>
                         <td>
                             <a ng-click="editRoles(item)" ng-if="!item.superAdmin">
-                                <span ng-bind="item.roles[0].name" ng-if="item.roles && item.roles.length > 0"></span>
+                                <span ng-repeat="role in item.roles">
+                                    <span class="label label-info" ng-bind="role.name"></span>&nbsp;
+                                </span>
                                 <em ng-if="item.roles && item.roles.length == 0" ng-bind="'admin.modules.core.users.noRoles'|translate"></em>
                             </a>
                             <span ng-if="item.superAdmin">
-                                <span ng-bind="item.roles[0].name" ng-if="item.roles && item.roles.length > 0"></span>
-                                <em ng-if="item.roles && item.roles.length == 0" ng-bind="'admin.modules.core.users.noRoles'|translate"></em>
+                                <span ng-repeat="role in item.roles">
+                                    <span class="label label-info" ng-bind="role.name"></span>&nbsp;
+                                </span>
                             </span>
                         </td>
                         <td>
@@ -96,12 +99,12 @@
                 <div class="modal-body">
                     <div class="list-group">
                         <a class="list-group-item"
-                           ng-click="changeRole(item)"
+                           ng-click="toggleRole(item)"
                            ng-repeat="item in roles">
                             <h4 class="list-group-item-heading">
                                 {{ item.name }}
-                                <i class="glyphicon glyphicon-ok-circle ng-cloak text-success pull-right"
-                                   ng-if="userModel.currentRole == item"></i>
+                                <i class="fa fa-check fa-2x ng-cloak text-success pull-right"
+                                   ng-if="userHasRole(item)"></i>
                             </h4>
                             <p class="list-group-item-text">{{ item.description }}</p>
                         </a>

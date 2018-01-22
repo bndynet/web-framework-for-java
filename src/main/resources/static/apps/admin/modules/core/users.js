@@ -33,30 +33,33 @@ app.controller('UsersCtrl',
 
         $scope.editRoles = function(item) {
             $scope.userModel = angular.copy(item);
-            if ($scope.userModel.roles && $scope.userModel.roles.length > 0) {
-                for (var idx in $scope.roles) {
-                    if ($scope.roles[idx].name == $scope.userModel.roles[0].name) {
-                        $scope.userModel.currentRole = $scope.roles[idx];
-                    }
-                }
-            }
             $('#rolesForm').modal('show');
         };
-        $scope.changeRole = function(role) {
-            $scope.userModel.currentRole = role;
+        $scope.toggleRole = function(role) {
+            var existedRole = _.find($scope.userModel.roles, function(r) { return r.name === role.name; });
+            if (existedRole) {
+                _.remove($scope.userModel.roles, function(r) {
+                    return r.name === role.name;
+                });
+            } else {
+                $scope.userModel.roles.push(role);
+            }
         };
         $scope.saveRoles = function() {
             if ($scope.userModel.id) {
-                var roleId = $scope.userModel.currentRole.id;
-                $http.put('/api/core/users/' + $scope.userModel.id + '/changeRole?roleId=' + $scope.userModel.currentRole.id)
+                var ids = _.map($scope.userModel.roles, 'id');
+                $http.put('/api/core/users/' + $scope.userModel.id + '/changeRole', {values: ids})
                     .then(function(res) {
                         appDialog.success();
                         var curItem = _.find($scope.data, function(item) { return item.id == $scope.userModel.id});
                         if (curItem) {
                             curItem.roles.length = 0;
                             curItem.roleNames.length = 0;
-                            curItem.roles.push($scope.userModel.currentRole);
-                            curItem.roleNames.push($scope.userModel.currentRole.name);
+                            _.each(ids, function(id) {
+                                var role = _.find($scope.roles, function(r) {return r.id === id; });
+                                curItem.roles.push(role);
+                                curItem.roleNames.push(role.name);
+                            });
                         } else {
                             $scope.pageUsers($scope.pager.currentPage);
                         }
@@ -89,6 +92,13 @@ app.controller('UsersCtrl',
         $scope.cancelSearch = function() {
             $scope.searchKeywords = null;
             $scope.pageUsers(1);
+        };
+
+        $scope.userHasRole = function(role) {
+            if ($scope.userModel && _.find($scope.userModel.roles||[], function(r) { return r.name === role.name; })) {
+                return true;
+            }
+            return false;
         };
 
         $scope.init();

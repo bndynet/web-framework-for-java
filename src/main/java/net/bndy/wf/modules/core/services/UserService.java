@@ -109,15 +109,19 @@ public class UserService extends _BaseService<User> {
         return this.userRepository.findByUsername(username);
     }
 
-    public User changeRole(long userId, long roleId) {
-        this.userRepository.deleteRolesByUserId(userId);
-        Role role = this.roleRepository.findOne(roleId);
+    public User changeRole(long userId, List<Long> roleIds) {
         User user = this.userRepository.findOne(userId);
-        if (user != null && role != null) {
-            HashSet<Role> roles = new HashSet<>();
-            roles.add(role);
-            user.setRoles(roles);
+        this.userRepository.deleteRolesByUserId(userId);
+        HashSet<Role> roles = new HashSet<>();
+        for(Long id: roleIds) {
+            if (id != null) {
+                Role role = this.roleRepository.findOne(id);
+                if (user != null && role != null) {
+                    roles.add(role);
+                }
+            }
         }
+        user.setRoles(roles);
         return super.save(user);
     }
 

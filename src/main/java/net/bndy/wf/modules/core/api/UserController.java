@@ -11,6 +11,7 @@ import java.util.Map;
 
 import net.bndy.wf.ApplicationContext;
 import net.bndy.wf.exceptions.AppException;
+import net.bndy.wf.lib.LongsWrapper;
 import net.bndy.wf.modules.core.models.File;
 import net.bndy.wf.modules.core.models.User;
 import net.bndy.wf.modules.core.models.UserProfile;
@@ -114,8 +115,8 @@ public class UserController extends _BaseApi<User> {
 
     @ApiOperation(value = "Change role for user")
     @RequestMapping(value = "/{userId}/changeRole", method = RequestMethod.PUT)
-    public void changeRole(@PathVariable(name = "userId") long userId, @RequestParam(name = "roleId") long roleId) {
-        this.userService.changeRole(userId, roleId);
+    public void changeRole(@PathVariable(name = "userId") long userId, @RequestBody LongsWrapper roleIds) {
+        this.userService.changeRole(userId, roleIds.getValues());
     }
 
     @Override
