@@ -122,7 +122,7 @@ $(function () {
         else
             tmp = 'skin-black-light';
     }
-    if (tmp && $.inArray(tmp, mySkins))
+    if (tmp && $.inArray(tmp, mySkins) >= 0)
       changeSkin(tmp)
 
     // Add the change skin listener
