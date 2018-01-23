@@ -6,7 +6,15 @@ package net.bndy.wf.modules.core.services.repositories;
 
 import net.bndy.wf.modules.core.models.Role;
 import org.springframework.data.jpa.repository.JpaRepository;
+import org.springframework.data.jpa.repository.Modifying;
+import org.springframework.data.jpa.repository.Query;
+import org.springframework.transaction.annotation.Transactional;
 
 public interface RoleRepository extends JpaRepository<Role, Long>  {
 	Role findByName(String name);
+
+	@Modifying
+	@Transactional
+	@Query(value = "UPDATE core_role SET menu_ids = :menuIds WHERE id = :roldId", nativeQuery = true)
+    void updateMenus(long roleId, String menuIds);
 }
