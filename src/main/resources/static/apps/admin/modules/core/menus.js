@@ -11,9 +11,9 @@ app.controller('MenusCtrl',
         $scope.add = function(parent) {
             angular.resetForm($scope.form);
             if (parent) {
-                $scope.formModel = { parentId: parent.id };
+                $scope.formModel = { parentId: parent.id, visible: true };
             } else {
-                $scope.formModel = null;
+                $scope.formModel = { visible: true };
             }
             $('#dialogForm').modal('show');
         };
