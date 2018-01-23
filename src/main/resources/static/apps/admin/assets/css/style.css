@@ -1,33 +1,150 @@
-/* AdminLTE */
-.skin-blue md-toolbar.md-default-theme:not(.md-menu-toolbar), .skin-blue md-toolbar:not(.md-menu-toolbar), .skin-blue-light md-toolbar.md-default-theme:not(.md-menu-toolbar), .skin-blue-light md-toolbar:not(.md-menu-toolbar) {
+/* skins */
+.skin-blue .modal-header,
+.skin-blue .modal-header .close,
+.skin-blue md-toolbar.md-default-theme:not(.md-menu-toolbar),
+.skin-blue md-toolbar:not(.md-menu-toolbar),
+.skin-blue md-switch.md-default-theme.md-checked.md-primary .md-thumb,
+.skin-blue md-switch.md-checked.md-primary .md-thumb,
+.skin-blue-light .modal-header,
+.skin-blue-light .modal-header .close,
+.skin-blue-light md-toolbar.md-default-theme:not(.md-menu-toolbar),
+.skin-blue-light md-toolbar:not(.md-menu-toolbar),
+.skin-blue-light md-switch.md-default-theme.md-checked.md-primary .md-thumb,
+.skin-blue-light md-switch.md-checked.md-primary .md-thumb {
   background-color: #3c8dbc;
+  color: rgba(255, 255, 255, 0.87);
 }
 
-.skin-red md-toolbar.md-default-theme:not(.md-menu-toolbar), .skin-red md-toolbar:not(.md-menu-toolbar), .skin-red-light md-toolbar.md-default-theme:not(.md-menu-toolbar), .skin-red-light md-toolbar:not(.md-menu-toolbar) {
+.skin-blue md-switch.md-default-theme.md-checked.md-primary .md-bar,
+.skin-blue md-switch.md-checked.md-primary .md-bar,
+.skin-blue-light md-switch.md-default-theme.md-checked.md-primary .md-bar,
+.skin-blue-light md-switch.md-checked.md-primary .md-bar {
+  background-color: rgba(60, 141, 188, 0.5);
+}
+
+.skin-red .modal-header,
+.skin-red .modal-header .close,
+.skin-red md-toolbar.md-default-theme:not(.md-menu-toolbar),
+.skin-red md-toolbar:not(.md-menu-toolbar),
+.skin-red md-switch.md-default-theme.md-checked.md-primary .md-thumb,
+.skin-red md-switch.md-checked.md-primary .md-thumb,
+.skin-red-light .modal-header,
+.skin-red-light .modal-header .close,
+.skin-red-light md-toolbar.md-default-theme:not(.md-menu-toolbar),
+.skin-red-light md-toolbar:not(.md-menu-toolbar),
+.skin-red-light md-switch.md-default-theme.md-checked.md-primary .md-thumb,
+.skin-red-light md-switch.md-checked.md-primary .md-thumb {
   background-color: #dd4b39;
+  color: rgba(255, 255, 255, 0.87);
 }
 
-.skin-yellow md-toolbar.md-default-theme:not(.md-menu-toolbar), .skin-yellow md-toolbar:not(.md-menu-toolbar), .skin-yellow-light md-toolbar.md-default-theme:not(.md-menu-toolbar), .skin-yellow-light md-toolbar:not(.md-menu-toolbar) {
+.skin-red md-switch.md-default-theme.md-checked.md-primary .md-bar,
+.skin-red md-switch.md-checked.md-primary .md-bar,
+.skin-red-light md-switch.md-default-theme.md-checked.md-primary .md-bar,
+.skin-red-light md-switch.md-checked.md-primary .md-bar {
+  background-color: rgba(221, 75, 57, 0.5);
+}
+
+.skin-yellow .modal-header,
+.skin-yellow .modal-header .close,
+.skin-yellow md-toolbar.md-default-theme:not(.md-menu-toolbar),
+.skin-yellow md-toolbar:not(.md-menu-toolbar),
+.skin-yellow md-switch.md-default-theme.md-checked.md-primary .md-thumb,
+.skin-yellow md-switch.md-checked.md-primary .md-thumb,
+.skin-yellow-light .modal-header,
+.skin-yellow-light .modal-header .close,
+.skin-yellow-light md-toolbar.md-default-theme:not(.md-menu-toolbar),
+.skin-yellow-light md-toolbar:not(.md-menu-toolbar),
+.skin-yellow-light md-switch.md-default-theme.md-checked.md-primary .md-thumb,
+.skin-yellow-light md-switch.md-checked.md-primary .md-thumb {
   background-color: #f39c12;
+  color: rgba(255, 255, 255, 0.87);
 }
 
-.skin-purple md-toolbar.md-default-theme:not(.md-menu-toolbar), .skin-purple md-toolbar:not(.md-menu-toolbar), .skin-purple-light md-toolbar.md-default-theme:not(.md-menu-toolbar), .skin-purple-light md-toolbar:not(.md-menu-toolbar) {
+.skin-yellow md-switch.md-default-theme.md-checked.md-primary .md-bar,
+.skin-yellow md-switch.md-checked.md-primary .md-bar,
+.skin-yellow-light md-switch.md-default-theme.md-checked.md-primary .md-bar,
+.skin-yellow-light md-switch.md-checked.md-primary .md-bar {
+  background-color: rgba(243, 156, 18, 0.5);
+}
+
+.skin-purple .modal-header,
+.skin-purple .modal-header .close,
+.skin-purple md-toolbar.md-default-theme:not(.md-menu-toolbar),
+.skin-purple md-toolbar:not(.md-menu-toolbar),
+.skin-purple md-switch.md-default-theme.md-checked.md-primary .md-thumb,
+.skin-purple md-switch.md-checked.md-primary .md-thumb,
+.skin-purple-light .modal-header,
+.skin-purple-light .modal-header .close,
+.skin-purple-light md-toolbar.md-default-theme:not(.md-menu-toolbar),
+.skin-purple-light md-toolbar:not(.md-menu-toolbar),
+.skin-purple-light md-switch.md-default-theme.md-checked.md-primary .md-thumb,
+.skin-purple-light md-switch.md-checked.md-primary .md-thumb {
   background-color: #605ca8;
+  color: rgba(255, 255, 255, 0.87);
 }
 
-.skin-green md-toolbar.md-default-theme:not(.md-menu-toolbar), .skin-green md-toolbar:not(.md-menu-toolbar), .skin-green-light md-toolbar.md-default-theme:not(.md-menu-toolbar), .skin-green-light md-toolbar:not(.md-menu-toolbar) {
+.skin-purple md-switch.md-default-theme.md-checked.md-primary .md-bar,
+.skin-purple md-switch.md-checked.md-primary .md-bar,
+.skin-purple-light md-switch.md-default-theme.md-checked.md-primary .md-bar,
+.skin-purple-light md-switch.md-checked.md-primary .md-bar {
+  background-color: rgba(96, 92, 168, 0.5);
+}
+
+.skin-green .modal-header,
+.skin-green .modal-header .close,
+.skin-green md-toolbar.md-default-theme:not(.md-menu-toolbar),
+.skin-green md-toolbar:not(.md-menu-toolbar),
+.skin-green md-switch.md-default-theme.md-checked.md-primary .md-thumb,
+.skin-green md-switch.md-checked.md-primary .md-thumb,
+.skin-green-light .modal-header,
+.skin-green-light .modal-header .close,
+.skin-green-light md-toolbar.md-default-theme:not(.md-menu-toolbar),
+.skin-green-light md-toolbar:not(.md-menu-toolbar),
+.skin-green-light md-switch.md-default-theme.md-checked.md-primary .md-thumb,
+.skin-green-light md-switch.md-checked.md-primary .md-thumb {
   background-color: #00a65a;
+  color: rgba(255, 255, 255, 0.87);
 }
 
-.skin-black md-toolbar.md-default-theme:not(.md-menu-toolbar), .skin-black md-toolbar:not(.md-menu-toolbar) {
+.skin-green md-switch.md-default-theme.md-checked.md-primary .md-bar,
+.skin-green md-switch.md-checked.md-primary .md-bar,
+.skin-green-light md-switch.md-default-theme.md-checked.md-primary .md-bar,
+.skin-green-light md-switch.md-checked.md-primary .md-bar {
+  background-color: rgba(0, 166, 90, 0.5);
+}
+
+.skin-black .modal-header,
+.skin-black .modal-header .close,
+.skin-black md-toolbar.md-default-theme:not(.md-menu-toolbar),
+.skin-black md-toolbar:not(.md-menu-toolbar),
+.skin-black md-switch.md-default-theme.md-checked.md-primary .md-thumb,
+.skin-black md-switch.md-checked.md-primary .md-thumb {
   background-color: #222d32;
+  color: rgba(255, 255, 255, 0.87);
 }
 
-.skin-black-light md-toolbar.md-default-theme:not(.md-menu-toolbar), .skin-black-light md-toolbar:not(.md-menu-toolbar) {
+.skin-black md-switch.md-default-theme.md-checked.md-primary .md-bar,
+.skin-black md-switch.md-checked.md-primary .md-bar {
+  background-color: rgba(34, 45, 50, 0.5);
+}
+
+.skin-black-light .modal-header,
+.skin-black-light .modal-header .close,
+.skin-black-light md-toolbar.md-default-theme:not(.md-menu-toolbar),
+.skin-black-light md-toolbar:not(.md-menu-toolbar),
+.skin-black-light md-switch.md-default-theme.md-checked.md-primary .md-thumb,
+.skin-black-light md-switch.md-checked.md-primary .md-thumb {
   background-color: #ecf0f5;
   color: #333333;
 }
 
+.skin-black-light md-switch.md-default-theme.md-checked.md-primary .md-bar,
+.skin-black-light md-switch.md-checked.md-primary .md-bar {
+  background-color: rgba(236, 240, 245, 0.5);
+}
+
+/* AdminLTE */
 .lockscreen {
   display: none;
   position: absolute;
@@ -41,6 +158,12 @@
 .lockscreen .error-message {
   position: absolute;
   margin-top: .5rem;
+}
+
+md-toolbar,
+.md-toolbar-tools {
+  height: 56px;
+  min-height: 56px;
 }
 
 .navbar-nav {
@@ -183,6 +306,21 @@
 
 .modal-dialog .modal-content {
   border-radius: 4px;
+  box-shadow: 0 7px 8px -4px rgba(0, 0, 0, 0.2), 0 13px 19px 2px rgba(0, 0, 0, 0.14), 0 5px 24px 4px rgba(0, 0, 0, 0.12);
+}
+
+.modal-dialog .modal-content .modal-header {
+  border-radius: 4px 4px 0 0;
+  padding: 14px 16px 13px 16px;
+}
+
+.modal-dialog .modal-content .modal-header h4 {
+  font-size: 20px;
+  font-weight: 400;
+}
+
+.modal-dialog .modal-content .modal-header .close {
+  opacity: 1;
 }
 
 .modal-dialog .modal-content .modal-body > form {

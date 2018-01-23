@@ -1,40 +1,134 @@
-/* AdminLTE */
-.skin-blue, .skin-blue-light {
-  md-toolbar.md-default-theme:not(.md-menu-toolbar), md-toolbar:not(.md-menu-toolbar) {
-    background-color: #3c8dbc;
+$color-blue: #3c8dbc;
+$color-red: #dd4b39;
+$color-yellow: #f39c12;
+$color-purple: #605ca8;
+$color-green: #00a65a;
+$color-light:#ecf0f5;
+$color-black:#222d32;
+$color-text-light: rgba(255, 255, 255, 0.87);
+$color-text-dark: #333333;
+
+/* skins */
+
+.skin-blue,
+.skin-blue-light {
+  .modal-header,
+  .modal-header .close,
+  md-toolbar.md-default-theme:not(.md-menu-toolbar),
+  md-toolbar:not(.md-menu-toolbar),
+  md-switch.md-default-theme.md-checked.md-primary .md-thumb,
+  md-switch.md-checked.md-primary .md-thumb {
+    background-color: $color-blue;
+    color: $color-text-light;
+  }
+  md-switch.md-default-theme.md-checked.md-primary .md-bar,
+  md-switch.md-checked.md-primary .md-bar {
+    background-color: rgba($color-blue, .5);
   }
 }
-.skin-red, .skin-red-light {
-  md-toolbar.md-default-theme:not(.md-menu-toolbar), md-toolbar:not(.md-menu-toolbar) {
-    background-color: #dd4b39;
+
+.skin-red,
+.skin-red-light {
+  .modal-header,
+  .modal-header .close,
+  md-toolbar.md-default-theme:not(.md-menu-toolbar),
+  md-toolbar:not(.md-menu-toolbar),
+  md-switch.md-default-theme.md-checked.md-primary .md-thumb,
+  md-switch.md-checked.md-primary .md-thumb {
+    background-color: $color-red;
+    color: $color-text-light;
+  }
+  md-switch.md-default-theme.md-checked.md-primary .md-bar,
+  md-switch.md-checked.md-primary .md-bar {
+    background-color: rgba($color-red, .5);
   }
 }
-.skin-yellow, .skin-yellow-light {
-  md-toolbar.md-default-theme:not(.md-menu-toolbar), md-toolbar:not(.md-menu-toolbar) {
-    background-color: #f39c12;
+
+.skin-yellow,
+.skin-yellow-light {
+  .modal-header,
+  .modal-header .close,
+  md-toolbar.md-default-theme:not(.md-menu-toolbar),
+  md-toolbar:not(.md-menu-toolbar),
+  md-switch.md-default-theme.md-checked.md-primary .md-thumb,
+  md-switch.md-checked.md-primary .md-thumb {
+    background-color: $color-yellow;
+    color: $color-text-light;
+  }
+  md-switch.md-default-theme.md-checked.md-primary .md-bar,
+  md-switch.md-checked.md-primary .md-bar {
+    background-color: rgba($color-yellow, .5);
   }
 }
-.skin-purple, .skin-purple-light {
-  md-toolbar.md-default-theme:not(.md-menu-toolbar), md-toolbar:not(.md-menu-toolbar) {
-    background-color: #605ca8;
+
+.skin-purple,
+.skin-purple-light {
+  .modal-header,
+  .modal-header .close,
+  md-toolbar.md-default-theme:not(.md-menu-toolbar),
+  md-toolbar:not(.md-menu-toolbar),
+  md-switch.md-default-theme.md-checked.md-primary .md-thumb,
+  md-switch.md-checked.md-primary .md-thumb {
+    background-color: $color-purple;
+    color: $color-text-light;
+  }
+  md-switch.md-default-theme.md-checked.md-primary .md-bar,
+  md-switch.md-checked.md-primary .md-bar {
+    background-color: rgba($color-purple, .5);
   }
 }
-.skin-green, .skin-green-light {
-  md-toolbar.md-default-theme:not(.md-menu-toolbar), md-toolbar:not(.md-menu-toolbar) {
-    background-color: #00a65a;
+
+.skin-green,
+.skin-green-light {
+  .modal-header,
+  .modal-header .close,
+  md-toolbar.md-default-theme:not(.md-menu-toolbar),
+  md-toolbar:not(.md-menu-toolbar),
+  md-switch.md-default-theme.md-checked.md-primary .md-thumb,
+  md-switch.md-checked.md-primary .md-thumb {
+    background-color: $color-green;
+    color: $color-text-light;
+  }
+  md-switch.md-default-theme.md-checked.md-primary .md-bar,
+  md-switch.md-checked.md-primary .md-bar {
+    background-color: rgba($color-green, .5);
   }
 }
+
 .skin-black {
-  md-toolbar.md-default-theme:not(.md-menu-toolbar), md-toolbar:not(.md-menu-toolbar) {
-    background-color: #222d32;
+  .modal-header,
+  .modal-header .close,
+  md-toolbar.md-default-theme:not(.md-menu-toolbar),
+  md-toolbar:not(.md-menu-toolbar),
+  md-switch.md-default-theme.md-checked.md-primary .md-thumb,
+  md-switch.md-checked.md-primary .md-thumb {
+    background-color: $color-black;
+    color: $color-text-light;
+  }
+  md-switch.md-default-theme.md-checked.md-primary .md-bar,
+  md-switch.md-checked.md-primary .md-bar {
+    background-color: rgba($color-black, .5);
   }
 }
+
 .skin-black-light {
-  md-toolbar.md-default-theme:not(.md-menu-toolbar), md-toolbar:not(.md-menu-toolbar) {
-    background-color: #ecf0f5;
-    color: #333333;
+  .modal-header,
+  .modal-header .close,
+  md-toolbar.md-default-theme:not(.md-menu-toolbar),
+  md-toolbar:not(.md-menu-toolbar),
+  md-switch.md-default-theme.md-checked.md-primary .md-thumb,
+  md-switch.md-checked.md-primary .md-thumb {
+    background-color: $color-light;
+    color: $color-text-dark;
+  }
+  md-switch.md-default-theme.md-checked.md-primary .md-bar,
+  md-switch.md-checked.md-primary .md-bar {
+    background-color: rgba($color-light, .5);
   }
 }
+
+
+/* AdminLTE */
 
 .lockscreen {
   display: none;
@@ -48,6 +142,12 @@
     position: absolute;
     margin-top: .5rem;
   }
+}
+
+md-toolbar,
+.md-toolbar-tools {
+  height: 56px;
+  min-height: 56px;
 }
 
 .navbar-nav {
@@ -223,6 +323,18 @@
   margin-top: 150px;
   .modal-content {
     border-radius: 4px;
+    box-shadow: 0 7px 8px -4px rgba(0, 0, 0, .2), 0 13px 19px 2px rgba(0, 0, 0, .14), 0 5px 24px 4px rgba(0, 0, 0, .12);
+    .modal-header {
+      border-radius: 4px 4px 0 0;
+      padding: 14px 16px 13px 16px;
+      h4 {
+        font-size: 20px;
+        font-weight: 400;
+      }
+      .close {
+        opacity: 1;
+      }
+    }
     .modal-body {
       &>form {
         margin-top: 15px;
@@ -240,6 +352,7 @@
 
 
 /* angularjs material */
+
 .layout-row {
   md-input-container {
     margin-bottom: 0;
