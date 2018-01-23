@@ -99,12 +99,19 @@
                     </form>
                 </div>
                 <div class="modal-footer">
-                    <button type="button" class="btn btn-default" data-dismiss="modal" ng-bind="'common.close'|translate"></button>
-                    <button type="button" class="btn btn-primary"
-                            ng-disabled="form.$invalid"
-                            ng-bind="'common.saveChanges'|translate"
-                            ng-click="save()">
-                    </button>
+                    <div class="pull-left">
+                        <md-switch class="md-primary no-margin" ng-model="formModel.visible">
+                            <span ng-bind="'admin.modules.core.menus.fieldVisible'|translate"></span>
+                        </md-switch>
+                    </div>
+                    <div class="pull-right">
+                        <button type="button" class="btn btn-default" data-dismiss="modal" ng-bind="'common.close'|translate"></button>
+                        <button type="button" class="btn btn-primary"
+                                ng-disabled="form.$invalid"
+                                ng-bind="'common.saveChanges'|translate"
+                                ng-click="save()">
+                        </button>
+                    </div>
                 </div>
             </div>
         </div>
