@@ -175,6 +175,10 @@ md-toolbar,
   margin-left: 0;
 }
 
+.md-select-menu-container {
+  z-index: 9999;
+}
+
 .messages-menu li h3 {
   margin: 0 0 10px 0;
   font-size: 14px;

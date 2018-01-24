@@ -52,6 +52,7 @@
             <div class="modal-content">
                 <div class="modal-header">
                     <button type="button" class="close" data-dismiss="modal"
+                            ng-click="closeDialog()"
                             aria-label="Close">
                         <span aria-hidden="true">&times;</span>
                     </button>
@@ -63,6 +64,20 @@
                 </div>
                 <div class="modal-body">
                     <form name="form">
+                        <md-input-container class="md-block">
+                            <label>
+                                <span ng-bind="'admin.modules.core.menus.fieldTemplate'|translate"></span>
+                            </label>
+                            <md-select ng-model="selectedMenuTemplate" ng-change="selectMenuTemplate()"
+                                       placeholder="{{'admin.modules.core.menus.msgSelectTemplate'|translate}}">
+                                <md-option ng-repeat="m in menuTemplates" ng-value="m">
+                                    {{ '&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;'.repeat(m.name.split('.').length - 4) }}
+                                    <i class="fa fa-fw fa-circle-o"></i>
+                                    <span ng-bind="m.name | translate"></span>
+                                </md-option>
+                            </md-select>
+                        </md-input-container>
+
                         <div layout="row">
                             <md-input-container flex="50">
                                 <label>
@@ -105,7 +120,9 @@
                         </md-switch>
                     </div>
                     <div class="pull-right">
-                        <button type="button" class="btn btn-default" data-dismiss="modal" ng-bind="'common.close'|translate"></button>
+                        <button type="button" class="btn btn-default" data-dismiss="modal"
+                                ng-click="closeDialog()"
+                                ng-bind="'common.close'|translate"></button>
                         <button type="button" class="btn btn-primary"
                                 ng-disabled="form.$invalid"
                                 ng-bind="'common.saveChanges'|translate"

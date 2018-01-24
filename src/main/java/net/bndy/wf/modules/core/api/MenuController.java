@@ -48,4 +48,11 @@ public class MenuController extends _BaseApi<Menu> {
 	public void toggleVisible(@PathVariable(name = "id") long id) {
 		this.menuService.toggleVisible(id);
 	}
+
+
+	@ApiOperation(value = "Gets menu templates")
+	@RequestMapping(value = "/templates", method = RequestMethod.GET)
+	public List<Menu> getTemplates() throws IOException {
+		return this.menuService.getTemplates();
+	}
 }

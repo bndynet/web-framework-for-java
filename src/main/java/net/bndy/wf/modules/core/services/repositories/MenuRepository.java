@@ -15,6 +15,8 @@ import net.bndy.wf.modules.core.models.Menu;
 import org.springframework.transaction.annotation.Transactional;
 
 public interface MenuRepository extends JpaRepository<Menu, Long> {
+
+	Menu findByName(String name);
 	
 	@Query(value="SELECT t.* FROM core_menu t WHERE t.is_visible = 1", nativeQuery=true)
 	List<Menu> getVisibleMenus();

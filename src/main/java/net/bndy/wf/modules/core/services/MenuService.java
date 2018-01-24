@@ -34,27 +34,73 @@ public class MenuService extends _BaseService<Menu> {
         return this.menuRepo.findAll();
     }
 
-    public void initMenus() throws IOException {
-        if (this.getList().size() == 0) {
-            List<String> menus = this.appService.allModules();
+    public List<Menu> getTemplates() throws IOException {
+        List<Menu> result = new ArrayList<>();
 
-            menus.sort(Comparator.naturalOrder());
+        List<String> menus = this.appService.allModules();
 
-            Map<String, Menu> pathMapping = new HashMap();
-            for (String menu : menus) {
-                if (menu.startsWith("shared")) {
+        Map<String, Menu> pathMapping = new HashMap();
+        for (String menu : menus) {
+            // exclude modules
+            if (menu.startsWith("shared")) {
+                continue;
+            }
+
+            for (String path : StringHelper.stairSplit(menu, "-")) {
+                if (pathMapping.get(path) != null) {
                     continue;
                 }
 
-                for (String path : StringHelper.stairSplit(menu, "-")) {
-                    if (pathMapping.get(path) != null) {
-                        continue;
-                    }
+                String name = "admin.modules." + path.replace("-", ".") + ".title";
+                Menu m = new Menu();
+                m.setVisible(true);
+                m.setIcon("fa fa-fw fa-circle-thin");
+                m.setName(name);
+                if (path.equals(menu)) {
+                    m.setLink(path);
+                }
+// uncomment for getting tree
+//                if (path.indexOf("-") > 0) {
+//                    Menu parentMenu = pathMapping.get(path.substring(0, path.lastIndexOf("-")));
+//                    if (parentMenu != null) {
+//                        parentMenu.getChildren().add(m);
+//                    }
+//                } else {
+//                    result.add(m);
+//                }
+                // comment for getting tree
+                result.add(m);
 
-                    Menu m = new Menu();
-                    m.setVisible(true);
+                pathMapping.put(path, m);
+            }
+        }
+
+        return result;
+    }
+
+    public void initMenus() throws IOException {
+        List<String> menus = this.appService.allModules();
+
+        menus.sort(Comparator.naturalOrder());
+
+        Map<String, Menu> pathMapping = new HashMap();
+        for (String menu : menus) {
+            if (menu.startsWith("shared")) {
+                continue;
+            }
+
+            for (String path : StringHelper.stairSplit(menu, "-")) {
+                if (pathMapping.get(path) != null) {
+                    continue;
+                }
+
+                String name = "admin.modules." + path.replace("-", ".") + ".title";
+                Menu m = this.menuRepo.findByName(name);
+                if (m == null) {
+                    m = new Menu();
+                    m.setVisible(false);
                     m.setIcon("fa fa-fw fa-circle-thin");
-                    m.setName("admin.modules." + path.replace("-", ".") + ".title");
+                    m.setName(name);
 
                     if (path.indexOf("-") > 0) {
                         Menu parentMenu = pathMapping.get(path.substring(0, path.lastIndexOf("-")));
@@ -67,15 +113,14 @@ public class MenuService extends _BaseService<Menu> {
                         m.setLink(path);
                     }
                     m = this.save(m);
-                    pathMapping.put(path, m);
                 }
+                pathMapping.put(path, m);
             }
         }
     }
 
     public List<Menu> getMenus() throws IOException {
         List<Menu> menus = this.menuRepo.findAll();
-
         if (menus.size() == 0) {
             this.initMenus();
             menus = this.menuRepo.findAll();

@@ -1,8 +1,12 @@
 app.controller('MenusCtrl',
-    [ '$scope', 'appDialog', '$http',
-    function($scope, appDialog, $http) {
+    [ '$scope', 'appDialog', '$http', '$mdSelect',
+    function($scope, appDialog, $http, $mdSelect) {
 
         function initData() {
+            $scope.selectedMenuTemplate = null;
+            $http.get('/api/core/menus/templates').then(function(res) {
+                $scope.menuTemplates = res.data;
+            });
             $http.get('/api/core/menus/tree?all=true').then(function(res) {
                 $scope.data = res.data;
             });
@@ -54,6 +58,18 @@ app.controller('MenusCtrl',
                     initData();
                 });
             });
+        };
+
+        $scope.selectMenuTemplate = function() {
+            if ($scope.selectedMenuTemplate) {
+                $scope.formModel.name = $scope.selectedMenuTemplate.name;
+                $scope.formModel.link = $scope.selectedMenuTemplate.link;
+            }
+        };
+
+        $scope.closeDialog = function() {
+            $mdSelect.hide();
+            $scope.selectedMenuTemplate = null;
         };
 
         initData();
