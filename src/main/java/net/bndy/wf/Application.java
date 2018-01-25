@@ -38,7 +38,7 @@ public class Application extends SpringBootServletInitializer {
 	@Bean
 	public Docket newsApi() {
 		return new Docket(DocumentationType.SWAGGER_2).select().apis(RequestHandlerSelectors.any())
-				.paths(regex("/api/.*")).build().pathMapping("/").apiInfo(apiInfo());
+				.paths(regex("/api/v\\d/.*")).build().pathMapping("/").apiInfo(apiInfo());
 	}
 
 	private ApiInfo apiInfo() {
