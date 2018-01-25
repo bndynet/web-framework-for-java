@@ -16,15 +16,14 @@
                                 <div class="form-group col-xs-6">
                                     <label>&nbsp;</label>
                                     <div class="form-control-static">
-                                        <label class="iradio">
-                                            <input type="radio" name="gender" ng-model="viewModel.gender" value="1" />
-                                            <span>{{'admin.modules.core.userProfile.valueMale'|translate}}</span>
-                                        </label>
-                                        &nbsp;
-                                        <label class="iradio">
-                                            <input type="radio" name="gender" ng-model="viewModel.gender" value="0" />
-                                            <span>{{'admin.modules.core.userProfile.valueFemale'|translate}}</span>
-                                        </label>
+                                        <md-radio-group layout="row" ng-model="viewModel.gender">
+                                            <md-radio-button flex="1" value="1" class="md-primary">
+                                                {{'admin.modules.core.userProfile.valueMale'|translate}}
+                                            </md-radio-button>
+                                            <md-radio-button flex="1" value="0" class="md-primary">
+                                                {{'admin.modules.core.userProfile.valueFemale'|translate}}
+                                            </md-radio-button>
+                                        </md-radio-group>
                                     </div>
                                 </div>
                             </div>
