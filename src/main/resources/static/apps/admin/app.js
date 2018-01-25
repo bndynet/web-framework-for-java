@@ -314,13 +314,19 @@ angular.element(document).ready(function () {
 });
 
 
-// MISC
+// misc functions
 function initUI() {
     $('.icheck, .iradio').iCheck({ checkboxClass: 'icheckbox_flat-green', radioClass   : 'iradio_flat-green'});
     $('.colorpicker').colorpicker();
     $('.timepicker').timepicker({ showInputs: false });
     $('.datepicker').datepicker({ autoclose: true, format: 'yyyy-mm-dd' });
 }
+
+// overwrite global settings
+
+// disable modal dialog closing when clicking outside dialog or pressing ESC
+$.fn.modal.prototype.constructor.Constructor.DEFAULTS.backdrop = 'static';
+$.fn.modal.prototype.constructor.Constructor.DEFAULTS.keyboard =  false;
 
 $(function () {
     initUI();
