@@ -1,30 +1,3 @@
-<script type="text/ng-template" id="menuTemplate">
-    <div class="tree-item with-border hover" ng-class="{'disabled': !menu.visible, 'active': menu.selected}" ng-if="menu.id">
-        <div class="pull-left">
-            <i class="{{menu.icon}}"></i>
-            <span ng-bind="menu.name|translate"></span>
-        </div>
-        <div class="pull-right icon-group">
-            <a ng-click="toggleVisible(menu)">
-                <i class="fa {{menu.visible?'fa-eye':'fa-eye-slash'}}"></i>
-            </a>
-            <a ng-click="add(menu)">
-                <i class="glyphicon glyphicon-plus text-primary"></i>
-            </a>
-            <a ng-click="edit(menu)">
-                <i class="glyphicon glyphicon-edit text-primary"></i>
-            </a>
-            <a ng-click="remove(menu)">
-                <i class="glyphicon glyphicon-trash text-danger"></i>
-            </a>
-        </div>
-        <div class="clearfix"></div>
-    </div>
-    <div class="child-box">
-        <ng-include src="'menuTemplate'" ng-repeat="item in menu.children | orderBy: 'displayOrder'" ng-init="menu=item"></ng-include>
-    </div>
-</script>
-
 <div ng-controller="MenusCtrl">
     <ui-page-header title="'admin.modules.core.menus.title'"
                     subtitle="'admin.modules.core.menus.subtitle'"
@@ -38,11 +11,13 @@
                 </div>
             </div>
             <div class="box-body">
-                <div class="tree">
-                    <div ng-include="'menuTemplate'" ng-repeat="menu in data"></div>
-                </div>
-
-                <ui-no-data ng-if="data.length==0" message="admin.modules.core.menus.noMenus"></ui-no-data>
+                <ui-menu-tree ng-model="menus"
+                              can-edit="true"
+                              multi-select="true"
+                              on-item-edit="edit(item)"
+                              on-item-remove="remove(item)"
+                              on-item-add-submenu="add(item)"
+                              on-item-toggle-visible="toggleVisible(item)"></ui-menu-tree>
             </div>
         </div>
     </section>

@@ -8,7 +8,7 @@ app.controller('MenusCtrl',
                 $scope.menuTemplates = res.data;
             });
             $http.get('/api/core/menus/tree?all=true').then(function(res) {
-                $scope.data = res.data;
+                $scope.menus = res.data;
             });
         }
 

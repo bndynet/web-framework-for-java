@@ -1,0 +1,38 @@
+<div>
+    <script type="text/ng-template" id="menuTemplate">
+        <div class="tree-item with-border hover" ng-class="{'disabled': !menu.visible, 'active': menu.selected}" ng-if="menu.id">
+            <div class="pull-left">
+                <md-checkbox ng-if="multiSelect"
+                             ng-checked="menu.__selected"
+                             ng-click="toggleSelect(menu, parent)">
+                </md-checkbox>
+                <i class="{{menu.icon}}"></i>
+                <span ng-bind="menu.name|translate"></span>
+            </div>
+            <div class="pull-right icon-group" ng-cloak ng-if="canEdit">
+                <a ng-click="toggleVisible(menu)">
+                    <i class="fa {{menu.visible?'fa-eye':'fa-eye-slash'}}"></i>
+                </a>
+                <a ng-click="addSubmenu(menu)">
+                    <i class="glyphicon glyphicon-plus text-primary"></i>
+                </a>
+                <a ng-click="edit(menu)">
+                    <i class="glyphicon glyphicon-edit text-primary"></i>
+                </a>
+                <a ng-click="remove(menu)">
+                    <i class="glyphicon glyphicon-trash text-danger"></i>
+                </a>
+            </div>
+            <div class="clearfix"></div>
+        </div>
+        <div class="child-box">
+            <ng-include src="'menuTemplate'" ng-repeat="item in menu.children | orderBy: 'displayOrder'" ng-init="parent=menu;menu=item"></ng-include>
+        </div>
+    </script>
+
+    <div class="tree">
+        <div ng-include="'menuTemplate'" ng-repeat="menu in model"></div>
+    </div>
+
+    <ui-no-data ng-if="!model || model.length==0" message="admin.modules.core.menus.noMenus"></ui-no-data>
+</div>
