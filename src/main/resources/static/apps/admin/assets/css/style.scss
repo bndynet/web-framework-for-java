@@ -115,15 +115,19 @@ $color-text-dark: #333333;
   .modal-header,
   .modal-header .close,
   md-toolbar.md-default-theme:not(.md-menu-toolbar),
-  md-toolbar:not(.md-menu-toolbar),
+  md-toolbar:not(.md-menu-toolbar) {
+    background-color: $color-light;
+    color: $color-text-dark;
+  }
+
   md-switch.md-default-theme.md-checked.md-primary .md-thumb,
   md-switch.md-checked.md-primary .md-thumb {
-    background-color: $color-light;
+    background-color: $color-blue;
     color: $color-text-dark;
   }
   md-switch.md-default-theme.md-checked.md-primary .md-bar,
   md-switch.md-checked.md-primary .md-bar {
-    background-color: rgba($color-light, .5);
+    background-color: rgba($color-blue, .5);
   }
 }
 
