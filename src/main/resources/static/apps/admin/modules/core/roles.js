@@ -3,35 +3,12 @@ app.controller('RolesCtrl',
     function($scope, appDialog, $http, $timeout) {
         $scope.data = [];
         $scope.roles = null;
-        $scope.pageRoles = function (page) {
-            var url = '/api/core/roles/search?page=' + (page - 1);
-            if ($scope.searchKeywords) {
-                url += '&keywords=' + $scope.searchKeywords;
-            }
-            $http.get(url).then(function(res) {
-                $scope.data = res.data.content;
-                $scope.pager = {
-                    currentPage: page,
-                    pageSize:  res.data.size,
-                    recordCount: res.data.totalElements,
-                };
-
-                if ($scope.searchKeywords) {
-                    $timeout(function() {
-                        $('table > tbody > tr > td, table > tbody > tr > td > span').highlightText($scope.searchKeywords);
-                    }, 100);
-                }
-            });
-        };
-
-/*
         $scope.init = function() {
-            $http.get('/api/core/config/users').then(function(res) {
-                $scope.users = res.data;
+            $http.get('/api/core/roles').then(function(res) {
+                $scope.data = res.data;
             });
-            $scope.pageUsers(1);
         };
-
+/*
         $scope.editUsers = function(item) {
             $scope.roleModel = angular.copy(item);
             $('#rolesForm').modal('show');
@@ -70,6 +47,7 @@ app.controller('RolesCtrl',
             }
         };
 
+*/
         $scope.remove = function(item) {
             appDialog.confirmDeletion(function(){
                 $http.delete('/api/core/roles/' + item.id).then(function(res) {
@@ -79,22 +57,5 @@ app.controller('RolesCtrl',
             });
         };
 
-        $scope.search = function() {
-            $scope.pageRoles(1);
-        };
-
-        $scope.cancelSearch = function() {
-            $scope.searchKeywords = null;
-            $scope.pageRoles(1);
-        };
-
-        $scope.roleHasUser = function(role) {
-            if ($scope.roleModel && _.find($scope.roleModel.users||[], function(r) { return r.name === user.name; })) {
-                return true;
-            }
-            return false;
-        };
-
         $scope.init();
     }]);
-*/
