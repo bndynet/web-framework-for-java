@@ -132,16 +132,20 @@
 .skin-black-light .modal-header,
 .skin-black-light .modal-header .close,
 .skin-black-light md-toolbar.md-default-theme:not(.md-menu-toolbar),
-.skin-black-light md-toolbar:not(.md-menu-toolbar),
+.skin-black-light md-toolbar:not(.md-menu-toolbar) {
+  background-color: #ecf0f5;
+  color: #333333;
+}
+
 .skin-black-light md-switch.md-default-theme.md-checked.md-primary .md-thumb,
 .skin-black-light md-switch.md-checked.md-primary .md-thumb {
-  background-color: #ecf0f5;
+  background-color: #3c8dbc;
   color: #333333;
 }
 
 .skin-black-light md-switch.md-default-theme.md-checked.md-primary .md-bar,
 .skin-black-light md-switch.md-checked.md-primary .md-bar {
-  background-color: rgba(236, 240, 245, 0.5);
+  background-color: rgba(60, 141, 188, 0.5);
 }
 
 /* AdminLTE */
