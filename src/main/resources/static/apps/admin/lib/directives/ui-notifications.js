@@ -1,4 +1,4 @@
-app.directive('uiMenuMessages', ['$http', '$translate', function($http, $translate) {
+app.directive('uiNotifications', ['$http', '$translate', function($http, $translate) {
 
     return {
         restrict: 'E',
@@ -11,7 +11,7 @@ app.directive('uiMenuMessages', ['$http', '$translate', function($http, $transla
             moreClick: '&moreClick',
             data: '=data'
         },
-        templateUrl: '/static/apps/admin/lib/directives/ui-menu-messages.html',
+        templateUrl: '/static/apps/admin/lib/directives/ui-notifications.html',
         link: function(scope, element, attrs) {
         }
     };
