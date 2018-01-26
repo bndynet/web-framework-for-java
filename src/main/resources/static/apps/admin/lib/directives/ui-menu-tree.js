@@ -17,7 +17,6 @@ angular.module('app')
             templateUrl: '/static/apps/admin/lib/directives/ui-menu-tree.html',
             link: function(scope, elem, attrs) {
 
-                console.debug(_.flatMapDeep(scope.model));
                 function toggleChildren(item) {
                     if (item.children) {
                         for (var idx = 0; idx < item.children.length; idx++) {
