@@ -9,7 +9,7 @@
                 </div>
 
                 <div class="box-tools pull-right">
-                    <a class="btn btn-sm btn-primary" href="javascript:;" target="_blank" ng-bind="'admin.modules.core.roles.addRole'|translate"></a>
+                    <button type="button" class="btn btn-sm btn-primary" ng-click="add()" ng-bind="'admin.modules.core.roles.addRole'|translate"></button>
                 </div>
             </div>
             <div class="box-body">
@@ -20,7 +20,7 @@
                         <th ng-bind="'admin.modules.core.roles.fieldDescription'|translate"></th>
                         <th ng-bind="'admin.modules.core.roles.fieldCreatedAt'|translate"></th>
                         <th ng-bind="'admin.modules.core.roles.fieldLastUpdate'|translate"></th>
-                        <th class="text-center" ng-bind="'common.delete'|translate"></th>
+                        <th class="text-center" ng-bind="'common.operation'|translate"></th>
                     </tr>
                     </thead>
                     <tbody>
@@ -31,6 +31,9 @@
                         <td ng-bind="item.lastUpdate | date: 'yyyy-MM-dd HH:mm'"></td>
 
                         <td class="text-center">
+                            <a ng-click="edit(item)">
+                                <i class="glyphicon glyphicon-edit text-primary"></i>
+                            </a>
                             <a ng-click="remove(item)">
                                 <i class="glyphicon glyphicon-trash text-danger"></i>
                             </a>
@@ -43,39 +46,54 @@
         </div>
     </section>
 
-    <!--<div id="usersForm" class="modal fade" tabindex="-1" role="dialog">-->
-        <!--<div class="modal-dialog" role="document">-->
-            <!--<div class="modal-content">-->
-                <!--<div class="modal-header">-->
-                    <!--<button type="button" class="close" data-dismiss="modal"-->
-                            <!--aria-label="Close">-->
-                        <!--<span aria-hidden="true">&times;</span>-->
-                    <!--</button>-->
-                    <!--<h4 class="modal-title">-->
-                        <!--<span ng-bind-html="'admin.modules.core.roles.usersForRole'|translate:[roleModel.name]"></span>-->
-                    <!--</h4>-->
-                <!--</div>-->
-                <!--<div class="modal-body">-->
-                    <!--<div class="list-group">-->
-                        <!--<a class="list-group-item"-->
-                           <!--ng-click="toggleUser(item)"-->
-                           <!--ng-repeat="item in users">-->
-                            <!--<h4 class="list-group-item-heading">-->
-                                <!--{{ item.name }}-->
-                                <!--<i class="fa fa-check fa-2x ng-cloak text-success pull-right"-->
-                                   <!--ng-if="roleHasUser(item)"></i>-->
-                            <!--</h4>-->
-                            <!--<p class="list-group-item-text">{{ item.description }}</p>-->
-                        <!--</a>-->
-                    <!--</div>-->
-                <!--</div>-->
-                <!--<div class="modal-footer">-->
-                    <!--<button type="button" class="btn btn-default" data-dismiss="modal" ng-bind="'common.close'|translate"></button>-->
-                    <!--<button type="button" class="btn btn-primary"-->
-                            <!--ng-bind="'common.saveChanges'|translate"-->
-                            <!--ng-click="saveUsers()"></button>-->
-                <!--</div>-->
-            <!--</div>-->
-        <!--</div>-->
-    <!--</div>-->
+    <div id="dialogForm" class="modal fade" tabindex="-1" role="dialog">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" ng-click="closeDialog()" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                    <h4 class="modal-title">
+                        <span ng-if="formModel.id" ng-bind="'admin.modules.core.roles.editRole'|translate"></span>
+                        <span ng-if="!formModel.id" ng-bind="'admin.modules.core.roles.addRole'|translate"></span>
+                    </h4>
+                </div>
+                <div class="modal-body">
+                    <form name="form">
+                        <div layout="row">
+                            <md-input-container flex="50">
+                                <label>
+                                    <span ng-bind="'admin.modules.core.roles.fieldRoleName'|translate"></span>
+                                    <span ng-show="formModel.name">({{formModel.name|translate}})</span>
+                                </label>
+                                <input name="name" required ng-model="formModel.name"/>
+                                <div ng-messages="form.name.$error">
+                                    <div ng-message="required" ng-bind="'common.msgRequired'|translate"></div>
+                                </div>
+                            </md-input-container>
+                            <md-input-container flex="50">
+                                <label>
+                                    <span ng-bind="'admin.modules.core.roles.fieldDescription'|translate"></span>
+                                </label>
+                                <input name="description" ng-model="formModel.description"/>
+                            </md-input-container>
+                        </div>
+                    </form>
+                </div>
+                <div class="modal-footer">
+                    <div class="pull-left">
+                    </div>
+                    <div class="pull-right">
+                        <button type="button" class="btn btn-default" data-dismiss="modal" ng-click="closeDialog()"
+                                ng-bind="'common.close'|translate"></button>
+                        <button type="button" class="btn btn-primary"
+                                ng-disabled="form.$invalid"
+                                ng-bind="'common.saveChanges'|translate"
+                                ng-click="save()">
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
 </div>
