@@ -61,17 +61,16 @@
                 <div class="modal-body">
                     <form name="form">
                         <div layout="row">
-                            <md-input-container flex="50">
+                            <md-input-container flex="30">
                                 <label>
                                     <span ng-bind="'admin.modules.core.roles.fieldRoleName'|translate"></span>
-                                    <span ng-show="formModel.name">({{formModel.name|translate}})</span>
                                 </label>
                                 <input name="name" required ng-model="formModel.name"/>
                                 <div ng-messages="form.name.$error">
                                     <div ng-message="required" ng-bind="'common.msgRequired'|translate"></div>
                                 </div>
                             </md-input-container>
-                            <md-input-container flex="50">
+                            <md-input-container flex="70">
                                 <label>
                                     <span ng-bind="'admin.modules.core.roles.fieldDescription'|translate"></span>
                                 </label>
