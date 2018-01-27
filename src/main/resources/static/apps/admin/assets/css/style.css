@@ -256,6 +256,10 @@ md-toolbar,
   margin-bottom: 0;
 }
 
+.content-wrapper ui-view .content-header + .content > .box-default .box-header {
+  height: 41px;
+}
+
 .content-wrapper ui-view .content-header + .content > .box-default .box-body {
   height: calc(100vh - 177px);
   overflow: auto;
@@ -348,6 +352,57 @@ md-toolbar,
 .md-input-container md-switch {
   margin-left: 0;
   margin-bottom: 0;
+}
+
+md-radio-button.md-default-theme.md-checked .md-off, md-radio-button.md-checked .md-off {
+  border-color: rgba(60, 141, 188, 0.87);
+}
+
+md-radio-button.md-default-theme .md-on, md-radio-button .md-on {
+  background-color: rgba(60, 141, 188, 0.87);
+}
+
+md-radio-button .md-container,
+md-radio-button .md-off, md-radio-button .md-on {
+  width: 1rem;
+  height: 1rem;
+}
+
+md-radio-button .md-container .md-ripple-container {
+  top: -.5rem;
+  left: -.5rem;
+  right: -.5rem;
+  bottom: -.5rem;
+}
+
+md-radio-button .md-label {
+  margin-left: 1.5rem;
+}
+
+md-checkbox {
+  width: 1.5rem;
+  margin-bottom: 0;
+}
+
+md-checkbox .md-container {
+  height: 1rem;
+  width: 1rem;
+}
+
+md-checkbox .md-container .md-icon {
+  width: 1rem;
+  height: 1rem;
+}
+
+md-checkbox .md-container .md-icon:after {
+  top: -.3rem;
+  left: .2rem;
+  width: .5rem;
+  height: 1rem;
+}
+
+md-checkbox.md-checked .md-container .md-icon {
+  background-color: #3c8dbc;
 }
 
 md-backdrop.md-dialog-backdrop {
