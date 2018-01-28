@@ -4,13 +4,16 @@ app.controller('MenusCtrl',
 
         function initData() {
             $scope.selectedMenuTemplate = null;
-            appService.loading();
-            $http.get('/api/core/menus/templates').then(function(res) {
-                $scope.menuTemplates = res.data;
-            });
-            $http.get('/api/core/menus/tree?all=true').then(function(res) {
-                $scope.menus = res.data;
-                appService.loading(false);
+            appDialog.loading();
+
+            appService.ajaxAll(
+                appService.ajaxGet('/api/core/menus/templates'),
+                appService.ajaxGet('/api/core/menus/tree?all=true')
+            ).then(function(values) {
+                $scope.menuTemplates = values[0];
+                $scope.menus = values[1];
+            }).finally(function() {
+                appDialog.loading(false);
             });
         }
 

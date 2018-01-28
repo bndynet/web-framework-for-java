@@ -92,22 +92,50 @@ app.config(['$provide', '$qProvider', '$httpProvider', '$stateProvider', '$trans
 	}
 }]);
 
-app.factory('appService', ['$rootScope', '$translate', function($rootScope, $translate) {
+app.factory('appService', ['$rootScope', '$http', '$translate', function($rootScope, $http, $translate) {
     var service = {};
 
-    service.loading = function(showLoading) {
-        $rootScope.$broadcast('loading', { showLoading: showLoading } );
-    }
+    service.ajaxGet = function(apiUrl) {
+        return $http.get(apiUrl).then(function(res) {
+            return res.data;
+        });
+    };
+    service.ajaxPut = function(apiUrl, data) {
+        return $http.put(apiUrl, data).then(function(res) {
+            return res.data;
+        });
+    };
+    service.ajaxPost = function(apiUrl, data) {
+        return $http.post(apiUrl, data).then(function(res) {
+            return res.data;
+        });
+    };
+    service.ajaxDelete = function(apiUrl, data) {
+        return $http.delete(apiUrl).then(function(res) {
+            return res.data;
+        });
+    };
+    service.ajaxAll = function() {
+        return angular.ajaxAll.apply(this, arguments);
+    };
+
 
     return service;
 }]);
 
 app.factory('appDialog', [
+    '$rootScope',
     '$translate',
 	'$mdDialog',
 	'toaster',
-	function ($translate, $mdDialog, toaster) {
+	function ($rootScope, $translate, $mdDialog, toaster) {
 		var service = {};
+
+        service.loading = function(showLoading) {
+            if (typeof showLoading === 'undefined') showLoading = true;
+            $rootScope.$broadcast('loading', showLoading);
+            $rootScope.$emit('loading', showLoading);
+        }
 
 		service.info = function (title, msg) {
 			toaster.pop({
@@ -244,12 +272,8 @@ app.factory('appDialog', [
 app.controller('LayoutCtrl', ['$http', '$scope', 'appDialog',
     function($http, $scope, appDialog) {
 
-        $scope.$on('loading', function(event, args) {
-            if (typeof args.showLoading === 'undefined') {
-                $scope.showLoading = true;
-            } else {
-                $scope.showLoading = args.showLoading;
-            }
+        $scope.$on('loading', function(event, showLoading) {
+            $scope.showLoading = showLoading;
         });
 
         // menus
