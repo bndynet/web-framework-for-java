@@ -125,16 +125,19 @@ app.factory('appService', ['$rootScope', '$http', '$translate', function($rootSc
 
 app.factory('appDialog', [
     '$rootScope',
+    '$timeout',
     '$translate',
 	'$mdDialog',
 	'toaster',
-	function ($rootScope, $translate, $mdDialog, toaster) {
+	function ($rootScope, $timeout, $translate, $mdDialog, toaster) {
 		var service = {};
 
         service.loading = function(showLoading) {
             if (typeof showLoading === 'undefined') showLoading = true;
-            $rootScope.$broadcast('loading', showLoading);
-            $rootScope.$emit('loading', showLoading);
+            $timeout(function() {
+                $rootScope.$broadcast('loading', showLoading);
+                $rootScope.$emit('loading', showLoading);
+            });
         }
 
 		service.info = function (title, msg) {
