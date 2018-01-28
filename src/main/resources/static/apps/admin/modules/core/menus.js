@@ -1,14 +1,16 @@
 app.controller('MenusCtrl',
-    [ '$scope', 'appDialog', '$http', '$mdSelect',
-    function($scope, appDialog, $http, $mdSelect) {
+    [ '$scope', '$http', '$mdSelect', 'appService', 'appDialog',
+    function($scope, $http, $mdSelect, appService, appDialog) {
 
         function initData() {
             $scope.selectedMenuTemplate = null;
+            appService.loading();
             $http.get('/api/core/menus/templates').then(function(res) {
                 $scope.menuTemplates = res.data;
             });
             $http.get('/api/core/menus/tree?all=true').then(function(res) {
                 $scope.menus = res.data;
+                appService.loading(false);
             });
         }
 

@@ -354,6 +354,19 @@ md-toolbar,
   margin-bottom: 0;
 }
 
+md-progress-linear {
+  position: absolute;
+  z-index: 9;
+}
+
+md-progress-linear.md-default-theme .md-container, md-progress-linear .md-container {
+  background-color: rgba(60, 141, 188, 0.4);
+}
+
+md-progress-linear.md-default-theme .md-bar, md-progress-linear .md-bar {
+  background-color: rgba(60, 141, 188, 0.8);
+}
+
 md-radio-button.md-default-theme.md-checked .md-off, md-radio-button.md-checked .md-off {
   border-color: rgba(60, 141, 188, 0.87);
 }

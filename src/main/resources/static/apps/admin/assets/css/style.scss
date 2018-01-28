@@ -379,6 +379,18 @@ md-toolbar,
   }
 }
 
+md-progress-linear {
+  position: absolute;
+  z-index: 9;
+}
+md-progress-linear.md-default-theme .md-container, md-progress-linear .md-container {
+  background-color: rgba($color-primary, .4);
+
+}
+md-progress-linear.md-default-theme .md-bar, md-progress-linear .md-bar {
+  background-color: rgba($color-primary, .8);
+}
+
 // radio:
 md-radio-button.md-default-theme.md-checked .md-off, md-radio-button.md-checked .md-off {
   border-color: rgba($color-primary, .87);

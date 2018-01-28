@@ -9,6 +9,7 @@
 		<div th:replace="admin/partials/headers::header"></div>
 		<div th:replace="admin/partials/sidebars::sidebar"></div>
 		<div class="content-wrapper">
+			<md-progress-linear md-mode="query" ng-disabled="!showLoading"></md-progress-linear>
 			<ui-view></ui-view>
 		</div>
 

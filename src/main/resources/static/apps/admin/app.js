@@ -92,6 +92,16 @@ app.config(['$provide', '$qProvider', '$httpProvider', '$stateProvider', '$trans
 	}
 }]);
 
+app.factory('appService', ['$rootScope', '$translate', function($rootScope, $translate) {
+    var service = {};
+
+    service.loading = function(showLoading) {
+        $rootScope.$broadcast('loading', { showLoading: showLoading } );
+    }
+
+    return service;
+}]);
+
 app.factory('appDialog', [
     '$translate',
 	'$mdDialog',
@@ -233,6 +243,15 @@ app.factory('appDialog', [
 
 app.controller('LayoutCtrl', ['$http', '$scope', 'appDialog',
     function($http, $scope, appDialog) {
+
+        $scope.$on('loading', function(event, args) {
+            if (typeof args.showLoading === 'undefined') {
+                $scope.showLoading = true;
+            } else {
+                $scope.showLoading = args.showLoading;
+            }
+        });
+
         // menus
         $scope.menus = [];
         $http.get('/api/core/menus/tree').then(function(res) {
