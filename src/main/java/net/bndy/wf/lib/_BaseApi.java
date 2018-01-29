@@ -106,7 +106,7 @@ public abstract class _BaseApi<T extends _BaseEntity> {
 			f.setName(file.getOriginalFilename().replace("." + f.getExtName(), ""));
 		}
 
-		f.setPath(Paths.get(File.separator, new SimpleDateFormat("yyyy-MM").format(new Date())).toString());
+		f.setPath(new SimpleDateFormat("yyyy-MM").format(new Date()));
 		if (this.appliationConfig.isRenameUploadFile()) {
 			if (f.getExtName() != null && f.getExtName() != "") {
 				f.setPath(Paths.get(f.getPath(), f.getUuid() + "." + f.getExtName()).toString());
@@ -127,7 +127,7 @@ public abstract class _BaseApi<T extends _BaseEntity> {
 			}
 		}
 
-		String destAbsPath = this.appliationConfig.getUploadPath() + f.getPath();
+		String destAbsPath = Paths.get(this.appliationConfig.getUploadPath(), f.getPath()).toAbsolutePath().toString();
 
 		File destAbsFile = new File(destAbsPath);
 		if (!destAbsFile.getParentFile().exists()) {
@@ -143,6 +143,7 @@ public abstract class _BaseApi<T extends _BaseEntity> {
 		out.flush();
 		out.close();
 
+		f.setPath("/" + f.getPath().replaceAll("[/\\\\]+", "/"));
 		f = this.fileService.save(f);
 
 		return f;
