@@ -8,11 +8,13 @@ angular.module('app')
             scope: {
                 model: '=ngModel',
                 multiSelect: '=?',
+                showAll: '=?',
                 canEdit: '=?',
-                onItemEdit: '&',
-                onItemRemove: '&',
-                onItemAddSubmenu: '&',
-                onItemToggleVisible: '&',
+                onItemEdit: '&?',
+                onItemRemove: '&?',
+                onItemAddSubmenu: '&?',
+                onItemToggleVisible: '&?',
+                onItemToggleSelect: '&?',
             },
             templateUrl: '/static/apps/admin/lib/directives/ui-menu-tree.html',
             link: function(scope, elem, attrs) {
@@ -28,18 +30,32 @@ angular.module('app')
                     }
                 }
 
-                scope.toggleSelect = function(item, parent) {
+                var dicMenus = {};
+                scope.initMapping = function(item) {
+                    if (item.id) {
+                        dicMenus[item.id] = item;
+                    }
+                };
+
+                scope.toggleSelect = function(item) {
                     item.__selected = !item.__selected;
-                    if (parent) {
+
+                    var parent = dicMenus[item.parentId];
+                    while(parent) {
                         if (item.__selected) {
                             parent.__selected = true;
                         } else {
-                            if (parent.children.length === _.filter(parent.children, function(c) { return !c.__selected;} ).length) {
+                            if (parent && parent.children.length === _.filter(parent.children, function(c) { return !c.__selected;} ).length) {
                                 parent.__selected = false;
                             }
                         }
+                        parent = dicMenus[parent.parentId];
                     }
                     toggleChildren(item);
+
+                    if (scope.onItemToggleSelect) {
+                        scope.onItemToggleSelect({item: item});
+                    }
                 };
 
                 scope.addSubmenu = function(item) {

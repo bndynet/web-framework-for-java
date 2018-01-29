@@ -1,10 +1,12 @@
 <div>
     <script type="text/ng-template" id="menuTemplate">
-        <div class="tree-item with-border hover" ng-class="{'disabled': !menu.visible, 'active': menu.selected}" ng-if="menu.id">
+        <div class="tree-item with-border hover"
+             ng-if="menu.id && (showAll || menu.visible)"
+             ng-class="{'disabled': !menu.visible && !menu.__selected}">
             <div class="pull-left">
                 <md-checkbox ng-if="multiSelect"
                              ng-checked="menu.__selected"
-                             ng-click="toggleSelect(menu, parent)">
+                             ng-click="toggleSelect(menu)">
                 </md-checkbox>
                 <i class="{{menu.icon}}"></i>
                 <span ng-bind="menu.name|translate"></span>
@@ -26,13 +28,13 @@
             <div class="clearfix"></div>
         </div>
         <div class="child-box">
-            <ng-include src="'menuTemplate'" ng-repeat="item in menu.children | orderBy: 'displayOrder'" ng-init="parent=menu;menu=item"></ng-include>
+            <ng-include src="'menuTemplate'" ng-repeat="item in menu.children | orderBy: 'displayOrder'" ng-init="initMapping(item); menu=item"></ng-include>
         </div>
     </script>
 
     <div class="tree">
-        <div ng-include="'menuTemplate'" ng-repeat="menu in model"></div>
+        <div ng-include="'menuTemplate'" ng-repeat="menu in model" ng-init="initMapping(menu)"></div>
     </div>
 
-    <ui-no-data ng-if="!model || model.length==0" message="admin.modules.core.menus.noMenus"></ui-no-data>
+    <ui-no-data ng-if="!model || model.length===0" message="admin.modules.core.menus.noMenus"></ui-no-data>
 </div>
