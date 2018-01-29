@@ -30,7 +30,7 @@
                         <td ng-bind="item.createDate | date: 'yyyy-MM-dd HH:mm'"></td>
                         <td ng-bind="item.lastUpdate | date: 'yyyy-MM-dd HH:mm'"></td>
                         <td class="text-center">
-                            <div ng-if="!item.isSys">
+                            <div ng-if="!item.sys">
                                 <a ng-click="showMenus(item)" ng-class="{'text-warning': !item.menuIds}" title="{{'admin.modules.core.roles.fieldMenus'|translate}}">
                                     <i class="fa fa-bars"></i>
                                 </a>

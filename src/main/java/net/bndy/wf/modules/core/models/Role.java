@@ -24,6 +24,9 @@ public class Role extends _BaseEntity {
     private String menuIds;
     private String description;
 
+    @Transient
+    private boolean isSys;
+
     @ManyToMany(mappedBy = "roles")
     @JsonIgnore
     private Set<User> users;
@@ -58,5 +61,13 @@ public class Role extends _BaseEntity {
 
     public String getDescription() {
         return  this.description;
+    }
+
+    public void setSys(boolean sys) {
+        isSys = sys;
+    }
+
+    public boolean isSys() {
+        return isSys;
     }
 }

@@ -7,7 +7,6 @@ package net.bndy.wf.modules.core.api;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import net.bndy.wf.ApplicationContext;
-import net.bndy.wf.config.ApplicationUserRole;
 import net.bndy.wf.modules.core.models.Role;
 import net.bndy.wf.modules.core.services.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -30,20 +29,6 @@ public class ConfigController {
 
     @Autowired
     private UserService userService;
-
-    @ApiOperation(value = "Gets all defined roles")
-    @RequestMapping(value = "/roles", method = RequestMethod.GET)
-    public List<Role> getRoles() {
-        List<Role> result = this.userService.getAllRoles();
-        for (Role role : result) {
-            for (ApplicationUserRole ur: ApplicationUserRole.values()) {
-                if (ur.name().equalsIgnoreCase(role.getName())) {
-                    role.setDescription(ur.getDescription());
-                }
-            }
-        }
-        return result;
-    }
 
     @ApiOperation(value = "Gets all messages of current locale")
     @CacheResult(cacheName = "default")

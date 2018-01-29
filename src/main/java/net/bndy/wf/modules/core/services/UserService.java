@@ -4,21 +4,17 @@
  ******************************************************************************/
 package net.bndy.wf.modules.core.services;
 
-import java.io.IOException;
-import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.util.*;
 
 import net.bndy.wf.ApplicationContext;
 import net.bndy.wf.config.ApplicationConfig;
-import net.bndy.wf.config.ApplicationUserRole;
 import net.bndy.wf.modules.core.models.File;
 import net.bndy.wf.modules.core.models.Role;
 import net.bndy.wf.modules.core.models.User;
 import net.bndy.wf.modules.core.models.UserProfile;
 import net.bndy.wf.modules.core.services.repositories.FileRepository;
 import net.bndy.wf.modules.core.services.repositories.UserProfileRepository;
-import org.apache.tomcat.util.http.fileupload.FileUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -138,15 +134,11 @@ public class UserService extends _BaseService<User> {
             entity.setEnabled(true);
             entity.setSuperAdmin(true);
             // initialize roles
-            roleRepository.deleteAll();
-            Role adminRole = null;
-            for (ApplicationUserRole role : ApplicationUserRole.values()) {
-                Role roleModel = new Role();
-                roleModel.setName(role.name());
-                roleModel = roleRepository.saveAndFlush(roleModel);
-                if (adminRole == null) {
-                    adminRole = roleModel;
-                }
+            Role adminRole = this.roleRepository.findByName(applicationConfig.getAdminRoleName());
+            if (adminRole == null) {
+                adminRole = new Role();
+                adminRole.setName(applicationConfig.getAdminRoleName());
+                adminRole = this.roleRepository.saveAndFlush(adminRole);
             }
 
             Set<Role> roles = new HashSet<>();

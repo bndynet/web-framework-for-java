@@ -5,10 +5,12 @@
 package net.bndy.wf.modules.core.api;
 
 import java.io.IOException;
+import java.util.ArrayList;
 import java.util.List;
 
 import net.bndy.wf.ApplicationContext;
-import net.bndy.wf.config.ApplicationUserRole;
+import net.bndy.wf.config.ApplicationConfig;
+import net.bndy.wf.modules.core.models.Role;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
@@ -25,22 +27,45 @@ public class MenuController extends _BaseApi<Menu> {
 
 	@Autowired
 	private MenuService menuService;
+	@Autowired
+	private ApplicationConfig applicationConfig;
 
 	@ApiOperation(value = "Get menus with children")
 	@RequestMapping(value = "/tree", method = RequestMethod.GET)
-	public List<Menu> get(@RequestParam(name = "all", required = false, defaultValue = "false") boolean all) throws IOException {
+	public List<Menu> get(@RequestParam(name = "all", required = false, defaultValue = "false") boolean all) {
+
+		boolean isAdmin = ApplicationContext.isUserInRole(this.applicationConfig.getAdminRoleName());
+
 	    List<Menu> result;
-		if (all) {
-			result = this.menuService.getMenus();
+		if (all && isAdmin) {
+			result = this.menuService.getAllMenuList();
 		} else {
-			result = this.menuService.getUserMenus();
+			List<Menu> tmpMenus = this.menuService.getVisibleMenuList();
+			if (isAdmin) {
+				result = tmpMenus;
+			} else {
+				result = new ArrayList<>();
+				for (Role r: ApplicationContext.getCurrentUser().getRoles()) {
+					if (r.getMenuIds() != null && r.getMenuIds() != "") {
+						String menuIds = "|" + r.getMenuIds().replace(",", "||") + "|";
+						for (Menu m : tmpMenus) {
+							if (menuIds.indexOf("|" + m.getId().toString() + "|") > -1) {
+								if (!result.contains(m)) {
+									result.add(m);
+								}
+							}
+						}
+					}
+				}
+			}
 		}
 
+		result = menuService.convertList2Tree(result);
 		// Append menu management entry for Admin user
-        if (ApplicationContext.isUserInRole(ApplicationUserRole.Admin)) {
+        if (isAdmin) {
             result.add(this.menuService.getMenuManagementEntry());
         }
-		return  result;
+		return result;
 	}
 
 	@ApiOperation(value = "Toggle menu visible")

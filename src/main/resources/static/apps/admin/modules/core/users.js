@@ -25,7 +25,7 @@ app.controller('UsersCtrl',
         };
 
         $scope.init = function() {
-            $http.get('/api/core/config/roles').then(function(res) {
+            $http.get('/api/core/roles').then(function(res) {
                 $scope.roles = res.data;
             });
             $scope.pageUsers(1);

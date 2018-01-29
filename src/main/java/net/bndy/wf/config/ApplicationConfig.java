@@ -20,6 +20,7 @@ public class ApplicationConfig {
 	private String defaultUserAvatar;
 	private boolean renameUploadFile;
 	private String adminSkin;
+	private String adminRoleName;
 
 	public String getAllowedOrigins() {
 		return allowedOrigins;
@@ -91,5 +92,13 @@ public class ApplicationConfig {
 
 	public void setAdminSkin(String adminSkin) {
 		this.adminSkin = adminSkin;
+	}
+
+	public String getAdminRoleName() {
+		return adminRoleName;
+	}
+
+	public void setAdminRoleName(String adminRoleName) {
+		this.adminRoleName = adminRoleName;
 	}
 }

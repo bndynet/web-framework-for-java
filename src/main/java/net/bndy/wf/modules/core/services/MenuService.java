@@ -30,10 +30,6 @@ public class MenuService extends _BaseService<Menu> {
     @Autowired
     private PageRepository pageRepo;
 
-    public List<Menu> getList() {
-        return this.menuRepo.findAll();
-    }
-
     public List<Menu> getTemplates() throws IOException {
         List<Menu> result = new ArrayList<>();
 
@@ -119,17 +115,19 @@ public class MenuService extends _BaseService<Menu> {
         }
     }
 
-    public List<Menu> getMenus() throws IOException {
-        List<Menu> menus = this.menuRepo.findAll();
-        if (menus.size() == 0) {
-            this.initMenus();
-            menus = this.menuRepo.findAll();
-        }
+    public List<Menu> getAllMenuList() {
+        return this.menuRepo.findAll();
+    }
 
+    public List<Menu> getVisibleMenuList() {
+        return this.menuRepo.getVisibleMenus();
+    }
+
+    public List<Menu> convertList2Tree(List<Menu> menuList) {
         List<Menu> rootMenus = new ArrayList<Menu>();
-        for (Menu m : menus) {
+        for (Menu m : menuList) {
             if (m.getParentId() == null || m.getParentId() <= 0) {
-                m.setChildren(this.getChildrenMenus(m, menus));
+                m.setChildren(this.getChildrenMenus(m, menuList));
                 rootMenus.add(m);
             }
         }
@@ -148,18 +146,6 @@ public class MenuService extends _BaseService<Menu> {
         m.setDisplayOrder(999999);
         m.setVisible(true);
         return m;
-    }
-
-    public List<Menu> getUserMenus() {
-        List<Menu> menus = this.menuRepo.getVisibleMenus();
-        List<Menu> rootMenus = new ArrayList<Menu>();
-        for (Menu m : menus) {
-            if (m.getParentId() == null || m.getParentId() <= 0) {
-                m.setChildren(this.getChildrenMenus(m, menus));
-                rootMenus.add(m);
-            }
-        }
-        return rootMenus;
     }
 
     private List<Menu> getChildrenMenus(Menu menu, List<Menu> menus) {

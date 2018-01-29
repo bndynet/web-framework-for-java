@@ -5,7 +5,6 @@
 package net.bndy.wf;
 
 import net.bndy.wf.config.ApplicationConfig;
-import net.bndy.wf.config.ApplicationUserRole;
 import net.bndy.wf.lib.HttpHelper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.MessageSource;
@@ -59,9 +58,9 @@ public class ApplicationContext {
         return null;
     }
 
-    public static boolean isUserInRole(ApplicationUserRole role) {
+    public static boolean isUserInRole(String roleName) {
         for (GrantedAuthority ga: getCurrentUser().getAuthorities()) {
-            if (ga.getAuthority().equals(role.name())) {
+            if (ga.getAuthority().equals(roleName)) {
                 return true;
             }
         }
