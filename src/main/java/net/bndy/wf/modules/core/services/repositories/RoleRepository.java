@@ -8,6 +8,7 @@ import net.bndy.wf.modules.core.models.Role;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Modifying;
 import org.springframework.data.jpa.repository.Query;
+import org.springframework.data.repository.query.Param;
 import org.springframework.transaction.annotation.Transactional;
 
 public interface RoleRepository extends JpaRepository<Role, Long>  {
@@ -15,6 +16,6 @@ public interface RoleRepository extends JpaRepository<Role, Long>  {
 
 	@Modifying
 	@Transactional
-	@Query(value = "UPDATE core_role SET menu_ids = :menuIds WHERE id = :roldId", nativeQuery = true)
-    void updateMenus(long roleId, String menuIds);
+	@Query(value = "UPDATE core_role SET menu_ids = :menuIds WHERE id = :roleId", nativeQuery = true)
+    void updateMenus(@Param("roleId") long roleId, @Param("menuIds") String menuIds);
 }

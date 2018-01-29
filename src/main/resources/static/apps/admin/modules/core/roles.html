@@ -29,14 +29,18 @@
                         <td><span ng-bind="item.description"></span></td>
                         <td ng-bind="item.createDate | date: 'yyyy-MM-dd HH:mm'"></td>
                         <td ng-bind="item.lastUpdate | date: 'yyyy-MM-dd HH:mm'"></td>
-
                         <td class="text-center">
-                            <a ng-click="edit(item)">
-                                <i class="glyphicon glyphicon-edit text-primary"></i>
-                            </a>
-                            <a ng-click="remove(item)">
-                                <i class="glyphicon glyphicon-trash text-danger"></i>
-                            </a>
+                            <div ng-if="!item.isSys">
+                                <a ng-click="showMenus(item)" ng-class="{'text-warning': !item.menuIds}" title="{{'admin.modules.core.roles.fieldMenus'|translate}}">
+                                    <i class="fa fa-bars"></i>
+                                </a>
+                                <a ng-click="edit(item)">
+                                    <i class="glyphicon glyphicon-edit text-primary"></i>
+                                </a>
+                                <a ng-click="remove(item)">
+                                    <i class="glyphicon glyphicon-trash text-danger"></i>
+                                </a>
+                            </div>
                         </td>
                     </tr>
                     </tbody>
@@ -89,6 +93,45 @@
                                 ng-disabled="form.$invalid"
                                 ng-bind="'common.saveChanges'|translate"
                                 ng-click="save()">
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div id="menusForm" class="modal fade" tabindex="-1" role="dialog">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                    <h4 class="modal-title">
+                        <span ng-bind="'admin.modules.core.roles.assignMenusForRole'|translate: [formModel.name]"></span>
+                    </h4>
+                </div>
+                <div class="modal-body">
+                    <ui-menu-tree ng-model="menus"
+                                  multi-select="canEditMenus"
+                                  show-all="canEditMenus" on-item-toggle-select="toggleMenuSelect(item)"></ui-menu-tree>
+                    <ui-no-data ng-if="!formModel.menuIds && !canEditMenus" message="admin.modules.core.roles.noMenusForRole"></ui-no-data>
+                </div>
+                <div class="modal-footer">
+                    <div class="pull-left">
+                        <md-switch class="md-primary no-margin" aria-label="edit" ng-model="canEditMenus">
+                            <span ng-bind="'common.editMode'|translate"></span>
+                        </md-switch>
+                    </div>
+                    <div class="pull-right">
+                        <button type="button" class="btn btn-default" data-dismiss="modal"
+                                ng-bind="'common.close'|translate"></button>
+                        <button type="button" class="btn btn-default" ng-cloak ng-click="resetMenus()"
+                                ng-show="canResetForm"
+                                ng-bind="'common.reset'|translate"></button>
+                        <button type="button" class="btn btn-primary"
+                                ng-bind="'common.saveChanges'|translate"
+                                ng-click="assignMenus()">
                         </button>
                     </div>
                 </div>

@@ -4,7 +4,8 @@
              ng-if="menu.id && (showAll || menu.visible)"
              ng-class="{'disabled': !menu.visible && !menu.__selected}">
             <div class="pull-left">
-                <md-checkbox ng-if="multiSelect"
+                <md-checkbox aria-label="select"
+                             ng-if="multiSelect"
                              ng-checked="menu.__selected"
                              ng-click="toggleSelect(menu)">
                 </md-checkbox>

@@ -85,6 +85,15 @@ img {
   }
 }
 
+.modal-dialog {
+  .modal-content {
+    .modal-body {
+      max-height: 50vh;
+      overflow: auto;
+    }
+  }
+}
+
 .label {
   position: relative;
   top: -.2em;
