@@ -13,6 +13,10 @@
             <id>maven-ali</id>
             <url>http://maven.aliyun.com/nexus/content/groups/public/</url>
         </repository>
+		<repository>
+			<id>maven-central</id>
+			<url>http://repo1.maven.org/maven2</url>
+		</repository>
     </repositories>
 
     <properties>
@@ -99,6 +103,11 @@
 			<groupId>pl.jalokim.propertiestojson</groupId>
 			<artifactId>java-properties-to-json</artifactId>
 			<version>2.0</version>
+		</dependency>
+		<dependency>
+			<groupId>net.bndy</groupId>
+			<artifactId>lib</artifactId>
+			<version>1.0.1</version>
 		</dependency>
 		<dependency>
 			<groupId>org.webjars</groupId>

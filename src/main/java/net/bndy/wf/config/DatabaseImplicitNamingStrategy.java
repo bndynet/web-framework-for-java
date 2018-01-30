@@ -1,6 +1,6 @@
 package net.bndy.wf.config;
 
-import net.bndy.wf.lib.StringHelper;
+import net.bndy.lib.StringHelper;
 import org.hibernate.boot.model.naming.Identifier;
 import org.hibernate.boot.model.naming.ImplicitBasicColumnNameSource;
 import org.hibernate.boot.model.naming.ImplicitNamingStrategyJpaCompliantImpl;
@@ -12,9 +12,8 @@ public class DatabaseImplicitNamingStrategy extends ImplicitNamingStrategyJpaCom
     @Override
     public Identifier determineBasicColumnName(ImplicitBasicColumnNameSource source) {
 
-        String columnName = StringHelper.toLowerCase(
-            StringHelper.insertUnderscoreBetweenWords(source.getAttributePath().getProperty())
-        );
+        String columnName =
+            StringHelper.insertUnderscoreBetweenWords(source.getAttributePath().getProperty()).toLowerCase();
 
         ImplicitBasicColumnNameSource newSource = new ImplicitBasicColumnNameSource() {
             @Override

@@ -4,8 +4,8 @@
  ******************************************************************************/
 package net.bndy.wf;
 
+import net.bndy.lib.HttpHelper;
 import net.bndy.wf.config.ApplicationConfig;
-import net.bndy.wf.lib.HttpHelper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.MessageSource;
 import org.springframework.context.i18n.LocaleContextHolder;
@@ -47,15 +47,19 @@ public class ApplicationContext {
             User u = (User) auth.getPrincipal();
             if (u.getAvatar() != null && !u.getAvatar().isEmpty()) {
                 if (request != null && !u.getAvatar().toLowerCase().startsWith("http") && u.getAvatar().indexOf("/") < 0) {
-                    u.setAvatar(HttpHelper.getFileUrl(request, u.getAvatar()));
+                    u.setAvatar(getFileUrl(request, u.getAvatar()));
                 }
             } else {
-                u.setAvatar(HttpHelper.getFileUrl(request, "defaultAvatar"));
+                u.setAvatar(getFileUrl(request, "defaultAvatar"));
             }
             return u;
         }
 
         return null;
+    }
+
+    public static String getFileUrl(HttpServletRequest request, String fileId) {
+        return HttpHelper.getRootUrl(request) + "/files/" + fileId;
     }
 
     public static boolean isUserInRole(String roleName) {

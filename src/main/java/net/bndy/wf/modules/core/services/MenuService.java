@@ -9,7 +9,7 @@ import java.util.*;
 
 import javax.transaction.Transactional;
 
-import net.bndy.wf.lib.StringHelper;
+import net.bndy.lib.StringHelper;
 import net.bndy.wf.service.AppService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -41,7 +41,6 @@ public class MenuService extends _BaseService<Menu> {
             if (menu.startsWith("shared")) {
                 continue;
             }
-
             for (String path : StringHelper.stairSplit(menu, "-")) {
                 if (pathMapping.get(path) != null) {
                     continue;

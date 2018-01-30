@@ -5,8 +5,8 @@
 package net.bndy.wf.config;
 
 import com.google.common.collect.ImmutableList;
+import net.bndy.lib.StringHelper;
 import net.bndy.wf.ApplicationContext;
-import net.bndy.wf.lib.StringHelper;
 import net.bndy.wf.modules.core.services.UserDetailsServiceImpl;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.web.servlet.FilterRegistrationBean;

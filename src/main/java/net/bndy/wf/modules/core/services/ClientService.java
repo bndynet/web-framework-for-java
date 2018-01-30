@@ -10,8 +10,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import net.bndy.lib.StringHelper;
 import net.bndy.wf.config.Constant;
-import net.bndy.wf.lib.StringHelper;
 import net.bndy.wf.lib._BaseService;
 import net.bndy.wf.modules.core.models.Client;
 import net.bndy.wf.modules.core.services.repositories.ClientRepository;
