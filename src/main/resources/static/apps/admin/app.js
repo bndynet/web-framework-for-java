@@ -115,6 +115,14 @@ app.factory('appService', ['$rootScope', '$http', '$translate', function($rootSc
             return res.data;
         });
     };
+    service.ajaxSave = function(apiUrl, data) {
+        if (data.id) {
+            apiUrl += '/' + data.id;
+            return service.ajaxPut(apiUrl, data);
+        }
+
+        return service.ajaxPost(apiUrl, data);
+    };
     service.ajaxAll = function() {
         return angular.ajaxAll.apply(this, arguments);
     };

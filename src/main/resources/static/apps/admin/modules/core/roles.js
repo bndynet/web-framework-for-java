@@ -33,24 +33,16 @@ app.controller('RolesCtrl',
         };
 
         $scope.save = function() {
-            if ($scope.formModel.id) {
-                $http.put('/api/core/roles/' + $scope.formModel.id, $scope.formModel).then(function() {
-                    $('#dialogForm').modal('hide');
-                    appDialog.success();
-                    $scope.init();
-                });
-            } else {
-                $http.post('/api/core/roles', $scope.formModel).then(function() {
-                    $('#dialogForm').modal('hide');
-                    appDialog.success();
-                    $scope.init();
-                });
-            }
+            appService.ajaxSave('/api/core/roles', $scope.formModel).then(function(data) {
+                initData();
+                appDialog.success();
+                $('#dialogForm').modal('hide');
+            });
         };
 
         $scope.remove = function(item) {
             appDialog.confirmDeletion(function(){
-                $http.delete('/api/core/roles/' + item.id).then(function(res) {
+                appService.ajaxDelete('/api/core/roles/' + item.id).then(function() {
                     $scope.data.splice($scope.data.indexOf(item), 1)
                     appDialog.success();
                 });
