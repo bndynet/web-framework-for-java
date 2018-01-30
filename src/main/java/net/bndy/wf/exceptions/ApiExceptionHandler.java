@@ -8,6 +8,7 @@ import javax.servlet.http.HttpServletRequest;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.dao.DataIntegrityViolationException;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.ControllerAdvice;
@@ -31,8 +32,10 @@ public class ApiExceptionHandler {
         this.logger.error("{} for {}", e.getMessage(), req.getRequestURL());
 
         ApiError error = new ApiError(e);
-
-        if (e instanceof NoResourceFoundException) {
+        if (e instanceof DataIntegrityViolationException ||
+            e instanceof ResourceIntegrityException) {
+            error.setStatus(HttpStatus.CONFLICT);
+        } else if (e instanceof NoResourceFoundException) {
             error.setStatus(HttpStatus.NOT_FOUND);
         } else if (e instanceof OAuthException) {
             error.setStatus(HttpStatus.UNAUTHORIZED);

@@ -4,6 +4,7 @@ import net.bndy.wf.ApplicationContext;
 
 public class AppException extends Exception {
 
+    private Throwable innerException;
     private String title;
 
     public String getTitle() {
@@ -18,9 +19,19 @@ public class AppException extends Exception {
         super(message);
     }
 
+    public AppException(String message, Throwable t) {
+        this(message);
+        this.innerException = t;
+    }
+
     public AppException(String title, String message) {
         super(message);
         this.title = title;
+    }
+
+    public AppException(String title, String message, Throwable t) {
+        this(title, message);
+        this.innerException = t;
     }
 
     @Override
@@ -30,5 +41,9 @@ public class AppException extends Exception {
             return ApplicationContext.language(message);
         }
         return message;
+    }
+
+    public Throwable getInnerException() {
+        return innerException;
     }
 }
