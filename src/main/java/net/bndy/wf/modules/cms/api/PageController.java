@@ -8,6 +8,7 @@ import java.io.IOException;
 
 import javax.servlet.http.HttpServletRequest;
 
+import net.bndy.wf.exceptions.ResourceIntegrityException;
 import net.bndy.wf.modules.core.models.File;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -29,12 +30,16 @@ public class PageController extends _BaseApi<Page> {
 	PageService pageService;
 
 	@Override
-	public void delete(long id) {
-		Page p = this.pageService.get(id);
-		if (p != null) {
-			this.pageService.deleteAllAttachments(p.getId(), p.getBoTypeId());
+	public void delete(long id) throws ResourceIntegrityException {
+		try {
+			Page p = this.pageService.get(id);
+			if (p != null) {
+				this.pageService.deleteAllAttachments(p.getId(), p.getBoTypeId());
+			}
+			super.delete(id);
+		} catch (Exception ex) {
+			throw new ResourceIntegrityException("admin.modules.cms.page.errForDelete", ex);
 		}
-		super.delete(id);
 	}
 
 	@Override

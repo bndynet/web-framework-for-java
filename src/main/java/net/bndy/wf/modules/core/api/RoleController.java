@@ -3,6 +3,7 @@ package net.bndy.wf.modules.core.api;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import net.bndy.wf.config.ApplicationConfig;
+import net.bndy.wf.exceptions.ResourceIntegrityException;
 import net.bndy.wf.lib.LongsWrapper;
 import net.bndy.wf.lib._BaseApi;
 import net.bndy.wf.modules.core.models.Role;
@@ -43,5 +44,15 @@ public class RoleController extends _BaseApi<Role> {
         }
 
         return result;
+    }
+
+    @Override
+    public void delete(@PathVariable(name = "id") long id) throws ResourceIntegrityException {
+        try {
+            super.delete(id);
+        } catch (Exception ex) {
+            throw new ResourceIntegrityException("admin.modules.core.roles.errForDelete", ex);
+        }
+
     }
 }
