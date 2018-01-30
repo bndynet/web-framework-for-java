@@ -260,6 +260,11 @@ md-toolbar,
   height: 41px;
 }
 
+.content-wrapper ui-view .content-header + .content > .box-default .box-header > .box-tools.pull-left {
+  left: 10px;
+  top: 5px;
+}
+
 .content-wrapper ui-view .content-header + .content > .box-default .box-body {
   height: calc(100vh - 177px);
   overflow: auto;

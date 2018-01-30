@@ -255,6 +255,12 @@ md-toolbar,
           margin-bottom: 0;
           .box-header {
             height: 41px;
+            &>.box-tools {
+              &.pull-left {
+                left: 10px;
+                top: 5px;
+              }
+            }
           }
           .box-body {
             height: calc(100vh - 177px);
