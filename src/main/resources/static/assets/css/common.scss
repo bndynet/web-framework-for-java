@@ -1,3 +1,5 @@
+@import "variables";
+
 html,
 body {
   margin: 0;
@@ -170,18 +172,26 @@ img {
   height: 100vh;
   overflow: hidden;
   background-color: #d2d6de;
+  text-align: center;
 
-  .panel {
+  .box {
+    margin: 10% auto 1.5rem auto;
     width: 360px;
-    margin: 10% auto 0 auto;
-    border: none;
+    background-color: #ffffff;
 
-    img.logo {
+    .logo {
       width: 50%;
+      margin-bottom: 2rem;
+      font-size: 3rem;
     }
 
-    &.panel-danger {
-      box-shadow: 0 0 5px rgba(255, 0, 0, .4);
+    .title {
+      font-size: 1.25rem;
+      margin-bottom: 1.25rem;
+    }
+
+    .box-body {
+      padding: 2rem;
     }
   }
 }
@@ -213,9 +223,23 @@ img {
   }
 }
 
+.text-block {
+    padding-top: 8px;
+}
+
 .icon-group {
   i {
     padding: 2px 3px;
     margin: 0 5px;
   }
+}
+
+.img-list {
+	margin: 0 -1rem;
+
+	img {
+		display: inline-block;
+		height: 40px;
+		margin: 1rem;
+	}
 }

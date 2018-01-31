@@ -164,6 +164,10 @@
   margin-top: .5rem;
 }
 
+.lockscreen .lockscreen-wrapper {
+  margin-top: 20%;
+}
+
 md-toolbar,
 .md-toolbar-tools {
   height: 56px;
@@ -258,6 +262,11 @@ md-toolbar,
 
 .content-wrapper ui-view .content-header + .content > .box-default .box-header {
   height: 41px;
+}
+
+.content-wrapper ui-view .content-header + .content > .box-default .box-header > .box-tools.pull-left {
+  left: 10px;
+  top: 5px;
 }
 
 .content-wrapper ui-view .content-header + .content > .box-default .box-body {
