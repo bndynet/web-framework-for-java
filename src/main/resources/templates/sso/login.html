@@ -6,18 +6,16 @@
     <title>Login</title>
 </head>
 <body>
-<div layout:fragment="body">
-    <div class="login-box">
-        <div class="login-box-body">
+<div layout:fragment="body" class="page-onebox">
+    <div class="box">
+        <div class="box-body">
             <div th:if="!${param.logout}">
-                <div class="login-logo">
-                    <img src="/static/assets/img/logo.png" />
-                </div>
 
-                <p class="login-box-msg" th:text="#{sso.titleLogin}"></p>
+                <img class="logo" src="/static/assets/img/logo.png" />
 
-                <div class="alert alert-danger alert-dismissible" th:if="${param.error}">
-                    <button type="button" class="close" data-dismiss="alert" aria-hidden="true">×</button>
+                <p class="title" th:text="#{sso.titleLogin}"></p>
+
+                <div class="alert alert-danger" th:if="${param.error}">
                     <p><i class="icon fa fa-ban"></i><span th:text="#{sso.invalidNameOrPassword}"></span></p>
                 </div>
 
@@ -31,7 +29,7 @@
                         <span class="glyphicon glyphicon-lock form-control-feedback"></span>
                     </div>
                     <div class="row">
-                        <div class="col-xs-8 text-block">
+                        <div class="col-xs-8 text-left text-block">
                             <a href="signup" class="text-center" th:text="#{sso.linkSignUp}"></a>
                         </div>
                         <div class="col-xs-4">
@@ -41,11 +39,9 @@
                 </form>
             </div>
 
-            <div class="text-center padding-lg" th:if="${param.logout}">
+            <div th:if="${param.logout}">
                 <br />
-                <div class="login-logo">
-                    <i class="icon fa fa-check-circle-o fa-2x text-green"></i>
-                </div>
+                <i class="logo fa fa-check-circle-o fa-2x text-green"></i>
                 <h4 th:text="#{sso.loggedOut}"></h4>
                 <br />
                 <a href="/" th:text="#{common.backHome}"></a> &nbsp;&nbsp; | &nbsp;&nbsp; <a href="/sso/login" th:text="#{common.relogin}"></a>

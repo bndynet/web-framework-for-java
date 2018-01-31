@@ -145,20 +145,28 @@ img.circle {
   height: 100vh;
   overflow: hidden;
   background-color: #d2d6de;
+  text-align: center;
 }
 
-.page-onebox .panel {
+.page-onebox .box {
+  margin: 10% auto 1.5rem auto;
   width: 360px;
-  margin: 10% auto 0 auto;
-  border: none;
+  background-color: #ffffff;
 }
 
-.page-onebox .panel img.logo {
+.page-onebox .box .logo {
   width: 50%;
+  margin-bottom: 2rem;
+  font-size: 3rem;
 }
 
-.page-onebox .panel.panel-danger {
-  box-shadow: 0 0 5px rgba(255, 0, 0, 0.4);
+.page-onebox .box .title {
+  font-size: 1.25rem;
+  margin-bottom: 1.25rem;
+}
+
+.page-onebox .box .box-body {
+  padding: 2rem;
 }
 
 .tree .tree-item {
@@ -186,8 +194,22 @@ img.circle {
   margin-left: 2rem;
 }
 
+.text-block {
+  padding-top: 8px;
+}
+
 .icon-group i {
   padding: 2px 3px;
   margin: 0 5px;
+}
+
+.img-list {
+  margin: 0 -1rem;
+}
+
+.img-list img {
+  display: inline-block;
+  height: 40px;
+  margin: 1rem;
 }
 /*# sourceMappingURL=common.css.map */

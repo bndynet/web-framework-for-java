@@ -7,21 +7,19 @@
 </head>
 <body class="page-onebox">
 	<div layout:fragment="body">
-		<div class="panel panel-danger">
-			<div class="panel-body text-center">
+		<div class="box">
+			<div class="box-body">
                 <img class="logo" src="/static/assets/img/logo.png" />
 				<h4 th:utext="${message}"></h4>
-					
+				<br />
 				<div th:inline="text" style="display:none;" th:if="${exception!=null}">
 					Failed URL: [[${url}]] <br />
 					Exception: [[${exception.message}]] <br />
 					[[${exception.stackTrace}]]
 				</div>
 			</div>
-			<div class="panel-footer text-center">
-				<div th:replace="common/footer::footer"></div>
-			</div>
 		</div>
+		<div th:include="common/footer::footer"></div>
 	</div>
 </body>
 </html>
