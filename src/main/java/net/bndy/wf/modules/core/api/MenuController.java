@@ -34,7 +34,7 @@ public class MenuController extends _BaseApi<Menu> {
 	@RequestMapping(value = "/tree", method = RequestMethod.GET)
 	public List<Menu> get(@RequestParam(name = "all", required = false, defaultValue = "false") boolean all) {
 
-		boolean isAdmin = ApplicationContext.isUserInRole(this.applicationConfig.getAdminRoleName());
+		boolean isAdmin = ApplicationContext.isUserInRole(this.applicationConfig.getAdminRole()[0]);
 
 	    List<Menu> result;
 		if (all && isAdmin) {

@@ -10,8 +10,7 @@
 		<div class="panel panel-danger">
 			<div class="panel-body text-center">
                 <img class="logo" src="/static/assets/img/logo.png" />
-				<h1 th:text="${title}"></h1>
-				<p th:utext="${message}"></p>
+				<h4 th:utext="${message}"></h4>
 					
 				<div th:inline="text" style="display:none;" th:if="${exception!=null}">
 					Failed URL: [[${url}]] <br />

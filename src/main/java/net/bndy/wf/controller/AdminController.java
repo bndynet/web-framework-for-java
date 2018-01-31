@@ -4,6 +4,8 @@
  ******************************************************************************/
 package net.bndy.wf.controller;
 
+import net.bndy.wf.ApplicationContext;
+import net.bndy.wf.exceptions.UnauthorizedException;
 import org.aspectj.util.FileUtil;
 import org.springframework.context.i18n.LocaleContextHolder;
 import org.springframework.core.io.ClassPathResource;
@@ -22,7 +24,12 @@ public class AdminController extends _BaseController {
 
 
     @RequestMapping(value = "/")
-    public String home(Model model) throws IOException {
+    public String home(Model model) throws IOException, UnauthorizedException {
+
+        if (ApplicationContext.userNoRoles()) {
+            throw new UnauthorizedException();
+        }
+
         model.addAttribute("skin", applicationConfig.getAdminSkin());
         model.addAttribute("locale", LocaleContextHolder.getLocale().toString());
 

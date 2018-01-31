@@ -16,9 +16,6 @@ import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.servlet.ModelAndView;
 
-import net.bndy.lib.AnnotationHelper;
-import net.bndy.wf.lib.annotation.*;
-
 @ControllerAdvice(annotations = { Controller.class })
 public class ControllerExceptionHandler {
 
@@ -40,22 +37,14 @@ public class ControllerExceptionHandler {
 
 		// Otherwise setup and send the user to a default error-view.
 		ModelAndView mav = new ModelAndView();
-		mav.addObject("title", ApplicationContext.language("error.title"));
-		if (e != null && e.getMessage() != null && e.getMessage() != "") {
-			mav.addObject("message", e.getMessage());
-		} else {
-			mav.addObject("message", ApplicationContext.language("error.description"));
-		}
+		mav.addObject("message", ApplicationContext.language("error.description"));
 		mav.addObject("exception", e);
 		mav.addObject("url", req.getRequestURL());
 		mav.setViewName(DEFAULT_ERROR_VIEW);
 
-		if (e instanceof OAuthException) {
-			OAuthException ex = (OAuthException) e;
-			Description d = AnnotationHelper.getFieldAnnotation(Description.class, OAuthExceptionType.class, ex.getType().name());
-			if (d != null) {
-				mav.addObject("message", d.value());
-			} else {
+		if (e instanceof AppException) {
+			AppException ex = (AppException) e;
+            if (ex.getMessage() != null && !ex.getMessage().isEmpty()) {
 				mav.addObject("message", e.getMessage());
 			}
 		}

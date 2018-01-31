@@ -4,8 +4,10 @@
  ******************************************************************************/
 package net.bndy.wf.config;
 
+import net.bndy.lib.StringHelper;
 import org.springframework.boot.context.properties.ConfigurationProperties;
 import org.springframework.stereotype.Component;
+import org.springframework.util.Assert;
 
 @Component
 @ConfigurationProperties(prefix="application")
@@ -20,7 +22,7 @@ public class ApplicationConfig {
 	private String defaultUserAvatar;
 	private boolean renameUploadFile;
 	private String adminSkin;
-	private String adminRoleName;
+	private String adminRole;
 
 	public String getAllowedOrigins() {
 		return allowedOrigins;
@@ -94,11 +96,14 @@ public class ApplicationConfig {
 		this.adminSkin = adminSkin;
 	}
 
-	public String getAdminRoleName() {
-		return adminRoleName;
+	public String[] getAdminRole() {
+		if (adminRole == null || adminRole.trim().equals("")) {
+			Assert.isNull(adminRole, "You did NOT set admin-role value in application.yml.");
+		}
+		return StringHelper.splitWithoutWhitespace(adminRole, ",");
 	}
 
-	public void setAdminRoleName(String adminRoleName) {
-		this.adminRoleName = adminRoleName;
+	public void setAdminRole(String adminRole) {
+		this.adminRole = adminRole;
 	}
 }

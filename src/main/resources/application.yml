@@ -23,7 +23,7 @@ application:
   allowed-origins: http://bndy.net, http://localhost:5500
   default-user-avatar: /static/assets/img/me.png
   admin-skin: skin-blue-light
-  admin-role-name: Admin
+  admin-role: Admin, The system administrator who has full all privileges.
 
 # LOGGING  
 logging:

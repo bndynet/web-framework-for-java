@@ -161,7 +161,7 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
         return new AuthenticationEntryPoint() {
             @Override
             public void commence(HttpServletRequest request, HttpServletResponse response, AuthenticationException authException) throws IOException {
-                response.sendError(HttpServletResponse.SC_UNAUTHORIZED, ApplicationContext.language("error.msgUnauthorized"));
+                response.sendError(HttpServletResponse.SC_UNAUTHORIZED, ApplicationContext.language("error.unauthorizedAccess"));
             }
         };
     }

@@ -6,6 +6,8 @@ package net.bndy.wf;
 
 import net.bndy.lib.HttpHelper;
 import net.bndy.wf.config.ApplicationConfig;
+import net.bndy.wf.exceptions.UnauthorizedException;
+import net.bndy.wf.modules.core.models.Role;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.MessageSource;
 import org.springframework.context.i18n.LocaleContextHolder;
@@ -23,9 +25,10 @@ import java.util.*;
 @Component
 public class ApplicationContext {
 
+    public static ApplicationConfig applicationConfig;
+
     private static HttpServletRequest request;
     private static MessageSource messageSource;
-    private static ApplicationConfig applicationConfig;
 
     @Autowired
     private HttpServletRequest _request;
@@ -63,12 +66,21 @@ public class ApplicationContext {
     }
 
     public static boolean isUserInRole(String roleName) {
-        for (GrantedAuthority ga: getCurrentUser().getAuthorities()) {
+        for (GrantedAuthority ga : getCurrentUser().getAuthorities()) {
             if (ga.getAuthority().equals(roleName)) {
                 return true;
             }
         }
         return false;
+    }
+
+    public static boolean userNoRoles() throws UnauthorizedException {
+        User user = getCurrentUser();
+        if (user != null) {
+            return  user.getRoles() == null || user.getRoles().size() == 0;
+        }
+
+        throw new UnauthorizedException();
     }
 
     public static User updateCurrentUserAvatar(String fileUUID) {

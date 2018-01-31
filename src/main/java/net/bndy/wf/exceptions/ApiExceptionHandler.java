@@ -14,8 +14,6 @@ import org.springframework.web.bind.annotation.ControllerAdvice;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.RestController;
 
-import net.bndy.lib.AnnotationHelper;
-import net.bndy.wf.lib.annotation.*;
 import net.bndy.wf.lib.ResponseResult;
 
 @RestController
@@ -25,8 +23,7 @@ public class ApiExceptionHandler {
     private Logger logger = LoggerFactory.getLogger(this.getClass());
 
     @ExceptionHandler(Exception.class)
-    public ResponseEntity<ResponseResult<?>> handleUnexpectedException(HttpServletRequest req, Exception e)
-        throws NoSuchFieldException, SecurityException {
+    public ResponseEntity<ResponseResult<?>> handleUnexpectedException(HttpServletRequest req, Exception e) {
 
         this.logger.error("{} for {}", e.getMessage(), req.getRequestURL());
 
@@ -35,11 +32,8 @@ public class ApiExceptionHandler {
             error.setStatus(HttpStatus.METHOD_NOT_ALLOWED);
         } else if (e instanceof NoResourceFoundException) {
             error.setStatus(HttpStatus.NOT_FOUND);
-        } else if (e instanceof OAuthException) {
+        } else if (e instanceof UnauthorizedException) {
             error.setStatus(HttpStatus.UNAUTHORIZED);
-            OAuthException ex = (OAuthException) e;
-            error.setMessage(AnnotationHelper
-                .getFieldAnnotation(Description.class, OAuthExceptionType.class, ex.getType().name()).value());
         } else {
             error.setStatus(HttpStatus.INTERNAL_SERVER_ERROR);
         }

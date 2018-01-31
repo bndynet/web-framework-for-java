@@ -15,6 +15,7 @@ import net.bndy.wf.modules.core.models.User;
 import net.bndy.wf.modules.core.models.UserProfile;
 import net.bndy.wf.modules.core.services.repositories.FileRepository;
 import net.bndy.wf.modules.core.services.repositories.UserProfileRepository;
+import net.bndy.wf.service.AppService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -43,6 +44,10 @@ public class UserService extends _BaseService<User> {
     private FileRepository fileRepository;
     @Autowired
     private ApplicationConfig applicationConfig;
+    @Autowired
+    private AppService appService;
+    @Autowired
+    private RoleService roleService;
 
     private Logger logger = LoggerFactory.getLogger(UserService.class);
     private PasswordEncoder passwordEncoder = new BCryptPasswordEncoder();
@@ -131,16 +136,12 @@ public class UserService extends _BaseService<User> {
         }
 
         if (this.userRepository.findAll().size() == 0) {
+
+            this.appService.initBasicData();
+
             entity.setEnabled(true);
             entity.setSuperAdmin(true);
-            // initialize roles
-            Role adminRole = this.roleRepository.findByName(applicationConfig.getAdminRoleName());
-            if (adminRole == null) {
-                adminRole = new Role();
-                adminRole.setName(applicationConfig.getAdminRoleName());
-                adminRole = this.roleRepository.saveAndFlush(adminRole);
-            }
-
+            Role adminRole = this.roleService.findByName(applicationConfig.getAdminRole()[0]);
             Set<Role> roles = new HashSet<>();
             roles.add(adminRole);
             entity.setRoles(roles);

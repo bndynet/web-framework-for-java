@@ -5,14 +5,9 @@ import net.bndy.wf.ApplicationContext;
 public class AppException extends Exception {
 
     private Throwable innerException;
-    private String title;
 
-    public String getTitle() {
-        if (title != null && !title.isEmpty()) {
-            return ApplicationContext.language(title);
-        }
+    public AppException() {
 
-        return null;
     }
 
     public AppException(String message) {
@@ -24,21 +19,14 @@ public class AppException extends Exception {
         this.innerException = t;
     }
 
-    public AppException(String title, String message) {
-        super(message);
-        this.title = title;
-    }
-
-    public AppException(String title, String message, Throwable t) {
-        this(title, message);
-        this.innerException = t;
-    }
-
     @Override
     public String getMessage() {
         String message =  super.getMessage();
         if (message != null && !message.isEmpty()) {
-            return ApplicationContext.language(message);
+             String result = ApplicationContext.language(message);
+             if (result != null && !result.isEmpty()) {
+                 return result;
+             }
         }
         return message;
     }

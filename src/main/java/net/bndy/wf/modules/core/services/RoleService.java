@@ -27,4 +27,20 @@ public class RoleService extends _BaseService<Role> {
         }
         this.roleRepository.updateMenus(roleId, Strings.join(ids).with(","));
     }
+
+    public Role findByName(String name) {
+        return this.roleRepository.findByName(name);
+    }
+
+    public void initSysRoles() {
+        Role role = this.findByName(applicationConfig.getAdminRole()[0]);
+        if (role == null) {
+            role = new Role();
+            role.setName(applicationConfig.getAdminRole()[0]);
+            if (applicationConfig.getAdminRole().length > 1) {
+                role.setDescription(applicationConfig.getAdminRole()[1]);
+            }
+            this.roleRepository.saveAndFlush(role);
+        }
+    }
 }

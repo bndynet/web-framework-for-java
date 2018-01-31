@@ -48,15 +48,15 @@ app.config(['$provide', '$qProvider', '$httpProvider', '$stateProvider', '$trans
            'responseError': function(rejection) {
                 console.error(rejection);
 
-                var title = rejection.data.error || rejection.data.title;
-                var message = rejection.data.message;
+                var title = null;
+                var message = rejection.data.error || rejection.data.message;
 
                 switch(rejection.status) {
                     case 401:
                     $timeout(function() {
                         location.href = '/sso/login';
                     }, 3000);
-                    title = translate.instant('error.msgUnauthorized');
+                    title = translate.instant('error.unauthorizedAccess');
                     message = translate.instant('common.msgRedirectToLogin');
                     default:
                 }

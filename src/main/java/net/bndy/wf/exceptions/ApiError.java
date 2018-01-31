@@ -10,21 +10,10 @@ import net.bndy.wf.lib.ResponseResult;
 
 public class ApiError extends ResponseResult<Exception> {
 
-	private String title;
-
-	public String getTitle() {
-		return title;
-	}
-
-
 	public ApiError(Exception data) {
 		super(data);
 
 		this.setStatus(HttpStatus.INTERNAL_SERVER_ERROR);
 		this.setMessage(data.getMessage());
-
-		if (data instanceof AppException) {
-			this.title = ((AppException)data).getTitle();
-		}
 	}
 }

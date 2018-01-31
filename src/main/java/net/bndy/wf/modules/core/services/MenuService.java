@@ -4,7 +4,6 @@
  ******************************************************************************/
 package net.bndy.wf.modules.core.services;
 
-import java.io.IOException;
 import java.util.*;
 
 import javax.transaction.Transactional;
@@ -30,7 +29,7 @@ public class MenuService extends _BaseService<Menu> {
     @Autowired
     private PageRepository pageRepo;
 
-    public List<Menu> getTemplates() throws IOException {
+    public List<Menu> getTemplates() {
         List<Menu> result = new ArrayList<>();
 
         List<String> menus = this.appService.allModules();
@@ -73,43 +72,45 @@ public class MenuService extends _BaseService<Menu> {
         return result;
     }
 
-    public void initMenus() throws IOException {
-        List<String> menus = this.appService.allModules();
+    public void initMenus() {
+        if (this.getAll().size() == 0) {
+            List<String> menus = this.appService.allModules();
 
-        menus.sort(Comparator.naturalOrder());
+            menus.sort(Comparator.naturalOrder());
 
-        Map<String, Menu> pathMapping = new HashMap();
-        for (String menu : menus) {
-            if (menu.startsWith("shared")) {
-                continue;
-            }
-
-            for (String path : StringHelper.stairSplit(menu, "-")) {
-                if (pathMapping.get(path) != null) {
+            Map<String, Menu> pathMapping = new HashMap();
+            for (String menu : menus) {
+                if (menu.startsWith("shared")) {
                     continue;
                 }
 
-                String name = "admin.modules." + path.replace("-", ".") + ".title";
-                Menu m = this.menuRepo.findByName(name);
-                if (m == null) {
-                    m = new Menu();
-                    m.setVisible(false);
-                    m.setIcon("fa fa-fw fa-circle-thin");
-                    m.setName(name);
+                for (String path : StringHelper.stairSplit(menu, "-")) {
+                    if (pathMapping.get(path) != null) {
+                        continue;
+                    }
 
-                    if (path.indexOf("-") > 0) {
-                        Menu parentMenu = pathMapping.get(path.substring(0, path.lastIndexOf("-")));
-                        if (parentMenu != null) {
-                            m.setParentId(parentMenu.getId());
+                    String name = "admin.modules." + path.replace("-", ".") + ".title";
+                    Menu m = this.menuRepo.findByName(name);
+                    if (m == null) {
+                        m = new Menu();
+                        m.setVisible(true);
+                        m.setIcon("fa fa-fw fa-circle-thin");
+                        m.setName(name);
+
+                        if (path.indexOf("-") > 0) {
+                            Menu parentMenu = pathMapping.get(path.substring(0, path.lastIndexOf("-")));
+                            if (parentMenu != null) {
+                                m.setParentId(parentMenu.getId());
+                            }
                         }
-                    }
 
-                    if (path.equals(menu)) {
-                        m.setLink(path);
+                        if (path.equals(menu)) {
+                            m.setLink(path);
+                        }
+                        m = this.save(m);
                     }
-                    m = this.save(m);
+                    pathMapping.put(path, m);
                 }
-                pathMapping.put(path, m);
             }
         }
     }
