@@ -26,6 +26,8 @@ public class Role extends _BaseEntity {
 
     @Transient
     private boolean isSys;
+    @Transient
+    private int userCount;
 
     @ManyToMany(mappedBy = "roles")
     @JsonIgnore
@@ -69,5 +71,13 @@ public class Role extends _BaseEntity {
 
     public boolean isSys() {
         return isSys;
+    }
+
+    public int getUserCount() {
+        return userCount;
+    }
+
+    public void setUserCount(int userCount) {
+        this.userCount = userCount;
     }
 }

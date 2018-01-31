@@ -25,7 +25,12 @@
                     </thead>
                     <tbody>
                     <tr ng-repeat="item in data">
-                        <td ng-bind="item.name"></td>
+                        <td>
+                            <span ng-bind="item.name"></span>
+                            <small ng-if="item.userCount">
+                                (<span ng-bind="item.userCount"></span> <span ng-bind="'admin.modules.core.roles.fieldUsers'|translate"></span> )
+                            </small>
+                        </td>
                         <td><span ng-bind="item.description"></span></td>
                         <td ng-bind="item.createDate | date: 'yyyy-MM-dd HH:mm'"></td>
                         <td ng-bind="item.lastUpdate | date: 'yyyy-MM-dd HH:mm'"></td>

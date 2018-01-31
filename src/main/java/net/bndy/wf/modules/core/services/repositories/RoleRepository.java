@@ -18,4 +18,7 @@ public interface RoleRepository extends JpaRepository<Role, Long>  {
 	@Transactional
 	@Query(value = "UPDATE core_role SET menu_ids = :menuIds WHERE id = :roleId", nativeQuery = true)
     void updateMenus(@Param("roleId") long roleId, @Param("menuIds") String menuIds);
+
+	@Query(value = "SELECT COUNT(1) FROM core_user_role WHERE role_id = :roleId", nativeQuery = true)
+	int countByRoleId(@Param("roleId") long roleId);
 }

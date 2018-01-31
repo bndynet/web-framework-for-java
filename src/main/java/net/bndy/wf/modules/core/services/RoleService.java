@@ -43,4 +43,15 @@ public class RoleService extends _BaseService<Role> {
             this.roleRepository.saveAndFlush(role);
         }
     }
+
+    public List<Role> getListWithDetail() {
+        List<Role> result = this.roleRepository.findAll();
+        for (Role r : result) {
+            r.setUserCount(this.roleRepository.countByRoleId(r.getId()));
+            if (r.getName().equals(applicationConfig.getAdminRole()[0])) {
+                r.setSys(true);
+            }
+        }
+        return result;
+    }
 }

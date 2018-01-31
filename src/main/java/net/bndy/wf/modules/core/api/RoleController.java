@@ -35,15 +35,7 @@ public class RoleController extends _BaseApi<Role> {
 
     @Override
     public List<Role> get() {
-        List<Role> result = super.get();
-
-        for(Role r: result) {
-           if (r.getName().equals(applicationConfig.getAdminRole()[0])) {
-               r.setSys(true);
-           }
-        }
-
-        return result;
+        return this.roleService.getListWithDetail();
     }
 
     @Override
