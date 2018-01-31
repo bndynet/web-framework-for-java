@@ -3,7 +3,8 @@ app.controller('UsersCtrl',
     function($scope, appDialog, $http, $timeout) {
         $scope.data = [];
         $scope.roles = null;
-        $scope.pageUsers = function (page) {
+
+        function pageUsers(page) {
             var url = '/api/core/users/search?page=' + (page - 1);
             if ($scope.searchKeywords) {
                 url += '&keywords=' + $scope.searchKeywords;
@@ -24,11 +25,11 @@ app.controller('UsersCtrl',
             });
         };
 
-        $scope.init = function() {
+        function initData() {
             $http.get('/api/core/roles').then(function(res) {
                 $scope.roles = res.data;
             });
-            $scope.pageUsers(1);
+            pageUsers(1);
         };
 
         $scope.editRoles = function(item) {
@@ -61,7 +62,7 @@ app.controller('UsersCtrl',
                                 curItem.roleNames.push(role.name);
                             });
                         } else {
-                            $scope.pageUsers($scope.pager.currentPage);
+                            pageUsers($scope.pager.currentPage);
                         }
                         $scope.userModel = null
                         $('#rolesForm').modal('hide');
@@ -86,12 +87,12 @@ app.controller('UsersCtrl',
         };
 
         $scope.search = function() {
-            $scope.pageUsers(1);
+            pageUsers(1);
         };
 
         $scope.cancelSearch = function() {
             $scope.searchKeywords = null;
-            $scope.pageUsers(1);
+            pageUsers(1);
         };
 
         $scope.userHasRole = function(role) {
@@ -101,5 +102,5 @@ app.controller('UsersCtrl',
             return false;
         };
 
-        $scope.init();
+        initData();
     }]);
