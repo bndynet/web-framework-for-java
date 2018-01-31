@@ -49,15 +49,23 @@ app.config(['$provide', '$qProvider', '$httpProvider', '$stateProvider', '$trans
                 console.error(rejection);
 
                 var title = null;
-                var message = rejection.data.error || rejection.data.message;
+                var message = null;
+
+                if (rejection.data) {
+                    var message = rejection.data.error || rejection.data.message;
+                }
 
                 switch(rejection.status) {
+                    // if server unavailable
+                    case -1:
+                        title = translate.instant('error.serverUnavailable');
+                        break;
                     case 401:
-                    $timeout(function() {
-                        location.href = '/sso/login';
-                    }, 3000);
-                    title = translate.instant('error.unauthorizedAccess');
-                    message = translate.instant('common.msgRedirectToLogin');
+                        $timeout(function() {
+                            location.href = '/sso/login';
+                        }, 3000);
+                        title = translate.instant('error.unauthorizedAccess');
+                        message = translate.instant('common.msgRedirectToLogin');
                     default:
                 }
 
