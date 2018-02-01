@@ -1,0 +1,46 @@
+<div ng-controller="ChannelsCtrl">
+    <ui-page-header title="'admin.modules.cms.channels.title'"
+                    subtitle="'admin.modules.cms.channels.subtitle'"
+                    breadcrumbs="[{'text': 'admin.modules.cms.channels.title'}]"></ui-page-header>
+    <section class="content">
+        <div class="box box-default with-header">
+            <div class="box-header with-border">
+                <h3 class="box-title"></h3>
+                <div class="box-tools pull-right">
+                    <button type="button" class="btn btn-sm btn-primary" ng-click="add()"
+                            ng-bind="'admin.modules.cms.channels.addChannel'|translate"></button>
+                </div>
+            </div>
+            <div class="box-body">
+                <div class="tree">
+                    <div ng-include="'itemTpl'"
+                         ng-repeat="item in channels | filter: {path: '/'}: true">
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <script type="text/ng-template" id="itemTpl">
+        <div class="tree-item with-border hover indent{{item.__level}}" ng-class="{'disabled': !item.visible}">
+            <div class="pull-left">
+                {{item.__level}}
+                <span ng-bind="item.name"></span>
+            </div>
+            <div class="pull-right">
+                <ui-actions ng-model="item"
+                            on-add="add(__model)"
+                            on-edit="edit(__model)"
+                            on-remove="remove(__model)"
+                            on-toggle-visible="toggleVisible(__model)"></ui-actions>
+            </div>
+            <div class="pull-right col-xs-4 text-center" ng-bind="item.boType"></div>
+            <div class="clearfix"></div>
+        </div>
+        <div class="child-box">
+        <div ng-include="'itemTpl'"
+             ng-repeat="item in channels | filter: {path: item.path + item.id + '/'}: true">
+        </div>
+        </div>
+    </script>
+</div>

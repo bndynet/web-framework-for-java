@@ -1,0 +1,14 @@
+<div class="icon-group">
+    <a ng-click="onToggleVisible({__model: model})" ng-if="onToggleVisible">
+        <i class="fa {{model.visible?'fa-eye':'fa-eye-slash'}}"></i>
+    </a>
+    <a ng-click="onAdd({__model: model})" ng-if="onAdd">
+        <i class="glyphicon glyphicon-plus text-primary"></i>
+    </a>
+    <a ng-click="onEdit({__model: model})" ng-if="onEdit">
+        <i class="glyphicon glyphicon-edit text-primary"></i>
+    </a>
+    <a ng-click="onRemove({__model: model})" ng-if="onRemove">
+        <i class="glyphicon glyphicon-trash text-danger"></i>
+    </a>
+</div>

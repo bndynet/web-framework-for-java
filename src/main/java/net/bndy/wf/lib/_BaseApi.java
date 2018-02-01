@@ -17,6 +17,7 @@ import java.util.List;
 import javax.servlet.http.HttpServletRequest;
 
 import net.bndy.wf.config.ApplicationConfig;
+import net.bndy.wf.exceptions.NoResourceFoundException;
 import net.bndy.wf.exceptions.ResourceIntegrityException;
 import net.bndy.wf.modules.core.services.FileService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -88,7 +89,7 @@ public abstract class _BaseApi<T extends _BaseEntity> {
 
 	@ApiOperation(value = "Delete an entity")
 	@RequestMapping(value = "/{id:\\d+}", method = RequestMethod.DELETE)
-	public void delete(@PathVariable(name = "id") long id) throws ResourceIntegrityException {
+	public void delete(@PathVariable(name = "id") long id) throws NoResourceFoundException, ResourceIntegrityException {
 		this.service.delete(id);
 	}
 

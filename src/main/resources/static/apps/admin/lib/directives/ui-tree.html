@@ -1,0 +1,15 @@
+<div class="tree">
+    <script type="text/ng-template" id="tpl">
+        <div ng-include="itemTemplate"
+             id="{{id}}_{{item.path.replaceAll('/', '_')}}"
+             class="tree-item with-border hover indent{{item.__level}}"></div>
+        <div ng-include="'tpl'"
+             ng-repeat="item in model | filter: {path: item.path + item.id + '/'}: true"
+             ng-init="item.__level = item.path.split('/').length - 2"></div>
+    </script>
+
+    <div ng-include="'tpl'"
+         ng-repeat="item in model | filter: {path: '/'}: true"
+         ng-init="item.__level = item.path.split('/').length - 2">
+    </div>
+</div>
