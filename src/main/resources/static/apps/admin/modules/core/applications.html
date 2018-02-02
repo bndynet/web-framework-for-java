@@ -2,68 +2,62 @@
     <ui-page-header title="'admin.modules.core.applications.title'"
                     subtitle="'admin.modules.core.applications.subtitle'"
                     breadcrumbs="[{'text': 'admin.modules.core.applications.title'}]"></ui-page-header>
-    <section class="content">
-        <div class="box box-default with-header">
-            <div class="box-header with-border">
-                <h3 class="box-title"></h3>
-                <div class="box-tools pull-right">
-                    <button type="button" class="btn btn-sm btn-primary" ng-click="add()" ng-bind="'admin.modules.core.applications.addApp'|translate"></button>
-                </div>
-            </div>
-            <div class="box-body">
-                <ul class="list-group">
-                    <li class="list-group-item" ng-repeat="item in data">
-                        <div class="media">
-                            <div class="media-left">
-                                <img class="media-object" ng-src="{{item.icon}}"/>
-                            </div>
-                            <div class="media-body">
-                                <h4 class="media-heading">
-                                    <span ng-bind="item.name"></span>
-                                </h4>
+    <ui-page-content>
+        <ui-page-content-header-right>
+            <button type="button" class="btn btn-sm btn-primary" ng-click="add()" ng-bind="'admin.modules.core.applications.addApp'|translate"></button>
+        </ui-page-content-header-right>
 
-                                <div ng-if="item.details.scope">
-                                    <label ng-bind="'admin.modules.core.applications.fieldScope'|translate"></label>:
-                                    <span class="btn-group">
+        <ul class="list-group">
+            <li class="list-group-item" ng-repeat="item in data">
+                <div class="media">
+                    <div class="media-left">
+                        <img class="media-object" ng-src="{{item.icon}}"/>
+                    </div>
+                    <div class="media-body">
+                        <h4 class="media-heading">
+                            <span ng-bind="item.name"></span>
+                        </h4>
+
+                        <div ng-if="item.details.scope">
+                            <label ng-bind="'admin.modules.core.applications.fieldScope'|translate"></label>:
+                            <span class="btn-group">
                                         <a target="_blank" class="btn btn-default btn-xs btn-flag" ng-href="/oauth/authorize?response_type=code&scope={{scope}}&client_id={{item.details.clientId}}&redirect_uri={{item.details.webServerRedirectUri}}"
                                            ng-repeat="scope in item.details.scope.split(',')" ng-bind="scope"></a>
                                     </span>
-                                </div>
+                        </div>
 
-                                <div>
-                                    <label ng-bind="'admin.modules.core.applications.fieldClientId'|translate"></label>:
-                                    <span>{{item.details.clientId}}</span>
-                                    &nbsp;&nbsp;&nbsp;&nbsp;
-                                    <label ng-bind="'admin.modules.core.applications.fieldClientSecret'|translate"></label>:
-                                    <span>{{item.details.clientSecret}}</span>
-                                </div>
+                        <div>
+                            <label ng-bind="'admin.modules.core.applications.fieldClientId'|translate"></label>:
+                            <span>{{item.details.clientId}}</span>
+                            &nbsp;&nbsp;&nbsp;&nbsp;
+                            <label ng-bind="'admin.modules.core.applications.fieldClientSecret'|translate"></label>:
+                            <span>{{item.details.clientSecret}}</span>
+                        </div>
 
-                                <div ng-if="item.approvals.length > 0">
+                        <div ng-if="item.approvals.length > 0">
                                     <span class="badge"
                                           title="{{'admin.modules.core.applications.iAuthorized'|translate}}"
                                           ng-class="{'bg-green': approval.status == 'APPROVED', 'bg-red': approval.status == 'DENIED'}"
                                           ng-repeat="approval in item.approvals" >
                                         {{approval.scope}}: {{approval.status}}
                                     </span>
-                                </div>
-                            </div>
                         </div>
-                        <div class="pull-right">
-                            <button class="btn btn-xs btn-primary"
-                                    ng-click="edit(item)">
-                                <i class="glyphicon glyphicon-edit"></i>
-                            </button>
-                            <button class="btn btn-xs btn-danger"
-                                    ng-click="remove(item, $event)">
-                                <i class="glyphicon glyphicon-trash"></i>
-                            </button>
-                        </div>
-                    </li>
-                </ul>
-                <ui-no-data ng-if="data.length==0"></ui-no-data>
-            </div>
-        </div>
-    </section>
+                    </div>
+                </div>
+                <div class="pull-right">
+                    <button class="btn btn-xs btn-primary"
+                            ng-click="edit(item)">
+                        <i class="glyphicon glyphicon-edit"></i>
+                    </button>
+                    <button class="btn btn-xs btn-danger"
+                            ng-click="remove(item, $event)">
+                        <i class="glyphicon glyphicon-trash"></i>
+                    </button>
+                </div>
+            </li>
+        </ul>
+        <ui-no-data ng-if="data.length==0"></ui-no-data>
+    </ui-page-content>
 
     <div id="dialogForm" class="modal fade" tabindex="-1" role="dialog">
         <div class="modal-dialog" role="document">

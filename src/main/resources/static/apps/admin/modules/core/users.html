@@ -2,87 +2,84 @@
     <ui-page-header title="'admin.modules.core.users.title'"
                     subtitle="'admin.modules.core.users.subtitle'"
                     breadcrumbs="[{'text': 'admin.modules.core.users.title'}]"></ui-page-header>
-    <section class="content">
-        <div class="box box-default with-header with-footer">
-            <div class="box-header with-border">
-                <div class="box-tools pull-left">
-                    <ui-search ng-model="searchKeywords" on-cancel="cancelSearch()" on-search="search()"></ui-search>
-                </div>
 
-                <div class="box-tools pull-right">
-                    <a class="btn btn-sm btn-primary" href="/sso/signup" target="_blank" ng-bind="'admin.modules.core.users.addUser'|translate"></a>
-                </div>
-            </div>
-            <div class="box-body">
-                <table class="table table-striped table-hover">
-                    <thead>
-                    <tr>
-                        <th class="col-icon"></th>
-                        <th ng-bind="'admin.modules.core.users.fieldUsername'|translate"></th>
-                        <th ng-bind="'admin.modules.core.users.fieldRoles'|translate"></th>
-                        <th ng-bind="'admin.modules.core.userProfile.fieldRealName'|translate"></th>
-                        <th ng-bind="'admin.modules.core.userProfile.fieldEmail'|translate"></th>
-                        <th ng-bind="'admin.modules.core.users.fieldCreatedAt'|translate"></th>
-                        <th ng-bind="'admin.modules.core.users.fieldLastUpdate'|translate"></th>
-                        <th class="text-center"
-                            ng-bind="'common.enable'|translate"></th>
-                        <th class="text-center"
-                            ng-bind="'common.delete'|translate"></th>
-                    </tr>
-                    </thead>
-                    <tbody>
-                    <tr ng-repeat="item in data">
-                        <td>
-                            <span class="fa"
-                                  title="{{ item.userProfile.gender == '1' ? 'admin.modules.core.userProfile.valueMale' : (item.userProfile.gender == '0' ? 'admin.modules.core.userProfile.valueFemale' : '') |translate}}"
-                                  ng-class="{'fa-mars text-blue': item.userProfile.gender == '1', 'fa-venus text-red': item.userProfile.gender == '0'}"></span>
-                        </td>
-                        <td ng-bind="item.username"></td>
-                        <td>
-                            <a ng-click="editRoles(item)" ng-if="!item.superAdmin">
-                                <span ng-repeat="role in item.roles">
-                                    <span class="label label-info" ng-bind="role.name"></span>&nbsp;
-                                </span>
-                                <em ng-if="item.roles && item.roles.length == 0" ng-bind="'admin.modules.core.users.noRoles'|translate"></em>
-                            </a>
-                            <span ng-if="item.superAdmin">
-                                <span ng-repeat="role in item.roles">
-                                    <span class="label label-info" ng-bind="role.name"></span>&nbsp;
-                                </span>
-                            </span>
-                        </td>
-                        <td>
-                            <span ng-bind="item.userProfile.realName"></span>
-                        </td>
-                        <td>
-                            <span ng-bind="item.userProfile.email"></span>
-                        </td>
-                        <td ng-bind="item.createDate | date: 'yyyy-MM-dd HH:mm'"></td>
-                        <td ng-bind="item.lastUpdate | date: 'yyyy-MM-dd HH:mm'"></td>
-                        <td class="text-center" ng-if="!item.superAdmin">
-                            <a ng-click="toggleEnabled(item)">
-                                <i class="glyphicon glyphicon-check text-success ng-cloak" ng-if="item.enabled"></i>
-                                <i class="glyphicon glyphicon-unchecked ng-cloak" ng-if="!item.enabled"></i>
-                            </a>
-                        </td>
-                        <td class="text-center" ng-if="!item.superAdmin">
-                            <a ng-click="remove(item)">
-                                <i class="glyphicon glyphicon-trash text-danger"></i>
-                            </a>
-                        </td>
-                        <td class="text-center" colspan="2" ng-if="item.superAdmin">
-                            {{'admin.modules.core.users.disableEditForSuperAdmin'|translate}}
-                        </td>
-                    </tr>
-                    </tbody>
-                </table>
-                <ui-no-data ng-if="data.length==0"></ui-no-data>
-            </div>
-            <div class="box-footer">
-                <bn-ui-pager ng-model="pager" on-page="pageUsers(page)"></bn-ui-pager>
-            </div>
-        </div>
-    </section>
+    <ui-page-content>
+        <ui-page-content-header-left>
+            <ui-search on-cancel="cancelSearch()" on-search="search(__model)"></ui-search>
+        </ui-page-content-header-left>
+        <ui-page-content-header-right>
+            <a class="btn btn-sm btn-primary" href="/sso/signup" target="_blank"
+               ng-bind="'admin.modules.core.users.addUser'|translate"></a>
+        </ui-page-content-header-right>
+        <ui-page-content-footer>
+            <bn-ui-pager ng-model="pager" on-page="pageUsers(page)"></bn-ui-pager>
+        </ui-page-content-footer>
+        <table class="table table-striped table-hover">
+            <thead>
+            <tr>
+                <th class="col-icon"></th>
+                <th ng-bind="'admin.modules.core.users.fieldUsername'|translate"></th>
+                <th ng-bind="'admin.modules.core.users.fieldRoles'|translate"></th>
+                <th ng-bind="'admin.modules.core.userProfile.fieldRealName'|translate"></th>
+                <th ng-bind="'admin.modules.core.userProfile.fieldEmail'|translate"></th>
+                <th ng-bind="'admin.modules.core.users.fieldCreatedAt'|translate"></th>
+                <th ng-bind="'admin.modules.core.users.fieldLastUpdate'|translate"></th>
+                <th class="text-center"
+                    ng-bind="'common.enable'|translate"></th>
+                <th class="text-center"
+                    ng-bind="'common.delete'|translate"></th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr ng-repeat="item in pager.content">
+                <td>
+                    <span class="fa"
+                          title="{{ item.userProfile.gender == '1' ? 'admin.modules.core.userProfile.valueMale' : (item.userProfile.gender == '0' ? 'admin.modules.core.userProfile.valueFemale' : '') |translate}}"
+                          ng-class="{'fa-mars text-blue': item.userProfile.gender == '1', 'fa-venus text-red': item.userProfile.gender == '0'}"></span>
+                </td>
+                <td ng-bind="item.username"></td>
+                <td>
+                    <a ng-click="editRoles(item)" ng-if="!item.superAdmin">
+                        <span ng-repeat="role in item.roles">
+                            <span class="label label-info" ng-bind="role.name"></span>&nbsp;
+                        </span>
+                        <em ng-if="item.roles && item.roles.length == 0"
+                            ng-bind="'admin.modules.core.users.noRoles'|translate"></em>
+                    </a>
+                    <span ng-if="item.superAdmin">
+                        <span ng-repeat="role in item.roles">
+                            <span class="label label-info" ng-bind="role.name"></span>&nbsp;
+                        </span>
+                        </span>
+                </td>
+                <td>
+                    <span ng-bind="item.userProfile.realName"></span>
+                </td>
+                <td>
+                    <span ng-bind="item.userProfile.email"></span>
+                </td>
+                <td ng-bind="item.createDate | date: 'yyyy-MM-dd HH:mm'"></td>
+                <td ng-bind="item.lastUpdate | date: 'yyyy-MM-dd HH:mm'"></td>
+                <td class="text-center" ng-if="!item.superAdmin">
+                    <a ng-click="toggleEnabled(item)">
+                        <i class="glyphicon glyphicon-check text-success ng-cloak" ng-if="item.enabled"></i>
+                        <i class="glyphicon glyphicon-unchecked ng-cloak" ng-if="!item.enabled"></i>
+                    </a>
+                </td>
+                <td class="text-center" ng-if="!item.superAdmin">
+                    <a ng-click="remove(item)">
+                        <i class="glyphicon glyphicon-trash text-danger"></i>
+                    </a>
+                </td>
+                <td class="text-center" colspan="2" ng-if="item.superAdmin">
+                    {{'admin.modules.core.users.disableEditForSuperAdmin'|translate}}
+                </td>
+            </tr>
+            </tbody>
+        </table>
+        <ui-no-data ng-if="pager.content.length==0"></ui-no-data>
+    </ui-page-content>
+
 
     <div id="rolesForm" class="modal fade" tabindex="-1" role="dialog">
         <div class="modal-dialog" role="document">
@@ -111,7 +108,8 @@
                     </div>
                 </div>
                 <div class="modal-footer">
-                    <button type="button" class="btn btn-default" data-dismiss="modal" ng-bind="'common.close'|translate"></button>
+                    <button type="button" class="btn btn-default" data-dismiss="modal"
+                            ng-bind="'common.close'|translate"></button>
                     <button type="button" class="btn btn-primary"
                             ng-bind="'common.saveChanges'|translate"
                             ng-click="saveRoles()"></button>

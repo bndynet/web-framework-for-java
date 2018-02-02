@@ -1,21 +1,23 @@
 app.controller('UsersCtrl',
-    [ '$scope', 'appDialog', '$http', '$timeout',
-    function($scope, appDialog, $http, $timeout) {
-        $scope.data = [];
+    [ '$scope', 'appService', 'appDialog', '$timeout',
+    function($scope, appService, appDialog, $timeout) {
+        $scope.pager = {};
         $scope.roles = null;
 
-        function pageUsers(page) {
+        function initData() {
+            appService.ajaxGet('/api/core/roles').then(function(d) {
+                $scope.roles = d;
+            });
+            $scope.pageUsers(1);
+        };
+
+        $scope.pageUsers = function(page) {
             var url = '/api/core/users/search?page=' + (page - 1);
             if ($scope.searchKeywords) {
                 url += '&keywords=' + $scope.searchKeywords;
             }
-            $http.get(url).then(function(res) {
-                $scope.data = res.data.content;
-                $scope.pager = {
-                    currentPage: page,
-                    pageSize:  res.data.size,
-                    recordCount: res.data.totalElements,
-                };
+            appService.ajaxGet(url).then(function(d) {
+                $scope.pager = d;
 
                 if ($scope.searchKeywords) {
                     $timeout(function() {
@@ -23,13 +25,6 @@ app.controller('UsersCtrl',
                     }, 100);
                 }
             });
-        };
-
-        function initData() {
-            $http.get('/api/core/roles').then(function(res) {
-                $scope.roles = res.data;
-            });
-            pageUsers(1);
         };
 
         $scope.editRoles = function(item) {
@@ -49,10 +44,10 @@ app.controller('UsersCtrl',
         $scope.saveRoles = function() {
             if ($scope.userModel.id) {
                 var ids = _.map($scope.userModel.roles, 'id');
-                $http.put('/api/core/users/' + $scope.userModel.id + '/changeRole', {values: ids})
-                    .then(function(res) {
+                appService.ajaxPut('/api/core/users/' + $scope.userModel.id + '/changeRole', {values: ids})
+                    .then(function() {
                         appDialog.success();
-                        var curItem = _.find($scope.data, function(item) { return item.id == $scope.userModel.id});
+                        var curItem = _.find($scope.pager.content, function(item) { return item.id == $scope.userModel.id});
                         if (curItem) {
                             curItem.roles.length = 0;
                             curItem.roleNames.length = 0;
@@ -62,7 +57,7 @@ app.controller('UsersCtrl',
                                 curItem.roleNames.push(role.name);
                             });
                         } else {
-                            pageUsers($scope.pager.currentPage);
+                            $scope.pageUsers($scope.pager.currentPage);
                         }
                         $scope.userModel = null
                         $('#rolesForm').modal('hide');
@@ -72,27 +67,29 @@ app.controller('UsersCtrl',
 
         $scope.remove = function(item) {
             appDialog.confirmDeletion(function(){
-                $http.delete('/api/core/users/' + item.id).then(function(res) {
-                    $scope.data.splice($scope.data.indexOf(item), 1)
+                appService.ajaxDelete('/api/core/users/' + item.id).then(function() {
+                    $scope.pager.content.splice($scope.pager.content.indexOf(item), 1)
                     appDialog.success();
+                    $scope.pageUsers($scope.pager.currentPage);
                 });
             });
         };
 
         $scope.toggleEnabled = function(item) {
-            $http.put('/api/core/users/' + item.id + '/toggleEnabled').then(function(res) {
+            appService.ajaxPut('/api/core/users/' + item.id + '/toggleEnabled').then(function(res) {
                 item.enabled = !item.enabled;
                 appDialog.success();
             });
         };
 
-        $scope.search = function() {
-            pageUsers(1);
+        $scope.search = function(keywords) {
+            $scope.searchKeywords = keywords;
+            $scope.pageUsers(1);
         };
 
         $scope.cancelSearch = function() {
             $scope.searchKeywords = null;
-            pageUsers(1);
+            $scope.pageUsers(1);
         };
 
         $scope.userHasRole = function(role) {

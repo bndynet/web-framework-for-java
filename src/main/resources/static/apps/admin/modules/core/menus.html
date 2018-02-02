@@ -2,25 +2,19 @@
     <ui-page-header title="'admin.modules.core.menus.title'"
                     subtitle="'admin.modules.core.menus.subtitle'"
                     breadcrumbs="[{'text': 'admin.modules.core.menus.title'}]"></ui-page-header>
-    <section class="content">
-        <div class="box box-default with-header">
-            <div class="box-header with-border">
-                <h3 class="box-title"></h3>
-                <div class="box-tools pull-right">
-                    <button type="button" class="btn btn-sm btn-primary" ng-click="add()" ng-bind="'admin.modules.core.menus.addMenu'|translate"></button>
-                </div>
-            </div>
-            <div class="box-body">
-                <ui-menu-tree ng-model="menus"
-                              can-edit="true"
-                              show-all="true"
-                              on-item-edit="edit(item)"
-                              on-item-remove="remove(item)"
-                              on-item-add-submenu="add(item)"
-                              on-item-toggle-visible="toggleVisible(item)"></ui-menu-tree>
-            </div>
-        </div>
-    </section>
+    <ui-page-content>
+        <ui-page-content-header-right>
+            <button type="button" class="btn btn-sm btn-primary" ng-click="add()" ng-bind="'admin.modules.core.menus.addMenu'|translate"></button>
+        </ui-page-content-header-right>
+
+        <ui-menu-tree ng-model="menus"
+                      can-edit="true"
+                      show-all="true"
+                      on-item-edit="edit(item)"
+                      on-item-remove="remove(item)"
+                      on-item-add-submenu="add(item)"
+                      on-item-toggle-visible="toggleVisible(item)"></ui-menu-tree>
+    </ui-page-content>
 
     <div id="dialogForm" class="modal fade" tabindex="-1" role="dialog">
         <div class="modal-dialog" role="document">

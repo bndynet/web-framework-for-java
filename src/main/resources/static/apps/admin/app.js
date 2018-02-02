@@ -105,7 +105,14 @@ app.factory('appService', ['$rootScope', '$http', '$translate', function($rootSc
 
     service.ajaxGet = function(apiUrl) {
         return $http.get(apiUrl).then(function(res) {
-            return res.data;
+            var result = res.data;
+            // for paging
+            if (typeof result.totalElements !== 'undefined') {
+                result.currentPage = result.number + 1;
+                result.pageSize = result.size;
+                result.recordCount = result.totalElements;
+            }
+            return result;
         });
     };
     service.ajaxPut = function(apiUrl, data) {

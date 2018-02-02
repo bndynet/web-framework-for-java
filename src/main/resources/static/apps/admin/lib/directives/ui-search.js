@@ -3,25 +3,24 @@ angular.module('app')
         return {
             restrict: 'E',
             replace: true,
-            require: ['ngModel'],
             scope: {
-                model: '=ngModel',
                 onCancel: '&',
                 onSearch: '&'
             },
             templateUrl: '/static/apps/admin/lib/directives/ui-search.html',
             link: function(scope, elem, attrs) {
-
+                scope.model = null;
                 scope.cancel = function() {
                     scope.model = null;
                     if (scope.onCancel) {
-                        scope.onCancel();
+                        scope.onCancel({__model: scope.model});
                     }
                 };
 
                 scope.search = function() {
                     if (scope.onSearch) {
-                        scope.onSearch();
+                        console.debug(scope.model);
+                        scope.onSearch({__model: scope.model});
                     }
                 };
             }

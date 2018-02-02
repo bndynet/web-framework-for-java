@@ -1,0 +1,16 @@
+<section class="content">
+    <div class="box box-default" ng-class="{'with-header': hasHeader, 'with-footer': hasFooter}">
+        <div class="box-header with-border" ng-cloak ng-if="hasHeader">
+            <div class="box-tools pull-left" ng-if="hasHeaderLeft">
+                <div ng-transclude="headerLeft"></div>
+            </div>
+            <div class="box-tools pull-right" ng-if="hasHeaderRight">
+                <div ng-transclude="headerRight"></div>
+            </div>
+        </div>
+        <div class="box-body">
+            <ng-transclude></ng-transclude>
+        </div>
+        <div class="box-footer" ng-transclude="footer" ng-if="hasFooter"></div>
+    </div>
+</section>
