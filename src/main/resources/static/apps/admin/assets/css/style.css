@@ -348,6 +348,14 @@ md-toolbar,
   margin-top: 15px;
 }
 
+.modal-dialog .modal-content .modal-body > form > md-input-container:last-child {
+  margin-bottom: 0;
+}
+
+.modal-dialog .modal-content .modal-footer .pull-right {
+  margin-left: 10px;
+}
+
 /* toaster */
 .toast-close-button {
   top: -10px;

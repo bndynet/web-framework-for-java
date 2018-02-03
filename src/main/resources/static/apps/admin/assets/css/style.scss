@@ -360,6 +360,16 @@ md-toolbar,
     .modal-body {
       &>form {
         margin-top: 15px;
+        &>md-input-container {
+          &:last-child {
+            margin-bottom: 0;
+          } 
+        }
+      }
+    }
+    .modal-footer {
+      .pull-right {
+        margin-left: 10px;
       }
     }
   }
