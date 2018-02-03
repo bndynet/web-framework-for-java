@@ -18,20 +18,23 @@ public class ChannelService extends _BaseService<Channel> {
     @Autowired
     private ChannelRepository channelRepository;
 
+    private void syncVisible(Channel channel) {
+        if (channel.isVisible()) {
+            List<Long> ids = StringHelper.splitToLong(channel.getPath(), "/");
+            if (ids.size() > 0) {
+                this.channelRepository.openVisible(ids);
+            }
+        } else {
+            this.channelRepository.hideAllChildren(channel.getPath() + channel.getId() + "/");
+        }
+    }
+
     public void toggleVisible(long channelId) {
         Channel channel = this.channelRepository.findOne(channelId);
         if (channel != null) {
             channel.setVisible(!channel.isVisible());
             channel = this.channelRepository.saveAndFlush(channel);
-
-            if (channel.isVisible()) {
-                List<Long> ids = StringHelper.splitToLong(channel.getPath(), "/");
-                if (ids.size() > 0) {
-                    this.channelRepository.openVisible(ids);
-                }
-            } else {
-                this.channelRepository.hideAllChildren(channel.getPath() + channel.getId() + "/");
-            }
+            syncVisible(channel);
         }
     }
 
@@ -42,6 +45,16 @@ public class ChannelService extends _BaseService<Channel> {
         }
 
         throw new NoResourceFoundException();
+    }
+
+    @Override
+    public Channel save(Channel entity) {
+        if (entity.getPath() == null || "".equals(entity.getPath())) {
+            entity.setPath("/");
+        }
+        entity = super.save(entity);
+        syncVisible(entity);
+        return entity;
     }
 
     @Override

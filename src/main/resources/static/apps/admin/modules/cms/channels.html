@@ -37,4 +37,44 @@
             </div>
         </div>
     </script>
+    <ui-dialog title="{{formModel.id ? 'admin.modules.cms.channels.editChannel' : 'admin.modules.cms.channels.addChannel'}}">
+        <form name="form">
+            <md-input-container class="md-block">
+                <label>
+                    <span ng-bind="'admin.modules.cms.channels.fieldName'|translate"></span>
+                    <span ng-if="formModel.parent">({{'admin.modules.cms.channels.fieldParentChanel'|translate}}: <span ng-bind="formModel.parent.name"}></span>)</span>
+                </label>
+                <input name="name" required ng-model="formModel.name"/>
+                <div ng-messages="form.name.$error">
+                    <div ng-message="required" ng-bind="'common.msgRequired'|translate"></div>
+                </div>
+            </md-input-container>
+            <md-input-container class="md-block">
+                <label>
+                    <span ng-bind="'admin.modules.core.menus.fieldBoType'|translate"></span>
+                </label>
+                <md-select ng-model="selectedBoType" ng-change="selectBoType()"
+                           placeholder="{{'admin.modules.cms.channels.msgSelectBoType'|translate}}">
+                    <md-option ng-repeat="item in boTypes" ng-value="item">
+                        <i class="fa fa-fw fa-circle-o"></i>
+                        <span ng-bind="item.name"></span>
+                    </md-option>
+                </md-select>
+            </md-input-container>
+        </form>
+        <ui-dialog-footer>
+            <div class="pull-left">
+                <md-switch class="md-primary no-margin" ng-model="formModel.visible">
+                    <span ng-bind="'admin.modules.cms.channels.fieldVisible'|translate"></span>
+                </md-switch>
+            </div>
+            <div class="pull-right">
+                <button type="button" class="btn btn-primary"
+                        ng-disabled="form.$invalid"
+                        ng-bind="'common.saveChanges'|translate"
+                        ng-click="save()">
+                </button>
+            </div>
+        </ui-dialog-footer>
+    </ui-dialog>
 </div>

@@ -270,6 +270,25 @@ app.factory('appDialog', [
             });
 		};
 
+		service.getModal = function(name) {
+		    return {
+		        name: name,
+		        selector: function() {
+		            if (this.name) {
+                        return '#' + name;
+		            } else {
+		                return '.modal';
+		            }
+		        },
+		        show: function() {
+		            $(this.selector()).modal('show');
+		        },
+		        close: function() {
+		            $(this.selector()).modal('hide');
+		        }
+		    };
+		};
+
 		service.showWin = function (data, controller, templateUrl, fnOK, fnCancel, options) {
             angular.element(document.querySelector('body')).attr('style', 'overflow-y: hidden');
 			$mdDialog.show({

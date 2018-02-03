@@ -10,12 +10,34 @@ angular.module('app')
                 });
             }
 
+            var dialogForm = appDialog.getModal();
             $scope.add = function(item) {
-                console.debug(item);
+                angular.resetForm($scope.form);
+                if (item) {
+                    $scope.formModel = {
+                        visible: true,
+                        path: item.path + item.id + '/',
+                        parent: item,
+                    };
+                } else {
+                    $scope.formModel = {
+                        visible: true,
+                    };
+                }
+                dialogForm.show();
             };
             $scope.edit = function(item) {
-
+                angular.resetForm($scope.form);
+                $scope.formModel = angular.copy(item);
+                dialogForm.show();
             };
+            $scope.save = function() {
+                appService.ajaxSave('/api/cms/channels', $scope.formModel).then(function() {
+                    initData();
+                    appDialog.success();
+                    dialogForm.close();
+                });
+            }
             $scope.toggleVisible = function(item) {
                 appService.ajaxPut('/api/cms/channels/' + item.id + '/toggleVisible').then(function() {
                     initData();
