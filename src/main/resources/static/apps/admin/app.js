@@ -151,8 +151,9 @@ app.factory('appDialog', [
     '$timeout',
     '$translate',
 	'$mdDialog',
+	'$mdSelect',
 	'toaster',
-	function ($rootScope, $timeout, $translate, $mdDialog, toaster) {
+	function ($rootScope, $timeout, $translate, $mdDialog, $mdSelect, toaster) {
 		var service = {};
 
         service.loading = function(showLoading) {
@@ -281,6 +282,9 @@ app.factory('appDialog', [
 		            }
 		        },
 		        show: function() {
+                    $(this.selector()).on('hide.bs.modal', function (e) {
+                        $mdSelect.hide();
+                    });
 		            $(this.selector()).modal('show');
 		        },
 		        close: function() {

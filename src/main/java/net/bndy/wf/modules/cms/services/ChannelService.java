@@ -9,6 +9,7 @@ import org.springframework.boot.context.config.ResourceNotFoundException;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import javax.validation.constraints.NotNull;
 import java.util.List;
 
 @Service
@@ -18,7 +19,7 @@ public class ChannelService extends _BaseService<Channel> {
     @Autowired
     private ChannelRepository channelRepository;
 
-    private void syncVisible(Channel channel) {
+    private void syncVisible(@NotNull Channel channel) {
         if (channel.isVisible()) {
             List<Long> ids = StringHelper.splitToLong(channel.getPath(), "/");
             if (ids.size() > 0) {

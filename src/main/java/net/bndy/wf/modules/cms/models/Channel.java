@@ -14,7 +14,7 @@ public class Channel extends _BaseEntity {
     private String name;
     private String path;
     private Long boId;
-    @Enumerated(EnumType.STRING)
+    @Enumerated(EnumType.ORDINAL)
     private BoType boType;
     private boolean isVisible;
 

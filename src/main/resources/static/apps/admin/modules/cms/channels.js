@@ -2,11 +2,16 @@ angular.module('app')
     .controller('ChannelsCtrl',
         [ '$scope', 'appService', 'appDialog', '$http', '$timeout',
         function($scope, appService, appDialog, $http, $timeout) {
+            $scope.boTypes = [];
+
             function initData() {
                 appDialog.loading();
                 appService.ajaxGet('/api/cms/channels/query?all=true').then(function(d) {
                     $scope.channels = d;
                     appDialog.loading(false);
+                });
+                appService.ajaxGet('/api/cms/config/boTypes').then(function(d) {
+                    $scope.boTypes = d;
                 });
             }
 
