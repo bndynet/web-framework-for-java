@@ -13,7 +13,6 @@ public class Channel extends _BaseEntity {
 
     private String name;
     private String path;
-    private Long boId;
     @Enumerated(EnumType.ORDINAL)
     private BoType boType;
     private boolean isVisible;
@@ -32,14 +31,6 @@ public class Channel extends _BaseEntity {
 
     public void setPath(String path) {
         this.path = path;
-    }
-
-    public Long getBoId() {
-        return boId;
-    }
-
-    public void setBoId(Long boId) {
-        this.boId = boId;
     }
 
     public BoType getBoType() {

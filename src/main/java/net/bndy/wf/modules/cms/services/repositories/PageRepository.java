@@ -14,11 +14,16 @@ import net.bndy.wf.modules.cms.models.*;
 
 public interface PageRepository extends JpaRepository<Page, Long> {
 
-	@Query(value="SELECT * FROM cms_page WHERE bo_type_id = :boTypeId", nativeQuery=true)
-	Page getByBoTypeId(@Param(value="boTypeId") long boTypeId);
+	@Query(value="SELECT t FROM Page t WHERE t.channelId = :channelId")
+	Page findByChannelId(@Param(value="channelId") long channelId);
 
 	@Modifying
 	@Transactional
-	@Query(value="DELETE FROM cms_page WHERE bo_type_id = :boTypeId", nativeQuery=true)
-	void deleteByBoTypeId(@Param(value="boTypeId") long boTypeId);
+	@Query(value="DELETE FROM Page t WHERE t.channelId = :channelId")
+	void deleteByChannelId(@Param(value="channelId") long channelId);
+
+	@Modifying
+	@Transactional
+	@Query(value = "UPDATE Page t SET t.channelId = ?2 WHERE t.channelId = ?1")
+	void transferChannel(long sourceChannelId, long targetChannelId);
 }

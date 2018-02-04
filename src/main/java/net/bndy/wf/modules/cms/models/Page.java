@@ -12,6 +12,7 @@ import javax.persistence.Table;
 import javax.persistence.Transient;
 
 import net.bndy.wf.lib._BaseEntity;
+import org.springframework.data.domain.Pageable;
 
 @Entity
 @Table(name="cms_page")
@@ -19,19 +20,14 @@ public class Page extends _BaseEntity {
 
 	private static final long serialVersionUID = 1L;
 
-	private long boTypeId;
+	private long channelId;
 	private String title;
 	@Column(columnDefinition="TEXT")
 	private String content;
-	
-	public List<Attachment> getAttachments() {
-		return attachments;
-	}
-	public void setAttachments(List<Attachment> attachments) {
-		this.attachments = attachments;
-	}
 	@Transient
 	private List<Attachment> attachments;
+	@Transient
+	private org.springframework.data.domain.Page<Comment> comments;
 	
 	public String getTitle() {
 		return title;
@@ -45,11 +41,22 @@ public class Page extends _BaseEntity {
 	public void setContent(String content) {
 		this.content = content;
 	}
-	public long getBoTypeId() {
-		return boTypeId;
+	public long getChannelId() {
+		return channelId;
 	}
-	public void setBoTypeId(long boTypeId) {
-		this.boTypeId = boTypeId;
+	public void setChannelId(long channelId) {
+		this.channelId = channelId;
 	}
-
+	public org.springframework.data.domain.Page<Comment> getComments() {
+		return comments;
+	}
+	public void setComments(org.springframework.data.domain.Page<Comment> comments) {
+		this.comments = comments;
+	}
+	public List<Attachment> getAttachments() {
+		return attachments;
+	}
+	public void setAttachments(List<Attachment> attachments) {
+		this.attachments = attachments;
+	}
 }

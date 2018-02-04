@@ -6,15 +6,28 @@ package net.bndy.wf.modules.cms.services.repositories;
 
 import java.util.List;
 
+import net.bndy.wf.modules.cms.models.BoType;
 import org.springframework.data.jpa.repository.JpaRepository;
+import org.springframework.data.jpa.repository.Modifying;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;
 
 import net.bndy.wf.modules.cms.models.Attachment;
+import org.springframework.transaction.annotation.Transactional;
 
 public interface AttachmentRepository extends JpaRepository<Attachment, Long> {
-	@Query(value="SELECT t FROM #{#entityName} t "
-			+ "WHERE t.boTypeId = :boTypeId AND t.boId = :boId "
-			+ "ORDER BY t.lastUpdate DESC")
-	List<Attachment> findByBo(@Param(value="boTypeId") long boTypeId, @Param(value="boId") long boId);
+	@Query(value="SELECT * FROM cms_attachment "
+			+ "WHERE bo_type = :boType AND bo_id = :boId "
+			+ "ORDER BY last_update DESC", nativeQuery = true)
+	List<Attachment> findByBo(@Param(value="boType") int boType, @Param(value="boId") long boId);
+
+	@Modifying
+	@Transactional
+	@Query(value = "DELETE FROM cms_attachment WHERE bo_type = ?1 AND bo_id = ?2", nativeQuery = true)
+	void deleteByBo(int boType, long boId);
+
+	@Modifying
+	@Transactional
+	@Query(value = "UPDATE Attachment t SET t.boId = ?3 WHERE t.boId = ?2 AND t.boType = ?1")
+	void transfer(int boType, long sourceBoId, long targetBoId);
 }

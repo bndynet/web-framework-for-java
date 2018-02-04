@@ -33,15 +33,15 @@ public class ArticleController extends _BaseApi<Article> {
 	@ApiOperation(value = "Search title and content by bo or keywords") 
 	@RequestMapping(value="/search", method = RequestMethod.GET)
 	public Page<Article> get(
-			@RequestParam(name = "bo", required = false) Integer boTypeId,
+			@RequestParam(name = "channel", required = false) Long channel,
 			@RequestParam(name = "keywords", required = false) String keywords,
 			@PageableDefault(value = 10, sort = { "lastUpdate" }, direction = Sort.Direction.DESC) Pageable pageable) {
-		if (boTypeId != null && boTypeId > 0 && keywords != null && keywords.length() > 0) {
-			return this.articleService.findByBoAndKeywords(boTypeId, keywords, pageable);
+		if (channel != null && channel > 0 && keywords != null && keywords.length() > 0) {
+			return this.articleService.findByChannelIdAndKeywords(channel, keywords, pageable);
 		} else if (keywords != null && keywords.length() > 0) {
 			return this.articleService.findByKeywords(keywords, pageable);
-		} else if (boTypeId != null && boTypeId > 0) {
-			return this.articleService.findByBoTypeId(boTypeId, pageable);
+		} else if (channel != null && channel > 0) {
+			return this.articleService.findByChannelId(channel, pageable);
 		}
 		return this.articleService.findAll(pageable);
 	}

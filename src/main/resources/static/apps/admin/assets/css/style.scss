@@ -10,6 +10,10 @@ $color-text-dark: #333333;
 
 $color-primary: #3c8dbc;
 
+html, body {
+  font-size: 13px;
+}
+
 /* skins */
 
 .skin-blue,
@@ -506,4 +510,12 @@ md-backdrop.md-dialog-backdrop {
 .no-data-box {
   padding: 5rem;
   color: #666666;
+}
+
+@for $i from 1 through 8 {
+  .indent#{$i} {
+    & > div:first-child {
+      margin-left: #{$i * 2}rem;
+    }
+  }
 }

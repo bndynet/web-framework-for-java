@@ -170,7 +170,8 @@ img.circle {
 }
 
 .tree .tree-item {
-  padding: 6px 10px;
+  margin-top: 3px;
+  padding: 5px 10px 3px 10px;
 }
 
 .tree .tree-item.with-border {

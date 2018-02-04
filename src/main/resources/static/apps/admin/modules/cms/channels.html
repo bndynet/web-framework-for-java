@@ -16,26 +16,25 @@
     </ui-page-content>
 
     <script type="text/ng-template" id="itemTpl">
-        <div class="tree-item with-border hover indent{{item.__level}}" ng-class="{'disabled': !item.visible}">
+        <div class="tree-item with-border hover {{item.path.replaceAll('/', '_')}}" ng-class="{'disabled': !item.visible}">
             <div class="pull-left">
                 <span ng-bind="item.name"></span>
             </div>
-            <div class="pull-right">
+            <div class="pull-left" style="position:relative; margin-left: 360px;">
+                <span ng-if="item.boType" ng-bind="'admin.modules.cms.boTypes.' + item.boType.name.toLowerCase() | translate">></span>
+            </div>
+            <div class="pull-right text-right">
                 <ui-actions ng-model="item"
                             on-add="add(__model)"
                             on-edit="edit(__model)"
                             on-remove="remove(__model)"
                             on-toggle-visible="toggleVisible(__model)"></ui-actions>
             </div>
-            <div class="pull-right col-xs-4 text-center" ng-if="item.boType">
-                <span ng-bind="'admin.modules.cms.boTypes.' + item.boType.name.toLowerCase() | translate">></span>
-            </div>
             <div class="clearfix"></div>
         </div>
-        <div class="child-box">
-            <div ng-include="'itemTpl'"
-                 ng-repeat="item in channels | filter: {path: item.path + item.id + '/'}: true">
-            </div>
+        <div class="child-box"
+             ng-include="'itemTpl'"
+             ng-repeat="item in channels | filter: {path: item.path + item.id + '/'}: true">
         </div>
     </script>
     <ui-dialog title="{{formModel.id ? 'admin.modules.cms.channels.editChannel' : 'admin.modules.cms.channels.addChannel'}}">

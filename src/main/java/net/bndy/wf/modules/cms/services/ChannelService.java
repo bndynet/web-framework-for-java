@@ -3,6 +3,7 @@ package net.bndy.wf.modules.cms.services;
 import net.bndy.lib.StringHelper;
 import net.bndy.wf.exceptions.NoResourceFoundException;
 import net.bndy.wf.modules.cms.models.Channel;
+import net.bndy.wf.modules.cms.models.Page;
 import net.bndy.wf.modules.cms.services.repositories.ChannelRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.context.config.ResourceNotFoundException;
@@ -18,6 +19,10 @@ public class ChannelService extends _BaseService<Channel> {
 
     @Autowired
     private ChannelRepository channelRepository;
+    @Autowired
+    private ArticleService articleService;
+    @Autowired
+    private PageService pageService;
 
     private void syncVisible(@NotNull Channel channel) {
         if (channel.isVisible()) {
@@ -48,6 +53,24 @@ public class ChannelService extends _BaseService<Channel> {
         throw new NoResourceFoundException();
     }
 
+    public void transferChannel(long sourceId, long targetId) {
+        Channel source = this.channelRepository.findOne(sourceId);
+        Channel target = this.channelRepository.findOne(targetId);
+        if (source != null && target != null && source.getBoType() == target.getBoType()) {
+            // TODO: transfer BO according to boType
+            switch (source.getBoType()) {
+                case File:
+                    break;
+                case Page:
+                    this.pageService.transfer(source.getId(), target.getId());
+                    break;
+                case Article:
+                    this.articleService.transfer(source.getId(), target.getId());
+                    break;
+            }
+        }
+    }
+
     @Override
     public Channel save(Channel entity) {
         if (entity.getPath() == null || "".equals(entity.getPath())) {
@@ -55,12 +78,42 @@ public class ChannelService extends _BaseService<Channel> {
         }
         entity = super.save(entity);
         syncVisible(entity);
+
+        switch (entity.getBoType()) {
+            case Page:
+                Page p = this.pageService.getByChannelId(entity.getId());
+                if (p == null) {
+                    p = new Page();
+                    p.setContent(entity.getName());
+                }
+                p.setChannelId(entity.getId());
+                p.setTitle(entity.getName());
+                this.pageService.save(p);
+                break;
+        }
+
         return entity;
     }
 
     @Override
     public boolean delete(long id) {
-        // TODO: delete all resources according to boType
-        return super.delete(id);
+        Channel channel = this.get(id);
+        if (channel != null) {
+            if (channel.getBoType() != null) {
+                switch (channel.getBoType()) {
+                    case Article:
+                        this.articleService.deleteByChannelId(channel.getId());
+                        break;
+                    case Page:
+                        this.pageService.deleteByChannelId(channel.getId());
+                        break;
+                    case File:
+                        // TODO: remove File channel
+                        break;
+                }
+            }
+            return super.delete(id);
+        }
+        return false;
     }
 }

@@ -15,14 +15,49 @@ import net.bndy.wf.modules.cms.services.repositories.*;
 @Service
 @Transactional
 public class PageService extends _BaseService<Page> {
-	
-	@Autowired
-	PageRepository pageRepo;
-	
-	@Override
-	public Page get(long pageId) {
-		Page result = this.pageRepo.findOne(pageId);
-		result.setAttachments(this.attachmentRepo.findByBo(result.getBoTypeId(), result.getId()));
-		return result;	
-	}
+
+    @Autowired
+    PageRepository pageRepository;
+
+    public Page getByChannelId(long channelId) {
+        Page result = this.pageRepository.findByChannelId(channelId);
+        if (result != null) {
+            result.setAttachments(this.getAttachments(result.getId()));
+        }
+        return result;
+    }
+
+    public void deleteByChannelId(long channelId) {
+        Page page = this.pageRepository.findByChannelId(channelId);
+        if (page != null) {
+            this.delete(page.getId());
+        }
+    }
+
+    @Override
+    public boolean delete(long id) {
+        Page p = this.pageRepository.findOne(id);
+        if (p != null) {
+            this.deleteComments(p.getId());
+            this.deleteAttachments(p.getId());
+        }
+        return super.delete(id);
+    }
+
+    public void transfer(long sourceChannelId, long targetChannelId) {
+        Page sourcePage = this.pageRepository.findOne(sourceChannelId);
+        Page targetPage = this.pageRepository.findOne(targetChannelId);
+        if (sourcePage != null && targetPage != null) {
+            targetPage.setContent(sourcePage.getContent());
+
+            this.transferAttachment(sourcePage.getId(), targetPage.getId());
+            this.deleteAttachments(sourcePage.getId());
+
+            this.transferComments(sourcePage.getId(), targetPage.getId());
+            this.deleteComments(sourcePage.getId());
+
+            this.pageRepository.transferChannel(sourcePage.getId(), targetPage.getId());
+            this.pageRepository.delete(sourcePage.getId());
+        }
+    }
 }

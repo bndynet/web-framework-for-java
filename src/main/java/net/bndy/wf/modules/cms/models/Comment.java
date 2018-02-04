@@ -5,6 +5,8 @@
 package net.bndy.wf.modules.cms.models;
 
 import javax.persistence.Entity;
+import javax.persistence.EnumType;
+import javax.persistence.Enumerated;
 import javax.persistence.Table;
 
 import net.bndy.wf.lib._BaseEntity;
@@ -16,17 +18,15 @@ public class Comment extends _BaseEntity {
 	private static final long serialVersionUID = 1L;
 
 	private long boId;
-	private long boTypeId;
+
+	@Enumerated(value = EnumType.ORDINAL)
+	private BoType boType;
 	private String content;
 	private String title;
 	private long userId;
 	public long getBoId() {
 		return boId;
 	}
-	public long getBoTypeId() {
-		return boTypeId;
-	}
-
 	public String getContent() {
 		return content;
 	}
@@ -39,9 +39,6 @@ public class Comment extends _BaseEntity {
 	public void setBoId(long boId) {
 		this.boId = boId;
 	}
-	public void setBoTypeId(long boTypeId) {
-		this.boTypeId = boTypeId;
-	}
 	public void setContent(String content) {
 		this.content = content;
 	}
@@ -50,5 +47,11 @@ public class Comment extends _BaseEntity {
 	}
 	public void setUserId(long userId) {
 		this.userId = userId;
+	}
+	public BoType getBoType() {
+		return boType;
+	}
+	public void setBoType(BoType boType) {
+		this.boType = boType;
 	}
 }

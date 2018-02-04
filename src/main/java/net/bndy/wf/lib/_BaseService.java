@@ -4,6 +4,7 @@
  ******************************************************************************/
 package net.bndy.wf.lib;
 
+import java.lang.reflect.ParameterizedType;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -16,12 +17,19 @@ import net.bndy.wf.service.MailService;
 
 public class _BaseService<T> {
 
+	protected Class<T> domainClass;
+
 	@Autowired
 	protected ApplicationConfig applicationConfig;
 	@Autowired
 	protected MailService mailService;
 	@Autowired
 	JpaRepository<T, Long> repo;
+
+	public _BaseService() {
+		this.domainClass = (Class<T>) ((ParameterizedType) getClass()
+			.getGenericSuperclass()).getActualTypeArguments()[0];
+	}
 	
 	public List<T> getAll() {
 		return repo.findAll();

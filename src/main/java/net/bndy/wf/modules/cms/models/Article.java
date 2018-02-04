@@ -20,7 +20,7 @@ public class Article extends _BaseEntity {
 	private static final long serialVersionUID = 1L;
 	
 	private long userId;
-	private long boTypeId;
+	private long channelId;
 	private String title;
 	
 	@Column(columnDefinition="TEXT")
@@ -53,10 +53,10 @@ public class Article extends _BaseEntity {
 	public void setContent(String content) {
 		this.content = content;
 	}
-	public long getBoTypeId() {
-		return boTypeId;
+	public long getChannelId() {
+		return channelId;
 	}
-	public void setBoTypeId(long boTypeId) {
-		this.boTypeId = boTypeId;
+	public void setChannelId(long channelId) {
+		this.channelId = channelId;
 	}
 }

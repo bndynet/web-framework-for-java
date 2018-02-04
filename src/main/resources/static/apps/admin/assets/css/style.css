@@ -1,3 +1,7 @@
+html, body {
+  font-size: 13px;
+}
+
 /* skins */
 .skin-blue .modal-header,
 .skin-blue .modal-header .close,
@@ -479,5 +483,37 @@ md-backdrop.md-dialog-backdrop {
 .no-data-box {
   padding: 5rem;
   color: #666666;
+}
+
+.indent1 > div:first-child {
+  margin-left: 2rem;
+}
+
+.indent2 > div:first-child {
+  margin-left: 4rem;
+}
+
+.indent3 > div:first-child {
+  margin-left: 6rem;
+}
+
+.indent4 > div:first-child {
+  margin-left: 8rem;
+}
+
+.indent5 > div:first-child {
+  margin-left: 10rem;
+}
+
+.indent6 > div:first-child {
+  margin-left: 12rem;
+}
+
+.indent7 > div:first-child {
+  margin-left: 14rem;
+}
+
+.indent8 > div:first-child {
+  margin-left: 16rem;
 }
 /*# sourceMappingURL=style.css.map */

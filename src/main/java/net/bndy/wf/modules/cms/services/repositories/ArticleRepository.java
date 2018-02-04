@@ -14,28 +14,36 @@ import org.springframework.transaction.annotation.Transactional;
 
 import net.bndy.wf.modules.cms.models.*;
 
-public interface ArticleRepository extends JpaRepository<Article, Long> {
-	
-	@Query(value="SELECT t FROM #{#entityName} t "
-			+ "WHERE t.boTypeId = :boTypeId "
-			+ "ORDER BY t.lastUpdate DESC")
-	Page<Article> findByBoTypeId(@Param(value="boTypeId") long boTypeId, Pageable pageable);
-	
-	@Query(value="SELECT t FROM #{#entityName} t "
-			+ "WHERE t.title LIKE %:keywords% OR t.content LIKE %:keywords% "
-			+ "ORDER BY t.lastUpdate DESC")
-	Page<Article> findByKeywords(@Param(value="keywords") String keywords, Pageable pageable);
-	
-	@Query(value="SELECT t FROM #{#entityName} t "
-			+ "WHERE t.boTypeId = :boTypeId AND (t.title LIKE %:keywords% OR t.content LIKE %:keywords%) "
-			+ "ORDER BY t.lastUpdate DESC")
-	Page<Article> findByBoAndKeywords(
-			@Param(value="boTypeId") long boTypeId, 
-			@Param(value="keywords") String keywords, 
-			Pageable pageable);
+import java.util.List;
 
-	@Modifying
-	@Transactional
-	@Query(value="DELETE FROM #{#entityName} t WHERE t.boTypeId = :boTypeId")
-	void deleteByBoTypeId(@Param(value="boTypeId") long boTypeId);
+public interface ArticleRepository extends JpaRepository<Article, Long> {
+
+    List<Article> findByChannelId(long channelId);
+
+    @Query(value = "SELECT t FROM #{#entityName} t "
+        + "WHERE t.channelId= :channelId "
+        + "ORDER BY t.lastUpdate DESC")
+    Page<Article> findByChannelId(@Param(value = "channelId") long channelId, Pageable pageable);
+
+    @Query(value = "SELECT t FROM #{#entityName} t "
+        + "WHERE t.title LIKE %:keywords% OR t.content LIKE %:keywords% "
+        + "ORDER BY t.lastUpdate DESC")
+    Page<Article> findByKeywords(@Param(value = "keywords") String keywords, Pageable pageable);
+
+    @Query(value = "SELECT t FROM #{#entityName} t "
+        + "WHERE t.channelId = :channelId AND (t.title LIKE %:keywords% OR t.content LIKE %:keywords%) "
+        + "ORDER BY t.lastUpdate DESC")
+    Page<Article> findByChannelIdAndKeywords(
+        @Param(value = "channelId") long channelId,
+        @Param(value = "keywords") String keywords,
+        Pageable pageable);
+
+    @Modifying
+    @Transactional
+    void deleteByChannelId(long channelId);
+
+    @Modifying
+    @Transactional
+    @Query(value = "UPDATE Article t SET t.channelId = ?2 WHERE t.channelId = ?1")
+    void transferChannel(long sourceChannelId, long targetChannelId);
 }

@@ -9,6 +9,7 @@ import java.io.IOException;
 import javax.servlet.http.HttpServletRequest;
 
 import net.bndy.wf.exceptions.ResourceIntegrityException;
+import net.bndy.wf.modules.cms.models.BoType;
 import net.bndy.wf.modules.core.models.File;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -30,19 +31,6 @@ public class PageController extends _BaseApi<Page> {
 	PageService pageService;
 
 	@Override
-	public void delete(long id) throws ResourceIntegrityException {
-		try {
-			Page p = this.pageService.get(id);
-			if (p != null) {
-				this.pageService.deleteAllAttachments(p.getId(), p.getBoTypeId());
-			}
-			super.delete(id);
-		} catch (Exception ex) {
-			throw new ResourceIntegrityException("admin.modules.cms.page.errForDelete", ex);
-		}
-	}
-
-	@Override
 	public File upload(MultipartFile file, HttpServletRequest request) throws IllegalStateException, IOException {
 		File fi = super.upload(file, request);
 
@@ -52,7 +40,6 @@ public class PageController extends _BaseApi<Page> {
 		attachment.setFileName(fi.getName());
 		attachment.setFileType(fi.getType());
 		attachment.setBoId(Long.parseLong(request.getParameter("boId")));
-		attachment.setBoTypeId(Long.parseLong(request.getParameter("boTypeId")));
 		this.pageService.addAttachment(attachment);
 
 		return fi;

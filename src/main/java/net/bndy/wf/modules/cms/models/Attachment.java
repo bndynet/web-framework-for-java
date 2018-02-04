@@ -19,7 +19,8 @@ public class Attachment extends _BaseEntity {
 	private static final long serialVersionUID = 1L;
 
 	private long boId;
-	private long boTypeId;
+	@Enumerated(value = EnumType.ORDINAL)
+	private BoType boType;
 	private String path;
 	private String fileName;
 	private String extensionName;
@@ -35,12 +36,14 @@ public class Attachment extends _BaseEntity {
 		this.boId = boId;
 	}
 
-	public long getBoTypeId() {
-		return boTypeId;
+	public BoType getBoType() {
+		return boType;
 	}
-	public void setBoTypeId(long boTypeId) {
-		this.boTypeId = boTypeId;
+
+	public void setBoType(BoType boType) {
+		this.boType = boType;
 	}
+
 	public String getPath() {
 		return path;
 	}

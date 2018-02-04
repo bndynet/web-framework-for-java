@@ -14,37 +14,46 @@ import org.springframework.stereotype.Service;
 import net.bndy.wf.modules.cms.models.*;
 import net.bndy.wf.modules.cms.services.repositories.*;
 
+import java.util.List;
+
 @Service
 @Transactional
 public class ArticleService extends _BaseService<Article> {
 
-	@Autowired
-	ArticleRepository articleRepo;
-	@Autowired
-	CommentRepository commentRepo;
-	@Autowired
-	AttachmentRepository attachmentRepo;
-	
-	@Override
-	public Article get(long article){
-		Article result = this.articleRepo.findOne(article);
-		result.setAttachments(this.attachmentRepo.findByBo(result.getBoTypeId(), result.getId()));
-		return result;	
-	}
+    @Autowired
+    ArticleRepository articleRepository;
+    @Autowired
+    AttachmentRepository attachmentRepository;
 
-	public Page<Article> findByBoTypeId(long boTypeId, Pageable pageable) {
-		return this.articleRepo.findByBoTypeId(boTypeId, pageable);
-	}
+    @Override
+    public Article get(long article) {
+        Article result = this.articleRepository.findOne(article);
+        result.setAttachments(this.attachmentRepository.findByBo(BoType.Article.getValue(), result.getId()));
+        return result;
+    }
 
-	public Page<Article> findByKeywords(String keywords, Pageable pageable) {
-		return this.articleRepo.findByKeywords(keywords, pageable);
-	}
+    public Page<Article> findByChannelId(long channelId, Pageable pageable) {
+        return this.articleRepository.findByChannelId(channelId, pageable);
+    }
 
-	public Page<Article> findByBoAndKeywords(long boTypeId, String keywords, Pageable pageable) {
-		return this.articleRepo.findByBoAndKeywords(boTypeId, keywords, pageable);
-	}
+    public Page<Article> findByKeywords(String keywords, Pageable pageable) {
+        return this.articleRepository.findByKeywords(keywords, pageable);
+    }
 
-	public void deleteByBoTypeId(long boTypeId) {
-		this.articleRepo.deleteByBoTypeId(boTypeId);
-	}
+    public Page<Article> findByChannelIdAndKeywords(long channelId, String keywords, Pageable pageable) {
+        return this.articleRepository.findByChannelIdAndKeywords(channelId, keywords, pageable);
+    }
+
+    public void deleteByChannelId(long channelId) {
+        List<Article> articles = this.getAll();
+        for (Article article : articles) {
+            this.deleteAttachments(article.getId());
+            this.deleteComments(article.getId());
+        }
+        this.articleRepository.deleteByChannelId(channelId);
+    }
+
+    public void transfer(long sourceChannelId, long targetChannelId) {
+        this.articleRepository.transferChannel(sourceChannelId, targetChannelId);
+    }
 }
