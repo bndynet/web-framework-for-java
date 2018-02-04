@@ -28,6 +28,6 @@ public interface AttachmentRepository extends JpaRepository<Attachment, Long> {
 
 	@Modifying
 	@Transactional
-	@Query(value = "UPDATE Attachment t SET t.boId = ?3 WHERE t.boId = ?2 AND t.boType = ?1")
+	@Query(value = "UPDATE cms_attachment SET bo_id = ?3 WHERE bo_id = ?2 AND bo_type = ?1", nativeQuery = true)
 	void transfer(int boType, long sourceBoId, long targetBoId);
 }

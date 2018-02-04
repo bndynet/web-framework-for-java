@@ -508,8 +508,12 @@ md-backdrop.md-dialog-backdrop {
 }
 
 .no-data-box {
-  padding: 5rem;
+  padding: 2rem;
   color: #666666;
+
+  h4 {
+    line-height: 2rem;
+  }
 }
 
 @for $i from 1 through 8 {

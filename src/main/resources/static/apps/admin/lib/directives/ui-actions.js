@@ -10,6 +10,7 @@ angular.module('app')
                     onEdit: '&?',
                     onRemove: '&?',
                     onToggleVisible: '&?',
+                    onExchange: '&?',
                 },
                 templateUrl: '/static/apps/admin/lib/directives/ui-actions.html',
             };

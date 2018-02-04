@@ -18,6 +18,8 @@ import java.util.List;
 
 public interface ArticleRepository extends JpaRepository<Article, Long> {
 
+    int countByChannelId(long channelId);
+
     List<Article> findByChannelId(long channelId);
 
     @Query(value = "SELECT t FROM #{#entityName} t "

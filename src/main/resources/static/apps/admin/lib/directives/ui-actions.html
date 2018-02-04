@@ -2,6 +2,9 @@
     <a ng-click="onToggleVisible({__model: model})" ng-if="onToggleVisible">
         <i class="fa {{model.visible?'fa-eye':'fa-eye-slash'}}"></i>
     </a>
+    <a ng-click="onExchange({__model: model})" ng-if="onExchange">
+        <i class="fa fa-exchange"></i>
+    </a>
     <a ng-click="onAdd({__model: model})" ng-if="onAdd">
         <i class="glyphicon glyphicon-plus text-primary"></i>
     </a>

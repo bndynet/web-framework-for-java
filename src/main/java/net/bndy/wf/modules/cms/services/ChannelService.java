@@ -11,6 +11,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import javax.validation.constraints.NotNull;
+import java.util.ArrayList;
 import java.util.List;
 
 @Service
@@ -51,6 +52,21 @@ public class ChannelService extends _BaseService<Channel> {
         }
 
         throw new NoResourceFoundException();
+    }
+
+    public boolean hasContent(long channelId) {
+        return this.pageService.countByChannelId(channelId) > 0
+            || this.articleService.countByChannelId(channelId) > 0
+            ;
+    }
+
+    public List<Channel> getSameTypeChannels(long sourceChannelId) {
+        List<Channel> result = new ArrayList<>();
+        Channel channel = this.get(sourceChannelId);
+        if (channel != null && channel.getBoType() != null) {
+            result = this.channelRepository.findByBoType(channel.getBoType().getValue());
+        }
+        return result;
     }
 
     public void transferChannel(long sourceId, long targetId) {

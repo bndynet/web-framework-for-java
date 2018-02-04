@@ -19,13 +19,15 @@
         <div class="tree-item with-border hover {{item.path.replaceAll('/', '_')}}" ng-class="{'disabled': !item.visible}">
             <div class="pull-left">
                 <span ng-bind="item.name"></span>
-            </div>
-            <div class="pull-left" style="position:relative; margin-left: 360px;">
-                <span ng-if="item.boType" ng-bind="'admin.modules.cms.boTypes.' + item.boType.name.toLowerCase() | translate">></span>
+                <small ng-if="item.boType">
+                    &nbsp;&nbsp;&nbsp;&nbsp;
+                    ( <span ng-bind="'admin.modules.cms.boTypes.' + item.boType.name.toLowerCase() | translate"></span> )
+                </small>
             </div>
             <div class="pull-right text-right">
                 <ui-actions ng-model="item"
                             on-add="add(__model)"
+                            on-exchange="exchange(__model)"
                             on-edit="edit(__model)"
                             on-remove="remove(__model)"
                             on-toggle-visible="toggleVisible(__model)"></ui-actions>
@@ -37,7 +39,43 @@
              ng-repeat="item in channels | filter: {path: item.path + item.id + '/'}: true">
         </div>
     </script>
-    <ui-dialog title="{{formModel.id ? 'admin.modules.cms.channels.editChannel' : 'admin.modules.cms.channels.addChannel'}}">
+
+    <ui-dialog name="dialogExchange"
+               title="{{exchangeTitle}}">
+        <form name="formExchange">
+            <md-input-container class="md-block" ng-if="(sameTypeChannels | filter:{ id: '!' + formModel.id}).length > 0">
+                <label>
+                    <span ng-bind="'admin.modules.cms.channels.fieldTransferTo'|translate"></span>
+                </label>
+                <md-select ng-model="formModel.transferTo"
+                           ng-model-options="{trackBy: '$value.id'}">
+                    <md-option ng-repeat="item in sameTypeChannels | filter:{ id: '!' + formModel.id}" ng-value="item">
+                        <span ng-bind="item.name"></span>
+                    </md-option>
+                </md-select>
+            </md-input-container>
+            <ui-no-data message="admin.modules.cms.channels.msgNoTargetForTransfer"
+                        ng-if="(sameTypeChannels | filter:{ id: '!' + formModel.id}).length === 0"></ui-no-data>
+        </form>
+        <ui-dialog-footer>
+            <div class="pull-right">
+                <button type="button" class="btn btn-danger"
+                        data-dismiss="modal"
+                        ng-bind="'common.directDelete'|translate"
+                        ng-click="forceRemove()">
+                </button>
+                <button type="button" class="btn btn-primary"
+                        ng-disabled="!formModel.transferTo"
+                        ng-bind="'common.transfer'|translate"
+                        ng-if="(sameTypeChannels | filter:{ id: '!' + formModel.id}).length > 0"
+                        ng-click="exchangeSave()">
+                </button>
+            </div>
+        </ui-dialog-footer>
+    </ui-dialog>
+
+    <ui-dialog name="dialogEdit"
+               title="{{formModel.id ? 'admin.modules.cms.channels.editChannel' : 'admin.modules.cms.channels.addChannel'}}">
         <form name="form">
             <md-input-container class="md-block">
                 <label>

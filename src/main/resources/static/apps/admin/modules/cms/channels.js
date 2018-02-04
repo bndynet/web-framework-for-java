@@ -1,8 +1,10 @@
 angular.module('app')
     .controller('ChannelsCtrl',
-        [ '$scope', 'appService', 'appDialog', '$http', '$timeout',
-        function($scope, appService, appDialog, $http, $timeout) {
+        [ '$scope', 'appService', 'appDialog', '$http', '$timeout', '$filter',
+        function($scope, appService, appDialog, $http, $timeout, $filter) {
             $scope.boTypes = [];
+            $scope.sameTypeChannels = [];
+            $scope.exchangeTitle = null;
 
             function initData() {
                 appDialog.loading();
@@ -15,7 +17,8 @@ angular.module('app')
                 });
             }
 
-            var dialogForm = appDialog.getModal();
+            var dialogForm = appDialog.getModal('dialogEdit');
+            var dialogExchange = appDialog.getModal('dialogExchange');
             $scope.add = function(item) {
                 angular.resetForm($scope.form);
                 if (item) {
@@ -30,6 +33,25 @@ angular.module('app')
                     };
                 }
                 dialogForm.show();
+            };
+            $scope.getExchangeTitle = function() {
+                return
+            };
+            $scope.exchange = function(item) {
+                $scope.formModel = angular.copy(item);
+                $scope.exchangeTitle = $filter('translate')('admin.modules.cms.channels.exchangeTitle', [$scope.formModel.name]);
+                appService.ajaxGet('/api/cms/channels/sameTypeChannels?id=' + item.id).then(function(d) {
+                    $scope.sameTypeChannels = d;
+                });
+                dialogExchange.show();
+            };
+            $scope.exchangeSave = function() {
+                if ($scope.formModel && $scope.formModel.transferTo) {
+                    appService.ajaxPut('/api/cms/channels/' + $scope.formModel.id + '/transfer?to=' + $scope.formModel.transferTo.id).then(function() {
+                        dialogExchange.close();
+                        appDialog.success();
+                    });
+                }
             };
             $scope.edit = function(item) {
                 angular.resetForm($scope.form);
@@ -49,13 +71,20 @@ angular.module('app')
                     appDialog.success();
                 });
             };
-            $scope.remove = function(item) {
+            $scope.remove = function(item, force) {
                 appDialog.confirmDeletion(function() {
-                    appService.ajaxDelete('/api/cms/channels/' + item.id).then(function(d) {
+                    url = '/api/cms/channels/' + item.id;
+                    if (force) {
+                        url = '/api/cms/channels/' + item.id + '/forceDelete';
+                    }
+                    appService.ajaxDelete(url).then(function(d) {
                         initData();
                         appDialog.success();
                     });
                 });
+            };
+            $scope.forceRemove = function() {
+                $scope.remove($scope.formModel, true);
             };
 
 

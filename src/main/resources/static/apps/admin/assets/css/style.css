@@ -481,8 +481,12 @@ md-backdrop.md-dialog-backdrop {
 }
 
 .no-data-box {
-  padding: 5rem;
+  padding: 2rem;
   color: #666666;
+}
+
+.no-data-box h4 {
+  line-height: 2rem;
 }
 
 .indent1 > div:first-child {

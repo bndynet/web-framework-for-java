@@ -32,6 +32,10 @@ public class ArticleService extends _BaseService<Article> {
         return result;
     }
 
+    public int countByChannelId(long channelId) {
+        return this.articleRepository.countByChannelId(channelId);
+    }
+
     public Page<Article> findByChannelId(long channelId, Pageable pageable) {
         return this.articleRepository.findByChannelId(channelId, pageable);
     }

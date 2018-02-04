@@ -27,6 +27,10 @@ public class PageService extends _BaseService<Page> {
         return result;
     }
 
+    public int countByChannelId(long channelId) {
+        return this.pageRepository.countByChannelId(channelId);
+    }
+
     public void deleteByChannelId(long channelId) {
         Page page = this.pageRepository.findByChannelId(channelId);
         if (page != null) {
@@ -45,10 +49,10 @@ public class PageService extends _BaseService<Page> {
     }
 
     public void transfer(long sourceChannelId, long targetChannelId) {
-        Page sourcePage = this.pageRepository.findOne(sourceChannelId);
-        Page targetPage = this.pageRepository.findOne(targetChannelId);
+        Page sourcePage = this.getByChannelId(sourceChannelId);
+        Page targetPage = this.getByChannelId(targetChannelId);
         if (sourcePage != null && targetPage != null) {
-            targetPage.setContent(sourcePage.getContent());
+            targetPage.setContent(targetPage.getContent() + sourcePage.getContent());
 
             this.transferAttachment(sourcePage.getId(), targetPage.getId());
             this.deleteAttachments(sourcePage.getId());
@@ -56,6 +60,7 @@ public class PageService extends _BaseService<Page> {
             this.transferComments(sourcePage.getId(), targetPage.getId());
             this.deleteComments(sourcePage.getId());
 
+            this.pageRepository.saveAndFlush(targetPage);
             this.pageRepository.transferChannel(sourcePage.getId(), targetPage.getId());
             this.pageRepository.delete(sourcePage.getId());
         }

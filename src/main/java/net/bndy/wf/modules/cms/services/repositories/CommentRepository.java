@@ -31,6 +31,6 @@ public interface CommentRepository extends JpaRepository<Comment, Long> {
 
 	@Modifying
 	@Transactional
-	@Query(value = "UPDATE Comment t SET t.boId = ?3 WHERE t.boId = ?2 AND t.boType = ?1")
+	@Query(value = "UPDATE cms_comment SET bo_id = ?3 WHERE bo_id = ?2 AND bo_type = ?1", nativeQuery = true)
 	void transfer(int boType, long sourceBoId, long targetBoId);
 }

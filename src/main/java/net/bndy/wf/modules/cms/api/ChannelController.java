@@ -32,10 +32,20 @@ public class ChannelController extends _BaseApi<Channel> {
     public void delete(@PathVariable(name = "id") long id) throws NoResourceFoundException, ResourceIntegrityException {
         int childrenCount = this.channelService.countChildren(id);
         if (childrenCount > 0) {
-            throw new ResourceIntegrityException("admin.modules.cms.channels.errForDelete");
+            throw new ResourceIntegrityException("admin.modules.cms.channels.errForDeleteAboutHasChildren");
+        }
+
+        if (this.channelService.hasContent(id)) {
+            throw new ResourceIntegrityException("admin.modules.cms.channels.errForDeleteAboutHasContent");
         }
 
         super.delete(id);
+    }
+
+    @ApiOperation(value = "Force to remove")
+    @RequestMapping(value = "/{id:\\d+}/forceDelete", method = RequestMethod.DELETE)
+    public void forceDelete(@PathVariable(name = "id") long id) {
+        this.channelService.delete(id);
     }
 
     @ApiOperation(value = "Gets all channels")
@@ -49,5 +59,17 @@ public class ChannelController extends _BaseApi<Channel> {
     @RequestMapping(value = "/{id:\\d+}/toggleVisible", method = RequestMethod.PUT)
     public void toggleVisible(@PathVariable(name = "id") long id) {
         this.channelService.toggleVisible(id);
+    }
+
+    @ApiOperation(value = "Get channels for transferring")
+    @RequestMapping(value = "/sameTypeChannels", method = RequestMethod.GET)
+    public List<Channel> getSameTypeChannels(@RequestParam(name = "id") long id) {
+        return this.channelService.getSameTypeChannels(id);
+    }
+
+    @ApiOperation(value = "Transfer all content to another channel")
+    @RequestMapping(value = "/{id:\\d+}/transfer", method = RequestMethod.PUT)
+    public void transfer(@PathVariable(name = "id") long sourceId, @RequestParam(name = "to") long to) {
+        this.channelService.transferChannel(sourceId, to);
     }
 }

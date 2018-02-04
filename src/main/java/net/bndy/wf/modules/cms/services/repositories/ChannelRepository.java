@@ -11,6 +11,9 @@ import java.util.List;
 
 public interface ChannelRepository extends JpaRepository<Channel, Long> {
 
+    @Query(value = "SELECT * FROM cms_channel WHERE bo_type = ?1", nativeQuery = true)
+    List<Channel> findByBoType(int boType);
+
     @Modifying
     @Transactional
     @Query(value = "UPDATE cms_channel SET is_visible=1 WHERE id IN (:ids)", nativeQuery = true)

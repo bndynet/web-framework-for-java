@@ -7,23 +7,16 @@ import java.util.Map;
 
 @JsonFormat(shape = JsonFormat.Shape.OBJECT)
 public enum BoType {
-    Page(10),
-    Article(20),
-    File(30);
-
-    private int value;
-    private String name;
+    Page,
+    Article,
+    File;
 
     public int getValue() {
-        return value;
+        return this.ordinal();
     }
 
     public String getName() {
         return this.name();
-    }
-
-    BoType(int value) {
-        this.value = value;
     }
 
     @JsonCreator
