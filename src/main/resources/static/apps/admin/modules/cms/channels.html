@@ -43,7 +43,7 @@
     <ui-dialog name="dialogExchange"
                title="{{exchangeTitle}}">
         <form name="formExchange">
-            <md-input-container class="md-block" ng-if="(sameTypeChannels | filter:{ id: '!' + formModel.id}).length > 0">
+            <md-input-container class="md-block" ng-if="formModel.hasContent && (sameTypeChannels | filter:{ id: '!' + formModel.id}).length > 0">
                 <label>
                     <span ng-bind="'admin.modules.cms.channels.fieldTransferTo'|translate"></span>
                 </label>
@@ -55,7 +55,9 @@
                 </md-select>
             </md-input-container>
             <ui-no-data message="admin.modules.cms.channels.msgNoTargetForTransfer"
-                        ng-if="(sameTypeChannels | filter:{ id: '!' + formModel.id}).length === 0"></ui-no-data>
+                        ng-if="formModel.hasContent && (sameTypeChannels | filter:{ id: '!' + formModel.id}).length === 0"></ui-no-data>
+            <ui-no-data message="admin.modules.cms.channels.msgNoContentForTransfer"
+                        ng-if="!formModel.hasContent"></ui-no-data>
         </form>
         <ui-dialog-footer>
             <div class="pull-right">
@@ -67,7 +69,7 @@
                 <button type="button" class="btn btn-primary"
                         ng-disabled="!formModel.transferTo"
                         ng-bind="'common.transfer'|translate"
-                        ng-if="(sameTypeChannels | filter:{ id: '!' + formModel.id}).length > 0"
+                        ng-if="formModel.hasContent && (sameTypeChannels | filter:{ id: '!' + formModel.id}).length > 0"
                         ng-click="exchangeSave()">
                 </button>
             </div>
@@ -77,6 +79,13 @@
     <ui-dialog name="dialogEdit"
                title="{{formModel.id ? 'admin.modules.cms.channels.editChannel' : 'admin.modules.cms.channels.addChannel'}}">
         <form name="form">
+            <div class="callout callout-info" ng-if="formModel.hasContent">
+                <h4>
+                    <i class="icon fa fa-fw fa-info-circle"></i>
+                    <span ng-bind="'common.tips'|translate"></span>
+                </h4>
+                <p ng-bind="'admin.modules.cms.channels.msgHasContentForChangeType'|translate"></p>
+            </div>
             <md-input-container class="md-block">
                 <label>
                     <span ng-bind="'admin.modules.cms.channels.fieldName'|translate"></span>
@@ -91,7 +100,10 @@
                 <label>
                     <span ng-bind="'admin.modules.cms.channels.fieldBoType'|translate"></span>
                 </label>
-                <md-select ng-model="formModel.boType" ng-model-options="{trackBy: '$value.value'}">
+                <md-select ng-model="formModel.boType"
+                           ng-disabled="formModel.hasContent"
+                           ng-model-options="{trackBy: '$value.value'}">
+                    <md-option><em ng-bind="'common.none'|translate"></em></md-option>
                     <md-option ng-repeat="item in boTypes" ng-value="item">
                         <span ng-bind="'admin.modules.cms.boTypes.' + item.name.toLowerCase() | translate"></span>
                     </md-option>

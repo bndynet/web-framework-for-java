@@ -95,17 +95,19 @@ public class ChannelService extends _BaseService<Channel> {
         entity = super.save(entity);
         syncVisible(entity);
 
-        switch (entity.getBoType()) {
-            case Page:
-                Page p = this.pageService.getByChannelId(entity.getId());
-                if (p == null) {
-                    p = new Page();
-                    p.setContent(entity.getName());
-                }
-                p.setChannelId(entity.getId());
-                p.setTitle(entity.getName());
-                this.pageService.save(p);
-                break;
+        if (entity.getBoType() != null) {
+            switch (entity.getBoType()) {
+                case Page:
+                    Page p = this.pageService.getByChannelId(entity.getId());
+                    if (p == null) {
+                        p = new Page();
+                        p.setContent(entity.getName());
+                    }
+                    p.setChannelId(entity.getId());
+                    p.setTitle(entity.getName());
+                    this.pageService.save(p);
+                    break;
+            }
         }
 
         return entity;

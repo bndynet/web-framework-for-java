@@ -52,7 +52,11 @@ public class ChannelController extends _BaseApi<Channel> {
     @RequestMapping(value = "/query", method = RequestMethod.GET)
     public List<Channel> getWithQuery(
         @RequestParam(name = "all", required = false) boolean all) {
-        return super.get();
+        List<Channel> result = super.get();
+        for (Channel channel : result) {
+            channel.setHasContent(this.channelService.hasContent(channel.getId()));
+        }
+        return result;
     }
 
     @ApiOperation(value = "Toogles channel visible")

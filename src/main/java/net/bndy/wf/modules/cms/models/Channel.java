@@ -2,10 +2,7 @@ package net.bndy.wf.modules.cms.models;
 
 import net.bndy.wf.lib._BaseEntity;
 
-import javax.persistence.Entity;
-import javax.persistence.EnumType;
-import javax.persistence.Enumerated;
-import javax.persistence.Table;
+import javax.persistence.*;
 
 @Entity
 @Table(name="cms_channel")
@@ -16,6 +13,8 @@ public class Channel extends _BaseEntity {
     @Enumerated(EnumType.ORDINAL)
     private BoType boType;
     private boolean isVisible;
+    @Transient
+    private boolean hasContent;
 
     public String getName() {
         return name;
@@ -47,6 +46,14 @@ public class Channel extends _BaseEntity {
 
     public void setVisible(boolean visible) {
         isVisible = visible;
+    }
+
+    public boolean isHasContent() {
+        return hasContent;
+    }
+
+    public void setHasContent(boolean hasContent) {
+        this.hasContent = hasContent;
     }
 
 }

@@ -356,6 +356,12 @@ md-toolbar,
   margin-bottom: 0;
 }
 
+.modal-dialog .modal-content .modal-body > form > .callout,
+.modal-dialog .modal-content .modal-body > form > .alert {
+  margin-top: -15px;
+  margin-bottom: 30px;
+}
+
 .modal-dialog .modal-content .modal-footer .pull-right {
   margin-left: 10px;
 }
