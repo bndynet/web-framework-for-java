@@ -51,16 +51,19 @@ public class PageService extends _BaseService<Page> {
     public void transfer(long sourceChannelId, long targetChannelId) {
         Page sourcePage = this.getByChannelId(sourceChannelId);
         Page targetPage = this.getByChannelId(targetChannelId);
-        if (sourcePage != null && targetPage != null) {
-            targetPage.setContent(targetPage.getContent() + sourcePage.getContent());
+        if (sourcePage != null) {
+            if (targetPage == null) {
+                targetPage = new Page();
+                targetPage.setChannelId(targetChannelId);
+                targetPage.setContent(sourcePage.getContent());
+            } else {
+                targetPage.setContent(targetPage.getContent() + sourcePage.getContent());
+            }
+            targetPage = this.pageRepository.saveAndFlush(targetPage);
 
             this.transferAttachment(sourcePage.getId(), targetPage.getId());
-            this.deleteAttachments(sourcePage.getId());
-
             this.transferComments(sourcePage.getId(), targetPage.getId());
-            this.deleteComments(sourcePage.getId());
 
-            this.pageRepository.saveAndFlush(targetPage);
             this.pageRepository.transferChannel(sourcePage.getId(), targetPage.getId());
             this.pageRepository.delete(sourcePage.getId());
         }

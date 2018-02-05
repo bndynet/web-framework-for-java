@@ -48,6 +48,7 @@ angular.module('app')
             $scope.exchangeSave = function() {
                 if ($scope.formModel && $scope.formModel.transferTo) {
                     appService.ajaxPut('/api/cms/channels/' + $scope.formModel.id + '/transfer?to=' + $scope.formModel.transferTo.id).then(function() {
+                        initData();
                         dialogExchange.close();
                         appDialog.success();
                     });
