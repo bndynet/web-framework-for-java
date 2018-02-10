@@ -87,6 +87,7 @@ app.config(['$provide', '$qProvider', '$httpProvider', '$stateProvider', '$trans
 		$stateProvider.state(name, {
 			url: '/' + path,
 			templateUrl: '/static/apps/admin/modules/' + path + '.html',
+			params: { obj: null },
 		});
 	}
 	var pages = appModules || [];   // appModules is from backend
@@ -318,8 +319,8 @@ app.factory('appDialog', [
 	}
 ]);
 
-app.controller('LayoutCtrl', ['$http', '$scope', 'appDialog',
-    function($http, $scope, appDialog) {
+app.controller('LayoutCtrl', ['$http', '$scope', '$state', 'appDialog',
+    function($http, $scope, $state, appDialog) {
 
         $scope.$on('loading', function(event, showLoading) {
             $scope.showLoading = showLoading;
@@ -367,6 +368,11 @@ app.controller('LayoutCtrl', ['$http', '$scope', 'appDialog',
         $scope.messageMoreClick = function() {
             // TODO
             appDialog.alert('TODO', 'Link to more messages.');
+        };
+        $scope.goTo = function(menu) {
+            // {id: 1}  -> ({id: 1}) -> {"id": 1} -> json object
+            var args = JSON.parse(JSON.stringify(eval('(' + menu.linkParams + ')')));
+            $state.go(menu.link, {obj: args});
         };
 
         // lock screen

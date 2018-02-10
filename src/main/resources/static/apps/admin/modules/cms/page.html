@@ -1,0 +1,13 @@
+<div ng-controller="PageCtrl">
+    <ui-page-header title="viewModel.title"
+                    breadcrumbs="[{'text': viewModel.title}]"></ui-page-header>
+
+    <ui-page-content>
+        <ui-page-content-header-right>
+            <button type="button" class="btn btn-sm btn-primary" ng-click="save()"
+                    ng-bind="'common.saveChanges'|translate"></button>
+        </ui-page-content-header-right>
+
+        <ui-html-editor ng-model="viewModel.content"></ui-html-editor>
+    </ui-page-content>
+</div>
