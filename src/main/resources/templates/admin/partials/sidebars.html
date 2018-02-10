@@ -36,9 +36,9 @@
 
         <!-- sidebar menus -->
         <script type="text/ng-template" id="MainMenuItem">
-            <a ui-sref="{{menu.link}}" ui-sref-active="active">
+            <a ui-sref-active="active" ng-click="goTo(menu)">
                 <i class="{{menu.icon}}"></i>
-                <span ng-bind="menu.name|translate"></span>
+                <span ng-bind-html="menu.name|translate"></span>
 
                 <span class="pull-right-container" ng-show="menu.children && menu.children.length > 0">
                     <i class="fa fa-angle-left pull-right"></i>

@@ -1,4 +1,7 @@
 <div class="icon-group">
+    <a ng-click="onView({__model: model})" ng-if="onView">
+        <i class="fa fa-search"></i>
+    </a>
     <a ng-click="onToggleVisible({__model: model})" ng-if="onToggleVisible">
         <i class="fa {{model.visible?'fa-eye':'fa-eye-slash'}}"></i>
     </a>

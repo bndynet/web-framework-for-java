@@ -80,7 +80,8 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
                 "/api/v1/core/users/login",
                 "/sso/login*", "/sso/signup").permitAll()
 //            .antMatchers("/admin/**").hasAnyAuthority([rolename])
-            .anyRequest().authenticated();
+            .antMatchers("/admin/**","/api/**").authenticated()
+            .anyRequest().permitAll();
 
         http
             .formLogin()

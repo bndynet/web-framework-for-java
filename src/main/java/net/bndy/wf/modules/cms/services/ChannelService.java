@@ -12,7 +12,9 @@ import org.springframework.transaction.annotation.Transactional;
 
 import javax.validation.constraints.NotNull;
 import java.util.ArrayList;
+import java.util.Collection;
 import java.util.List;
+import java.util.stream.Collectors;
 
 @Service
 @Transactional
@@ -25,6 +27,14 @@ public class ChannelService extends _BaseService<Channel> {
     @Autowired
     private PageService pageService;
 
+    public List<Channel> getTree(boolean all) {
+        if (all) {
+            return this.convert2Tree(this.channelRepository.findAll());
+        } else {
+            return this.convert2Tree(this.channelRepository.findByIsVisible(true));
+        }
+    }
+
     private void syncVisible(@NotNull Channel channel) {
         if (channel.isVisible()) {
             List<Long> ids = StringHelper.splitToLong(channel.getPath(), "/");
@@ -34,6 +44,10 @@ public class ChannelService extends _BaseService<Channel> {
         } else {
             this.channelRepository.hideAllChildren(channel.getPath() + channel.getId() + "/");
         }
+    }
+
+    public Channel getByName(String name) {
+        return this.channelRepository.findByName(name);
     }
 
     public void toggleVisible(long channelId) {
@@ -84,6 +98,24 @@ public class ChannelService extends _BaseService<Channel> {
                     this.articleService.transfer(source.getId(), target.getId());
                     break;
             }
+        }
+    }
+
+    public List<Channel> convert2Tree(List<Channel> all) {
+        List<Channel> result = all.stream().filter((c) -> "/".equals(c.getPath()))
+            .collect(Collectors.toList());
+
+        for (Channel root : result) {
+            setChildren(root, all);
+        }
+
+        return result;
+    }
+
+    private void setChildren(Channel channel, List<Channel> all) {
+        channel.setChildren(all.stream().filter((c) -> (channel.getPath() + channel.getId() + "/").equals(c.getPath())).collect(Collectors.toList()));
+        for (Channel c : channel.getChildren()) {
+            setChildren(c, all);
         }
     }
 

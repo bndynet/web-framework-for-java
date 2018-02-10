@@ -1,0 +1,17 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/web/thymeleaf/layout"
+      layout:decorator="/common/layout_main">
+<head>
+    <title>About</title>
+</head>
+<body>
+<div layout:fragment="content">
+    <div class="page-header">
+        <h2 th:text="${model.title}"> </h2>
+    </div>
+
+    <div th:utext="${model.content}"></div>
+</div>
+</body>
+</html>

@@ -19,12 +19,19 @@ public class PageService extends _BaseService<Page> {
     @Autowired
     PageRepository pageRepository;
 
+    @Autowired
+    private ChannelService channelService;
+
     public Page getByChannelId(long channelId) {
         Page result = this.pageRepository.findByChannelId(channelId);
         if (result != null) {
             result.setAttachments(this.getAttachments(result.getId()));
         }
         return result;
+    }
+
+    public Page getByTitle(String title) {
+        return this.pageRepository.findByTitle(title);
     }
 
     public int countByChannelId(long channelId) {

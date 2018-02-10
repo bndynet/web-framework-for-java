@@ -15,6 +15,7 @@ import net.bndy.wf.modules.cms.models.*;
 public interface PageRepository extends JpaRepository<Page, Long> {
 
 	int countByChannelId(long channelId);
+	Page findByTitle(String title);
 
 	@Query(value="SELECT t FROM Page t WHERE t.channelId = :channelId")
 	Page findByChannelId(@Param(value="channelId") long channelId);

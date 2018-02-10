@@ -6,16 +6,14 @@ package net.bndy.wf.controller;
 
 import java.io.*;
 import java.nio.file.Paths;
-import java.util.ArrayList;
-import java.util.Date;
-import java.util.List;
-import java.util.Map;
 
+import net.bndy.wf.modules.cms.services.ChannelService;
 import net.bndy.wf.modules.core.services.FileService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.core.io.ClassPathResource;
 import org.springframework.http.MediaType;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.util.FileCopyUtils;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
@@ -27,18 +25,9 @@ public class HomeController extends _BaseController {
 
 	@Autowired
 	private FileService fileService;
-	
-	@RequestMapping("/")
-	public String index(Map<String, Object> map) throws Exception {
-		List<String> lst = new ArrayList<String>();
-		lst.add("/");
-		lst.add("/v2/api-docs");
-		lst.add("/swagger-ui.html");
-		lst.add("/docs/api");
 
-		map.put("time", new Date());
-		map.put("urls", lst);
-		
+	@RequestMapping("/")
+	public String index(Model viewModel) {
 		return "/index";
 	}
 
@@ -57,11 +46,6 @@ public class HomeController extends _BaseController {
         String filePath = Paths.get(new ClassPathResource("/").getFile().getAbsolutePath(), this.applicationConfig.getDefaultUserAvatar()).toAbsolutePath().toString();
         FileCopyUtils.copy(new FileInputStream(filePath), resp.getOutputStream());
         resp.flushBuffer();
-	}
-	
-	@RequestMapping("/about")
-	public String about() {
-		return "/about";
 	}
 	
 	@RequestMapping("/test/upload")

@@ -6,7 +6,8 @@ angular.module('app')
                 replace: true,
                 scope: {
                     model: '=ngModel',
-                    onAdd: '&onAdd',
+                    onView: '&?',
+                    onAdd: '&?',
                     onEdit: '&?',
                     onRemove: '&?',
                     onToggleVisible: '&?',
