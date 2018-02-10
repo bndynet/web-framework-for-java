@@ -1,7 +1,7 @@
 angular.module('app')
     .controller('ChannelsCtrl',
-        [ '$scope', 'appService', 'appDialog', '$http', '$timeout', '$filter',
-        function($scope, appService, appDialog, $http, $timeout, $filter) {
+        /* @ngInject */
+        function($scope, appService, appDialog, $http, $timeout, $filter, $state) {
             $scope.boTypes = [];
             $scope.sameTypeChannels = [];
             $scope.exchangeTitle = null;
@@ -36,6 +36,17 @@ angular.module('app')
             };
             $scope.getExchangeTitle = function() {
                 return
+            };
+            $scope.view = function(item) {
+                switch(item.boType.name) {
+                    case 'Page':
+                        $state.go('cms-page', {obj: {id: item.id}});
+                        break;
+                    case 'Article':
+                        break;
+                    case 'File':
+                        break;
+                }
             };
             $scope.exchange = function(item) {
                 $scope.formModel = angular.copy(item);
@@ -91,4 +102,4 @@ angular.module('app')
 
             initData();
         }
-    ]);
+    );

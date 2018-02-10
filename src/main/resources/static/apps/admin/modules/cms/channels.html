@@ -19,13 +19,19 @@
         <div class="tree-item with-border hover {{item.path.replaceAll('/', '_')}}" ng-class="{'disabled': !item.visible}">
             <div class="pull-left">
                 <span ng-bind="item.name"></span>
-                <small ng-if="item.boType">
+                <small>
                     &nbsp;&nbsp;&nbsp;&nbsp;
-                    ( <span ng-bind="'admin.modules.cms.boTypes.' + item.boType.name.toLowerCase() | translate"></span> )
+                    (
+                    #{{item.id}}
+                    <span ng-if="item.boType">,
+                        <span ng-bind="'admin.modules.cms.boTypes.' + item.boType.name.toLowerCase() | translate"></span>
+                    </span>
+                    )
                 </small>
             </div>
             <div class="pull-right text-right">
                 <ui-actions ng-model="item"
+                            on-view="view(__model)"
                             on-add="add(__model)"
                             on-exchange="exchange(__model)"
                             on-edit="edit(__model)"
@@ -34,9 +40,10 @@
             </div>
             <div class="clearfix"></div>
         </div>
-        <div class="child-box"
-             ng-include="'itemTpl'"
-             ng-repeat="item in channels | filter: {path: item.path + item.id + '/'}: true">
+        <div class="child-box">
+            <div ng-include="'itemTpl'"
+                 ng-repeat="item in channels | filter: {path: item.path + item.id + '/'}: true">
+            </div>
         </div>
     </script>
 
@@ -60,12 +67,14 @@
                         ng-if="!formModel.hasContent"></ui-no-data>
         </form>
         <ui-dialog-footer>
-            <div class="pull-right">
+            <div class="pull-left">
                 <button type="button" class="btn btn-danger"
                         data-dismiss="modal"
-                        ng-bind="'common.directDelete'|translate"
+                        ng-bind="'common.forceDelete'|translate"
                         ng-click="forceRemove()">
                 </button>
+            </div>
+            <div class="pull-right">
                 <button type="button" class="btn btn-primary"
                         ng-disabled="!formModel.transferTo"
                         ng-bind="'common.transfer'|translate"
@@ -79,7 +88,7 @@
     <ui-dialog name="dialogEdit"
                title="{{formModel.id ? 'admin.modules.cms.channels.editChannel' : 'admin.modules.cms.channels.addChannel'}}">
         <form name="form">
-            <div class="callout callout-info" ng-if="formModel.hasContent">
+            <div class="alert alert-info" ng-if="formModel.hasContent">
                 <h4>
                     <i class="icon fa fa-fw fa-info-circle"></i>
                     <span ng-bind="'common.tips'|translate"></span>

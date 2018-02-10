@@ -10,7 +10,7 @@
                              ng-click="toggleSelect(menu)">
                 </md-checkbox>
                 <i class="{{menu.icon}}"></i>
-                <span ng-bind="menu.name|translate"></span>
+                <span ng-bind-html="menu.name|translate"></span>
             </div>
             <div class="pull-right icon-group" ng-cloak ng-if="canEdit">
                 <a ng-click="toggleVisible(menu)">
