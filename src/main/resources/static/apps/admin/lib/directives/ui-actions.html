@@ -1,20 +1,20 @@
 <div class="icon-group">
-    <a ng-click="onView({__model: model})" ng-if="onView">
-        <i class="fa fa-search"></i>
+    <a ng-click="onView({__model: model})" ng-if="onView && showView">
+        <i class="fa fa-search-plus"></i>
     </a>
-    <a ng-click="onToggleVisible({__model: model})" ng-if="onToggleVisible">
+    <a ng-click="onToggleVisible({__model: model})" ng-if="onToggleVisible && showToggleVisible">
         <i class="fa {{model.visible?'fa-eye':'fa-eye-slash'}}"></i>
     </a>
-    <a ng-click="onExchange({__model: model})" ng-if="onExchange">
+    <a ng-click="onExchange({__model: model})" ng-if="onExchange && showExchange">
         <i class="fa fa-exchange"></i>
     </a>
-    <a ng-click="onAdd({__model: model})" ng-if="onAdd">
+    <a ng-click="onAdd({__model: model})" ng-if="onAdd && showAdd">
         <i class="glyphicon glyphicon-plus text-primary"></i>
     </a>
-    <a ng-click="onEdit({__model: model})" ng-if="onEdit">
+    <a ng-click="onEdit({__model: model})" ng-if="onEdit && showEdit">
         <i class="glyphicon glyphicon-edit text-primary"></i>
     </a>
-    <a ng-click="onRemove({__model: model})" ng-if="onRemove">
+    <a ng-click="onRemove({__model: model})" ng-if="onRemove && showRemove">
         <i class="glyphicon glyphicon-trash text-danger"></i>
     </a>
 </div>
