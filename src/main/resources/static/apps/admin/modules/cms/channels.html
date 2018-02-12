@@ -113,7 +113,7 @@
                 <md-select ng-model="formModel.boType"
                            ng-disabled="formModel.hasContent"
                            ng-model-options="{trackBy: '$value.value'}">
-                    <md-option><em ng-bind="'common.none'|translate"></em></md-option>
+                    <md-option ng-value="null"><em ng-bind="'common.none'|translate"></em></md-option>
                     <md-option ng-repeat="item in boTypes" ng-value="item">
                         <span ng-bind="'admin.modules.cms.boTypes.' + item.name.toLowerCase() | translate"></span>
                     </md-option>
