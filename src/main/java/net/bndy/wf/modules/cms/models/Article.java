@@ -19,7 +19,7 @@ public class Article extends _BaseEntity {
 
 	private static final long serialVersionUID = 1L;
 	
-	private long userId;
+	private Long userId;
 	private long channelId;
 	private String title;
 	
@@ -35,10 +35,10 @@ public class Article extends _BaseEntity {
 	public void setAttachments(List<Attachment> attachments) {
 		this.attachments = attachments;
 	}
-	public long getUserId() {
+	public Long getUserId() {
 		return userId;
 	}
-	public void setUserId(long userId) {
+	public void setUserId(Long userId) {
 		this.userId = userId;
 	}
 	public String getTitle() {

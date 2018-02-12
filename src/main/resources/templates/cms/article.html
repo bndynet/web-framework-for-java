@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/web/thymeleaf/layout"
+      layout:decorator="/common/layout_main">
+<head>
+    <title th:text="${model.title}"></title>
+</head>
+<body>
+<div layout:fragment="content">
+    <div class="page-header text-center">
+        <h2>
+            <span th:text="${model.title}"></span>
+            <br />
+            <small>
+                <span th:text="${#dates.format(model.lastUpdate, 'yyyy-MM-dd h:mm a')}"></span>
+            </small>
+        </h2>
+    </div>
+
+    <p th:utext="${model.content}"></p>
+</div>
+</body>
+</html>

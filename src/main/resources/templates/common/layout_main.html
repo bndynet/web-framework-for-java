@@ -56,10 +56,17 @@
 		</div>
 	</header>
 
-	<div class="main">
+	<div class="main" style="min-height:calc(100vh - 180px);">
 		<div class="container">
 			<div layout:fragment="content"></div>
 		</div>
+	</div>
+
+	<div class="container text-center">
+		<br />
+		<hr />
+		<div th:replace="common/footer"></div>
+		<br />
 	</div>
 
 <script type="text/javascript"
