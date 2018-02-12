@@ -1,0 +1,77 @@
+<main class="fluid-block">
+    <section class="description">
+        <p><strong>Thymeleaf</strong> is a modern server-side Java template engine for both web and standalone 
+        environments.</p>
+
+        <p>Thymeleaf's main goal is to bring elegant <em>natural templates</em> to
+        your development workflow — HTML that can be correctly displayed in browsers
+        and also work as static prototypes, allowing for stronger collaboration
+        in development teams.</p>
+
+        <p>With modules for Spring Framework, a host of integrations with
+        your favourite tools, and the ability to plug in your own functionality,
+        Thymeleaf is ideal for modern-day HTML5 JVM web development — although there
+        is much more it can do.</p>
+    </section>
+
+    <section>
+        <header>
+            <h2>
+                <a id="natural-templates" href="#natural-templates" class="anchor"></a>
+                Natural templates
+            </h2>
+        </header>
+        <p>HTML templates written in Thymeleaf still look and work like HTML, letting the
+        actual templates that are run in your application keep working 
+        as useful design artifacts.</p>
+
+        <pre class="line-numbers language-html"><code class=" language-html" data-src="template-example"><span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>table</span><span class="token punctuation">&gt;</span></span>
+<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>thead</span><span class="token punctuation">&gt;</span></span>
+<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>tr</span><span class="token punctuation">&gt;</span></span>
+<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>th</span> <span class="token attr-name"><span class="token namespace">th:</span>text</span><span class="token attr-value"><span class="token punctuation">=</span><span class="token punctuation">"</span>#{msgs.headers.name}<span class="token punctuation">"</span></span><span class="token punctuation">&gt;</span></span>Name<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>th</span><span class="token punctuation">&gt;</span></span>
+<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>th</span> <span class="token attr-name"><span class="token namespace">th:</span>text</span><span class="token attr-value"><span class="token punctuation">=</span><span class="token punctuation">"</span>#{msgs.headers.price}<span class="token punctuation">"</span></span><span class="token punctuation">&gt;</span></span>Price<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>th</span><span class="token punctuation">&gt;</span></span>
+<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>tr</span><span class="token punctuation">&gt;</span></span>
+<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>thead</span><span class="token punctuation">&gt;</span></span>
+<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>tbody</span><span class="token punctuation">&gt;</span></span>
+<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>tr</span> <span class="token attr-name"><span class="token namespace">th:</span>each</span><span class="token attr-value"><span class="token punctuation">=</span><span class="token punctuation">"</span>prod: ${allProducts}<span class="token punctuation">"</span></span><span class="token punctuation">&gt;</span></span>
+<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>td</span> <span class="token attr-name"><span class="token namespace">th:</span>text</span><span class="token attr-value"><span class="token punctuation">=</span><span class="token punctuation">"</span>${prod.name}<span class="token punctuation">"</span></span><span class="token punctuation">&gt;</span></span>Oranges<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>td</span><span class="token punctuation">&gt;</span></span>
+<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>td</span> <span class="token attr-name"><span class="token namespace">th:</span>text</span><span class="token attr-value"><span class="token punctuation">=</span><span class="token punctuation">"</span>${#numbers.formatDecimal(prod.price, 1, 2)}<span class="token punctuation">"</span></span><span class="token punctuation">&gt;</span></span>0.99<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>td</span><span class="token punctuation">&gt;</span></span>
+<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>tr</span><span class="token punctuation">&gt;</span></span>
+<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>tbody</span><span class="token punctuation">&gt;</span></span>
+<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>table</span><span class="token punctuation">&gt;</span></span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+    </section>
+
+    <section>
+        <header>
+            <h2>
+                <a id="integrations" href="#integrations" class="anchor"></a>
+                Integrations galore
+            </h2>
+        </header>
+        <p>Eclipse, IntelliJ IDEA, Spring, Play, even the up-and-coming
+        Model-View-Controller API for Java EE 8.  Write Thymeleaf in your
+        favourite tools, using your favourite web-development framework.</p>
+
+        <p>Check out our <a href="http://www.thymeleaf.org/ecosystem.html">Ecosystem</a> to see more
+        integrations, including community-written plugins to speed-up your
+        development with Thymeleaf.</p>
+    </section>
+
+    <section>
+        <header>
+            <h2>
+                <a id="lets-go" href="#lets-go" class="anchor"></a>
+                Let's go!
+            </h2>
+        </header>
+        <p>Looking to get started?  Check out our <a href="http://www.thymeleaf.org/download.html">Download</a>
+        section for getting Thymeleaf, then go to our <a href="http://www.thymeleaf.org/documentation.html">Docs</a>
+        pages for several tutorials to slowly ease you into using Thymeleaf.</p>
+
+        <p>Found a bug, or itching to contribute?  Then find the GitHub repo for
+        it on our <a href="http://www.thymeleaf.org/issuetracking.html">issue tracking</a> page.</p>
+
+        <p>Stuck?  Got a question?  Then find us on our <a href="http://forum.thymeleaf.org/">Forums</a>
+        and ask away.</p>
+    </section>
+</main>
