@@ -4,7 +4,7 @@ angular.module('app')
             restrict: 'E',
             replace: true,
             scope: {
-                onCancel: '&',
+                onCancel: '&?',
                 onSearch: '&'
             },
             templateUrl: '/static/apps/admin/lib/directives/ui-search.html',
@@ -13,15 +13,12 @@ angular.module('app')
                 scope.cancel = function() {
                     scope.model = null;
                     if (scope.onCancel) {
-                        scope.onCancel({__model: scope.model});
+                        scope.onCancel();
                     }
                 };
 
                 scope.search = function() {
-                    if (scope.onSearch) {
-                        console.debug(scope.model);
-                        scope.onSearch({__model: scope.model});
-                    }
+                    scope.onSearch({__model: scope.model});
                 };
             }
         };
