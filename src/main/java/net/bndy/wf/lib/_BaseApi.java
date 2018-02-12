@@ -70,8 +70,12 @@ public abstract class _BaseApi<T extends _BaseEntity> {
 
 	@ApiOperation(value = "Get entity by id")
 	@RequestMapping(value = "/{id:\\d+}", method = RequestMethod.GET)
-	public T get(@PathVariable(name = "id") long id) {
-		return this.service.get(id);
+	public T get(@PathVariable(name = "id") long id) throws NoResourceFoundException {
+		T t = this.service.get(id);
+		if (t == null) {
+			throw new NoResourceFoundException();
+		}
+		return t;
 	}
 
 	@ApiOperation(value = "Update an existing entity")

@@ -2,10 +2,14 @@ angular.module('app')
     .controller('PageCtrl',
         /* @ngInject */
         function($scope, $stateParams, appService, appDialog) {
-
+            if (!$stateParams.obj) {
+                var error = 'You should specify the linkParams like {id: channelId}.';
+                appDialog.error(error);
+                throw error;
+            }
             var params = $stateParams.obj || {};
 
-            $scope.viewModel = {};
+            $scope.viewModel = { };
 
             function initData() {
                 appDialog.loading();

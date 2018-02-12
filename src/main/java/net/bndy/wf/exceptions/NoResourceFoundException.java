@@ -9,7 +9,7 @@ public class NoResourceFoundException extends AppException {
     private static final long serialVersionUID = 1L;
 
     public NoResourceFoundException() {
-        super("error.msgNoResourceFound");
+        super("error.noResourceFound");
     }
 
     public NoResourceFoundException(String resourceName) {

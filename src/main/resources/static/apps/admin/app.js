@@ -211,7 +211,6 @@ app.factory('appDialog', [
 		};
 		service.error = function (title, msg) {
 			if (!title) title = 'error.title';
-            if (!msg) msg = 'error.description';
             if (title) title = $translate.instant(title);
             if (msg) msg = $translate.instant(msg);
 			toaster.pop({

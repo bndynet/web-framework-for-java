@@ -5,12 +5,10 @@
 package net.bndy.wf.modules.cms.api;
 
 import java.io.IOException;
-import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
 
-import net.bndy.wf.exceptions.ResourceIntegrityException;
-import net.bndy.wf.modules.cms.models.BoType;
+import net.bndy.wf.exceptions.NoResourceFoundException;
 import net.bndy.wf.modules.core.models.File;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -33,8 +31,12 @@ public class PageController extends _BaseApi<Page> {
 	PageService pageService;
 
 	@Override
-	public Page get(@PathVariable(name = "id") long id) {
-		return this.pageService.getByChannelId(id);
+	public Page get(@PathVariable(name = "id") long id) throws NoResourceFoundException {
+		Page page = this.pageService.getByChannelId(id);
+		if (page == null) {
+			throw new NoResourceFoundException();
+		}
+		return page;
 	}
 
 	@Override

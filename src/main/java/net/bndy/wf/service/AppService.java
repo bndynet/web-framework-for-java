@@ -1,5 +1,6 @@
 package net.bndy.wf.service;
 
+import net.bndy.wf.modules.cms.Setup;
 import net.bndy.wf.modules.core.services.ClientService;
 import net.bndy.wf.modules.core.services.MenuService;
 import net.bndy.wf.modules.core.services.RoleService;
@@ -20,6 +21,9 @@ public class AppService {
     private MenuService menuService;
     @Autowired
     private ClientService clientService;
+
+    @Autowired
+    private Setup cmsSetup;
 
     public List<String> allModules() {
         List<String> modules = new ArrayList<>();
@@ -56,5 +60,7 @@ public class AppService {
                 "http://bndy.net/img/apple-touch-icon-120x120-precomposed.png",
                 "http://bndy.net/demo/oauth/index.html", "all", "bndy.net", "bndy.net_secret");
         }
+
+        this.cmsSetup.init();
     }
 }
