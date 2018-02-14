@@ -97,9 +97,7 @@ public class ApplicationConfig {
 	}
 
 	public String[] getAdminRole() {
-		if (adminRole == null || adminRole.trim().equals("")) {
-			Assert.isNull(adminRole, "You did NOT set admin-role value in application.yml.");
-		}
+		Assert.notNull(adminRole, "You did NOT set admin-role value in application.yml.");
 		return StringHelper.splitWithoutWhitespace(adminRole, ",");
 	}
 
