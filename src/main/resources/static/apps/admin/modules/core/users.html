@@ -5,7 +5,9 @@
 
     <ui-page-content>
         <ui-page-content-header-left>
-            <ui-search on-cancel="cancelSearch()" on-search="search(__model)"></ui-search>
+            <ui-search placeholder="admin.modules.core.users.searchTips"
+                       on-cancel="cancelSearch()"
+                       on-search="search(__model)"></ui-search>
         </ui-page-content-header-left>
         <ui-page-content-header-right>
             <a class="btn btn-sm btn-primary" href="/sso/signup" target="_blank"

@@ -40,9 +40,10 @@ angular.module('app')
             $scope.view = function(item) {
                 switch(item.boType.name) {
                     case 'Page':
-                        $state.go('cms-page', {obj: {id: item.id}});
+                        $state.go('cms-page', {obj: {id: item.id, channel: item}});
                         break;
                     case 'Article':
+                        $state.go('cms-articles', {obj: {id: item.id, channel: item}});
                         break;
                     case 'File':
                         break;

@@ -1,6 +1,6 @@
 <div class="input-group input-group-sm search-box">
     <input type="text" class="form-control" ng-model="model"
-           placeholder="{{'admin.modules.core.users.searchTips'|translate}}">
+           placeholder="{{(placeholder || 'common.searchPlaceholder')|translate}}">
     <button type="button" class="inline-btn" ng-click="cancel()" ng-if="model">
         <span>&times;</span>
     </button>

@@ -1,18 +1,18 @@
 <section class="content-header">
     <h1>
-        <span ng-bind="title|translate"></span>
-        <small ng-bind="subtitle|translate"></small>
+        <span ng-bind-html="title|translate"></span>
+        <small ng-bind-html="subtitle|translate"></small>
     </h1>
     <ol class="breadcrumb">
         <li>
             <a ui-sref="dashboard">
                 <i class="fa fa-dashboard"></i>
-                <span ng-bind="'common.home'|translate"></span>
+                <span ng-bind-html="'common.home'|translate"></span>
             </a>
         </li>
         <li ng-repeat="b in breadcrumbs" ng-class="{'active': breadcrumbs && $index == breadcrumbs.length - 1}">
             <a>
-                <span ng-bind="b.text|translate"></span>
+                <span ng-bind-html="b.text|translate"></span>
             </a>
         </li>
     </ol>

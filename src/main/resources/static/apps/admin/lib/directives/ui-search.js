@@ -4,12 +4,14 @@ angular.module('app')
             restrict: 'E',
             replace: true,
             scope: {
+                placeholder: '@?',
                 onCancel: '&?',
                 onSearch: '&'
             },
             templateUrl: '/static/apps/admin/lib/directives/ui-search.html',
             link: function(scope, elem, attrs) {
                 scope.model = null;
+
                 scope.cancel = function() {
                     scope.model = null;
                     if (scope.onCancel) {
