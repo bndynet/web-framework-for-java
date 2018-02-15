@@ -1,6 +1,5 @@
 package net.bndy.wf.service;
 
-import net.bndy.wf.modules.cms.Setup;
 import net.bndy.wf.modules.core.services.ClientService;
 import net.bndy.wf.modules.core.services.MenuService;
 import net.bndy.wf.modules.core.services.RoleService;
@@ -8,6 +7,7 @@ import org.aspectj.util.FileUtil;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.core.io.ClassPathResource;
 import org.springframework.stereotype.Service;
+import org.thymeleaf.util.ArrayUtils;
 
 import java.io.File;
 import java.util.*;
@@ -23,7 +23,9 @@ public class AppService {
     private ClientService clientService;
 
     @Autowired
-    private Setup cmsSetup;
+    private net.bndy.wf.modules.cms.Setup cmsSetup;
+    @Autowired
+    private net.bndy.wf.modules.core.Setup coreSetup;
 
     public List<String> allModules() {
         List<String> modules = new ArrayList<>();
@@ -38,7 +40,10 @@ public class AppService {
                     .replaceAll("[\\\\/]+", "-")
                     .replaceAll("^-", "");
 
-                modules.add(moduleName);
+                if (!ArrayUtils.contains(this.coreSetup.MODULES_EXCLUDED, moduleName) &&
+                    !ArrayUtils.contains(this.cmsSetup.MODULES_EXCLUDED, moduleName)) {
+                    modules.add(moduleName);
+                }
             }
         } catch (Exception ex) {
 

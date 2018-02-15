@@ -138,6 +138,10 @@ public class MenuService extends _BaseService<Menu> {
         return this.menuRepo.findOne(id);
     }
 
+    public Menu getByName(String name) {
+        return this.menuRepo.findByName(name);
+    }
+
     public Menu getMenuManagementEntry() {
         Menu m = new Menu();
         m.setName("admin.modules.core.menus.title");
