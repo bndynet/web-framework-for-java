@@ -9,7 +9,8 @@
                        on-search="search(__model)"></ui-search>
         </ui-page-content-header-left>
         <ui-page-content-header-right>
-            <a class="btn btn-sm btn-primary" target="_blank"
+            <a class="btn btn-sm btn-primary"
+               ng-click="edit()"
                ng-bind="'common.add'|translate"></a>
         </ui-page-content-header-right>
         <ui-page-content-footer>
@@ -40,40 +41,28 @@
     </ui-page-content>
 
 
-    <div id="rolesForm" class="modal fade" tabindex="-1" role="dialog">
-        <div class="modal-dialog" role="document">
-            <div class="modal-content">
-                <div class="modal-header">
-                    <button type="button" class="close" data-dismiss="modal"
-                            aria-label="Close">
-                        <span aria-hidden="true">&times;</span>
-                    </button>
-                    <h4 class="modal-title">
-                        <span ng-bind-html="'admin.modules.core.users.rolesForUser'|translate:[userModel.username]"></span>
-                    </h4>
-                </div>
-                <div class="modal-body">
-                    <div class="list-group">
-                        <a class="list-group-item"
-                           ng-click="toggleRole(item)"
-                           ng-repeat="item in roles">
-                            <h4 class="list-group-item-heading">
-                                {{ item.name }}
-                                <i class="fa fa-check fa-2x ng-cloak text-success pull-right"
-                                   ng-if="userHasRole(item)"></i>
-                            </h4>
-                            <p class="list-group-item-text">{{ item.description }}</p>
-                        </a>
-                    </div>
-                </div>
-                <div class="modal-footer">
-                    <button type="button" class="btn btn-default" data-dismiss="modal"
-                            ng-bind="'common.close'|translate"></button>
-                    <button type="button" class="btn btn-primary"
-                            ng-bind="'common.saveChanges'|translate"
-                            ng-click="saveRoles()"></button>
-                </div>
-            </div>
-        </div>
-    </div>
+     <ui-dialog name="dialogForm" size="lg"
+                title="{{formModel.id ? 'common.edit' : 'common.add'}}">
+           <form name="form">
+               <md-input-container class="md-block">
+                   <label>
+                       <span ng-bind="'admin.modules.cms.articles.fieldTitle'|translate"></span>
+                   </label>
+                   <input name="name" required ng-model="formModel.title"/>
+                   <div ng-messages="form.name.$error">
+                       <div ng-message="required" ng-bind="'common.msgRequired'|translate"></div>
+                   </div>
+               </md-input-container>
+               <ui-html-editor ng-model="formModel.content"></ui-html-editor>
+           </form>
+           <ui-dialog-footer>
+               <div class="pull-right">
+                   <button type="button" class="btn btn-primary"
+                           ng-disabled="form.$invalid"
+                           ng-bind="'common.saveChanges'|translate"
+                           ng-click="save()">
+                   </button>
+               </div>
+           </ui-dialog-footer>
+       </ui-dialog>
 </div>

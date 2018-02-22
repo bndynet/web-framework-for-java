@@ -14,6 +14,9 @@ angular.module('app')
             $scope.channel = null;
 
             function initData(page) {
+                if (!page) {
+                    page = 1;
+                }
                 if (!$scope.channel) {
                     appService.ajaxGet('/api/cms/channels/' + channelId).then(function(d){
                         $scope.channel = d;
@@ -35,7 +38,26 @@ angular.module('app')
                 });
             };
 
-
+            var dialogForm = appDialog.getModal('dialogForm');
+            $scope.add = function() {
+                dialogForm.show();
+            };
+            $scope.edit = function(item) {
+                if (!item) {
+                    item = {};
+                }
+                angular.resetForm($scope.form);
+                $scope.formModel = angular.copy(item);
+                dialogForm.show();
+            };
+            $scope.save = function() {
+                $scope.formModel.channelId = $scope.channel.id;
+                appService.ajaxSave('/api/cms/articles', $scope.formModel).then(function() {
+                    initData();
+                    appDialog.success();
+                    dialogForm.close();
+                });
+            };
             $scope.remove = function(item) {
                 appDialog.confirmDeletion(function(){
                     appService.ajaxDelete('/api/cms/articles/' + item.id).then(function() {
