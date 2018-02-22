@@ -19,6 +19,7 @@ import java.util.List;
 public interface ArticleRepository extends JpaRepository<Article, Long> {
 
     int countByChannelId(long channelId);
+    Article findByTitleKey(String titleKey);
 
     List<Article> findByChannelId(long channelId);
 

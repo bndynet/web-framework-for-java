@@ -55,11 +55,12 @@ public class CmsController extends _BaseController {
         return "/cms/articles";
     }
 
-    @RequestMapping("/article/{id}")
+    @RequestMapping("/article/{key}")
     public String article(Model viewModel,
-                          @PathVariable(name = "id") long id) throws NoResourceFoundException {
+                          @PathVariable(name = "key") String key) throws NoResourceFoundException {
 
-        Article article = this.articleService.get(id);
+        Article article = key.matches("^[0-9]*$") ? this.articleService.get(Long.parseLong(key))
+            : this.articleService.getByTitleKey(key);
         if (article != null) {
             viewModel.addAttribute("model", article);
         } else {

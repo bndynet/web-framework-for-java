@@ -13,7 +13,7 @@
 
     <ul>
         <li th:each="item: ${model.content}">
-            <a th:href="'/article/' + ${item.id}">
+            <a th:href="@{/article/{key}(key=${item.titleKey == null} ? ${item.id} : ${item.titleKey})}"
                 <h4>
                     <span th:text="${item.title}"></span>
                 </h4>
