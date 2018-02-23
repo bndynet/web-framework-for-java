@@ -44,7 +44,8 @@ public class ArticleService extends _BaseService<Article> {
         }
         entity = super.save(entity);
         if (complexKey) {
-            entity.setTitleKey(entity.getTitleKey() + "-" + entity.getId());
+            entity.setTitleKey(key + "-" + entity.getId());
+            entity = super.save(entity);
         }
         return entity;
     }
