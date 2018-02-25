@@ -450,16 +450,7 @@ $(function () {
 	// language
 	$('#LanguageOptions').change(function(){
 	    var lang = $(this).val();
-	    var url = location.href;
-	    var newUrl = ''
-	    if (url.indexOf('locale=') > 0) {
-	        newUrl = url.replace(/locale=[^#]*/g, 'locale=' + lang);
-	    } else if (url.indexOf('#') > 0) {
-	        newUrl = url.substring(0, url.indexOf('#'))
-	            + (url.indexOf('?') > 0 ? '&' : '?') + 'locale=' + lang + url.substring(url.indexOf('#'));
-	    } else {
-	        newUrl = url + (url.indexOf('?') > 0 ? '&' : '?') + 'locale=' + lang;
-	    }
-	    location.href = newUrl;
+	    document.cookie = 'LOCALE=' + lang + ';path=/';
+	    location.href = '/admin/';
 	});
 });
