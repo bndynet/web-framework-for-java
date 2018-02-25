@@ -39,7 +39,7 @@ app.controller('UserProfileCtrl', [ '$scope', 'appDialog', '$http', '$timeout', 
                 file.upload.then(function (response) {
                    $timeout(function () {
                        file.result = response.data;
-                       $scope.user.avatar = $scope.user.avatar.substring(0, $scope.user.avatar.lastIndexOf('/') + 1) + file.result.uuid;
+                       $scope.user.avatar = file.result.url;
                        // update all user avatar on page
                        $('img.user-avatar').attr('src', $scope.user.avatar);
                        appDialog.success();
