@@ -6,6 +6,7 @@ package net.bndy.wf.modules.cms.services;
 
 import javax.transaction.Transactional;
 
+import net.bndy.lib.StringHelper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
@@ -30,6 +31,27 @@ public class ArticleService extends _BaseService<Article> {
         Article result = this.articleRepository.findOne(article);
         result.setAttachments(this.attachmentRepository.findByBo(BoType.Article.getValue(), result.getId()));
         return result;
+    }
+
+    @Override
+    public Article save(Article entity) {
+        boolean complexKey = true;
+        String key = StringHelper.title2Url(entity.getTitle());
+        Article existed = this.articleRepository.findByTitleKey(key);
+        if (existed == null || existed.getId() == entity.getId()) {
+            entity.setTitleKey(key);
+            complexKey = false;
+        }
+        entity = super.save(entity);
+        if (complexKey) {
+            entity.setTitleKey(key + "-" + entity.getId());
+            entity = super.save(entity);
+        }
+        return entity;
+    }
+
+    public Article getByTitleKey(String titleKey) {
+        return this.articleRepository.findByTitleKey(titleKey);
     }
 
     public int countByChannelId(long channelId) {

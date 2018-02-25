@@ -14,6 +14,9 @@ angular.module('app')
                 },
                 templateUrl: '/static/apps/admin/lib/directives/ui-dialog.html',
                 link: function(scope, elem, attrs, ctrl, $transclude) {
+                    if (attrs.size && attrs.size.indexOf(',') < 0) {
+                        angular.element('.modal-dialog').addClass('modal-' + attrs.size);
+                    }
                     scope.hasFooter = $transclude.isSlotFilled('footer');
                     // NOTE: the following code is to share the controller scope for body and footer instead of ng-transclude
                     $transclude(scope.$parent, function(content) {

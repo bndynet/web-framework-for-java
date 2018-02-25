@@ -6,13 +6,11 @@ import net.bndy.wf.modules.cms.models.Channel;
 import net.bndy.wf.modules.cms.models.Page;
 import net.bndy.wf.modules.cms.services.repositories.ChannelRepository;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.boot.context.config.ResourceNotFoundException;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import javax.validation.constraints.NotNull;
 import java.util.ArrayList;
-import java.util.Collection;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -47,7 +45,27 @@ public class ChannelService extends _BaseService<Channel> {
     }
 
     public Channel getByName(String name) {
-        return this.channelRepository.findByName(name);
+        List<Channel> result = this.channelRepository.findByName(name);
+        if (result != null && result.size() > 0) {
+            return result.get(0);
+        }
+        return null;
+    }
+
+    public Channel getByNameKey(String nameKey) {
+        List<Channel> result = this.channelRepository.findByNameKey(nameKey);
+        if (result != null && result.size() > 0) {
+            return result.get(0);
+        }
+        return null;
+    }
+
+    public Channel getByNameOrNameKey(String nameOrKey) {
+        Channel result = this.getByNameKey(nameOrKey);
+        if (result == null) {
+            result = this.getByName(nameOrKey);
+        }
+        return result;
     }
 
     public void toggleVisible(long channelId) {
@@ -124,7 +142,13 @@ public class ChannelService extends _BaseService<Channel> {
         if (entity.getPath() == null || "".equals(entity.getPath())) {
             entity.setPath("/");
         }
+        entity.setNameKey(StringHelper.title2Url(entity.getName()));
+        Channel existed = this.getByNameKey(entity.getNameKey());
         entity = super.save(entity);
+        if (existed != null && existed.getId() != entity.getId()) {
+            entity.setNameKey(entity.getNameKey() + "-" + entity.getId());
+            entity = super.save(entity);
+        }
         syncVisible(entity);
 
         if (entity.getBoType() != null) {

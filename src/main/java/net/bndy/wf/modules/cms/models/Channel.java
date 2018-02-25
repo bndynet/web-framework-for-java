@@ -1,5 +1,6 @@
 package net.bndy.wf.modules.cms.models;
 
+import net.bndy.lib.StringHelper;
 import net.bndy.wf.lib._BaseEntity;
 
 import javax.persistence.*;
@@ -10,6 +11,7 @@ import java.util.List;
 public class Channel extends _BaseEntity {
 
     private String name;
+    private String nameKey;
     private String path;
     @Enumerated(EnumType.ORDINAL)
     private BoType boType;
@@ -27,6 +29,14 @@ public class Channel extends _BaseEntity {
 
     public void setName(String name) {
         this.name = name;
+    }
+
+    public String getNameKey() {
+        return nameKey;
+    }
+
+    public void setNameKey(String nameKey) {
+        this.nameKey = nameKey;
     }
 
     public String getPath() {
@@ -69,13 +79,13 @@ public class Channel extends _BaseEntity {
         if (this.boType != null && (url == null || "".equals(url))) {
             switch (this.boType) {
                 case File:
-                    url = "/resources/" + this.name; // + "?id=" + this.id;
+                    url = "/resources/" + (StringHelper.isNullOrWhiteSpace(this.nameKey) ? this.name : this.nameKey); // + "?id=" + this.id;
                     break;
                 case Page:
-                    url = "/page/" + this.name; // + "?id=" + this.id;
+                    url = "/page/"  + (StringHelper.isNullOrWhiteSpace(this.nameKey) ? this.name : this.nameKey); // + "?id=" + this.id;
                     break;
                 case Article:
-                    url = "/articles/" + this.name; // + "?id=" + this.id;
+                    url = "/articles/"  + (StringHelper.isNullOrWhiteSpace(this.nameKey) ? this.name : this.nameKey); // + "?id=" + this.id;
                     break;
             }
         }

@@ -22,6 +22,7 @@ public class Article extends _BaseEntity {
 	private Long userId;
 	private long channelId;
 	private String title;
+	private String titleKey;
 	
 	@Column(columnDefinition="TEXT")
 	private String content;
@@ -46,6 +47,12 @@ public class Article extends _BaseEntity {
 	}
 	public void setTitle(String title) {
 		this.title = title;
+	}
+	public String getTitleKey() {
+		return titleKey;
+	}
+	public void setTitleKey(String titleKey) {
+		this.titleKey = titleKey;
 	}
 	public String getContent() {
 		return content;
