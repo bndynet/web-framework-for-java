@@ -1,5 +1,6 @@
 package net.bndy.wf.controller;
 
+import net.bndy.lib.StringHelper;
 import net.bndy.wf.exceptions.NoResourceFoundException;
 import net.bndy.wf.modules.cms.models.Article;
 import net.bndy.wf.modules.cms.models.Channel;
@@ -57,7 +58,7 @@ public class CmsController extends _BaseController {
                           @PathVariable(name = "key") String key) throws NoResourceFoundException {
 
         Article article = this.articleService.getByTitleKey(key);
-        if (article == null && key.matches("^[0-9]*$")) {
+        if (article == null && StringHelper.isNumeric(key)) {
             article = this.articleService.get(Long.parseLong(key));
         }
         if (article != null) {
