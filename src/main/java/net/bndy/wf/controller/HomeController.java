@@ -7,13 +7,12 @@ package net.bndy.wf.controller;
 import java.io.*;
 import java.nio.file.Paths;
 
-import net.bndy.wf.modules.cms.services.ChannelService;
 import net.bndy.wf.modules.core.services.FileService;
+import net.bndy.wf.modules.core.services.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.core.io.ClassPathResource;
 import org.springframework.http.MediaType;
 import org.springframework.stereotype.Controller;
-import org.springframework.ui.Model;
 import org.springframework.util.FileCopyUtils;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
@@ -25,9 +24,14 @@ public class HomeController extends _BaseController {
 
 	@Autowired
 	private FileService fileService;
+	@Autowired
+	private UserService userService;
 
 	@RequestMapping("/")
-	public String index(Model viewModel) {
+	public String index() {
+		if (!this.userService.hasUsers()) {
+			return "redirect:/sso/login";
+		}
 		return "/index";
 	}
 
