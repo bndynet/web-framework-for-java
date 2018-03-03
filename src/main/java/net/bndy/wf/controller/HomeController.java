@@ -7,6 +7,8 @@ package net.bndy.wf.controller;
 import java.io.*;
 import java.nio.file.Paths;
 
+import net.bndy.lib.IOHelper;
+import net.bndy.wf.ApplicationContext;
 import net.bndy.wf.modules.core.services.FileService;
 import net.bndy.wf.modules.core.services.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -38,8 +40,24 @@ public class HomeController extends _BaseController {
 	@RequestMapping(value = "/files/{uuid:[\\w-]{36}}", method = RequestMethod.GET, produces = {MediaType.APPLICATION_OCTET_STREAM_VALUE})
 	public void get(@PathVariable(name = "uuid") String uuid, HttpServletResponse resp) throws IOException {
 		net.bndy.wf.modules.core.models.File f = this.fileService.getByUuid(uuid);
-		if (f != null && this.applicationConfig.getUploadPath() != null && !applicationConfig.getUploadPath().isEmpty()) {
-			String filePath = Paths.get(this.applicationConfig.getUploadPath(), f.getPath()).toAbsolutePath().toString();
+		if (f != null) {
+			String filePath = ApplicationContext.getFileFullPath(f.getPath());
+			if (!IOHelper.isFileExisted(filePath)) {
+				throw new FileNotFoundException(f.getName());
+			}
+			
+			switch (f.getType()) {
+				case TEXT:
+					resp.setHeader("Content-Type", "text/plain");
+				    break;
+				case IMAGE:
+				    resp.setHeader("Content-Type", "image/" + f.getExtName());
+					break;
+                default:
+                    resp.addHeader("Content-Disposition",
+						"attachment; filename=\"" + f.getFullname() + "\"");
+                    break;
+			}
 			FileCopyUtils.copy(new FileInputStream(filePath), resp.getOutputStream());
 			resp.flushBuffer();
 		}

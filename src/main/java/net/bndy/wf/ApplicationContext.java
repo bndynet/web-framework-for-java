@@ -7,7 +7,6 @@ package net.bndy.wf;
 import net.bndy.lib.HttpHelper;
 import net.bndy.wf.config.ApplicationConfig;
 import net.bndy.wf.exceptions.UnauthorizedException;
-import net.bndy.wf.modules.core.models.Role;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.MessageSource;
 import org.springframework.context.i18n.LocaleContextHolder;
@@ -20,6 +19,7 @@ import org.springframework.stereotype.Component;
 
 import javax.annotation.PostConstruct;
 import javax.servlet.http.HttpServletRequest;
+import java.nio.file.Paths;
 import java.util.*;
 
 @Component
@@ -63,6 +63,10 @@ public class ApplicationContext {
 
     public static String getFileUrl(HttpServletRequest request, String fileId) {
         return HttpHelper.getRootUrl(request) + "/files/" + fileId;
+    }
+
+    public static String getFileFullPath(String pathInDb) {
+        return Paths.get(applicationConfig.getUploadPath(), pathInDb).toAbsolutePath().toString();
     }
 
     public static boolean isUserInRole(String roleName) {
