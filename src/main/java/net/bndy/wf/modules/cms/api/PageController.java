@@ -18,7 +18,6 @@ import org.springframework.web.multipart.MultipartFile;
 
 import io.swagger.annotations.Api;
 import net.bndy.wf.lib._BaseApi;
-import net.bndy.wf.modules.cms.models.Attachment;
 import net.bndy.wf.modules.cms.models.Page;
 import net.bndy.wf.modules.cms.services.PageService;
 
@@ -41,17 +40,7 @@ public class PageController extends _BaseApi<Page> {
 
 	@Override
 	public File upload(MultipartFile file, HttpServletRequest request) throws IllegalStateException, IOException {
-		File fi = super.upload(file, request);
-
-		Attachment attachment = new Attachment();
-		attachment.setPath(fi.getPath());
-		attachment.setExtensionName(fi.getExtName());
-		attachment.setFileName(fi.getName());
-		attachment.setFileType(fi.getType());
-		attachment.setBoId(Long.parseLong(request.getParameter("boId")));
-		this.pageService.addAttachment(attachment);
-
-		return fi;
+		return super.upload(file, request);
 	}
 
 }

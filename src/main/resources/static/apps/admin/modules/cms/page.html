@@ -8,6 +8,26 @@
                     ng-bind="'common.saveChanges'|translate"></button>
         </ui-page-content-header-right>
 
-        <ui-html-editor ng-model="viewModel.content"></ui-html-editor>
+        <div class="form-group">
+            <ui-html-editor ng-model="viewModel.content"></ui-html-editor>
+        </div>
+
+        <div class="form-group">
+            <div>
+                <label ng-bind="'common.attachments'|translate"></label>
+            </div>
+            <div class="tag tag-inline" ng-repeat="item in viewModel.attachments">
+                <a href="/files/{{item.uuid}}" target="_blank">
+                    <span ng-bind="item.name"></span>.<span ng-bind="item.extName"></span>
+                </a>
+                <a class="text-danger" ng-click="removeAttachment(item)">
+                    <i class="glyphicon glyphicon-trash"></i>
+                </a>
+            </div>
+        </div>
+
+        <div class="form-group">
+            <ui-upload multiple label="common.attachments" url="/api/cms/pages/upload?boId={{viewModel.id}}" on-item-success="uploaded(result)"></ui-upload>
+        </div>
     </ui-page-content>
 </div>

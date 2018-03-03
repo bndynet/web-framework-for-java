@@ -19,6 +19,10 @@ a {
   cursor: pointer;
 }
 
+table {
+  width: 100%;
+}
+
 img {
   &.stretch {
     width: 100%;
@@ -243,4 +247,55 @@ img {
 		height: 40px;
 		margin: 1rem;
 	}
+}
+
+.tag {
+  padding: 6px 10px;
+  margin-right: 10px;
+  margin-bottom: 5px;
+  background-color: #efefef;
+  border-radius: 3px;
+
+  a {
+    margin-left: 5px;
+  }
+
+  i {
+    font-size: .8rem;
+  }
+  
+  &.tag-inline {
+    display: inline-block;
+  }
+
+  &.primary {
+    background-color: $color-primary;
+    color: #ffffff;
+    a {
+      color: #ffffff;
+    }
+  }
+
+  &.success {
+    background-color: $color-success;
+    color: #ffffff;
+    a {
+      color: #ffffff;
+    }
+  }
+
+  &.warning {
+    background-color: $color-warning;
+    color: #ffffff;
+    a {
+      color: #ffffff;
+    }
+  }
+
+  &.danger {
+    background-color: $color-danger;
+    a {
+      color: #ffffff;
+    }
+  }
 }

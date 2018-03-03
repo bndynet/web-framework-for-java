@@ -1,7 +1,7 @@
 angular.module('app')
     .controller('PageCtrl',
         /* @ngInject */
-        function($scope, $stateParams, appService, appDialog) {
+        function($scope, $stateParams, appService, appDialog, FileUploader) {
             if (!$stateParams.obj) {
                 var error = 'You should specify the linkParams like {id: channelId}.';
                 appDialog.error(error);
@@ -15,6 +15,7 @@ angular.module('app')
                 appDialog.loading();
                 appService.ajaxGet('/api/cms/pages/' + params.id).then(function(d) {
                     $scope.viewModel = d;
+                    $scope.uploadUrl = '/api/cms/pages/upload?boId=' + params.id;
                 }).finally(function() {
                     appDialog.loading(false);
                 });
@@ -30,4 +31,15 @@ angular.module('app')
                     appDialog.success();
                 });
             };
+
+            $scope.removeAttachment = function(item) {
+                appDialog.confirmDeletion(function() {
+                    $scope.viewModel.attachments.splice($scope.viewModel.attachments.indexOf(item), 1);
+                });
+            };
+
+            $scope.uploaded = function(result) {
+                $scope.viewModel.attachments.push(result);
+            };
+
         });

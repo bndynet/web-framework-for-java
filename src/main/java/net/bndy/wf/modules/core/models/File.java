@@ -4,6 +4,7 @@
  ******************************************************************************/
 package net.bndy.wf.modules.core.models;
 
+import net.bndy.lib.StringHelper;
 import net.bndy.wf.lib.FileType;
 import net.bndy.wf.lib._BaseEntity;
 
@@ -79,5 +80,13 @@ public class File extends _BaseEntity {
 
     public File() {
         this.setUuid(UUID.randomUUID().toString());
+    }
+
+    public String getFullname() {
+        if (!StringHelper.isNullOrWhiteSpace(this.getExtName())) {
+            return this.getName() + "." + this.getExtName();
+        }
+
+        return this.getName();
     }
 }
