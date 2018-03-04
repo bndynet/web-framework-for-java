@@ -14,11 +14,23 @@
 
 # Web Framework - A Starter Project for Spring Boot
 
-**NOTE** : If JDBC exception occurred, please drop all tables and let it recreate automatically.
+**NOTE** : Use **MySQL v5.7+**, if JDBC exception occurred, please drop all tables and let it recreate automatically.
 
 ![](https://raw.githubusercontent.com/bndynet/web-framework-for-java/master/docs/img/home.png)
 
 ![](https://raw.githubusercontent.com/bndynet/web-framework-for-java/master/docs/img/admin-home.png)
+
+## Features
+
+- User Management
+- Role Management
+- Menu Management
+- Application Management
+- User Profile
+- OAuth Endpoints
+- International Support
+- Skin Support
+- **Content Management System**
 	
 ## Getting Started
 
@@ -36,6 +48,10 @@
 - **src/main/resources/static/apps/admin**: AngularJS Application for Admin Panel
     - **src/main/resources/static/apps/admin/modules**: AngularJS Modules
     - **src/main/resources/static/apps/admin/modules/example**: Style Examples 
+    
+**Implemented AngularJS Components**
+
+ui-actions, ui-dialog, ui-html-editor, ui-input, ui-menu-tree, ui-no-data, ui-notifications, ui-page-content, ui-page-header, ui-search, ui-tree, ui-upload
     
 **Recommend:**
 
