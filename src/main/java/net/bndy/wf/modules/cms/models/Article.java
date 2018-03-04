@@ -4,14 +4,12 @@
  ******************************************************************************/
 package net.bndy.wf.modules.cms.models;
 
-import java.util.List;
+import java.util.Set;
 
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.Table;
-import javax.persistence.Transient;
+import javax.persistence.*;
 
 import net.bndy.wf.lib._BaseEntity;
+import net.bndy.wf.modules.core.models.File;
 
 @Entity
 @Table(name="cms_article")
@@ -26,14 +24,16 @@ public class Article extends _BaseEntity {
 	
 	@Column(columnDefinition="TEXT")
 	private String content;
+	@OneToMany(fetch = FetchType.LAZY)
+	@JoinTable(name = "cms_article_file",
+		joinColumns = @JoinColumn(name = "article_id"),
+		inverseJoinColumns = @JoinColumn(name = "file_id"))
+	private Set<File> attachments;
 	
-	@Transient
-	private List<Attachment> attachments;
-	
-	public List<Attachment> getAttachments() {
+	public Set<File> getAttachments() {
 		return attachments;
 	}
-	public void setAttachments(List<Attachment> attachments) {
+	public void setAttachments(Set<File> attachments) {
 		this.attachments = attachments;
 	}
 	public Long getUserId() {

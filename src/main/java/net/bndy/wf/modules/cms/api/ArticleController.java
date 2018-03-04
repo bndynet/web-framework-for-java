@@ -4,6 +4,7 @@
  ******************************************************************************/
 package net.bndy.wf.modules.cms.api;
 
+import net.bndy.wf.modules.core.models.File;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.domain.Sort;
 import org.springframework.data.web.PageableDefault;
@@ -21,6 +22,10 @@ import org.springframework.data.domain.Page;
 import net.bndy.wf.lib._BaseApi;
 import net.bndy.wf.modules.cms.models.*;
 import net.bndy.wf.modules.cms.services.ArticleService;
+import org.springframework.web.multipart.MultipartFile;
+
+import javax.servlet.http.HttpServletRequest;
+import java.io.IOException;
 
 @Api(value = "Article API")
 @RestController
@@ -44,5 +49,10 @@ public class ArticleController extends _BaseApi<Article> {
 			return this.articleService.findByChannelId(channel, pageable);
 		}
 		return this.articleService.findAll(pageable);
+	}
+
+	@Override
+	public File upload(MultipartFile file, HttpServletRequest request) throws IllegalStateException, IOException {
+		return super.upload(file, request);
 	}
 }

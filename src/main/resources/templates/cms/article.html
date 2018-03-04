@@ -18,6 +18,13 @@
     </div>
 
     <p th:utext="${model.content}"></p>
+
+    <hr />
+    <th:block th:each="item: ${model.attachments}">
+        <a class="tag tag-inline" th:href="@{'/files/' + ${item.uuid}}" target="_blank">
+            <span th:text="${item.name}"></span>.<span th:text="${item.extName}"></span>
+        </a>
+    </th:block>
 </div>
 </body>
 </html>

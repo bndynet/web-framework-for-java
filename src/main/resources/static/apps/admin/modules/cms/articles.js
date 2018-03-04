@@ -78,6 +78,17 @@ angular.module('app')
                 initData(1);
             };
 
+            $scope.removeAttachment = function(item) {
+                appDialog.confirmDeletion(function() {
+                    $scope.formModel.attachments.splice($scope.formModel.attachments.indexOf(item), 1);
+                });
+            };
+
+            $scope.uploaded = function(result) {
+                if (!$scope.formModel.attachments) $scope.formModel.attachments = [];
+                $scope.formModel.attachments.push(result);
+            };
+
             initData(1);
         }
     );

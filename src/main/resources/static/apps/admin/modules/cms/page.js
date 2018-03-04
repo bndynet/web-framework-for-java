@@ -15,7 +15,6 @@ angular.module('app')
                 appDialog.loading();
                 appService.ajaxGet('/api/cms/pages/' + params.id).then(function(d) {
                     $scope.viewModel = d;
-                    $scope.uploadUrl = '/api/cms/pages/upload?boId=' + params.id;
                 }).finally(function() {
                     appDialog.loading(false);
                 });

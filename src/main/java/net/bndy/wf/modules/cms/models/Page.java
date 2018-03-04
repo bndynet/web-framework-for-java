@@ -21,7 +21,7 @@ public class Page extends _BaseEntity {
 	private String title;
 	@Column(columnDefinition="TEXT")
 	private String content;
-    @OneToMany(fetch = FetchType.LAZY)    // FetchType.EAGER: don't use lazy load.
+    @OneToMany(fetch = FetchType.LAZY)
 	@JoinTable(name = "cms_page_file",
 		joinColumns = @JoinColumn(name = "page_id"),
 		inverseJoinColumns = @JoinColumn(name = "file_id"))

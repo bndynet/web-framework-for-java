@@ -6,7 +6,11 @@ package net.bndy.wf.modules.cms.services;
 
 import javax.transaction.Transactional;
 
+import net.bndy.lib.IOHelper;
 import net.bndy.lib.StringHelper;
+import net.bndy.wf.ApplicationContext;
+import net.bndy.wf.modules.core.models.File;
+import net.bndy.wf.modules.core.services.FileService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
@@ -15,6 +19,8 @@ import org.springframework.stereotype.Service;
 import net.bndy.wf.modules.cms.models.*;
 import net.bndy.wf.modules.cms.services.repositories.*;
 
+import java.io.IOException;
+import java.util.ArrayList;
 import java.util.List;
 
 @Service
@@ -22,19 +28,41 @@ import java.util.List;
 public class ArticleService extends _BaseService<Article> {
 
     @Autowired
-    ArticleRepository articleRepository;
+    private FileService fileService;
     @Autowired
-    AttachmentRepository attachmentRepository;
+    private ArticleRepository articleRepository;
 
     @Override
     public Article get(long article) {
         Article result = this.articleRepository.findOne(article);
-        result.setAttachments(this.attachmentRepository.findByBo(BoType.Article.getValue(), result.getId()));
         return result;
     }
 
     @Override
     public Article save(Article entity) {
+        // attachments checking
+        if (entity.getId() != null) {
+            Article origin = this.get(entity.getId());
+            List<File> filesToDelete = new ArrayList<>();
+            if (origin != null && origin.getAttachments() != null) {
+                for (File f: origin.getAttachments()) {
+                    if (entity.getAttachments() == null || !entity.getAttachments().stream().anyMatch((item) -> item.getId() == f.getId())) {
+                        filesToDelete.add(f);
+                    }
+                }
+            }
+
+            for (File f: filesToDelete) {
+                try {
+                    IOHelper.forceDelete(ApplicationContext.getFileFullPath(f.getPath()));
+                } catch (IOException ex) {
+                    // TODO: exception handling
+                    ex.printStackTrace();
+                }
+                this.fileService.delete(f.getId());
+            }
+        }
+
         boolean complexKey = true;
         String key = StringHelper.title2Url(entity.getTitle());
         Article existed = this.articleRepository.findByTitleKey(key);

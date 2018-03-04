@@ -54,6 +54,21 @@
                    </div>
                </md-input-container>
                <ui-html-editor ng-model="formModel.content"></ui-html-editor>
+               <br />
+               <div class="form-group">
+                   <div class="tag tag-inline" ng-repeat="item in formModel.attachments">
+                       <a href="/files/{{item.uuid}}" target="_blank">
+                           <span ng-bind="item.name"></span>.<span ng-bind="item.extName"></span>
+                       </a>
+                       <a class="text-danger" ng-click="removeAttachment(item)">
+                           <i class="glyphicon glyphicon-trash"></i>
+                       </a>
+                   </div>
+               </div>
+
+               <div class="form-group">
+                   <ui-upload multiple label="common.attachments" url="/api/cms/articles/upload" on-item-success="uploaded(result)"></ui-upload>
+               </div>
            </form>
            <ui-dialog-footer>
                <div class="pull-right">
