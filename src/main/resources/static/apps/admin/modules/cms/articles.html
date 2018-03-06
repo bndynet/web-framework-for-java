@@ -67,7 +67,7 @@
                </div>
 
                <div class="form-group">
-                   <ui-upload multiple label="common.attachments" url="/api/cms/articles/upload" on-item-success="uploaded(result)"></ui-upload>
+                   <ui-upload multiple label="common.attachments" url="/api/cms/articles/upload" on-item-success="uploaded(result)" reload-on="{{formModel.id}}"></ui-upload>
                </div>
            </form>
            <ui-dialog-footer>

@@ -1,49 +1,63 @@
 <div>
     <input type="file" nv-file-select uploader="uploader" style="position:absolute; top:-10000px;left: -10000px;"/>
-    <table>
-        <tbody>
+    <div class="btn-group btn-group-sm">
+        <button class="btn btn-info"
+                onclick="$(this).parent().parent().find('[type=file]').click()"
+                ng-disabled="uploader.isUploading">
+            <i class="glyphicon glyphicon-plus-sign"></i>
+            <span ng-bind="label|translate"></span>
+        </button>
+        <button type="button" class="btn btn-success"
+                ng-click="uploader.uploadAll()"
+                ng-disabled="uploader.isUploading"
+                ng-if="uploader.getNotUploadedItems().length">
+            <i class="glyphicon glyphicon-upload"></i>
+            <span ng-bind="'common.uploadAll'|translate"></span>
+        </button>
+        <button type="button" class="btn btn-warning" ng-click="uploader.cancelAll()"
+                ng-if="uploader.isUploading">
+            <i class="glyphicon glyphicon-ban-circle"></i>
+            <span ng-bind="'common.cancelAll'|translate"></span>
+        </button>
+        <button type="button" class="btn btn-danger"
+                ng-click="uploader.clearQueue()"
+                ng-disabled="uploader.isUploading"
+                ng-if="uploader.queue.length">
+            <i class="glyphicon glyphicon-trash"></i>
+            <span ng-bind="'common.removeAll'|translate"></span>
+        </button>
+    </div>
+    <br/>
+    <table class="table" ng-if="uploader.queue.length">
+        <thead>
         <tr>
-            <td style="width: 100px; vertical-align: top;">
-                <button class="btn btn-sm btn-primary"
-                        style="margin-right: 15px;"
-                        onclick="$(this).parent().parent().parent().parent().parent().find('[type=file]').click()">
-                    <i class="glyphicon glyphicon-plus-sign"></i>
-                    <span ng-bind="label|translate"></span>
-                </button>
-
+            <th ng-bind="'common.name'|translate"></th>
+            <th ng-bind="'common.size'|translate"></th>
+            <th ng-bind="'common.status'|translate"></th>
+            <th class="text-right">
+                <span ng-bind="'common.actions'|translate"></span>
+            </th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr ng-repeat="item in uploader.queue">
+            <td>
+                <b ng-bind="item.file.name"></b>
             </td>
             <td>
-                <div class="tag tag-inline" ng-repeat="item in uploader.queue">
-                    <span ng-bind="item.file.name" title="{{item.file.size/1024/1024|number:2}} MB"></span>
-                    <a class="text-danger" ng-click="item.remove()" ng-if="!item.isUploaded">
-                        <i class="glyphicon glyphicon-trash"></i>
-                    </a>
-                    <i class="text-success glyphicon glyphicon-ok" ng-if="item.isSuccess"></i>
-                    <i class="text-danger glyphicon glyphicon-exclamation-sign" ng-if="item.isError"></i>
-                </div>
-
+                {{item.file.size/1024/1024|number:2}} MB
             </td>
-            <td style="width:300px;text-align:right;vertical-align: top;">
-                <div class="pull-right btn-group btn-group-sm">
-                    <button type="button" class="btn btn-success"
-                            ng-click="uploader.uploadAll()"
-                            ng-if="uploader.getNotUploadedItems().length">
-                        <i class="glyphicon glyphicon-upload"></i>
-                        <span ng-bind="'common.uploadAll'|translate"></span>
-                    </button>
-                    <button type="button" class="btn btn-warning" ng-click="uploader.cancelAll()"
-                            ng-if="uploader.isUploading">
-                        <i class="glyphicon glyphicon-ban-circle"></i>
-                        <span ng-bind="'common.cancelAll'|translate"></span>
-                    </button>
-                    <button type="button" class="btn btn-danger"
-                            ng-click="uploader.clearQueue()"
-                            ng-if="uploader.queue.length">
-                        <i class="glyphicon glyphicon-trash"></i>
-                        <span ng-bind="'common.removeAll'|translate"></span>
-                    </button>
-                </div>
-
+            <td>
+                &nbsp;&nbsp;
+                <i class="fa fa-clock-o" ng-if="!item.isUploaded && !item.isUploading"></i>
+                <i class="text-info fa fa-spin fa-spinner" ng-if="item.isUploading"></i>
+                <i class="text-success glyphicon glyphicon-ok" ng-if="item.isSuccess"></i>
+                <i class="text-danger glyphicon glyphicon-exclamation-sign" ng-if="item.isError"></i>
+            </td>
+            <td style="text-align:right;">
+                <a class="text-danger" ng-click="item.remove()" ng-if="!item.isUploaded">
+                    <i class="glyphicon glyphicon-trash"></i>
+                </a>
             </td>
         </tr>
         </tbody>

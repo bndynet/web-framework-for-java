@@ -8,23 +8,29 @@
                     ng-bind="'common.saveChanges'|translate"></button>
         </ui-page-content-header-right>
 
-        <div class="form-group">
-            <ui-html-editor ng-model="viewModel.content"></ui-html-editor>
-        </div>
+        <div class="row">
+            <div class="col-md-8">
+                <div class="form-group">
+                    <ui-html-editor ng-model="viewModel.content"></ui-html-editor>
+                </div>
+            </div>
+            <div class="col-md-4">
+                <div class="form-group" ng-if="viewModel.attachments && viewModel.attachments.length > 0">
+                    <div class="tag" ng-repeat="item in viewModel.attachments">
+                        <a href="/files/{{item.uuid}}" target="_blank">
+                            <span ng-bind="item.name"></span>.<span ng-bind="item.extName"></span>
+                        </a>
+                        <a class="text-danger pull-right" ng-click="removeAttachment(item)">
+                            <i class="glyphicon glyphicon-trash"></i>
+                        </a>
+                    </div>
+                </div>
 
-        <div class="form-group">
-            <div class="tag tag-inline" ng-repeat="item in viewModel.attachments">
-                <a href="/files/{{item.uuid}}" target="_blank">
-                    <span ng-bind="item.name"></span>.<span ng-bind="item.extName"></span>
-                </a>
-                <a class="text-danger" ng-click="removeAttachment(item)">
-                    <i class="glyphicon glyphicon-trash"></i>
-                </a>
+                <div class="form-group">
+                    <ui-upload multiple label="common.attachments" url="/api/cms/pages/upload" on-item-success="uploaded(result)"></ui-upload>
+                </div>
             </div>
         </div>
 
-        <div class="form-group">
-            <ui-upload multiple label="common.attachments" url="/api/cms/pages/upload" on-item-success="uploaded(result)"></ui-upload>
-        </div>
     </ui-page-content>
 </div>

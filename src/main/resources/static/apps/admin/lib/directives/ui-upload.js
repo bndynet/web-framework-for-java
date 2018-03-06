@@ -12,7 +12,7 @@ angular.module('app')
                 onItemSuccess: '&?',
             },
             templateUrl: '/static/apps/admin/lib/directives/ui-upload.html',
-            compile: function() {
+            compile: function(elem, attrs) {
                 return {
                     pre: function(scope, element, attrs) {
                         scope.uploader = new FileUploader({
@@ -33,8 +33,14 @@ angular.module('app')
                         if (attrs.multiple || attrs.multiple === '') {
                             element.find('[type=file]').attr('multiple', attrs.multiple);
                         }
+                        attrs.$observe('reloadOn', function(data) {
+                            scope.uploader.clearQueue();
+                        }, true);
                     },
                 };
+            },
+            link: function() {
+                console.log('LINK');
             },
         };
     });
