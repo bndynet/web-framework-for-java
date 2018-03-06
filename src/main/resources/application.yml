@@ -70,8 +70,8 @@ spring:
   # Upload
   http:
     multipart:
-      max-file-size: 1024KB
-      max-request-size: 1024KB
+      max-file-size: -1 #1024KB
+      max-request-size: -1  #1024KB
 
   # MVC
   mvc:
@@ -85,7 +85,7 @@ spring:
 
   # DATASOURCE (DataSourceAutoConfiguration & DataSourceProperties)  
   datasource:
-    url: jdbc:mysql://localhost:3306/wf?useSSL=false
+    url: jdbc:mysql://localhost:3306/wf?useSSL=false&characterEncoding=utf8
     username: root
     password: 123456
     driver-class: com.mysql.jdbc.Driver
