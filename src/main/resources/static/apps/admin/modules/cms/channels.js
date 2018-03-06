@@ -5,6 +5,7 @@ angular.module('app')
             $scope.boTypes = [];
             $scope.sameTypeChannels = [];
             $scope.exchangeTitle = null;
+            $scope.isSaving = false;
 
             function initData() {
                 appDialog.loading();
@@ -72,10 +73,15 @@ angular.module('app')
                 dialogForm.show();
             };
             $scope.save = function() {
+                $scope.isSaving = true;
+                appDialog.loading();
                 appService.ajaxSave('/api/cms/channels', $scope.formModel).then(function() {
                     initData();
                     appDialog.success();
                     dialogForm.close();
+                }).finally(function() {
+                    $scope.isSaving = false;
+                    appDialog.loading(false);
                 });
             }
             $scope.toggleVisible = function(item) {

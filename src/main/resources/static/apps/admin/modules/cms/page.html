@@ -4,7 +4,7 @@
 
     <ui-page-content>
         <ui-page-content-header-right>
-            <button type="button" class="btn btn-sm btn-primary" ng-click="save()"
+            <button type="button" class="btn btn-sm btn-primary" ng-click="save()" ui-wait-on="isSaving"
                     ng-bind="'common.saveChanges'|translate"></button>
         </ui-page-content-header-right>
 

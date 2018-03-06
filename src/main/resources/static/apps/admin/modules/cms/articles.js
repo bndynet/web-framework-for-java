@@ -12,6 +12,7 @@ angular.module('app')
             var channelId = $stateParams.obj.id;
             $scope.pager = {};
             $scope.channel = null;
+            $scope.isSaving = false;
 
             function initData(page) {
                 if (!page) {
@@ -52,10 +53,15 @@ angular.module('app')
             };
             $scope.save = function() {
                 $scope.formModel.channelId = $scope.channel.id;
+                $scope.isSaving = true;
+                appDialog.loading();
                 appService.ajaxSave('/api/cms/articles', $scope.formModel).then(function() {
                     initData();
                     appDialog.success();
+                }).finally(function() {
+                    $scope.isSaving = false;
                     dialogForm.close();
+                    appDialog.loading(false);
                 });
             };
             $scope.remove = function(item) {

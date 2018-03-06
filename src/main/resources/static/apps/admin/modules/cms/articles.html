@@ -9,9 +9,10 @@
                        on-search="search(__model)"></ui-search>
         </ui-page-content-header-left>
         <ui-page-content-header-right>
-            <a class="btn btn-sm btn-primary"
-               ng-click="edit()"
-               ng-bind="'common.add'|translate"></a>
+            <button class="btn btn-sm btn-primary" ng-click="edit()">
+                <i class="glyphicon glyphicon-plus-sign"></i>
+                <span ng-bind="'common.add'|translate"></span>
+            </button>
         </ui-page-content-header-right>
         <ui-page-content-footer>
             <bn-ui-pager ng-model="pager" on-page="pageUsers(page)"></bn-ui-pager>
@@ -73,6 +74,7 @@
            <ui-dialog-footer>
                <div class="pull-right">
                    <button type="button" class="btn btn-primary"
+                           ui-wait-on="isSaving"
                            ng-disabled="form.$invalid"
                            ng-bind="'common.saveChanges'|translate"
                            ng-click="save()">

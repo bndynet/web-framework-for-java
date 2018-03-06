@@ -10,6 +10,7 @@ angular.module('app')
             var params = $stateParams.obj || {};
 
             $scope.viewModel = { };
+            $scope.isSaving = false;
 
             function initData() {
                 appDialog.loading();
@@ -23,11 +24,14 @@ angular.module('app')
             initData();
 
             $scope.save = function() {
+                $scope.isSaving = true;
                 appDialog.loading();
                 appService.ajaxSave('/api/cms/pages', $scope.viewModel).then(function(d) {
                     $scope.viewModel = d;
-                    appDialog.loading(false);
                     appDialog.success();
+                }).finally(function() {
+                    $scope.isSaving = false;
+                    appDialog.loading(false);
                 });
             };
 

@@ -5,8 +5,10 @@
 
     <ui-page-content>
         <ui-page-content-header-right>
-            <button type="button" class="btn btn-sm btn-primary" ng-click="add()"
-                    ng-bind="'admin.modules.cms.channels.addChannel'|translate"></button>
+            <button type="button" class="btn btn-sm btn-primary" ng-click="add()">
+                <i class="glyphicon glyphicon-plus-sign"></i>
+                <span ng-bind="'admin.modules.cms.channels.addChannel'|translate"></span>
+            </button>
         </ui-page-content-header-right>
         <div class="tree">
             <div ng-include="'itemTpl'"
@@ -128,6 +130,7 @@
             </div>
             <div class="pull-right">
                 <button type="button" class="btn btn-primary"
+                        ui-wait-on="isSaving"
                         ng-disabled="form.$invalid"
                         ng-bind="'common.saveChanges'|translate"
                         ng-click="save()">
