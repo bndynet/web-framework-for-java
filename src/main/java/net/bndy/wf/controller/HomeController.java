@@ -5,6 +5,7 @@
 package net.bndy.wf.controller;
 
 import java.io.*;
+import java.net.URLEncoder;
 import java.nio.file.Paths;
 
 import net.bndy.lib.IOHelper;
@@ -17,7 +18,6 @@ import org.springframework.http.MediaType;
 import org.springframework.stereotype.Controller;
 import org.springframework.util.FileCopyUtils;
 import org.springframework.web.bind.annotation.*;
-import org.springframework.web.multipart.MultipartFile;
 
 import javax.servlet.http.HttpServletResponse;
 
@@ -55,7 +55,7 @@ public class HomeController extends _BaseController {
 					break;
                 default:
                     resp.addHeader("Content-Disposition",
-						"attachment; filename=\"" + f.getFullname() + "\"");
+						"attachment; filename=\"" + URLEncoder.encode(f.getFullname(), "UTF-8") + "\"");
                     break;
 			}
 			FileCopyUtils.copy(new FileInputStream(filePath), resp.getOutputStream());
@@ -68,25 +68,5 @@ public class HomeController extends _BaseController {
         String filePath = Paths.get(new ClassPathResource("/").getFile().getAbsolutePath(), this.applicationConfig.getDefaultUserAvatar()).toAbsolutePath().toString();
         FileCopyUtils.copy(new FileInputStream(filePath), resp.getOutputStream());
         resp.flushBuffer();
-	}
-	
-	@RequestMapping("/test/upload")
-	public String upload() {
-		return "/upload";
-	}
-	
-	@PostMapping("/test/upload/handler") 
-	public String upload(@RequestParam("file") MultipartFile file) throws IllegalStateException, IOException {
-		String destFile = new File(".").getCanonicalPath() + File.separator + file.getOriginalFilename();
-		InputStream in = file.getInputStream();
-		OutputStream out = new FileOutputStream(new File(destFile));
-		int read = 0;
-		byte[] bytes = new byte[1024];
-		while((read = in.read(bytes)) != -1) {
-			out.write(bytes, 0, read);
-		}
-		out.flush();
-		out.close();
-		return file.getOriginalFilename();
 	}
 }
