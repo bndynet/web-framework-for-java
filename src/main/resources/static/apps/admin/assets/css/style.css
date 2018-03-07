@@ -462,7 +462,16 @@ md-backdrop.md-dialog-backdrop {
 }
 
 /* override others */
-ui-page-content-header-right .btn {
+.box-header .text-block {
+  padding: 5px 0;
+  display: inline-block;
+}
+
+.box-header ui-page-content-header-left .btn {
+  margin-right: 5px;
+}
+
+.box-header ui-page-content-header-right .btn {
   margin-left: 5px;
 }
 

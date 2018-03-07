@@ -1,0 +1,28 @@
+<div ng-controller="FilesCtrl">
+    <ui-page-header title="'admin.modules.core.files.title'"
+                    breadcrumbs="[{'text': 'admin.modules.core.files.title'}]"></ui-page-header>
+    <ui-page-content>
+        <ui-page-content-header-left>
+            <span class="text-block" ng-bind="'common.msgTotal'|translate: [files.length]"></span>
+        </ui-page-content-header-left>
+
+        <table class="table">
+            <thead>
+            <tr>
+                <th ng-bind="'admin.modules.core.files.fieldName'|translate"></th>
+                <th ng-bind="'admin.modules.core.files.fieldUrl'|translate"></th>
+                <th ng-bind="'admin.modules.core.files.fieldUploadedAt'|translate"></th>
+                <th ng-bind="'common.actions'|translate"></th>
+            </tr>
+            </thead>
+            <tr ng-repeat="item in files">
+                <td>
+                    <b ng-bind="item.fullname"></b>
+                </td>
+                <td ng-bind="item.url"></td>
+                <td ng-bind="item.createDate | appDateTime"></td>
+                <td class="text-right"></td>
+            </tr>
+        </table>
+    </ui-page-content>
+</div>

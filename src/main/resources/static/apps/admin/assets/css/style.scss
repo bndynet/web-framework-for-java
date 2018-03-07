@@ -487,10 +487,22 @@ md-backdrop.md-dialog-backdrop {
 
 
 /* override others */
+.box-header {
+  .text-block {
+    padding: 5px 0;
+    display: inline-block;
+  }
 
-ui-page-content-header-right {
-  .btn {
-    margin-left: 5px;
+  ui-page-content-header-left {
+    .btn {
+      margin-right: 5px;
+    }
+  }
+
+  ui-page-content-header-right {
+    .btn {
+      margin-left: 5px;
+    }
   }
 }
 
