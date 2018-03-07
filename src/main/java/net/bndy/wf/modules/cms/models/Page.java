@@ -17,6 +17,7 @@ public class Page extends _BaseEntity {
 
 	private static final long serialVersionUID = 1L;
 
+	@Column(columnDefinition = "BIGINT UNSIGNED")
 	private long channelId;
 	private String title;
 	@Column(columnDefinition="TEXT")
@@ -26,6 +27,9 @@ public class Page extends _BaseEntity {
 		joinColumns = @JoinColumn(name = "page_id"),
 		inverseJoinColumns = @JoinColumn(name = "file_id"))
 	private Set<File> attachments;
+	@OneToOne(fetch = FetchType.LAZY)
+	@JoinColumn(name="channel_id", insertable = false, updatable = false)
+    private Channel channel;
 	@Transient
 	private org.springframework.data.domain.Page<Comment> comments;
 	
@@ -59,4 +63,10 @@ public class Page extends _BaseEntity {
     public void setAttachments(Set<File> attachments) {
         this.attachments = attachments;
     }
+	public Channel getChannel() {
+		return channel;
+	}
+	public void setChannel(Channel channel) {
+		this.channel = channel;
+	}
 }

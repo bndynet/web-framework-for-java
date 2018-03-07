@@ -488,6 +488,12 @@ md-backdrop.md-dialog-backdrop {
 
 /* override others */
 
+ui-page-content-header-right {
+  .btn {
+    margin-left: 5px;
+  }
+}
+
 .datepicker {
   padding: 6px 12px;
 }

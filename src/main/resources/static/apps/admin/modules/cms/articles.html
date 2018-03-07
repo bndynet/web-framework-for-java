@@ -28,7 +28,9 @@
             </thead>
             <tbody>
             <tr ng-repeat="item in pager.content">
-                <td ng-bind="item.title"></td>
+                <td>
+                    <a target="_blank" href="/article/{{item.titleKey}}" ng-bind="item.title"></a>
+                </td>
                 <td ng-bind="item.createDate | date: 'yyyy-MM-dd HH:mm'"></td>
                 <td ng-bind="item.lastUpdate | date: 'yyyy-MM-dd HH:mm'"></td>
                 <td class="text-right">

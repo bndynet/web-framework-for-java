@@ -18,6 +18,7 @@ public class Article extends _BaseEntity {
 	private static final long serialVersionUID = 1L;
 	
 	private Long userId;
+	@Column(columnDefinition = "BIGINT UNSIGNED")
 	private long channelId;
 	private String title;
 	private String titleKey;
@@ -29,6 +30,9 @@ public class Article extends _BaseEntity {
 		joinColumns = @JoinColumn(name = "article_id"),
 		inverseJoinColumns = @JoinColumn(name = "file_id"))
 	private Set<File> attachments;
+	@OneToOne(fetch = FetchType.LAZY)
+	@JoinColumn(name="channel_id", insertable = false, updatable = false)
+	private Channel channel;
 	
 	public Set<File> getAttachments() {
 		return attachments;
@@ -65,5 +69,11 @@ public class Article extends _BaseEntity {
 	}
 	public void setChannelId(long channelId) {
 		this.channelId = channelId;
+	}
+	public Channel getChannel() {
+		return channel;
+	}
+	public void setChannel(Channel channel) {
+		this.channel = channel;
 	}
 }
