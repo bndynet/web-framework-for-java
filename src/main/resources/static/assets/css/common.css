@@ -95,6 +95,10 @@ img.circle {
 }
 
 /* bootstrap */
+.text-warning {
+  color: #f48024;
+}
+
 .navbar .nav li a img {
   position: relative;
   height: 32px;

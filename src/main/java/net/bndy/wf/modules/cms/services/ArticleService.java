@@ -22,6 +22,7 @@ import net.bndy.wf.modules.cms.services.repositories.*;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.stream.Collectors;
 
 @Service
 @Transactional
@@ -71,6 +72,8 @@ public class ArticleService extends _BaseService<Article> {
             complexKey = false;
         }
         entity = super.save(entity);
+        this.fileService.setRef(entity.getAttachments().stream().map(x -> x.getId()).collect(Collectors.toList()));
+
         if (complexKey) {
             entity.setTitleKey(key + "-" + entity.getId());
             entity = super.save(entity);

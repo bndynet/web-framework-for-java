@@ -19,6 +19,7 @@ import net.bndy.wf.modules.cms.services.repositories.*;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.stream.Collectors;
 
 @Service
 @Transactional
@@ -84,6 +85,9 @@ public class PageService extends _BaseService<Page> {
                 this.fileService.delete(f.getId());
             }
         }
+
+        this.fileService.setRef(entity.getAttachments().stream().map(x -> x.getId()).collect(Collectors.toList()));
+
         return super.save(entity);
     }
 

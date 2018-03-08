@@ -11,6 +11,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.util.List;
+
 @Service
 @Transactional
 public class FileService extends _BaseService<File> {
@@ -19,6 +21,10 @@ public class FileService extends _BaseService<File> {
     private FileRepository fileRepository;
 
     public File getByUuid(String uuid) {
-        return fileRepository.findByUuid(uuid);
+        return this.fileRepository.findByUuid(uuid);
+    }
+
+    public void setRef(List<Long> ids) {
+        this.fileRepository.setRef(ids);
     }
 }

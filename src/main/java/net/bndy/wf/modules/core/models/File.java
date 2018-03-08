@@ -22,6 +22,7 @@ public class File extends _BaseEntity {
     private String extName;
     private long size;
     private String path;
+    private boolean isRef;
 
     @Enumerated(EnumType.ORDINAL)
     private FileType type;
@@ -89,4 +90,13 @@ public class File extends _BaseEntity {
 
         return this.getName();
     }
+
+    public boolean isRef() {
+        return isRef;
+    }
+
+    public void setRef(boolean ref) {
+        isRef = ref;
+    }
+
 }
