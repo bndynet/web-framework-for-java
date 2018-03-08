@@ -1,4 +1,4 @@
-var app = angular.module('app', ['ngCookies', 'ngMessages', 'pascalprecht.translate', 'ngAnimate', 'ngMaterial', 'ui.router', 'toaster', 'bn.ui', 'ngFileUpload', 'angularFileUpload']);
+var app = angular.module('app', ['ngCookies', 'ngMessages', 'ngclipboard', 'pascalprecht.translate', 'ngAnimate', 'ngMaterial', 'ui.router', 'toaster', 'bn.ui', 'ngFileUpload', 'angularFileUpload']);
 
 app.config(['$provide', '$qProvider', '$httpProvider', '$stateProvider', '$translateProvider', function ($provide, $qProvider, $httpProvider, $stateProvider, $translateProvider) {
     $qProvider.errorOnUnhandledRejections(false);

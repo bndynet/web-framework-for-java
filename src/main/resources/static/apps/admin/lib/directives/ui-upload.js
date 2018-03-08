@@ -4,7 +4,6 @@ angular.module('app')
     function(FileUploader, appDialog) {
         return {
             restrict: 'E',
-            replace: true,
             scope: {
                 url: '@',
                 multiple: '@?',

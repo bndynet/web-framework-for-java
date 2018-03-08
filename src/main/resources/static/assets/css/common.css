@@ -40,8 +40,32 @@ img.circle {
   outline: none;
 }
 
+.margin {
+  margin: 15px;
+}
+
+.margin-sm {
+  margin: 10px;
+}
+
+.margin-xs {
+  margin: 5px;
+}
+
 .no-margin {
   margin: 0;
+}
+
+.padding {
+  padding: 15px;
+}
+
+.padding-sm {
+  padding: 10px;
+}
+
+.padding-xs {
+  padding: 5px;
 }
 
 .no-padding {
@@ -271,5 +295,13 @@ img.circle {
 
 .tag.danger a {
   color: #ffffff;
+}
+
+.hover .hover-target {
+  display: none;
+}
+
+.hover:hover .hover-target {
+  display: block;
 }
 /*# sourceMappingURL=common.css.map */

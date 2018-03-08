@@ -12,5 +12,33 @@ angular.module('app')
             });
         }
 
+        $scope.uploaded = function(result) {
+            $scope.files.splice(0, 0, result);
+        };
+
+        $scope.getFileIcon = function(file) {
+            switch(file.type) {
+                case 'IMAGE':
+                    return file.url;
+                default:
+                    return '/static/assets/img/fileTypes/' + file.extName + '.png';
+            }
+
+            return '/static/assets/img/fileTypes/_blank.png';
+        };
+
+        $scope.remove = function(file) {
+            appDialog.confirmDeletion(function() {
+                appService.ajaxDelete('/api/core/files/' + file.id).then(function() {
+                    $scope.files.splice($scope.files.indexOf(file), 1);
+                    appDialog.success();
+                });
+            });
+        };
+
+        $scope.copied = function(file) {
+            appDialog.success('common.msgCopied');
+        };
+
         initData();
     });

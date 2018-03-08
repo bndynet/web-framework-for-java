@@ -503,6 +503,21 @@ md-backdrop.md-dialog-backdrop {
     .btn {
       margin-left: 5px;
     }
+
+    ui-upload {
+      .btn-group {
+        float: right;
+      }
+    }
+  }
+
+  ui-upload {
+    .table {
+      position: relative;
+      z-index: 100;
+      background-color: #ffffff;
+      box-shadow: 0 3px 5px $color-text-dark;
+    }
   }
 }
 
@@ -545,4 +560,8 @@ md-backdrop.md-dialog-backdrop {
       margin-left: #{$i * 2}rem;
     }
   }
+}
+
+.radius {
+  border-radius: 4px;
 }
