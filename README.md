@@ -26,6 +26,7 @@
 - Role Management
 - Menu Management
 - Application Management
+- File Resource Management
 - User Profile
 - OAuth Endpoints
 - International Support
@@ -51,7 +52,7 @@
     
 **Implemented AngularJS Components**
 
-ui-actions, ui-dialog, ui-html-editor, ui-input, ui-menu-tree, ui-no-data, ui-notifications, ui-page-content, ui-page-header, ui-search, ui-tree, ui-upload
+ui-actions, ui-dialog, ui-html-editor, ui-input, ui-menu-tree, ui-no-data, ui-notifications, ui-page-content, ui-page-header, ui-search, ui-tree, ui-upload, ui-wait-on
     
 **Recommend:**
 
