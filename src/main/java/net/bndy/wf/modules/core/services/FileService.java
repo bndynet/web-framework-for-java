@@ -25,6 +25,8 @@ public class FileService extends _BaseService<File> {
     }
 
     public void setRef(List<Long> ids) {
-        this.fileRepository.setRef(ids);
+        if (ids != null && ids.size() > 0) {
+            this.fileRepository.setRef(ids);
+        }
     }
 }
