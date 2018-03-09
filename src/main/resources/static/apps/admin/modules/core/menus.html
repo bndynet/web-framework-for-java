@@ -4,7 +4,10 @@
                     breadcrumbs="[{'text': 'admin.modules.core.menus.title'}]"></ui-page-header>
     <ui-page-content>
         <ui-page-content-header-right>
-            <button type="button" class="btn btn-sm btn-primary" ng-click="add()" ng-bind="'admin.modules.core.menus.addMenu'|translate"></button>
+            <button type="button" class="btn btn-sm btn-primary" ng-click="add()">
+                <i class="fa fa-fw fa-plus-circle"></i>
+                <span ng-bind="'admin.modules.core.menus.addMenu'|translate"></span>
+            </button>
         </ui-page-content-header-right>
 
         <ui-menu-tree ng-model="menus"

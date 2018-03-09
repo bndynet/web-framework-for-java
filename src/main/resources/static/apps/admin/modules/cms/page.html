@@ -5,11 +5,13 @@
     <ui-page-content ng-if="viewModel.id">
         <ui-page-content-header-right>
             <a target="_blank" class="btn btn-sm btn-default" href="/page/{{viewModel.channel.nameKey}}">
-                <i class="fa fa-internet-explorer" aria-hidden="true"></i>
+                <i class="fa fa-fw fa-internet-explorer" aria-hidden="true"></i>
                 <span ng-bind="'common.preview'|translate"></span>
             </a>
-            <button type="button" class="btn btn-sm btn-primary" ng-click="save()" ui-wait-on="isSaving"
-                    ng-bind="'common.saveChanges'|translate"></button>
+            <button type="button" class="btn btn-sm btn-primary" ng-click="save()" ui-wait-on="isSaving">
+                <i class="fa fa-fw fa-save"></i>
+                <span ng-bind="'common.saveChanges'|translate"></span>
+            </button>
         </ui-page-content-header-right>
 
         <div>
@@ -22,8 +24,11 @@
                 <div class="form-group" ng-if="viewModel.attachments && viewModel.attachments.length > 0">
                     <div class="tag" ng-repeat="item in viewModel.attachments">
                         <a href="/files/{{item.uuid}}" target="_blank">
-                            <span ng-bind="item.name"></span>.<span ng-bind="item.extName"></span>
+                            <b ng-bind="item.fullname"></b>
                         </a>
+                        <small>
+                            ({{item.size/1024/1024|number:2}} MB, {{item.createTime|appDateTime}})
+                        </small>
                         <a class="text-danger pull-right" ng-click="removeAttachment(item)">
                             <i class="glyphicon glyphicon-trash"></i>
                         </a>

@@ -10,8 +10,10 @@
                        on-search="search(__model)"></ui-search>
         </ui-page-content-header-left>
         <ui-page-content-header-right>
-            <a class="btn btn-sm btn-primary" href="/sso/signup" target="_blank"
-               ng-bind="'admin.modules.core.users.addUser'|translate"></a>
+            <a class="btn btn-sm btn-primary" href="/sso/signup" target="_blank">
+                <i class="fa fa-fw fa-plus-circle"></i>
+                <span ng-bind="'admin.modules.core.users.addUser'|translate"></span>
+            </a>
         </ui-page-content-header-right>
         <ui-page-content-footer>
             <bn-ui-pager ng-model="pager" on-page="pageUsers(page)"></bn-ui-pager>

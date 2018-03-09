@@ -7,6 +7,7 @@ $color-light:#ecf0f5;
 $color-black:#222d32;
 $color-text-light: rgba(255, 255, 255, 0.87);
 $color-text-dark: #333333;
+$color-gray: #d2d6de;
 
 $color-primary: #3c8dbc;
 
@@ -153,7 +154,10 @@ html, body {
     margin-top: .5rem;
   }
   .lockscreen-wrapper {
-    margin-top: 20%;
+    margin-top: 10%;
+    .lockscreen-name {
+      font-size: 1.25rem;
+    }
   }
 }
 
@@ -262,6 +266,21 @@ md-toolbar,
           margin-bottom: 0;
           .box-header {
             height: 41px;
+            &>.header-center {
+              position: absolute;
+              top: 0;
+              padding-right: 20px;
+              width: 100%;
+              height: 0;
+              z-index: 88;
+              text-align: center;
+              .msg-block {
+                display: inline-block;
+                padding: 0 10px 3px 10px;
+                border-radius: 0 0 3px 3px;
+                background: linear-gradient($color-gray, lighten($color-gray, 10%));
+              }
+            }
             &>.box-tools {
               &.pull-left {
                 left: 10px;
@@ -537,6 +556,32 @@ md-backdrop.md-dialog-backdrop {
   }
 }
 
+/* angularjs component styles */
+.btn[ui-wait-on] {
+  position: relative;
+  .in-process {
+    position: absolute; 
+    width: 100%; 
+    top: 0; 
+    left: 0; 
+    line-height: 32px;
+  }
+  &.btn-xs {
+    .in-process {
+      line-height: 20px;
+    }
+  }
+  &.btn-sm {
+    .in-process {
+      line-height: 28px;
+    }
+  }
+  &.btn-lg {
+    .in-process {
+      line-height: 42px;
+    }
+  }
+}
 
 /* misc */
 
