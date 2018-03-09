@@ -2,80 +2,105 @@
     <ui-page-header title="'admin.modules.core.userProfile.title'"
                     breadcrumbs="[{'text': 'admin.modules.core.userProfile.title'}]"></ui-page-header>
 
-    <ui-page-content>
-        <form name="mainForm" class="col-sm-8 col-sm-offset-2">
+    <div class="row">
+        <div class="col-md-6 col-md-offset-3">
             <div class="row">
-                <div class="col-xs-7">
-                    <div class="row">
-                        <div class="col-xs-6">
-                            <ui-input name="realName"
-                                      label="admin.modules.core.userProfile.labelRealName"
-                                      ng-model="viewModel.realName"></ui-input>
+                <div class="col-xs-4 padding-xs">
+                    <div class="box box-info" style="height: 340px;">
+                        <div class="box-header with-border">
+                            <h3 class="box-title" ng-bind="'admin.modules.core.userProfile.titleAvatar'|translate"></h3>
                         </div>
-                        <div class="form-group col-xs-6">
-                            <label>&nbsp;</label>
-                            <div class="form-control-static">
-                                <md-radio-group layout="row" ng-model="viewModel.gender">
-                                    <md-radio-button flex="1" value="1">
-                                        {{'admin.modules.core.userProfile.valueMale'|translate}}
-                                    </md-radio-button>
-                                    <md-radio-button flex="1" value="0">
-                                        {{'admin.modules.core.userProfile.valueFemale'|translate}}
-                                    </md-radio-button>
-                                </md-radio-group>
-                            </div>
+                        <div class="box-body text-center padding">
+                            <img alt="User Image" class="radius" ng-src="{{user.avatar}}" style="width: 100%;">
+                            <br/>
+                            <br/>
+                            <a class="btn btn-flat btn-default" ngf-select="uploadAvatar($file, $invalidFiles)"
+                               accept="image/*" ngf-max-height="1000" ngf-max-size="1MB">
+                                {{'admin.modules.core.userProfile.uploadAvatar'|translate}}
+                            </a>
                         </div>
                     </div>
-
-                    <ui-input label="admin.modules.core.userProfile.labelEmail"
-                              name="email"
-                              type="email"
-                              error-message="common.msgInvalidEmail"
-                              ng-model="viewModel.email"></ui-input>
-
-                    <div class="form-group">
-                        <label ng-bind="'admin.modules.core.userProfile.labelBirthday'|translate"></label>
-                        <input type="text" class="datepicker form-control" ng-model="viewModel.birthday" />
-                    </div>
-                    <button class="btn btn-flat btn-primary" ng-click="updateProfile()" ng-disabled="!mainForm.$valid">
-                        {{'admin.modules.core.userProfile.updateProfile'|translate}}
-                    </button>
                 </div>
-                <div class="col-xs-5">
-                    <div class="text-center">
-                        <img alt="User Image" class="img-radius" ng-src="{{user.avatar}}" style="width: 200px;">
-                        <br />
-                        <br />
-                        <a class="btn btn-flat btn-default" ngf-select="uploadAvatar($file, $invalidFiles)"
-                           accept="image/*" ngf-max-height="1000" ngf-max-size="1MB">
-                            {{'admin.modules.core.userProfile.uploadAvatar'|translate}}
-                        </a>
+                <div class="col-xs-8 padding-xs">
+                    <div class="box box-primary">
+                        <div class="box-header with-border">
+                            <h3 class="box-title"
+                                ng-bind="'admin.modules.core.userProfile.titleGeneralInfo'|translate"></h3>
+                        </div>
+                        <div class="box-body">
+                            <form name="mainForm">
+                                <div class="row">
+                                    <div class="col-xs-6">
+                                        <ui-input name="realName"
+                                                  label="admin.modules.core.userProfile.labelRealName"
+                                                  ng-model="viewModel.realName"></ui-input>
+                                    </div>
+                                    <div class="form-group col-xs-6">
+                                        <label>&nbsp;</label>
+                                        <div class="form-control-static">
+                                            <md-radio-group layout="row" ng-model="viewModel.gender">
+                                                <md-radio-button flex="1" value="1">
+                                                    {{'admin.modules.core.userProfile.valueMale'|translate}}
+                                                </md-radio-button>
+                                                <md-radio-button flex="1" value="0">
+                                                    {{'admin.modules.core.userProfile.valueFemale'|translate}}
+                                                </md-radio-button>
+                                            </md-radio-group>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <ui-input label="admin.modules.core.userProfile.labelEmail"
+                                          name="email"
+                                          type="email"
+                                          error-message="common.msgInvalidEmail"
+                                          ng-model="viewModel.email"></ui-input>
+
+                                <div class="form-group">
+                                    <label ng-bind="'admin.modules.core.userProfile.labelBirthday'|translate"></label>
+                                    <input type="text" class="datepicker form-control" ng-model="viewModel.birthday"/>
+                                </div>
+                                <button class="btn btn-flat btn-primary" ng-click="updateProfile()"
+                                        ui-wait-on="isUpdatingProfile" ng-disabled="!mainForm.$valid">
+                                    {{'admin.modules.core.userProfile.updateProfile'|translate}}
+                                </button>
+                            </form>
+                        </div>
                     </div>
                 </div>
             </div>
-        </form>
 
-        <form name="pwdForm" class="col-sm-8 col-sm-offset-2">
-            <h2 class="with-border">{{'admin.modules.core.userProfile.titleChangePassword'|translate}}</h2>
             <div class="row">
-                <div class="col-xs-7">
-                    <ui-input name="oldPassword" label="admin.modules.core.userProfile.oldPassword" type="password"
-                              required="true" ng-model="pwdModel.oldPassword"></ui-input>
-                    <ui-input name="newPassword" label="admin.modules.core.userProfile.newPassword" type="password"
-                              required="true" ng-model="pwdModel.newPassword"></ui-input>
-                    <ui-input name="confirmPassword" label="admin.modules.core.userProfile.confirmPassword" type="password"
-                              has-error="pwdModel.newPassword != pwdModel.confirmPassword"
-                              error-message="admin.modules.core.userProfile.unmatchedConfirmPassword"
-                              required="true" ng-model="pwdModel.confirmPassword"></ui-input>
-                    <div class="form-group">
-                        <button type="button" class="btn btn-flat btn-primary" ng-disabled="pwdForm.$invalid || pwdModel.newPassword != pwdModel.confirmPassword" ng-click="changePassword()">
-                            {{'admin.modules.core.userProfile.updatePassword'|translate}}
-                        </button>
+                <div class="col-xs-12 padding-xs">
+                    <div class="box box-danger">
+                        <div class="box-header with-border">
+                            <h3 class="box-title"
+                                ng-bind="'admin.modules.core.userProfile.titleChangePassword'|translate"></h3>
+                        </div>
+                        <div class="box-body">
+                            <form name="pwdForm">
+                                <ui-input name="oldPassword" label="admin.modules.core.userProfile.oldPassword"
+                                          type="password"
+                                          required="true" ng-model="pwdModel.oldPassword"></ui-input>
+                                <ui-input name="newPassword" label="admin.modules.core.userProfile.newPassword"
+                                          type="password"
+                                          required="true" ng-model="pwdModel.newPassword"></ui-input>
+                                <ui-input name="confirmPassword" label="admin.modules.core.userProfile.confirmPassword"
+                                          type="password"
+                                          has-error="pwdModel.newPassword != pwdModel.confirmPassword"
+                                          error-message="admin.modules.core.userProfile.unmatchedConfirmPassword"
+                                          required="true" ng-model="pwdModel.confirmPassword"></ui-input>
+                                <button type="button" class="btn btn-flat btn-primary"
+                                        ui-wait-on="isChangingPassword"
+                                        ng-disabled="pwdForm.$invalid || pwdModel.newPassword != pwdModel.confirmPassword"
+                                        ng-click="changePassword()">
+                                    {{'admin.modules.core.userProfile.updatePassword'|translate}}
+                                </button>
+                            </form>
+                        </div>
                     </div>
                 </div>
-                <div class="col-xs-5"></div>
             </div>
-        </form>
-
-    </ui-page-content>
+        </div>
+    </div>
 </div>

@@ -55,23 +55,29 @@ app.controller('UserProfileCtrl', [ '$scope', 'appDialog', '$http', '$timeout', 
         };
 
         $scope.updateProfile = function() {
+            $scope.isUpdatingProfile = true;
             if ($scope.viewModel.id) {
                 $http.put('/api/core/userProfiles/' + $scope.viewModel.id, $scope.viewModel).then(function(res) {
                     appDialog.success();
                 }, function() {
                     appDialog.error();
+                }).finally(function() {
+                    $scope.isUpdatingProfile = false;
                 });
             } else {
                 $http.post('/api/core/userProfiles', $scope.viewModel).then(function(res) {
                     appDialog.success();
                 }, function() {
                     appDialog.error();
+                }).finally(function() {
+                    $scope.isUpdatingProfile = false;
                 });
             }
         };
 
         $scope.changePassword = function() {
             if ($scope.pwdModel.oldPassword && $scope.pwdModel.newPassword) {
+                $scope.isChangingPassword = true;
                 $http.post('/api/core/users/changePassword', {
                     oldPassword: $scope.pwdModel.oldPassword,
                     newPassword: $scope.pwdModel.newPassword
@@ -79,6 +85,8 @@ app.controller('UserProfileCtrl', [ '$scope', 'appDialog', '$http', '$timeout', 
                     $scope.pwdModel = null;
                     $scope.pwdForm.$setPristine();
                     appDialog.success();
+                }).finally(function() {
+                    $scope.isChangingPassword = false;
                 });
             }
         };
