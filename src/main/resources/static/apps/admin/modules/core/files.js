@@ -40,5 +40,15 @@ angular.module('app')
             appDialog.success('common.msgCopied');
         };
 
+        $scope.search = function(keywords) {
+            if (keywords) {
+                $scope.keywords = keywords;
+            }
+        };
+
+        $scope.cancelSearch = function() {
+            $scope.keywords = '';
+        };
+
         initData();
     });

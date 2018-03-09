@@ -3,17 +3,22 @@
                     breadcrumbs="[{'text': 'admin.modules.core.files.title'}]"></ui-page-header>
     <ui-page-content>
         <ui-page-content-header-left>
-            <b class="text-block" ng-bind="'common.msgTotal'|translate: [files.length]"></b>
+            <ui-search placeholder="admin.modules.core.files.searchByName"
+                       on-cancel="cancelSearch()"
+                       on-search="search(__model)"></ui-search>
         </ui-page-content-header-left>
         <ui-page-content-header-right>
             <ui-upload multiple label="common.file" url="/api/core/files/upload" on-item-success="uploaded(result)"></ui-upload>
         </ui-page-content-header-right>
+        <ui-page-content-header-center>
+            <span class="msg-block" ng-bind="'common.msgTotal'|translate: [(files | filter: {name: keywords}).length]"></span>
+        </ui-page-content-header-center>
 
-        <div class="col-sm-4 col-md-3" ng-repeat="item in files | orderBy: '-createDate'">
+        <div class="col-sm-4 col-md-3" ng-repeat="item in files | filter: {name: keywords} | orderBy: '-createDate'">
             <div class="media hover radius padding-sm">
                 <div class="media-left">
-                    <i class="fa fa-lock fa-2x text-warning" style="position:absolute;top:2px;left:18px;" ng-if="item.ref"></i>
-                    <img class="media-object" ng-src="{{getFileIcon(item)}}">
+                    <i class="fa fa-lock text-warning" style="position:absolute;top:2px;left:18px;" ng-if="item.ref"></i>
+                    <img class="media-object" ng-src="{{getFileIcon(item)}}" onerror="this.src='/static/assets/img/fileTypes/_blank.png'">
                 </div>
                 <div class="media-body">
                     <h4 class="media-heading">

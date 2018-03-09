@@ -1,6 +1,9 @@
 <section class="content">
     <div class="box box-default" ng-class="{'with-header': hasHeader, 'with-footer': hasFooter}">
         <div class="box-header with-border" ng-cloak ng-if="hasHeader">
+            <div class="header-center" ng-if="hasHeaderCenter">
+                <ng-transclude ng-transclude-slot="headerCenter"></ng-transclude>
+            </div>
             <div class="box-tools pull-left" ng-if="hasHeaderLeft">
                 <div ng-transclude="headerLeft"></div>
             </div>
