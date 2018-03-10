@@ -3,8 +3,8 @@ $color-red: #dd4b39;
 $color-yellow: #f39c12;
 $color-purple: #605ca8;
 $color-green: #00a65a;
-$color-light:#ecf0f5;
-$color-black:#222d32;
+$color-light: #ecf0f5;
+$color-black: #222d32;
 $color-text-light: rgba(255, 255, 255, 0.87);
 $color-text-dark: #333333;
 $color-gray: #d2d6de;
@@ -12,609 +12,661 @@ $color-gray: #d2d6de;
 $color-primary: #3c8dbc;
 
 html, body {
-  font-size: 13px;
+    font-size: 13px;
 }
 
 /* skins */
 
 .skin-blue,
 .skin-blue-light {
-  .modal-header,
-  .modal-header .close,
-  md-toolbar.md-default-theme:not(.md-menu-toolbar),
-  md-toolbar:not(.md-menu-toolbar),
-  md-switch.md-default-theme.md-checked.md-primary .md-thumb,
-  md-switch.md-checked.md-primary .md-thumb {
-    background-color: $color-blue;
-    color: $color-text-light;
-  }
-  md-switch.md-default-theme.md-checked.md-primary .md-bar,
-  md-switch.md-checked.md-primary .md-bar {
-    background-color: rgba($color-blue, .5);
-  }
+    .modal-header,
+    .modal-header .close,
+    md-toolbar.md-default-theme:not(.md-menu-toolbar),
+    md-toolbar:not(.md-menu-toolbar),
+    md-switch.md-default-theme.md-checked.md-primary .md-thumb,
+    md-switch.md-checked.md-primary .md-thumb {
+        background-color: $color-blue;
+        color: $color-text-light;
+    }
+
+    md-switch.md-default-theme.md-checked.md-primary .md-bar,
+    md-switch.md-checked.md-primary .md-bar {
+        background-color: rgba($color-blue, 0.5);
+    }
 }
 
 .skin-red,
 .skin-red-light {
-  .modal-header,
-  .modal-header .close,
-  md-toolbar.md-default-theme:not(.md-menu-toolbar),
-  md-toolbar:not(.md-menu-toolbar),
-  md-switch.md-default-theme.md-checked.md-primary .md-thumb,
-  md-switch.md-checked.md-primary .md-thumb {
-    background-color: $color-red;
-    color: $color-text-light;
-  }
-  md-switch.md-default-theme.md-checked.md-primary .md-bar,
-  md-switch.md-checked.md-primary .md-bar {
-    background-color: rgba($color-red, .5);
-  }
+    .modal-header,
+    .modal-header .close,
+    md-toolbar.md-default-theme:not(.md-menu-toolbar),
+    md-toolbar:not(.md-menu-toolbar),
+    md-switch.md-default-theme.md-checked.md-primary .md-thumb,
+    md-switch.md-checked.md-primary .md-thumb {
+        background-color: $color-red;
+        color: $color-text-light;
+    }
+
+    md-switch.md-default-theme.md-checked.md-primary .md-bar,
+    md-switch.md-checked.md-primary .md-bar {
+        background-color: rgba($color-red, 0.5);
+    }
 }
 
 .skin-yellow,
 .skin-yellow-light {
-  .modal-header,
-  .modal-header .close,
-  md-toolbar.md-default-theme:not(.md-menu-toolbar),
-  md-toolbar:not(.md-menu-toolbar),
-  md-switch.md-default-theme.md-checked.md-primary .md-thumb,
-  md-switch.md-checked.md-primary .md-thumb {
-    background-color: $color-yellow;
-    color: $color-text-light;
-  }
-  md-switch.md-default-theme.md-checked.md-primary .md-bar,
-  md-switch.md-checked.md-primary .md-bar {
-    background-color: rgba($color-yellow, .5);
-  }
+    .modal-header,
+    .modal-header .close,
+    md-toolbar.md-default-theme:not(.md-menu-toolbar),
+    md-toolbar:not(.md-menu-toolbar),
+    md-switch.md-default-theme.md-checked.md-primary .md-thumb,
+    md-switch.md-checked.md-primary .md-thumb {
+        background-color: $color-yellow;
+        color: $color-text-light;
+    }
+
+    md-switch.md-default-theme.md-checked.md-primary .md-bar,
+    md-switch.md-checked.md-primary .md-bar {
+        background-color: rgba($color-yellow, 0.5);
+    }
 }
 
 .skin-purple,
 .skin-purple-light {
-  .modal-header,
-  .modal-header .close,
-  md-toolbar.md-default-theme:not(.md-menu-toolbar),
-  md-toolbar:not(.md-menu-toolbar),
-  md-switch.md-default-theme.md-checked.md-primary .md-thumb,
-  md-switch.md-checked.md-primary .md-thumb {
-    background-color: $color-purple;
-    color: $color-text-light;
-  }
-  md-switch.md-default-theme.md-checked.md-primary .md-bar,
-  md-switch.md-checked.md-primary .md-bar {
-    background-color: rgba($color-purple, .5);
-  }
+    .modal-header,
+    .modal-header .close,
+    md-toolbar.md-default-theme:not(.md-menu-toolbar),
+    md-toolbar:not(.md-menu-toolbar),
+    md-switch.md-default-theme.md-checked.md-primary .md-thumb,
+    md-switch.md-checked.md-primary .md-thumb {
+        background-color: $color-purple;
+        color: $color-text-light;
+    }
+
+    md-switch.md-default-theme.md-checked.md-primary .md-bar,
+    md-switch.md-checked.md-primary .md-bar {
+        background-color: rgba($color-purple, 0.5);
+    }
 }
 
 .skin-green,
 .skin-green-light {
-  .modal-header,
-  .modal-header .close,
-  md-toolbar.md-default-theme:not(.md-menu-toolbar),
-  md-toolbar:not(.md-menu-toolbar),
-  md-switch.md-default-theme.md-checked.md-primary .md-thumb,
-  md-switch.md-checked.md-primary .md-thumb {
-    background-color: $color-green;
-    color: $color-text-light;
-  }
-  md-switch.md-default-theme.md-checked.md-primary .md-bar,
-  md-switch.md-checked.md-primary .md-bar {
-    background-color: rgba($color-green, .5);
-  }
+    .modal-header,
+    .modal-header .close,
+    md-toolbar.md-default-theme:not(.md-menu-toolbar),
+    md-toolbar:not(.md-menu-toolbar),
+    md-switch.md-default-theme.md-checked.md-primary .md-thumb,
+    md-switch.md-checked.md-primary .md-thumb {
+        background-color: $color-green;
+        color: $color-text-light;
+    }
+
+    md-switch.md-default-theme.md-checked.md-primary .md-bar,
+    md-switch.md-checked.md-primary .md-bar {
+        background-color: rgba($color-green, 0.5);
+    }
 }
 
 .skin-black {
-  .modal-header,
-  .modal-header .close,
-  md-toolbar.md-default-theme:not(.md-menu-toolbar),
-  md-toolbar:not(.md-menu-toolbar),
-  md-switch.md-default-theme.md-checked.md-primary .md-thumb,
-  md-switch.md-checked.md-primary .md-thumb {
-    background-color: $color-black;
-    color: $color-text-light;
-  }
-  md-switch.md-default-theme.md-checked.md-primary .md-bar,
-  md-switch.md-checked.md-primary .md-bar {
-    background-color: rgba($color-black, .5);
-  }
+    .modal-header,
+    .modal-header .close,
+    md-toolbar.md-default-theme:not(.md-menu-toolbar),
+    md-toolbar:not(.md-menu-toolbar),
+    md-switch.md-default-theme.md-checked.md-primary .md-thumb,
+    md-switch.md-checked.md-primary .md-thumb {
+        background-color: $color-black;
+        color: $color-text-light;
+    }
+
+    md-switch.md-default-theme.md-checked.md-primary .md-bar,
+    md-switch.md-checked.md-primary .md-bar {
+        background-color: rgba($color-black, 0.5);
+    }
 }
 
 .skin-black-light {
-  .modal-header,
-  .modal-header .close,
-  md-toolbar.md-default-theme:not(.md-menu-toolbar),
-  md-toolbar:not(.md-menu-toolbar) {
-    background-color: $color-light;
-    color: $color-text-dark;
-  }
+    .modal-header,
+    .modal-header .close,
+    md-toolbar.md-default-theme:not(.md-menu-toolbar),
+    md-toolbar:not(.md-menu-toolbar) {
+        background-color: $color-light;
+        color: $color-text-dark;
+    }
 
-  md-switch.md-default-theme.md-checked.md-primary .md-thumb,
-  md-switch.md-checked.md-primary .md-thumb {
-    background-color: $color-primary;
-    color: $color-text-dark;
-  }
-  md-switch.md-default-theme.md-checked.md-primary .md-bar,
-  md-switch.md-checked.md-primary .md-bar {
-    background-color: rgba($color-primary, .5);
-  }
+    md-switch.md-default-theme.md-checked.md-primary .md-thumb,
+    md-switch.md-checked.md-primary .md-thumb {
+        background-color: $color-primary;
+        color: $color-text-dark;
+    }
+
+    md-switch.md-default-theme.md-checked.md-primary .md-bar,
+    md-switch.md-checked.md-primary .md-bar {
+        background-color: rgba($color-primary, 0.5);
+    }
 }
-
 
 /* AdminLTE */
 
 .lockscreen {
-  display: none;
-  position: absolute;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
-  z-index: 9999;
-  .error-message {
+    display: none;
     position: absolute;
-    margin-top: .5rem;
-  }
-  .lockscreen-wrapper {
-    margin-top: 10%;
-    .lockscreen-name {
-      font-size: 1.25rem;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    z-index: 9999;
+
+    .error-message {
+        position: absolute;
+        margin-top: .5rem;
     }
-  }
+
+    .lockscreen-wrapper {
+        margin-top: 10%;
+
+        .lockscreen-name {
+            font-size: 1.25rem;
+        }
+    }
 }
 
 md-toolbar,
 .md-toolbar-tools {
-  height: 56px;
-  min-height: 56px;
+    height: 56px;
+    min-height: 56px;
 }
 
 .navbar-nav {
-  display: inline-table; // fix new line in safari
-  &>.messages-menu>.dropdown-menu>li .menu>li>a> {
-    h4,
-    p {
-      margin-left: 0;
+    display: inline-table; // fix new line in safari
+    & > .messages-menu > .dropdown-menu > li .menu > li > a > {
+        h4,
+        p {
+            margin-left: 0;
+        }
     }
-  }
 }
 
 .md-select-menu-container {
-  z-index: 9999;
+    z-index: 9999;
 }
 
 .messages-menu {
-  li {
-    h3 {
-      margin: 0 0 10px 0;
-      font-size: 14px;
-    }
-    .progress {
-      margin-bottom: 0;
-    }
-    .pull-left {
-      &+h4 {
-        margin-left: 45px;
-        &+p {
-          margin-left: 45px;
+    li {
+        h3 {
+            margin: 0 0 10px 0;
+            font-size: 14px;
         }
-      }
+
+        .progress {
+            margin-bottom: 0;
+        }
+
+        .pull-left {
+            & + h4 {
+                margin-left: 45px;
+
+                & + p {
+                    margin-left: 45px;
+                }
+            }
+        }
     }
-  }
 }
 
 .sidebar-menu {
-  & > li {
-    & > a {
-      padding-left: 12px;
+    & > li {
+        & > a {
+            padding-left: 12px;
+        }
     }
-  }
 }
 
 .control-sidebar {
-  .form-group {
-    clear: both;
-  }
-  ul.skin-list {
-    &>li {
-      float: left;
-      width: 50%;
-      padding: 5px 10px;
-      &>a {
-        display: block;
-        box-shadow: 0 0 3px rgba(0, 0, 0, 0.4);
-        &.active {
-          box-shadow: 0 0 5px rgba(0, 0, 0, 1);
-          opacity: 1;
-        }
-        &>div {
-          &>span:first-child {
-            display: block;
-            width: 20%;
-            float: left;
-          }
-          &>span:last-child {
-            display: block;
-            width: 80%;
-            float: left;
-          }
-          &:first-child {
-            &>span {
-              height: 7px;
-            }
-          }
-          &:last-child {
-            &>span {
-              height: 33px;
-            }
-          }
-        }
-      }
+    .form-group {
+        clear: both;
     }
-  }
-  &.control-sidebar-dark {
+
     ul.skin-list {
-      &>li {
-        &>a {
-          box-shadow: none;
-          border: solid 1px #cacaca;
+        & > li {
+            float: left;
+            width: 50%;
+            padding: 5px 10px;
+
+            & > a {
+                display: block;
+                box-shadow: 0 0 3px rgba(0, 0, 0, 0.4);
+
+                &.active {
+                    box-shadow: 0 0 5px rgba(0, 0, 0, 1);
+                    opacity: 1;
+                }
+
+                & > div {
+                    & > span:first-child {
+                        display: block;
+                        width: 20%;
+                        float: left;
+                    }
+
+                    & > span:last-child {
+                        display: block;
+                        width: 80%;
+                        float: left;
+                    }
+
+                    &:first-child {
+                        & > span {
+                            height: 7px;
+                        }
+                    }
+
+                    &:last-child {
+                        & > span {
+                            height: 33px;
+                        }
+                    }
+                }
+            }
         }
-      }
     }
-  }
+
+    &.control-sidebar-dark {
+        ul.skin-list {
+            & > li {
+                & > a {
+                    box-shadow: none;
+                    border: solid 1px #cacaca;
+                }
+            }
+        }
+    }
 }
 
 .content-wrapper {
-  ui-view {
-    display: block;
-    height: calc(100vh - 102px);
-    overflow-y: auto;
-    overflow-x: hidden;
-    .content-header {
-      &+.content {
-        &>.box-default {
-          margin-bottom: 0;
-          .box-header {
-            height: 41px;
-            &>.header-center {
-              position: absolute;
-              top: 0;
-              padding-right: 20px;
-              width: 100%;
-              height: 0;
-              z-index: 88;
-              text-align: center;
-              .msg-block {
-                display: inline-block;
-                padding: 0 10px 3px 10px;
-                border-radius: 0 0 3px 3px;
-                background: linear-gradient($color-gray, lighten($color-gray, 10%));
-              }
+    ui-view {
+        display: block;
+        height: calc(100vh - 102px);
+        overflow-y: auto;
+        overflow-x: hidden;
+
+        .content-header {
+            & + .content {
+                & > .box-default {
+                    margin-bottom: 0;
+
+                    .box-header {
+                        height: 41px;
+
+                        & > .header-center {
+                            position: absolute;
+                            top: 0;
+                            padding-right: 20px;
+                            width: 100%;
+                            height: 0;
+                            z-index: 88;
+                            text-align: center;
+
+                            .msg-block {
+                                display: inline-block;
+                                padding: 0 10px 3px 10px;
+                                border-radius: 0 0 3px 3px;
+                                background: linear-gradient($color-gray, lighten($color-gray, 10%));
+                            }
+                        }
+
+                        & > .box-tools {
+                            &.pull-left {
+                                left: 10px;
+                                top: 5px;
+                            }
+                        }
+                    }
+
+                    .box-body {
+                        height: calc(100vh - 177px);
+                        overflow: auto;
+                    }
+
+                    &.with-header {
+                        .box-body {
+                            height: calc(100vh - 177px - 41px);
+                        }
+
+                        &.with-footer {
+                            .box-body {
+                                height: calc(100vh - 177px - 41px - 62px);
+                            }
+                        }
+                    }
+                }
             }
-            &>.box-tools {
-              &.pull-left {
-                left: 10px;
-                top: 5px;
-              }
-            }
-          }
-          .box-body {
-            height: calc(100vh - 177px);
-            overflow: auto;
-          }
-          &.with-header {
-            .box-body {
-              height: calc(100vh - 177px - 41px);
-            }
-            &.with-footer {
-              .box-body {
-                height: calc(100vh - 177px - 41px - 62px);
-              }
-            }
-          }
         }
-      }
     }
-  }
 }
 
 .box-body {
-  &>form {
-    padding: 1rem 2rem;
-  }
+    & > form {
+        padding: 1rem 2rem;
+    }
 }
-
 
 /* Bootstrap */
 
 .form-group {
-  .error-block {
-    display: none;
-  }
-  &.has-error {
     .error-block {
-      display: block;
+        display: none;
     }
-  }
+
+    &.has-error {
+        .error-block {
+            display: block;
+        }
+    }
 }
 
 .list-group {
-  .list-group-item {
-    img.media-object {
-      width: 112px;
+    .list-group-item {
+        img.media-object {
+            width: 112px;
+        }
+
+        .pull-right {
+            position: absolute;
+            top: .2rem;
+            right: 1rem;
+        }
     }
-    .pull-right {
-      position: absolute;
-      top: .2rem;
-      right: 1rem;
-    }
-  }
 }
 
 .form-control-static {
-  &.iradio {
-    position: relative;
-    top: -3px;
-  }
+    &.iradio {
+        position: relative;
+        top: -3px;
+    }
 }
 
 .table {
-  td {
-    img {
-      height: 28px;
-      position: relative;
-      top: -4px;
+    td {
+        img {
+            height: 28px;
+            position: relative;
+            top: -4px;
+        }
+
+        a {
+            i {
+                font-size: 1rem;
+                padding: .25rem;
+            }
+        }
     }
-    a {
-      i {
-        font-size: 1rem;
-        padding: .25rem;
-      }
-    }
-  }
 }
 
 .modal-dialog {
-  margin-top: 150px;
-  .modal-content {
-    border-radius: 4px;
-    box-shadow: 0 7px 8px -4px rgba(0, 0, 0, .2), 0 13px 19px 2px rgba(0, 0, 0, .14), 0 5px 24px 4px rgba(0, 0, 0, .12);
-    .modal-header {
-      border-radius: 4px 4px 0 0;
-      padding: 14px 16px 13px 16px;
-      h4 {
-        font-size: 20px;
-        font-weight: 400;
-      }
-      .close {
-        opacity: 1;
-      }
-    }
-    .modal-body {
-      &>form {
-        margin-top: 15px;
-        &>md-input-container {
-          &:last-child {
-            margin-bottom: 0;
-          } 
-        }
-        &>.callout,
-        &>.alert {
-          margin-top: -15px;
-          margin-bottom: 30px;
-        }
-      }
-    }
-    .modal-footer {
-      .pull-right {
-        margin-left: 10px;
-      }
-    }
-  }
-}
+    margin-top: 150px;
 
+    .modal-content {
+        border-radius: 4px;
+        box-shadow: 0 7px 8px -4px rgba(0, 0, 0, 0.2), 0 13px 19px 2px rgba(0, 0, 0, 0.14), 0 5px 24px 4px rgba(0, 0, 0, 0.12);
+
+        .modal-header {
+            border-radius: 4px 4px 0 0;
+            padding: 14px 16px 13px 16px;
+
+            h4 {
+                font-size: 20px;
+                font-weight: 400;
+            }
+
+            .close {
+                opacity: 1;
+            }
+        }
+
+        .modal-body {
+            & > form {
+                margin-top: 15px;
+
+                & > md-input-container {
+                    &:last-child {
+                        margin-bottom: 0;
+                    }
+                }
+
+                & > .callout,
+                & > .alert {
+                    margin-top: -15px;
+                    margin-bottom: 30px;
+                }
+            }
+        }
+
+        .modal-footer {
+            .pull-right {
+                margin-left: 10px;
+            }
+        }
+    }
+}
 
 /* toaster */
 
 .toast-close-button {
-  top: -10px;
+    top: -10px;
 }
-
 
 /* angularjs material */
 
 .layout-row {
-  md-input-container {
-    margin-bottom: 0;
-  }
+    md-input-container {
+        margin-bottom: 0;
+    }
 }
 
 .md-input-container {
-  md-switch {
-    margin-left: 0;
-    margin-bottom: 0;
-  }
+    md-switch {
+        margin-left: 0;
+        margin-bottom: 0;
+    }
 }
 
 md-progress-linear {
-  position: absolute;
-  z-index: 9;
+    position: absolute;
+    z-index: 9;
 }
-md-progress-linear.md-default-theme .md-container, md-progress-linear .md-container {
-  background-color: rgba($color-primary, .4);
 
+md-progress-linear.md-default-theme .md-container, md-progress-linear .md-container {
+    background-color: rgba($color-primary, 0.4);
 }
+
 md-progress-linear.md-default-theme .md-bar, md-progress-linear .md-bar {
-  background-color: rgba($color-primary, .8);
+    background-color: rgba($color-primary, 0.8);
 }
 
 // radio:
 md-radio-button.md-default-theme.md-checked .md-off, md-radio-button.md-checked .md-off {
-  border-color: rgba($color-primary, .87);
+    border-color: rgba($color-primary, 0.87);
 }
+
 md-radio-button.md-default-theme .md-on, md-radio-button .md-on {
-  background-color: rgba($color-primary, .87);
+    background-color: rgba($color-primary, 0.87);
 }
+
 md-radio-button .md-container,
 md-radio-button .md-off, md-radio-button .md-on {
-  width: 1rem;
-  height: 1rem;
-}
-md-radio-button .md-container .md-ripple-container {
-  top: -.5rem;
-  left: -.5rem;
-  right: -.5rem;
-  bottom: -.5rem;
-}
-md-radio-button .md-label {
-  margin-left: 1.5rem;
-}
-// checkbox: set size same with font size
-md-checkbox { 
-  width: 1.5rem;
-  margin-bottom: 0;
-  .md-container {
-    height: 1rem;
     width: 1rem;
-    .md-icon {
-      width: 1rem;
-      height: 1rem;
-      &:after {
-        top: -.3rem;
-        left: .2rem;
-        width: .5rem;
-        height: 1rem;
-      }
-    }
-  }
+    height: 1rem;
+}
 
-  &.md-checked  {
+md-radio-button .md-container .md-ripple-container {
+    top: -.5rem;
+    left: -.5rem;
+    right: -.5rem;
+    bottom: -.5rem;
+}
+
+md-radio-button .md-label {
+    margin-left: 1.5rem;
+}
+
+// checkbox: set size same with font size
+md-checkbox {
+    width: 1.5rem;
+    margin-bottom: 0;
+
     .md-container {
-      .md-icon{
-        background-color: $color-primary;
-      }
+        height: 1rem;
+        width: 1rem;
+
+        .md-icon {
+            width: 1rem;
+            height: 1rem;
+
+            &:after {
+                top: -.3rem;
+                left: .2rem;
+                width: .5rem;
+                height: 1rem;
+            }
+        }
     }
-  }
+
+    &.md-checked {
+        .md-container {
+            .md-icon {
+                background-color: $color-primary;
+            }
+        }
+    }
 }
 
 // fix: dialog shadow lay need to cover sidebar and header
 md-backdrop.md-dialog-backdrop {
-  z-index: 1200;
+    z-index: 1200;
 }
 
 .md-dialog-container {
-  z-index: 9999;
-  md-dialog {
-    min-width: 360px;
-    .md-dialog-content {
-      h3 {
-        margin-top: 0;
-      }
-    }
-  }
-}
+    z-index: 9999;
 
+    md-dialog {
+        min-width: 360px;
+
+        .md-dialog-content {
+            h3 {
+                margin-top: 0;
+            }
+        }
+    }
+}
 
 /* override others */
 .box-header {
-  .text-block {
-    padding: 5px 0;
-    display: inline-block;
-  }
-
-  ui-page-content-header-left {
-    .btn {
-      margin-right: 5px;
+    .text-block {
+        padding: 5px 0;
+        display: inline-block;
     }
-  }
 
-  ui-page-content-header-right {
-    .btn {
-      margin-left: 5px;
+    ui-page-content-header-left {
+        .btn {
+            margin-right: 5px;
+        }
+    }
+
+    ui-page-content-header-right {
+        .btn {
+            margin-left: 5px;
+        }
+
+        ui-upload {
+            .btn-group {
+                float: right;
+            }
+        }
     }
 
     ui-upload {
-      .btn-group {
-        float: right;
-      }
+        .table {
+            position: relative;
+            z-index: 100;
+            background-color: #ffffff;
+            box-shadow: 0 3px 5px $color-text-dark;
+        }
     }
-  }
-
-  ui-upload {
-    .table {
-      position: relative;
-      z-index: 100;
-      background-color: #ffffff;
-      box-shadow: 0 3px 5px $color-text-dark;
-    }
-  }
 }
 
 .datepicker {
-  padding: 6px 12px;
+    padding: 6px 12px;
 }
 
 .bn-ui-pager {
-  margin: 0;
-  .summary {
-    margin-top: 3px;
-    margin-left: 8px;
-  }
-  .pagination>li>a,
-  .pagination>li>span {
-    padding: 2px 8px;
-  }
+    margin: 0;
+
+    .summary {
+        margin-top: 3px;
+        margin-left: 8px;
+    }
+
+    .pagination > li > a,
+    .pagination > li > span {
+        padding: 2px 8px;
+    }
 }
 
 /* angularjs component styles */
 .btn[ui-wait-on] {
-  position: relative;
-  .in-process {
-    position: absolute; 
-    width: 100%; 
-    top: 0; 
-    left: 0; 
-    line-height: 32px;
-  }
-  &.btn-xs {
+    position: relative;
+
     .in-process {
-      line-height: 20px;
+        position: absolute;
+        width: 100%;
+        top: 0;
+        left: 0;
+        line-height: 32px;
     }
-  }
-  &.btn-sm {
-    .in-process {
-      line-height: 28px;
+
+    &.btn-xs {
+        .in-process {
+            line-height: 20px;
+        }
     }
-  }
-  &.btn-lg {
-    .in-process {
-      line-height: 42px;
+
+    &.btn-sm {
+        .in-process {
+            line-height: 28px;
+        }
     }
-  }
+
+    &.btn-lg {
+        .in-process {
+            line-height: 42px;
+        }
+    }
 }
 
 /* misc */
 
 .search-box {
-  width: 260px;
-  margin-right: 1rem;
+    width: 260px;
+    margin-right: 1rem;
 }
 
 .no-data-box {
-  padding: 2rem;
-  color: #666666;
+    padding: 2rem;
+    color: #666666;
 
-  h4 {
-    line-height: 2rem;
-  }
+    h4 {
+        line-height: 2rem;
+    }
 }
 
 @for $i from 1 through 8 {
-  .indent#{$i} {
-    & > div:first-child {
-      margin-left: #{$i * 2}rem;
+    .indent#{$i} {
+        & > div:first-child {
+            margin-left: #{$i * 2}rem;
+        }
     }
-  }
 }
 
 .radius {
-  border-radius: 4px;
+    border-radius: 4px;
 }
