@@ -146,7 +146,7 @@ public class MenuService extends _BaseService<Menu> {
         Menu m = new Menu();
         m.setName("admin.modules.core.menus.title");
         m.setLink("core-menus");
-        m.setIcon("fa fa-circle-o text-red");
+        m.setIcon("fa fa-fw fa-circle-o text-red");
         m.setDisplayOrder(999999);
         m.setVisible(true);
         return m;

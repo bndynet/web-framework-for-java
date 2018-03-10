@@ -2,16 +2,20 @@
     <ui-page-header title="'admin.modules.core.userProfile.title'"
                     breadcrumbs="[{'text': 'admin.modules.core.userProfile.title'}]"></ui-page-header>
 
-    <div class="row">
-        <div class="col-md-6 col-md-offset-3">
+    <div class="padding">
+        <div class="col-sm-12 col-md-8 col-md-offset-2">
             <div class="row">
                 <div class="col-xs-4 padding-xs">
                     <div class="box box-info" style="height: 340px;">
                         <div class="box-header with-border">
-                            <h3 class="box-title" ng-bind="'admin.modules.core.userProfile.titleAvatar'|translate"></h3>
+                            <h3 class="box-title"
+                                ng-bind="'admin.modules.core.userProfile.titleAvatar'|translate"></h3>
                         </div>
                         <div class="box-body text-center padding">
-                            <img alt="User Image" class="radius" ng-src="{{user.avatar}}" style="width: 100%;">
+                            <br/>
+                            <img alt="User Image" class="radius" ng-src="{{user.avatar}}"
+                                 style="max-height: 150px;">
+                            <br/>
                             <br/>
                             <br/>
                             <a class="btn btn-flat btn-default" ngf-select="uploadAvatar($file, $invalidFiles)"
@@ -58,7 +62,8 @@
 
                                 <div class="form-group">
                                     <label ng-bind="'admin.modules.core.userProfile.labelBirthday'|translate"></label>
-                                    <input type="text" class="datepicker form-control" ng-model="viewModel.birthday"/>
+                                    <input type="text" class="datepicker form-control"
+                                           ng-model="viewModel.birthday"/>
                                 </div>
                                 <button class="btn btn-flat btn-primary" ng-click="updateProfile()"
                                         ui-wait-on="isUpdatingProfile" ng-disabled="!mainForm.$valid">
@@ -85,7 +90,8 @@
                                 <ui-input name="newPassword" label="admin.modules.core.userProfile.newPassword"
                                           type="password"
                                           required="true" ng-model="pwdModel.newPassword"></ui-input>
-                                <ui-input name="confirmPassword" label="admin.modules.core.userProfile.confirmPassword"
+                                <ui-input name="confirmPassword"
+                                          label="admin.modules.core.userProfile.confirmPassword"
                                           type="password"
                                           has-error="pwdModel.newPassword != pwdModel.confirmPassword"
                                           error-message="admin.modules.core.userProfile.unmatchedConfirmPassword"

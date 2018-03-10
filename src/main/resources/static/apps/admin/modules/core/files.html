@@ -35,7 +35,7 @@
                             <i class="fa fa-clipboard"></i>
                             <span ng-bind="'admin.modules.core.files.copyUrl'|translate"></span>
                         </button>
-                        <button class="btn btn-xs btn-block btn-default" ng-click="remove(item)" ng-disabled="item.ref">
+                        <button class="btn btn-xs btn-block btn-default" ng-click="remove(item)" ng-if="!item.ref">
                             <i class="fa fa-trash-o"></i>
                             <span ng-bind="'common.delete'|translate"></span>
                         </button>

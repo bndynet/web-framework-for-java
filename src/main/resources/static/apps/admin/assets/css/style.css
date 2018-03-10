@@ -212,6 +212,10 @@ md-toolbar,
   margin-left: 45px;
 }
 
+.sidebar-menu > li > a {
+  padding-left: 12px;
+}
+
 .control-sidebar .form-group {
   clear: both;
 }
