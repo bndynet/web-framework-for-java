@@ -6,6 +6,7 @@ package net.bndy.wf.modules.cms.services;
 
 import javax.transaction.Transactional;
 
+import net.bndy.lib.CollectionHelper;
 import net.bndy.lib.IOHelper;
 import net.bndy.wf.ApplicationContext;
 import net.bndy.wf.modules.core.models.File;
@@ -16,10 +17,8 @@ import org.springframework.stereotype.Service;
 import net.bndy.wf.modules.cms.models.*;
 import net.bndy.wf.modules.cms.services.repositories.*;
 
-import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.stream.Collectors;
 
 @Service
 @Transactional
@@ -69,24 +68,21 @@ public class PageService extends _BaseService<Page> {
             List<File> filesToDelete = new ArrayList<>();
             if (origin != null && origin.getAttachments() != null) {
                 for (File f: origin.getAttachments()) {
-                    if (entity.getAttachments() == null || !entity.getAttachments().stream().anyMatch((item) -> item.getId() == f.getId())) {
+                    if (entity.getAttachments() == null || !CollectionHelper.contains(entity.getAttachments(), (item) -> item.getId() == f.getId())) {
                        filesToDelete.add(f);
                     }
                 }
             }
 
             for (File f: filesToDelete) {
-                try {
-                    IOHelper.forceDelete(ApplicationContext.getFileFullPath(f.getPath()));
-                } catch (IOException ex) {
-                    // TODO: exception handling
-                    ex.printStackTrace();
-                }
+                IOHelper.forceDelete(ApplicationContext.getFileFullPath(f.getPath()));
                 this.fileService.delete(f.getId());
             }
         }
 
-        this.fileService.setRef(entity.getAttachments().stream().map(x -> x.getId()).collect(Collectors.toList()));
+        if (!CollectionHelper.isNullOrEmpty(entity.getAttachments())) {
+            this.fileService.setRef(CollectionHelper.convert(entity.getAttachments(), (x -> x.getId())));
+        }
 
         return super.save(entity);
     }
