@@ -385,10 +385,10 @@ app.controller('LayoutCtrl', ['$http', '$scope', '$state', 'appDialog',
         $scope.unlockScreenError = false;
         $scope.unlockScreen = function() {
             if (!$scope.password) {
+                $scope.unlockScreenError = true;
                 return;
             }
 
-            $scope.unlockScreenError = false;
             if ($scope.username && $scope.password) {
                 $http.post('/api/core/users/login', { username: $scope.username, password: $scope.password }).then(function(res) {
                     $scope.password = '';

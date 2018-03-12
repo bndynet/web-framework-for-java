@@ -157,8 +157,8 @@ html, body {
     z-index: 9999;
 
     .error-message {
-        position: absolute;
-        margin-top: .5rem;
+        position: relative;
+        margin-top: -1rem;
     }
 
     .lockscreen-wrapper {

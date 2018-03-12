@@ -26,9 +26,9 @@
                         <button type="submit" class="btn"><i class="fa fa-arrow-right text-muted"></i></button>
                     </div>
                 </div>
-                <div class="error-message text-danger" ng-if="unlockScreenError" th:text="#{sso.invalidPassword}"></div>
             </form>
         </div>
+        <div class="error-message text-center text-danger" ng-if="unlockScreenError" th:text="#{sso.invalidPassword}"></div>
         <div class="help-block text-center" th:text="#{sso.lockScreenTip}"></div>
         <div class="text-center">
             <a href="/sso/login" th:text="#{sso.orSwitchUser}"></a>

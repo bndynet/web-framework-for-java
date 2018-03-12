@@ -164,8 +164,8 @@ html, body {
 }
 
 .lockscreen .error-message {
-  position: absolute;
-  margin-top: .5rem;
+  position: relative;
+  margin-top: -1rem;
 }
 
 .lockscreen .lockscreen-wrapper {
