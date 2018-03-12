@@ -167,6 +167,19 @@ html, body {
         .lockscreen-name {
             font-size: 1.25rem;
         }
+
+        .lockscreen-credentials {
+            .btn[type=submit] {
+                height: 30px;
+                margin-right: 2px;
+                &:active {
+                    box-shadow: none;
+                }
+                &:hover {
+                    background-color: $color-gray;
+                }
+            }
+        }
     }
 }
 

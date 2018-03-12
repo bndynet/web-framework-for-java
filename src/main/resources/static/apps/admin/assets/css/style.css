@@ -176,6 +176,19 @@ html, body {
   font-size: 1.25rem;
 }
 
+.lockscreen .lockscreen-wrapper .lockscreen-credentials .btn[type=submit] {
+  height: 30px;
+  margin-right: 2px;
+}
+
+.lockscreen .lockscreen-wrapper .lockscreen-credentials .btn[type=submit]:active {
+  box-shadow: none;
+}
+
+.lockscreen .lockscreen-wrapper .lockscreen-credentials .btn[type=submit]:hover {
+  background-color: #d2d6de;
+}
+
 md-toolbar,
 .md-toolbar-tools {
   height: 56px;
