@@ -33,8 +33,8 @@ angular.module('app')
 
                     if ($scope.searchKeywords) {
                         $timeout(function() {
-                            $('table > tbody > tr > td, table > tbody > tr > td > span').highlightText($scope.searchKeywords);
-                        }, 100);
+                            $('table .title').highlightText($scope.searchKeywords);
+                        }, 200);
                     }
                 });
             };
