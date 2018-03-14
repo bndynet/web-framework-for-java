@@ -10,7 +10,8 @@
 		<div class="box">
 			<div class="box-body">
                 <img class="logo" src="/static/assets/img/logo.png" />
-				<h4 th:utext="${message}"></h4>
+				<h4 th:utext="${error}" th:if="${error!=null}"></h4>
+				<h4 th:utext="${message}" th:if="${error==null}"></h4>
 				<br />
 				<div th:inline="text" style="display:none;" th:if="${exception!=null}">
 					Failed URL: [[${url}]] <br />
