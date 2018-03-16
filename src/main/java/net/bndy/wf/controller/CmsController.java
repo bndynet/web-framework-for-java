@@ -16,6 +16,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 
 import java.io.IOException;
 import java.text.ParseException;
@@ -75,14 +76,15 @@ public class CmsController extends _BaseController {
         return "/cms/article";
     }
 
-    @RequestMapping(value = "/search/{keywords}")
-    public String search(Model viewModel, @PathVariable(name = "keywords", required = false) String keywords)
+    @RequestMapping(value = "/search")
+    public String search(Model viewModel, @RequestParam(name = "q", required = false) String keywords)
         throws ClassNotFoundException, InstantiationException, IllegalAccessException, org.apache.lucene.queryparser.classic.ParseException, IOException {
         List<IndexModel> lst = null;
         if (!StringHelper.isNullOrWhiteSpace(keywords)) {
             lst = ApplicationContext.getIndexService().search(keywords, IndexModel.class);
         }
         viewModel.addAttribute("model", lst);
+        viewModel.addAttribute("keywords", keywords);
         return "/cms/search";
     }
 }

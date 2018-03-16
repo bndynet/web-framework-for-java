@@ -8,17 +8,16 @@
 <body>
 <div layout:fragment="content">
     <div class="page-header">
-        <h2> Search for
-            <span th:text="${keywords}"</span>
+        <h2>
+            <span th:text="#{common.searchFor}"></span>
+            <b th:text="${keywords}"></b>
         </h2>
     </div>
 
     <ul>
         <li th:each="item: ${model}">
             <a th:href="@{/{catalog}/{title}(catalog=${#strings.toLowerCase(item.catalog)}, title=${item.titleKey})}">
-                <h4>
-                    <span th:text="${item.title}"></span>
-                </h4>
+                <span th:text="${item.title}"></span>
             </a>
         </li>
     </ul>
