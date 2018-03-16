@@ -3,17 +3,19 @@
       xmlns:layout="http://www.ultraq.net.nz/web/thymeleaf/layout"
       layout:decorator="/common/layout_main">
 <head>
-    <title th:text="${channel.name}"></title>
+    <title>Search</title>
 </head>
 <body>
 <div layout:fragment="content">
     <div class="page-header">
-        <h2 th:text="${channel.name}"> </h2>
+        <h2> Search for
+            <span th:text="${keywords}"</span>
+        </h2>
     </div>
 
     <ul>
-        <li th:each="item: ${model.content}">
-            <a th:href="@{/article/{key}(key=${item.titleKey == null} ? ${item.id} : ${item.titleKey})}">
+        <li th:each="item: ${model}">
+            <a th:href="@{/{catalog}/{title}(catalog=${#strings.toLowerCase(item.catalog)}, title=${item.titleKey})}">
                 <h4>
                     <span th:text="${item.title}"></span>
                 </h4>

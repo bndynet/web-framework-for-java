@@ -1,7 +1,9 @@
 package net.bndy.wf.controller;
 
 import net.bndy.lib.StringHelper;
+import net.bndy.wf.ApplicationContext;
 import net.bndy.wf.exceptions.NoResourceFoundException;
+import net.bndy.wf.modules.cms.IndexModel;
 import net.bndy.wf.modules.cms.models.Article;
 import net.bndy.wf.modules.cms.models.Channel;
 import net.bndy.wf.modules.cms.services.ArticleService;
@@ -14,6 +16,10 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
+
+import java.io.IOException;
+import java.text.ParseException;
+import java.util.List;
 
 @Controller
 public class CmsController extends _BaseController {
@@ -67,5 +73,16 @@ public class CmsController extends _BaseController {
             throw new NoResourceFoundException();
         }
         return "/cms/article";
+    }
+
+    @RequestMapping(value = "/search/{keywords}")
+    public String search(Model viewModel, @PathVariable(name = "keywords", required = false) String keywords)
+        throws ClassNotFoundException, InstantiationException, IllegalAccessException, org.apache.lucene.queryparser.classic.ParseException, IOException {
+        List<IndexModel> lst = null;
+        if (!StringHelper.isNullOrWhiteSpace(keywords)) {
+            lst = ApplicationContext.getIndexService().search(keywords, IndexModel.class);
+        }
+        viewModel.addAttribute("model", lst);
+        return "/cms/search";
     }
 }

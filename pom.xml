@@ -111,8 +111,25 @@
 		<dependency>
 			<groupId>net.bndy</groupId>
 			<artifactId>lib</artifactId>
-			<version>1.0.5</version>
+			<version>1.0.8</version>
 		</dependency>
+		<dependency>
+			<groupId>net.bndy</groupId>
+			<artifactId>ftsi</artifactId>
+			<version>1.0-pre</version>
+			<scope>system</scope>
+			<systemPath>/Users/bendy/works/ftsi/build/libs/ftsi-1.0-pre.jar</systemPath>
+		</dependency>
+        <dependency>
+            <groupId>org.apache.lucene</groupId>
+            <artifactId>lucene-core</artifactId>
+            <version>7.2.1</version>
+        </dependency>
+        <dependency>
+            <groupId>org.apache.lucene</groupId>
+            <artifactId>lucene-queryparser</artifactId>
+            <version>7.2.1</version>
+        </dependency>
 		<dependency>
 			<groupId>org.webjars</groupId>
 			<artifactId>bootstrap</artifactId>

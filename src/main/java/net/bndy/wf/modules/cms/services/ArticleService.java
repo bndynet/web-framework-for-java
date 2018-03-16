@@ -10,6 +10,7 @@ import net.bndy.lib.CollectionHelper;
 import net.bndy.lib.IOHelper;
 import net.bndy.lib.StringHelper;
 import net.bndy.wf.ApplicationContext;
+import net.bndy.wf.modules.cms.IndexModel;
 import net.bndy.wf.modules.core.models.File;
 import net.bndy.wf.modules.core.services.FileService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -75,6 +76,15 @@ public class ArticleService extends _BaseService<Article> {
             entity.setTitleKey(key + "-" + entity.getId());
             entity = super.save(entity);
         }
+
+        ApplicationContext.getIndexService().createIndex(new IndexModel(
+            entity.getId(),
+            entity.getTitle(),
+            entity.getTitleKey(),
+            entity.getContent(),
+            BoType.Article.getName()
+        ));
+
         return entity;
     }
 
