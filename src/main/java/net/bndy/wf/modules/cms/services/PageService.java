@@ -92,7 +92,7 @@ public class PageService extends _BaseService<Page> {
             entity.getId(),
             entity.getTitle(),
             StringHelper.title2Url(entity.getTitle()),
-            entity.getContent(),
+            entity.getContent().replaceAll("<.*?>", ""), // TODO: use stripHtml method instead
             BoType.Page.getName()
         ));
 
