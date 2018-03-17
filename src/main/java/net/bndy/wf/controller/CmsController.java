@@ -77,11 +77,15 @@ public class CmsController extends _BaseController {
     }
 
     @RequestMapping(value = "/search")
-    public String search(Model viewModel, @RequestParam(name = "q", required = false) String keywords)
+    public String search(Model viewModel, @RequestParam(name = "q", required = false) String keywords,
+        @RequestParam(name = "page", required = false) Integer page)
         throws ClassNotFoundException, InstantiationException, IllegalAccessException, org.apache.lucene.queryparser.classic.ParseException, IOException {
         List<IndexModel> lst = null;
+        if (page == null) {
+            page = 1;
+        }
         if (!StringHelper.isNullOrWhiteSpace(keywords)) {
-            lst = ApplicationContext.getIndexService().search(keywords, IndexModel.class);
+            lst = ApplicationContext.getIndexService().search(keywords, IndexModel.class, page, 10);
         }
         viewModel.addAttribute("model", lst);
         viewModel.addAttribute("keywords", keywords);
