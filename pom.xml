@@ -116,9 +116,7 @@
 		<dependency>
 			<groupId>net.bndy</groupId>
 			<artifactId>ftsi</artifactId>
-			<version>1.0-pre</version>
-			<scope>system</scope>
-			<systemPath>/Users/bendy/works/ftsi/build/libs/ftsi-1.0-pre.jar</systemPath>
+			<version>1.0</version>
 		</dependency>
         <dependency>
             <groupId>org.apache.lucene</groupId>
