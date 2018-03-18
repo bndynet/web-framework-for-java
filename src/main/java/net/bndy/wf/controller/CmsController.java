@@ -10,6 +10,7 @@ import net.bndy.wf.modules.cms.models.Channel;
 import net.bndy.wf.modules.cms.services.ArticleService;
 import net.bndy.wf.modules.cms.services.ChannelService;
 import net.bndy.wf.modules.cms.services.PageService;
+import org.apache.lucene.index.IndexNotFoundException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.web.PageableDefault;
@@ -79,14 +80,18 @@ public class CmsController extends _BaseController {
     public String search(Model viewModel, @RequestParam(name = "q", required = false) String keywords,
         @RequestParam(name = "page", required = false) Integer page)
         throws ClassNotFoundException, InstantiationException, IllegalAccessException, org.apache.lucene.queryparser.classic.ParseException, IOException {
-        SearchResult<IndexModel> lst = null;
+        SearchResult<IndexModel> searchResult = null;
         if (page == null) {
             page = 1;
         }
         if (!StringHelper.isNullOrWhiteSpace(keywords)) {
-            lst = ApplicationContext.getIndexService().search(keywords, IndexModel.class, page, 10);
+            try {
+                searchResult = ApplicationContext.getIndexService().search(keywords, IndexModel.class, page, 10);
+            } catch (IndexNotFoundException ex) {
+                viewModel.addAttribute("error", ApplicationContext.i18n().getString("error.fullTextSearchNotInitialized"));
+            }
         }
-        viewModel.addAttribute("model", lst);
+        viewModel.addAttribute("model", searchResult);
         viewModel.addAttribute("keywords", keywords);
         return "/cms/search";
     }

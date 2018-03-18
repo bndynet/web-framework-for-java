@@ -8,13 +8,18 @@
 <body>
 <div layout:fragment="content">
     <div class="page-header">
-        <h2>
+        <h2 th:if="${keywords}">
             <span th:text="#{common.searchFor}"></span>
             <b th:text="${keywords}"></b>
         </h2>
+        <h2 th:unless="${keywords}" th:text="#{public.searchTooltip}"></h2>
     </div>
 
-    <ul>
+    <div class="alert alert-danger" th:if="${error}">
+        <p th:text="${error}"></p>
+    </div>
+
+    <ul th:if="${model}">
         <li th:each="item: ${model.content}">
             <a th:href="@{/{catalog}/{title}(catalog=${#strings.toLowerCase(item.catalog)}, title=${item.titleKey})}">
                 <span th:text="${item.title}"></span>
