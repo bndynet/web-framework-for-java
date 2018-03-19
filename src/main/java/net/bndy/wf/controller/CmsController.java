@@ -1,5 +1,6 @@
 package net.bndy.wf.controller;
 
+import net.bndy.ftsi.SearchResult;
 import net.bndy.lib.StringHelper;
 import net.bndy.wf.ApplicationContext;
 import net.bndy.wf.exceptions.NoResourceFoundException;
@@ -19,8 +20,6 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
 import java.io.IOException;
-import java.text.ParseException;
-import java.util.List;
 
 @Controller
 public class CmsController extends _BaseController {
@@ -80,7 +79,7 @@ public class CmsController extends _BaseController {
     public String search(Model viewModel, @RequestParam(name = "q", required = false) String keywords,
         @RequestParam(name = "page", required = false) Integer page)
         throws ClassNotFoundException, InstantiationException, IllegalAccessException, org.apache.lucene.queryparser.classic.ParseException, IOException {
-        List<IndexModel> lst = null;
+        SearchResult<IndexModel> lst = null;
         if (page == null) {
             page = 1;
         }

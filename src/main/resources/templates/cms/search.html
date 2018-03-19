@@ -15,9 +15,14 @@
     </div>
 
     <ul>
-        <li th:each="item: ${model}">
+        <li th:each="item: ${model.content}">
             <a th:href="@{/{catalog}/{title}(catalog=${#strings.toLowerCase(item.catalog)}, title=${item.titleKey})}">
                 <span th:text="${item.title}"></span>
+            </a>
+        </li>
+        <li th:if="${model.hasMore()}">
+            <a th:href="@{/search(q=${keywords}, page=${model.page + 1})}">
+                Next Page >>
             </a>
         </li>
     </ul>
