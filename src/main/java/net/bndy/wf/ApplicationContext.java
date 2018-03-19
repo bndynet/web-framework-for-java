@@ -4,6 +4,7 @@
  ******************************************************************************/
 package net.bndy.wf;
 
+import net.bndy.ftsi.IndexService;
 import net.bndy.lib.HttpHelper;
 import net.bndy.wf.config.ApplicationConfig;
 import net.bndy.wf.exceptions.UnauthorizedException;
@@ -29,6 +30,7 @@ public class ApplicationContext {
 
     private static HttpServletRequest request;
     private static MessageSource messageSource;
+    private static IndexService indexService;
 
     @Autowired
     private HttpServletRequest _request;
@@ -42,6 +44,7 @@ public class ApplicationContext {
         request = _request;
         messageSource = _messageSource;
         applicationConfig = _applicationConfig;
+        indexService = new IndexService(applicationConfig.getFtsiPath());
     }
 
     public static User getCurrentUser() {
@@ -105,5 +108,9 @@ public class ApplicationContext {
 
     public static String language(String key, Object... args) {
         return language(key, args, null);
+    }
+
+    public static IndexService getIndexService() {
+        return indexService;
     }
 }

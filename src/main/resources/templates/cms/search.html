@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/web/thymeleaf/layout"
+      layout:decorator="/common/layout_main">
+<head>
+    <title>Search</title>
+</head>
+<body>
+<div layout:fragment="content">
+    <div class="page-header">
+        <h2>
+            <span th:text="#{common.searchFor}"></span>
+            <b th:text="${keywords}"></b>
+        </h2>
+    </div>
+
+    <ul>
+        <li th:each="item: ${model.content}">
+            <a th:href="@{/{catalog}/{title}(catalog=${#strings.toLowerCase(item.catalog)}, title=${item.titleKey})}">
+                <span th:text="${item.title}"></span>
+            </a>
+        </li>
+        <li th:if="${model.hasMore()}">
+            <a th:href="@{/search(q=${keywords}, page=${model.page + 1})}">
+                Next Page >>
+            </a>
+        </li>
+    </ul>
+</div>
+</body>
+</html>

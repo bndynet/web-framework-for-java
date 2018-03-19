@@ -17,6 +17,7 @@ public class ApplicationConfig {
 	private String appName;
 	private String appShortName;
 	private String uploadPath;
+	private String ftsiPath;
 	private String mailSender;
 	private String allowedOrigins;
 	private String defaultUserAvatar;
@@ -38,6 +39,14 @@ public class ApplicationConfig {
 
 	public String getUploadPath() {
 		return uploadPath;
+	}
+
+	public String getFtsiPath() {
+		return ftsiPath;
+	}
+
+	public void setFtsiPath(String ftsiPath) {
+		this.ftsiPath = ftsiPath;
 	}
 
 	public boolean isRenameUploadFile() {

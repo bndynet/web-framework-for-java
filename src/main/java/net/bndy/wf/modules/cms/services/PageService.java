@@ -8,7 +8,9 @@ import javax.transaction.Transactional;
 
 import net.bndy.lib.CollectionHelper;
 import net.bndy.lib.IOHelper;
+import net.bndy.lib.StringHelper;
 import net.bndy.wf.ApplicationContext;
+import net.bndy.wf.modules.cms.IndexModel;
 import net.bndy.wf.modules.core.models.File;
 import net.bndy.wf.modules.core.services.FileService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -84,7 +86,17 @@ public class PageService extends _BaseService<Page> {
             this.fileService.setRef(CollectionHelper.convert(entity.getAttachments(), (x -> x.getId())));
         }
 
-        return super.save(entity);
+        entity = super.save(entity);
+
+        ApplicationContext.getIndexService().createIndex(new IndexModel(
+            entity.getId(),
+            entity.getTitle(),
+            StringHelper.title2Url(entity.getTitle()),
+            entity.getContent().replaceAll("<.*?>", ""), // TODO: use stripHtml method instead
+            BoType.Page.getName()
+        ));
+
+        return entity;
     }
 
     public void transfer(long sourceChannelId, long targetChannelId) {
