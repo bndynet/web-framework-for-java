@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/web/thymeleaf/layout"
+      layout:decorator="/public/_layout">
+<head>
+    <title>About</title>
+</head>
+<body>
+<div layout:fragment="content">
+    <section id="components">
+        <div class="container">
+            <div class="section-heading text-center">
+                <h2 th:text="${model.title}"> </h2>
+                <p class="text-muted"></p>
+                <hr>
+            </div>
+
+            <div th:utext="${model.content}"></div>
+
+            <th:block th:each="item: ${model.attachments}">
+                <a class="tag tag-inline" th:href="@{'/files/' + ${item.uuid}}" target="_blank">
+                    <span th:text="${item.name}"></span>.<span th:text="${item.extName}"></span>
+                </a>
+            </th:block>
+        </div>
+    </section>
+</div>
+</body>
+</html>
