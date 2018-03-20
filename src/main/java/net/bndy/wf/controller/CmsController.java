@@ -84,13 +84,11 @@ public class CmsController extends _BaseController {
         if (page == null) {
             page = 1;
         }
+
         if (!StringHelper.isNullOrWhiteSpace(keywords)) {
-            try {
-                searchResult = ApplicationContext.getIndexService().search(keywords, IndexModel.class, page, 10);
-            } catch (IndexNotFoundException ex) {
-                viewModel.addAttribute("error", ApplicationContext.i18n().getString("error.fullTextSearchNotInitialized"));
-            }
+            searchResult = ApplicationContext.getIndexService().search(keywords, IndexModel.class, page, 10);
         }
+
         viewModel.addAttribute("model", searchResult);
         viewModel.addAttribute("keywords", keywords);
         return "/cms/search";

@@ -6,6 +6,7 @@ package net.bndy.wf.modules.cms.services;
 
 import javax.transaction.Transactional;
 
+import net.bndy.ftsi.NoKeyDefinedException;
 import net.bndy.lib.CollectionHelper;
 import net.bndy.lib.IOHelper;
 import net.bndy.lib.StringHelper;
@@ -88,13 +89,19 @@ public class PageService extends _BaseService<Page> {
 
         entity = super.save(entity);
 
-        ApplicationContext.getIndexService().createIndex(new IndexModel(
-            entity.getId(),
-            entity.getTitle(),
-            StringHelper.title2Url(entity.getTitle()),
-            entity.getContent().replaceAll("<.*?>", ""), // TODO: use stripHtml method instead
-            BoType.Page.getName()
-        ));
+        try {
+            ApplicationContext.getIndexService().updateIndex(new IndexModel(
+                entity.getId(),
+                entity.getTitle(),
+                StringHelper.title2Url(entity.getTitle()),
+                entity.getContent().replaceAll("<.*?>", ""), // TODO: use stripHtml method instead
+                BoType.Page.getName()
+            ));
+        } catch (NoKeyDefinedException ex) {
+            ex.printStackTrace();
+        } catch (IllegalAccessException ex) {
+            ex.printStackTrace();
+        }
 
         return entity;
     }

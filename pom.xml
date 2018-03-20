@@ -116,7 +116,7 @@
 		<dependency>
 			<groupId>net.bndy</groupId>
 			<artifactId>ftsi</artifactId>
-			<version>1.0</version>
+			<version>1.1</version>
 		</dependency>
 		<dependency>
 			<groupId>org.webjars</groupId>

@@ -1,22 +1,26 @@
 package net.bndy.wf.modules.cms;
 
+import net.bndy.ftsi.Indexable;
+import net.bndy.lib.StringHelper;
+
 public class IndexModel {
 
-    public IndexModel() {}
+    public IndexModel() {
+    }
 
-    public IndexModel(long id, String title, String titleKey, String content, String catalog) {
-        this.id = id;
+    public IndexModel(Long id, String title, String titleKey, String content, String catalog) {
+        this.id = catalog + "_" + id != null ? id.toString() : StringHelper.generateUUID();
         this.title = title;
         this.titleKey = titleKey;
         this.content = content;
         this.catalog = catalog;
     }
 
-    public Long getId() {
+    public String getId() {
         return id;
     }
 
-    public void setId(Long id) {
+    public void setId(String id) {
         this.id = id;
     }
 
@@ -52,7 +56,8 @@ public class IndexModel {
         this.content = content;
     }
 
-    private Long id;
+    @Indexable(isKey = true)
+    private String id;
     private String catalog;
     private String title;
     private String titleKey;
