@@ -5,30 +5,29 @@
 <head>
     <title>About</title>
 </head>
-<body class="non-home" layout:fragment="content">
-
-    <header class="masthead">
-        <div class="container h-30">
-            wefwe
+<body>
+    <div class="page-body" layout:fragment="content">
+        <div class="banner">
+            <img src="/static/public/img/banner2.png" />
         </div>
-    </header>
 
-    <section>
-        <div class="container h-100">
-            <div class="section-heading text-center">
-                <h2 th:text="${model.title}"> </h2>
-                <p class="text-muted"></p>
-                <hr>
+        <div class="content">
+            <div class="container">
+                <div class="page-heading text-center">
+                    <h1 th:text="${model.title}"></h1>
+                    <p class="text-muted"></p>
+                    <hr>
+                </div>
+
+                <div th:utext="${model.content}"></div>
+
+                <th:block th:each="item: ${model.attachments}">
+                    <a class="tag tag-inline" th:href="@{'/files/' + ${item.uuid}}" target="_blank">
+                        <span th:text="${item.name}"></span>.<span th:text="${item.extName}"></span>
+                    </a>
+                </th:block>
             </div>
-
-            <div th:utext="${model.content}"></div>
-
-            <th:block th:each="item: ${model.attachments}">
-                <a class="tag tag-inline" th:href="@{'/files/' + ${item.uuid}}" target="_blank">
-                    <span th:text="${item.name}"></span>.<span th:text="${item.extName}"></span>
-                </a>
-            </th:block>
         </div>
-    </section>
+    </div>
 </body>
 </html>

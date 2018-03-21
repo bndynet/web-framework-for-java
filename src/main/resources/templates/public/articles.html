@@ -6,18 +6,28 @@
     <title th:text="${channel.name}"></title>
 </head>
 <body>
-<div layout:fragment="content">
-    <div class="page-header">
-        <h2 th:text="${channel.name}"> </h2>
-    </div>
+    <div class="page-body" layout:fragment="content">
+        <div class="banner">
+            <img src="/static/public/img/banner3.png" />
+        </div>
 
-    <ul>
-        <li th:each="item: ${model.content}">
-            <a th:href="@{/article/{key}(key=${item.titleKey == null} ? ${item.id} : ${item.titleKey})}">
-                <span th:text="${item.title}"></span>
-            </a>
-        </li>
-    </ul>
-</div>
+         <div class="content">
+            <div class="container">
+                <div class="page-heading text-center">
+                    <h1>
+                        <span th:text="${channel.name}"></span>
+                    </h1>
+                    <hr>
+                </div>
+                <ul>
+                    <li th:each="item: ${model.content}">
+                        <a th:href="@{/article/{key}(key=${item.titleKey == null} ? ${item.id} : ${item.titleKey})}">
+                            <h4 th:text="${item.title}"></h4>
+                        </a>
+                    </li>
+                </ul>
+            </div>
+         </div>
+    </div>
 </body>
 </html>

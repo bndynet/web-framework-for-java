@@ -28,6 +28,12 @@
 
   // Collapse Navbar
   var navbarCollapse = function() {
+    var isHome = location.pathname === '/';
+    if (!isHome) {
+      $("#mainNav").addClass("navbar-shrink");
+      return;
+    }
+
     if ($("#mainNav").offset().top > 100) {
       $("#mainNav").addClass("navbar-shrink");
     } else {

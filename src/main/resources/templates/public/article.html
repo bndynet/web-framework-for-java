@@ -6,25 +6,36 @@
     <title th:text="${model.title}"></title>
 </head>
 <body>
-<div layout:fragment="content">
-    <div class="page-header text-center">
-        <h2>
-            <span th:text="${model.title}"></span>
-            <br />
-            <small>
-                <span th:text="${#dates.format(model.lastUpdate, 'yyyy-MM-dd h:mm a')}"></span>
-            </small>
-        </h2>
+    <div class="page-body" layout:fragment="content">
+        <div class="banner">
+            <img src="/static/public/img/banner2.png" />
+        </div>
+
+        <div class="content">
+            <div class="container">
+                <div class="page-heading text-center">
+                    <h1>
+                        <span th:text="${model.title}"></span>
+                        <br />
+                        <small>
+                            <span th:text="${#dates.format(model.lastUpdate, 'yyyy-MM-dd h:mm a')}"></span>
+                        </small>
+                    </h1>
+                    <hr>
+                </div>
+
+                <div>
+                    <p th:utext="${model.content}"></p>
+                    <hr />
+                    <th:block th:each="item: ${model.attachments}">
+                        <a class="tag tag-inline" th:href="@{'/files/' + ${item.uuid}}" target="_blank">
+                            <span th:text="${item.name}"></span>.<span th:text="${item.extName}"></span>
+                        </a>
+                    </th:block>
+                </div>
+            </div>
+        </div>
+
     </div>
-
-    <p th:utext="${model.content}"></p>
-
-    <hr />
-    <th:block th:each="item: ${model.attachments}">
-        <a class="tag tag-inline" th:href="@{'/files/' + ${item.uuid}}" target="_blank">
-            <span th:text="${item.name}"></span>.<span th:text="${item.extName}"></span>
-        </a>
-    </th:block>
-</div>
 </body>
 </html>

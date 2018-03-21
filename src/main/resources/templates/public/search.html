@@ -6,30 +6,40 @@
     <title>Search</title>
 </head>
 <body>
-<div layout:fragment="content">
-    <div class="page-header">
-        <h2 th:if="${keywords}">
-            <span th:text="#{common.searchFor}"></span>
-            <b th:text="${keywords}"></b>
-        </h2>
-        <h2 th:unless="${keywords}" th:text="#{public.searchTooltip}"></h2>
-    </div>
+    <div class="page-body" layout:fragment="content">
+        <div class="banner">
+            <img src="/static/public/img/banner1.png" />
+        </div>
 
-    <div th:if="${model}">
-        <ul class="list-unstyled">
-            <li th:each="item: ${model.content}">
-                <a th:href="@{/{catalog}/{title}(catalog=${#strings.toLowerCase(item.catalog)}, title=${item.titleKey})}">
-                    <h4 th:text="${item.title}"></h4>
-                </a>
-                <p th:text="${T(net.bndy.lib.StringHelper).cut(item.content.trim(), 300, '...')}"></p>
-            </li>
-        </ul>
-        <h4 th:if="${model.hasMore()}">
-            <a th:href="@{/search(q=${keywords}, page=${model.page + 1})}">
-                Next Page >>
-            </a>
-        </h4>
+        <div class="content">
+            <div class="container">
+                <div class="page-heading text-center">
+                    <h1 th:if="${keywords}">
+                        <span th:text="#{common.searchFor}"></span>
+                        <b th:text="${keywords}"></b>
+                    </h1>
+                    <p class="text-muted" th:unless="${keywords}" th:text="#{public.searchTooltip}"></p>
+                    <hr>
+                </div>
+
+                <div th:if="${model}">
+                    <ul class="list-unstyled">
+                        <li th:each="item: ${model.content}">
+                            <a th:href="@{/{catalog}/{title}(catalog=${#strings.toLowerCase(item.catalog)}, title=${item.titleKey})}">
+                                <h4 th:text="${item.title}"></h4>
+                            </a>
+                            <p th:text="${T(net.bndy.lib.StringHelper).cut(item.content.trim(), 300, '...')}"></p>
+                        </li>
+                    </ul>
+                    <h4 th:if="${model.hasMore()}">
+                        <a th:href="@{/search(q=${keywords}, page=${model.page + 1})}">
+                            Next Page >>
+                        </a>
+                    </h4>
+                </div>
+            </div>
+        </div>
+
     </div>
-</div>
 </body>
 </html>
