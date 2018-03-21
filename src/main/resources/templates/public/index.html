@@ -12,10 +12,12 @@
             <div class="row h-100">
                 <div class="col-lg-7 my-auto">
                     <div class="header-content mx-auto">
+                        <div th:if="${#authorization.expression('isAuthenticated()')}">
+                            <img class="avatar" th:src="${user.avatar}"/>
+                            <br /><br />
+                        </div>
                         <h1 class="mb-5">
-                            Hello, <b th:text="${user!=null?user.username:'world'}"></b>
-                            <img class="circle" style="height:42px; border: solid 2px #fff; position: relative; top: -5px;"
-                                 th:src="${user.avatar}" th:if="${#authorization.expression('isAuthenticated()')}" />
+                            Hello, <b th:text="${user!=null?user.username:'world'}"></b> !
                             <p>
                                 This is a starter project with Spring Boot, Thymeleaf, MySQL,
                                 RESTful API, OAuth2, Bootstrap, AngularJS and AngularJS Material.

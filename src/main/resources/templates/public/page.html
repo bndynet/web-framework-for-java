@@ -1,14 +1,20 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org"
       xmlns:layout="http://www.ultraq.net.nz/web/thymeleaf/layout"
-      layout:decorator="/public/_layout">
+      layout:decorator="public/_layout">
 <head>
     <title>About</title>
 </head>
-<body>
-<div layout:fragment="content">
-    <section id="components">
-        <div class="container">
+<body class="non-home" layout:fragment="content">
+
+    <header class="masthead">
+        <div class="container h-30">
+            wefwe
+        </div>
+    </header>
+
+    <section>
+        <div class="container h-100">
             <div class="section-heading text-center">
                 <h2 th:text="${model.title}"> </h2>
                 <p class="text-muted"></p>
@@ -24,6 +30,5 @@
             </th:block>
         </div>
     </section>
-</div>
 </body>
 </html>
