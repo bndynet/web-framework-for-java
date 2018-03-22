@@ -34,7 +34,7 @@ public class HomeController extends _BaseController {
 		if (!this.userService.hasUsers()) {
 			return "redirect:/sso/login";
 		}
-		return "/index";
+		return "public/index";
 	}
 
 	@RequestMapping(value = "/files/{uuid:[\\w-]{36}}", method = RequestMethod.GET, produces = {MediaType.APPLICATION_OCTET_STREAM_VALUE})

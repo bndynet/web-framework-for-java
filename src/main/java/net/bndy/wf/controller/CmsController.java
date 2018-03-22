@@ -40,7 +40,7 @@ public class CmsController extends _BaseController {
             throw new NoResourceFoundException();
         }
         viewModel.addAttribute("model", this.pageService.getByChannelId(channel1.getId()));
-        return "/cms/page";
+        return "public/page";
     }
 
     @RequestMapping("/articles/{channelName}")
@@ -57,7 +57,7 @@ public class CmsController extends _BaseController {
             throw new NoResourceFoundException();
         }
 
-        return "/cms/articles";
+        return "public/articles";
     }
 
     @RequestMapping("/article/{key}")
@@ -73,7 +73,7 @@ public class CmsController extends _BaseController {
         } else {
             throw new NoResourceFoundException();
         }
-        return "/cms/article";
+        return "public/article";
     }
 
     @RequestMapping(value = "/search")
@@ -91,6 +91,6 @@ public class CmsController extends _BaseController {
 
         viewModel.addAttribute("model", searchResult);
         viewModel.addAttribute("keywords", keywords);
-        return "/cms/search";
+        return "public/search";
     }
 }

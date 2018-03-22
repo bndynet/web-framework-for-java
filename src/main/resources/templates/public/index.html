@@ -1,0 +1,181 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/web/thymeleaf/layout"
+      layout:decorator="public/_layout">
+<head>
+    <title>Hello</title>
+</head>
+<body>
+<div layout:fragment="content">
+    <header class="masthead">
+        <div class="container h-100">
+            <div class="row h-100">
+                <div class="col-lg-7 my-auto">
+                    <div class="header-content mx-auto">
+                        <div th:if="${#authorization.expression('isAuthenticated()')}">
+                            <img class="avatar" th:src="${user.avatar}"/>
+                            <br /><br />
+                        </div>
+                        <h1 class="mb-5">
+                            Hello, <b th:text="${user!=null?user.username:'world'}"></b> !
+                            <p>
+                                This is a starter project with Spring Boot, Thymeleaf, MySQL,
+                                RESTful API, OAuth2, Bootstrap, AngularJS and AngularJS Material.
+                            </p>
+                        </h1>
+                        <a href="/admin/" class="btn btn-outline btn-xl">Go to <b>Admin Panel</b></a>
+                    </div>
+                </div>
+                <div class="col-lg-5 my-auto">
+                    <div class="device-container">
+                        <div class="device-mockup iphone6_plus portrait white">
+                            <div class="device">
+                                <div class="screen">
+                                    <img src="/static/public/img/code.png" class="img-fluid" alt="">
+                                </div>
+                                <div class="button">
+                                    <!-- You can hook the "home button" to some JavaScript events or just remove it -->
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </header>
+
+
+    <section id="features" class="features">
+        <div class="container">
+            <div class="text-center">
+                <h2>Features</h2>
+                <hr>
+            </div>
+            <div class="row">
+                <div class="col-lg-3">
+                    <div class="feature-item">
+                        <i class="icon-people text-primary"></i>
+                        <h3>User & Role</h3>
+                        <p class="text-muted">
+                            Create your admin user and manage registered users and roles.
+                        </p>
+                    </div>
+                </div>
+                <div class="col-lg-3">
+                    <div class="feature-item">
+                        <i class="icon-menu text-primary"></i>
+                        <h3>Menu Management</h3>
+                        <p class="text-muted">
+                            Custom your admin menus for each roles via existing templates.
+                        </p>
+                    </div>
+                </div>
+                <div class="col-lg-3">
+                    <div class="feature-item">
+                        <i class="icon-organization text-primary"></i>
+                        <h3>App Management</h3>
+                        <p class="text-muted">
+                            Register external applications for using SSO and OAuth features.
+                        </p>
+                    </div>
+                </div>
+                <div class="col-lg-3">
+                    <div class="feature-item">
+                        <i class="icon-login text-primary"></i>
+                        <h3>SSO & OAuth</h3>
+                        <p class="text-muted">
+                            Login and receive your account information according to OAuth standards.
+                        </p>
+                    </div>
+                </div>
+                <div class="col-lg-3">
+                    <div class="feature-item">
+                        <i class="icon-globe text-primary"></i>
+                        <h3>International</h3>
+                        <p class="text-muted">
+                            Multiple languages support and which is defined in i18n folder.
+                        </p>
+                    </div>
+                </div>
+                <div class="col-lg-3">
+                    <div class="feature-item">
+                        <i class="icon-docs text-primary"></i>
+                        <h3>CMS</h3>
+                        <p class="text-muted">
+                           Basic Content Management System. Supports pages, articles and attachments.
+                        </p>
+                    </div>
+                </div>
+                <div class="col-lg-3">
+                    <div class="feature-item">
+                        <i class="icon-book-open text-primary"></i>
+                        <h3>Full Text Search</h3>
+                        <p class="text-muted">
+                            CMS has been implemented Full Text Search feature. This feature is based on Apache Lucene.
+                        </p>
+                    </div>
+                </div>
+                <div class="col-lg-3">
+                    <div class="feature-item">
+                        <i class="icon-layers text-primary"></i>
+                        <h3>Themes</h3>
+                        <p class="text-muted">
+                            Support 10 themes for Admin Panel based on AdminLTE.
+                        </p>
+                    </div>
+                </div>
+            </div>
+
+            <div class="text-center">
+                <p class="text-muted">The following components are being used.</p>
+                <hr>
+            </div>
+            <div class="row">
+                <div class="col-lg-2">
+                    <div class="feature-item">
+                        <img src="http://blog.scottlogic.com/bjedrzejewski/assets/spring-boot.png"/>
+                        <p class="text-muted">
+                        </p>
+                    </div>
+                </div>
+                <div class="col-lg-2">
+                    <div class="feature-item">
+                        <img src="https://upload.wikimedia.org/wikipedia/en/thumb/6/62/MySQL.svg/1200px-MySQL.svg.png"/>
+                        <p class="text-muted">
+                        </p>
+                    </div>
+                </div>
+                <div class="col-lg-2">
+                    <div class="feature-item">
+                        <img src="https://getbootstrap.com/assets/img/bootstrap-stack.png" />
+                        <p class="text-muted">
+                        </p>
+                    </div>
+                </div>
+                <div class="col-lg-2">
+                    <div class="feature-item">
+                        <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/c/ca/AngularJS_logo.svg/250px-AngularJS_logo.svg.png"/>
+                        <p class="text-muted">
+                        </p>
+                    </div>
+                </div>
+                <div class="col-lg-2">
+                    <div class="feature-item">
+                        <img src="https://raw.githubusercontent.com/thymeleaf/thymeleaf-dist/master/src/artwork/thymeleaf%202016/thymeleaf_logo_white.png"/>
+                        <p class="text-muted">
+                        </p>
+                    </div>
+                </div>
+                <div class="col-lg-2">
+                    <div class="feature-item">
+                        <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/d/d2/Oauth_logo.svg/180px-Oauth_logo.svg.png"/>
+                        <p class="text-muted">
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+</div>
+</body>
+</html>

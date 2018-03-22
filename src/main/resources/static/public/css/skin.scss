@@ -1,0 +1,138 @@
+a {
+  text-decoration: none;
+  color: #666;
+  &:hover {
+    color: #fdcc52;
+    text-decoration: none;
+  }
+}
+
+img {
+    max-width: 100%;
+}
+
+.navbar {
+  form {
+    position: relative;
+    .form-control {
+      background: transparent;
+      padding-right: 36px;
+      color: rgba(255, 255, 255, 0.7);
+      border-radius: 0;
+      border-width: 0 0 2px 0;
+      border-color: transparent;
+      &:focus {
+        box-shadow: none;
+        border-bottom-color: #fff;
+      }
+    }
+    .btn {
+      position: absolute;
+      right: 0;
+      top: 0;
+      padding: 0.375rem;
+      border-radius: 3px;
+      border: none;
+      color: rgba(255, 255, 255, 0.7);
+      background: transparent;
+      &:focus {
+        box-shadow: none;
+      }
+      i {
+        font-size: 1.25rem;
+      }
+    }
+  }
+  &.navbar-shrink {
+    form {
+      .form-control {
+        color: #222;
+        &:focus {
+          border-bottom-color: #666;
+        }
+      }
+      .btn i {
+        color: #666;
+      }
+    }
+  }
+}
+
+.masthead {
+  .avatar {
+    height: 200px;
+    border: solid 2px #fff;
+    border-radius: 10px;
+    margin-left: 5px;
+  }
+}
+
+.nav-item {
+  position: relative;
+  .dropdown-menu {
+    border: none;
+    border-radius: 0;
+    background-color: rgba(255, 255, 255, 0.9);
+    box-shadow: 0 5px 5px rgba($color: #000000, $alpha: 0.5);
+    a {
+      display: block;
+      padding: 0.375rem 1rem;
+    }
+  }
+}
+
+.feature-item {
+    text-align: center;
+    margin-bottom: 30px;
+    img {
+        height: 36px;
+        margin-bottom: 15px;
+    }
+}
+
+footer {
+    padding: 1rem 0;
+}
+
+@media (min-width: 992px) {
+  #mainNav {
+    &.navbar-shrink {
+        box-shadow: 0 5px 5px rgba($color: #000000, $alpha: 0.5);
+    }
+  }
+}
+
+@media (max-width: 991.98px) {
+    .navbar {
+        box-shadow: 0 5px 5px rgba($color: #000000, $alpha: 0.5);
+        form {
+            .form-control {
+                color: #495057;
+                padding-left: 0;
+            }
+            .btn {
+                color: #495057;
+            }
+        }
+    } 
+}
+
+// my styles
+.banner {
+    img {
+        margin-top: 48px;
+        width: 100%;
+        opacity: 0.8;
+    }
+}
+
+.page-body {
+    min-height: calc(100vh - 77px);
+    .content {
+        padding: 5rem 0;
+
+        .page-heading {
+            margin-bottom: 15px;
+        }
+    }
+}

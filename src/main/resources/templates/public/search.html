@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/web/thymeleaf/layout"
+      layout:decorator="public/_layout">
+<head>
+    <title>Search</title>
+</head>
+<body>
+    <div class="page-body" layout:fragment="content">
+        <div class="banner">
+            <img src="/static/public/img/banner1.png" />
+        </div>
+
+        <div class="content">
+            <div class="container">
+                <div class="page-heading text-center">
+                    <h1 th:if="${keywords}">
+                        <span th:text="#{common.searchFor}"></span>
+                        <b th:text="${keywords}"></b>
+                    </h1>
+                    <p class="text-muted" th:unless="${keywords}" th:text="#{public.searchTooltip}"></p>
+                    <hr>
+                </div>
+
+                <div th:if="${model}">
+                    <ul class="list-unstyled">
+                        <li th:each="item: ${model.content}">
+                            <a th:href="@{/{catalog}/{title}(catalog=${#strings.toLowerCase(item.catalog)}, title=${item.id})}">
+                                <h4 th:utext="${item.title}"></h4>
+                            </a>
+                            <p th:utext="${T(net.bndy.lib.StringHelper).cut(item.content.trim(), 300, '...')}"></p>
+                        </li>
+                    </ul>
+                    <h4 th:if="${model.hasMore()}">
+                        <a th:href="@{/search(q=${keywords}, page=${model.page + 1})}">
+                            Next Page >>
+                        </a>
+                    </h4>
+                </div>
+            </div>
+        </div>
+
+    </div>
+</body>
+</html>
