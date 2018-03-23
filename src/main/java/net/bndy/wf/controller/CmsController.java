@@ -7,10 +7,10 @@ import net.bndy.wf.exceptions.NoResourceFoundException;
 import net.bndy.wf.modules.cms.IndexModel;
 import net.bndy.wf.modules.cms.models.Article;
 import net.bndy.wf.modules.cms.models.Channel;
+import net.bndy.wf.modules.cms.models.Page;
 import net.bndy.wf.modules.cms.services.ArticleService;
 import net.bndy.wf.modules.cms.services.ChannelService;
 import net.bndy.wf.modules.cms.services.PageService;
-import org.apache.lucene.index.IndexNotFoundException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.web.PageableDefault;
@@ -19,8 +19,6 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
-
-import java.io.IOException;
 
 @Controller
 public class CmsController extends _BaseController {
@@ -39,7 +37,9 @@ public class CmsController extends _BaseController {
         if (channel1 == null) {
             throw new NoResourceFoundException();
         }
-        viewModel.addAttribute("model", this.pageService.getByChannelId(channel1.getId()));
+        Page page = this.pageService.getByChannelId(channel1.getId());
+        viewModel.addAttribute("pageTitle", page.getTitle());
+        viewModel.addAttribute("model", page);
         return "public/page";
     }
 
@@ -69,6 +69,7 @@ public class CmsController extends _BaseController {
             article = this.articleService.get(Long.parseLong(key));
         }
         if (article != null) {
+            viewModel.addAttribute("pageTitle", article.getTitle());
             viewModel.addAttribute("model", article);
         } else {
             throw new NoResourceFoundException();
@@ -77,9 +78,11 @@ public class CmsController extends _BaseController {
     }
 
     @RequestMapping(value = "/search")
-    public String search(Model viewModel, @RequestParam(name = "q", required = false) String keywords,
-        @RequestParam(name = "page", required = false) Integer page)
-        throws ClassNotFoundException, InstantiationException, IllegalAccessException, org.apache.lucene.queryparser.classic.ParseException, IOException {
+    public String search(Model viewModel,
+                         @RequestParam(name = "q", required = false) String keywords,
+                         @RequestParam(name = "page", required = false) Integer page
+    ) {
+
         SearchResult<IndexModel> searchResult = null;
         if (page == null) {
             page = 1;
@@ -89,6 +92,7 @@ public class CmsController extends _BaseController {
             searchResult = ApplicationContext.getIndexService().search(keywords, IndexModel.class, page, 10);
         }
 
+        viewModel.addAttribute("pageTitle", keywords);
         viewModel.addAttribute("model", searchResult);
         viewModel.addAttribute("keywords", keywords);
         return "public/search";
