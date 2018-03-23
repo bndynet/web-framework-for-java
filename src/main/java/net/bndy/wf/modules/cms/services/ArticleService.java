@@ -95,6 +95,16 @@ public class ArticleService extends _BaseService<Article> {
         return entity;
     }
 
+    @Override
+    public boolean delete(long id) {
+        try {
+            ApplicationContext.getIndexService().deleteIndex(IndexModel.class, id);
+        } catch (NoKeyDefinedException ex) {
+            ex.printStackTrace();
+        }
+        return super.delete(id);
+    }
+
     public Article getByTitleKey(String titleKey) {
         return this.articleRepository.findByTitleKey(titleKey);
     }

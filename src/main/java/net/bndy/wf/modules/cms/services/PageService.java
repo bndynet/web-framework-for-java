@@ -61,6 +61,13 @@ public class PageService extends _BaseService<Page> {
             this.deleteComments(p.getId());
             this.deleteAttachments(p.getId());
         }
+
+        try {
+            ApplicationContext.getIndexService().deleteIndex(IndexModel.class, id);
+        } catch (NoKeyDefinedException ex) {
+            ex.printStackTrace();
+        }
+
         return super.delete(id);
     }
 

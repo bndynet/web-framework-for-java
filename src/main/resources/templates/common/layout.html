@@ -3,17 +3,13 @@
 <html xmlns:th="http://www.thymeleaf.org"
 	xmlns:layout="http://www.ultraq.net.nz/web/thymeleaf/layout">
 <head>
-<title layout:title-pattern="$DECORATOR_TITLE - $CONTENT_TITLE">Web
-	Framework</title>
-<link href="/static/assets/img/logo.png" rel="shortcut icon">
-<link rel="stylesheet" type="text/css"
-	href="/webjars/bootstrap/3.3.7/css/bootstrap.min.css" />
-<link rel="stylesheet" type="text/css" href="/static/assets/css/common.css" />
+<title layout:title-pattern="$DECORATOR_TITLE - $CONTENT_TITLE">Web Framework</title>
+    <link href="/static/assets/img/logo.png" rel="shortcut icon">
+	<link href="/static/plugins/bootstrap/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" type="text/css" href="/static/assets/css/common.css" />
 
-<script type="text/javascript"
-	src="/webjars/jquery/1.11.1/jquery.min.js"></script>
-<script type="text/javascript"
-	src="/webjars/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+	<script src="/static/plugins/jquery/jquery.min.js"></script>
+	<script src="/static/plugins/bootstrap/js/bootstrap.bundle.min.js"></script>
 </head>
 <body>
 	<div layout:fragment="body"></div>
