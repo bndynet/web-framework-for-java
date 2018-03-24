@@ -38,13 +38,15 @@ public class ApplicationContext {
     private MessageSource _messageSource;
     @Autowired
     private ApplicationConfig _applicationConfig;
+    @Autowired
+    private IndexService _indexService;
 
     @PostConstruct
     private void init() {
         request = _request;
         messageSource = _messageSource;
         applicationConfig = _applicationConfig;
-        indexService = new IndexService(applicationConfig.getFtsiPath());
+        indexService = _indexService;
     }
 
     public static User getCurrentUser() {

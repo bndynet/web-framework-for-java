@@ -18,7 +18,7 @@ application:
   app-logo:
   app-short-name: WF
   upload-path: upload
-  ftsi-path: ft-index
+  full-text-index-path: ft-index
   rename-upload-file: false
   mail-sender: zb@bndy.net
   allowed-origins: http://bndy.net, http://localhost:5500
@@ -51,7 +51,14 @@ spring:
 #    banner-mode: console # Mode used to display the banner when the application runs.  
 #    sources: # Sources (class name, package name or XML resource location) to include in the ApplicationContext.  
 #    web-environment: # Run the application in a web environment (auto-detected by default).
-    
+
+  ftsi:
+    analyzer: org.apache.lucene.analysis.standard.StandardAnalyzer
+    data-path: ${application.full-text-index-path}
+    highlight-pre-tag: <b class="highlight">
+    highlight-post-tag: </b>
+    highlight-fragment-size: 30
+
   # Email (MailProperties)  
   mail:
     default-encoding: UTF-8 # Default MimeMessage encoding.  
