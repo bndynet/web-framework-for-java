@@ -34,10 +34,17 @@ public class CmsController extends _BaseController {
     public String page(Model viewModel,
                        @PathVariable(name = "channel") String channel) throws NoResourceFoundException {
         Channel channel1 = this.channelService.getByNameOrNameKey(channel);
+        Page page = null;
         if (channel1 == null) {
+            if (StringHelper.isNumeric(channel)) {
+                page = this.pageService.get(Integer.parseInt(channel));
+            }
+        } else {
+            page = this.pageService.getByChannelId(channel1.getId());
+        }
+        if (page == null) {
             throw new NoResourceFoundException();
         }
-        Page page = this.pageService.getByChannelId(channel1.getId());
         viewModel.addAttribute("pageTitle", page.getTitle());
         viewModel.addAttribute("model", page);
         return "public/page";
