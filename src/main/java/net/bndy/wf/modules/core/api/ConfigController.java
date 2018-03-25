@@ -7,7 +7,6 @@ package net.bndy.wf.modules.core.api;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import net.bndy.wf.ApplicationContext;
-import net.bndy.wf.modules.core.models.Role;
 import net.bndy.wf.modules.core.services.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -19,7 +18,6 @@ import pl.jalokim.propertiestojson.util.PropertiesToJsonParser;
 import javax.cache.annotation.CacheResult;
 import java.util.Enumeration;
 import java.util.HashMap;
-import java.util.List;
 import java.util.Map;
 
 @Api(value = "Configurations API")

@@ -16,6 +16,7 @@ public class ApplicationConfig {
 	private String appLogo;
 	private String appName;
 	private String appShortName;
+    private String defaultLang;
 	private boolean uploadDisabled;
 	private String uploadPath;
 	private String fullTextIndexPath;
@@ -25,6 +26,14 @@ public class ApplicationConfig {
 	private boolean renameUploadFile;
 	private String adminSkin;
 	private String adminRole;
+
+	public String getDefaultLang() {
+		return defaultLang;
+	}
+
+	public void setDefaultLang(String lang) {
+		this.defaultLang = lang;
+	}
 
 	public String getAllowedOrigins() {
 		return allowedOrigins;

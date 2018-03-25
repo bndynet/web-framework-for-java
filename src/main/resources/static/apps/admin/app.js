@@ -9,7 +9,7 @@ app.config(['$provide', '$qProvider', '$httpProvider', '$stateProvider', '$trans
     }]);
 
     $translateProvider.useUrlLoader('/api/core/config/lang');
-    $translateProvider.preferredLanguage($cookies.get("LOCALE")||'en');
+    $translateProvider.preferredLanguage($cookies.get("LOCALE")||'');
 
     // override translateFilter for supporting java i18n format
     $provide.decorator('translateFilter', ['$delegate', function($delegate) {

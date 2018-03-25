@@ -25,6 +25,7 @@ application:
   app-name: Web Framework
   app-logo:
   app-short-name: WF
+  default-lang: en-US
   upload-disabled: ${var.upload-disabled}
   upload-path: ${var.upload-path}
   full-text-index-path: ${var.ft-path}
@@ -66,7 +67,7 @@ spring:
     data-path: ${application.full-text-index-path}
     highlight-pre-tag: <b class="highlight">
     highlight-post-tag: </b>
-    highlight-fragment-size: 30
+    highlight-fragment-size: 300
 
   # Email (MailProperties)  
   mail:

@@ -101,7 +101,11 @@ public class ApplicationContext {
     }
 
     public static ResourceBundle i18n() {
-        return ResourceBundle.getBundle("i18n.messages", LocaleContextHolder.getLocale());
+        Locale locale = LocaleContextHolder.getLocaleContext().getLocale();
+        if (locale == null) {
+            locale = Locale.forLanguageTag(applicationConfig.getDefaultLang());
+        }
+        return ResourceBundle.getBundle("i18n.messages", locale);
     }
 
     public static String language(String key, Object[] args, String defaultValue) {
