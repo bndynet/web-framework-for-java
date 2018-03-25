@@ -28,16 +28,6 @@ public class ApiExceptionHandler {
         this.logger.error("{} for {}", e.getMessage(), req.getRequestURL());
 
         ApiError error = new ApiError(e);
-        if (e instanceof ResourceIntegrityException) {
-            error.setStatus(HttpStatus.METHOD_NOT_ALLOWED);
-        } else if (e instanceof NoResourceFoundException) {
-            error.setStatus(HttpStatus.NOT_FOUND);
-        } else if (e instanceof UnauthorizedException) {
-            error.setStatus(HttpStatus.UNAUTHORIZED);
-        } else {
-            error.setStatus(HttpStatus.INTERNAL_SERVER_ERROR);
-        }
-
         return error.toResponse();
     }
 }

@@ -17,6 +17,7 @@ application:
   app-name: Web Framework
   app-logo:
   app-short-name: WF
+  upload-disabled: true
   upload-path: upload
   full-text-index-path: ft-index
   rename-upload-file: false

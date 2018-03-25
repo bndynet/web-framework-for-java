@@ -16,6 +16,7 @@ public class ApplicationConfig {
 	private String appLogo;
 	private String appName;
 	private String appShortName;
+	private boolean uploadDisabled;
 	private String uploadPath;
 	private String fullTextIndexPath;
 	private String mailSender;
@@ -109,4 +110,13 @@ public class ApplicationConfig {
 	public void setAdminRole(String adminRole) {
 		this.adminRole = adminRole;
 	}
+
+	public boolean isUploadDisabled() {
+		return uploadDisabled;
+	}
+
+	public void setUploadDisabled(boolean uploadDisabled) {
+		this.uploadDisabled = uploadDisabled;
+	}
+
 }

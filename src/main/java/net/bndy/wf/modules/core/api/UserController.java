@@ -11,6 +11,7 @@ import java.util.Map;
 
 import net.bndy.wf.ApplicationContext;
 import net.bndy.wf.exceptions.AppException;
+import net.bndy.wf.exceptions.DisabledFeatureException;
 import net.bndy.wf.lib.LongsWrapper;
 import net.bndy.wf.modules.core.models.File;
 import net.bndy.wf.modules.core.models.User;
@@ -126,7 +127,7 @@ public class UserController extends _BaseApi<User> {
 
     @Override
     @RequestMapping(value = "/updateAvatar", method = RequestMethod.POST, headers = ("content-type=multipart/*"), consumes = MediaType.APPLICATION_FORM_URLENCODED_VALUE)
-    public File upload(MultipartFile file, HttpServletRequest request) throws IllegalStateException, IOException {
+    public File upload(MultipartFile file, HttpServletRequest request) throws IllegalStateException, IOException, DisabledFeatureException {
         File f = super.upload(file, request);
         this.userService.updateAvatar(ApplicationContext.getCurrentUser().getId(), f);
         return f;

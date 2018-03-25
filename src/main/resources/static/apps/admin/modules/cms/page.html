@@ -15,12 +15,12 @@
         </ui-page-content-header-right>
 
         <div>
-            <div class="col-md-8">
+            <div class="col-lg-8">
                 <div class="form-group">
                     <ui-html-editor ng-model="viewModel.content"></ui-html-editor>
                 </div>
             </div>
-            <div class="col-md-4">
+            <div class="col-lg-4">
                 <div class="form-group" ng-if="viewModel.attachments && viewModel.attachments.length > 0">
                     <div class="tag" ng-repeat="item in viewModel.attachments">
                         <a href="/files/{{item.uuid}}" target="_blank">

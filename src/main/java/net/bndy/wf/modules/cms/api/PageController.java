@@ -8,6 +8,7 @@ import java.io.IOException;
 
 import javax.servlet.http.HttpServletRequest;
 
+import net.bndy.wf.exceptions.DisabledFeatureException;
 import net.bndy.wf.exceptions.NoResourceFoundException;
 import net.bndy.wf.modules.core.models.File;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -39,7 +40,7 @@ public class PageController extends _BaseApi<Page> {
 	}
 
 	@Override
-	public File upload(MultipartFile file, HttpServletRequest request) throws IllegalStateException, IOException {
+	public File upload(MultipartFile file, HttpServletRequest request) throws IllegalStateException, IOException, DisabledFeatureException {
 		return super.upload(file, request);
 	}
 

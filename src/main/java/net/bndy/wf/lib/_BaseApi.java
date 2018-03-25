@@ -17,6 +17,7 @@ import java.util.List;
 import javax.servlet.http.HttpServletRequest;
 
 import net.bndy.wf.config.ApplicationConfig;
+import net.bndy.wf.exceptions.DisabledFeatureException;
 import net.bndy.wf.exceptions.NoResourceFoundException;
 import net.bndy.wf.exceptions.ResourceIntegrityException;
 import net.bndy.wf.modules.core.services.FileService;
@@ -100,7 +101,11 @@ public abstract class _BaseApi<T extends _BaseEntity> {
 	@ApiOperation(value = "Upload files")
 	@RequestMapping(value = "/upload", method = RequestMethod.POST, headers = ("content-type=multipart/*"), consumes = MediaType.APPLICATION_FORM_URLENCODED_VALUE)
 	public net.bndy.wf.modules.core.models.File upload(@RequestPart(required = true) MultipartFile file, HttpServletRequest request)
-			throws IllegalStateException, IOException {
+		throws IllegalStateException, IOException, DisabledFeatureException {
+
+		if (this.appliationConfig.isUploadDisabled()) {
+			throw new DisabledFeatureException();
+		}
 
 		net.bndy.wf.modules.core.models.File f = new net.bndy.wf.modules.core.models.File();
 		f.setSize(file.getSize());

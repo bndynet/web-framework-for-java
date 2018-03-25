@@ -4,6 +4,7 @@
  ******************************************************************************/
 package net.bndy.wf.modules.cms.api;
 
+import net.bndy.wf.exceptions.DisabledFeatureException;
 import net.bndy.wf.modules.core.models.File;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.domain.Sort;
@@ -52,7 +53,7 @@ public class ArticleController extends _BaseApi<Article> {
 	}
 
 	@Override
-	public File upload(MultipartFile file, HttpServletRequest request) throws IllegalStateException, IOException {
+	public File upload(MultipartFile file, HttpServletRequest request) throws IllegalStateException, IOException, DisabledFeatureException {
 		return super.upload(file, request);
 	}
 }
