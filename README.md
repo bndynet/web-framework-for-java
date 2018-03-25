@@ -16,8 +16,10 @@
 
 **NOTE** : Use **MySQL v5.7+**, if JDBC exception occurred, please drop all tables and let it recreate automatically.
 
+**Home Page**
 ![](https://raw.githubusercontent.com/bndynet/web-framework-for-java/master/docs/img/home.png)
 
+**Admin Page**
 ![](https://raw.githubusercontent.com/bndynet/web-framework-for-java/master/docs/img/admin-home.png)
 
 ## Features

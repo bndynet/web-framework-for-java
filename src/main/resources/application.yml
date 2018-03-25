@@ -1,4 +1,12 @@
-# EMBEDDED SERVER CONFIGURATION (ServerProperties) 
+var:
+  upload-disabled: false
+  upload-path: upload
+  ft-path: ft-index
+  db-name: wf
+  db-user: root
+  db-password: 123456
+
+# EMBEDDED SERVER CONFIGURATION (ServerProperties)
 server:
   port: 9090
   address: 127.0.0.1
@@ -17,9 +25,9 @@ application:
   app-name: Web Framework
   app-logo:
   app-short-name: WF
-  upload-disabled: true
-  upload-path: upload
-  full-text-index-path: ft-index
+  upload-disabled: ${var.upload-disabled}
+  upload-path: ${var.upload-path}
+  full-text-index-path: ${var.ft-path}
   rename-upload-file: false
   mail-sender: zb@bndy.net
   allowed-origins: http://bndy.net, http://localhost:5500
@@ -94,9 +102,9 @@ spring:
 
   # DATASOURCE (DataSourceAutoConfiguration & DataSourceProperties)  
   datasource:
-    url: jdbc:mysql://localhost:3306/wf?useSSL=false&characterEncoding=utf8
-    username: root
-    password: 123456
+    url: jdbc:mysql://localhost:3306/${var.db-name}?useSSL=false&characterEncoding=utf8
+    username: ${var.db-user}
+    password: ${var.db-password}
     driver-class: com.mysql.jdbc.Driver
     testWhileIdle: true 
     validationQuery: SELECT 1
