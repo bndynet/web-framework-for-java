@@ -34,6 +34,7 @@
 - International Support
 - Skin Support
 - **Content Management System**
+- Full Text Search
 	
 ## Getting Started
 
