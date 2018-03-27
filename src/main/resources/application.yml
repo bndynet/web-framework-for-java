@@ -1,10 +1,11 @@
 var:
-  upload-disabled: false
-  upload-path: upload
-  ft-path: ft-index
+  lang: en-US
   db-name: wf
   db-user: root
   db-password: 123456
+  ft-path: ft-index
+  upload-disabled: false
+  upload-path: upload
 
 # EMBEDDED SERVER CONFIGURATION (ServerProperties)
 server:
@@ -25,7 +26,7 @@ application:
   app-name: Web Framework
   app-logo:
   app-short-name: WF
-  default-lang: en-US
+  default-lang: ${var.lang}
   upload-disabled: ${var.upload-disabled}
   upload-path: ${var.upload-path}
   full-text-index-path: ${var.ft-path}
