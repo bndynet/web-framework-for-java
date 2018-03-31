@@ -107,7 +107,7 @@ public class ChannelService extends _BaseService<Channel> {
         if (source != null && target != null && source.getBoType() == target.getBoType()) {
             // TODO: transfer BO according to boType
             switch (source.getBoType()) {
-                case File:
+                case Resource:
                     break;
                 case Page:
                     this.pageService.transfer(source.getId(), target.getId());
@@ -181,7 +181,7 @@ public class ChannelService extends _BaseService<Channel> {
                     case Page:
                         this.pageService.deleteByChannelId(channel.getId());
                         break;
-                    case File:
+                    case Resource:
                         // TODO: remove File channel
                         break;
                 }

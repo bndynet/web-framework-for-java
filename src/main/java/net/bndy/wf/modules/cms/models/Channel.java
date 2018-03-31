@@ -78,7 +78,7 @@ public class Channel extends _BaseEntity {
     public String getUrl() {
         if (this.boType != null && (url == null || "".equals(url))) {
             switch (this.boType) {
-                case File:
+                case Resource:
                     url = "/resources/" + (StringHelper.isNullOrWhiteSpace(this.nameKey) ? this.name : this.nameKey); // + "?id=" + this.id;
                     break;
                 case Page:

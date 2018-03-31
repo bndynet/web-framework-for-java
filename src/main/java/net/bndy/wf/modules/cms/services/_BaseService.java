@@ -87,7 +87,7 @@ public abstract class _BaseService<T> extends net.bndy.wf.lib._BaseService<T> {
 		} else if (this.domainClass.getName().equals(Article.class.getName())) {
 			boType = BoType.Article;
 		} else if (this.domainClass.getName().equals(Article.class.getName())) {
-			boType = BoType.File;
+			boType = BoType.Resource;
 		}
 		return boType;
 	}

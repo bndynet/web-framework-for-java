@@ -11,6 +11,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.lang.reflect.Field;
 import java.util.List;
 
 @Service
@@ -28,5 +29,9 @@ public class FileService extends _BaseService<File> {
         if (ids != null && ids.size() > 0) {
             this.fileRepository.setRef(ids);
         }
+    }
+
+    public List<File> getFilesByIds(List<Long> ids) {
+        return this.fileRepository.findByIds(ids);
     }
 }

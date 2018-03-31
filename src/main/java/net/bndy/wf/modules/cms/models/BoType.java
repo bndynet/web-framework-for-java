@@ -9,7 +9,7 @@ import java.util.Map;
 public enum BoType {
     Page,
     Article,
-    File;
+    Resource;
 
     public int getValue() {
         return this.ordinal();

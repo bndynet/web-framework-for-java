@@ -13,12 +13,15 @@ import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
 
-public interface FileRepository  extends JpaRepository<File, Long> {
+public interface FileRepository extends JpaRepository<File, Long> {
 
     File findByUuid(String uuid);
 
     @Modifying
     @Transactional
-    @Query(value="UPDATE core_file SET is_ref = 1 WHERE id IN (:ids)", nativeQuery=true)
+    @Query(value = "UPDATE core_file SET is_ref = 1 WHERE id IN (:ids)", nativeQuery = true)
     void setRef(@Param("ids") List<Long> ids);
+
+    @Query(value = "SELECT * FROM core_file WHERE id IN (:ids)", nativeQuery = true)
+    List<File> findByIds(@Param("ids") List<Long> ids);
 }
