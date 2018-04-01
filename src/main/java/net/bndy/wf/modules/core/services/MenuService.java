@@ -17,6 +17,7 @@ import net.bndy.wf.lib._BaseService;
 import net.bndy.wf.modules.core.models.Menu;
 import net.bndy.wf.modules.core.services.repositories.MenuRepository;
 import net.bndy.wf.modules.cms.services.repositories.PageRepository;
+import org.thymeleaf.util.ArrayUtils;
 
 @Service
 @Transactional
@@ -28,6 +29,11 @@ public class MenuService extends _BaseService<Menu> {
     private MenuRepository menuRepo;
     @Autowired
     private PageRepository pageRepo;
+
+    @Autowired
+    private net.bndy.wf.modules.cms.Setup cmsSetup;
+    @Autowired
+    private net.bndy.wf.modules.core.Setup coreSetup;
 
     public List<Menu> getTemplates() {
         List<Menu> result = new ArrayList<>();
@@ -80,7 +86,9 @@ public class MenuService extends _BaseService<Menu> {
 
             Map<String, Menu> pathMapping = new HashMap();
             for (String menu : menus) {
-                if (menu.startsWith("shared")) {
+                if (menu.startsWith("shared")
+                    || ArrayUtils.contains(this.coreSetup.MODULES_EXCLUDED, menu)
+                    || ArrayUtils.contains(this.cmsSetup.MODULES_EXCLUDED, menu)) {
                     continue;
                 }
 

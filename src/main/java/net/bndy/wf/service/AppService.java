@@ -7,9 +7,9 @@ import org.aspectj.util.FileUtil;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.core.io.ClassPathResource;
 import org.springframework.stereotype.Service;
-import org.thymeleaf.util.ArrayUtils;
 
 import java.io.File;
+import java.io.IOException;
 import java.util.*;
 
 @Service
@@ -32,7 +32,6 @@ public class AppService {
 
         try {
             File rootModule = new ClassPathResource("/static/apps/admin/modules").getFile();
-
             for (File f : FileUtil.listFiles(rootModule, (pathname -> pathname.getName().toLowerCase().endsWith(".html")))) {
                 String moduleName = f.getPath()
                     .replace(".html", "")
@@ -40,15 +39,11 @@ public class AppService {
                     .replaceAll("[\\\\/]+", "-")
                     .replaceAll("^-", "");
 
-                if (!ArrayUtils.contains(this.coreSetup.MODULES_EXCLUDED, moduleName) &&
-                    !ArrayUtils.contains(this.cmsSetup.MODULES_EXCLUDED, moduleName)) {
-                    modules.add(moduleName);
-                }
+                modules.add(moduleName);
             }
-        } catch (Exception ex) {
-
+        } catch (IOException e) {
+            e.printStackTrace();
         }
-
         return modules;
     }
 
