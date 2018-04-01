@@ -46,7 +46,8 @@ angular.module('app')
                     case 'Article':
                         $state.go('cms-articles', {obj: {id: item.id, channel: item}});
                         break;
-                    case 'File':
+                    case 'Resource':
+                        $state.go('cms-resources', {obj: {id: item.id, channel: item}});
                         break;
                 }
             };
