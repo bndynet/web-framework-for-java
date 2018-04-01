@@ -231,6 +231,10 @@ img.circle {
   padding-top: 8px;
 }
 
+.nowrap {
+  white-space: nowrap;
+}
+
 .icon-group i {
   padding: 2px 3px;
   margin: 0 5px;
