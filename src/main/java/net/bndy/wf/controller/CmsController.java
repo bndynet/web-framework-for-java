@@ -11,6 +11,8 @@ import net.bndy.wf.modules.cms.models.Page;
 import net.bndy.wf.modules.cms.services.ArticleService;
 import net.bndy.wf.modules.cms.services.ChannelService;
 import net.bndy.wf.modules.cms.services.PageService;
+import net.bndy.wf.modules.cms.services.ResourceService;
+import net.bndy.wf.modules.core.models.File;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.web.PageableDefault;
@@ -19,6 +21,8 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+
+import java.util.List;
 
 @Controller
 public class CmsController extends _BaseController {
@@ -29,6 +33,8 @@ public class CmsController extends _BaseController {
     private ChannelService channelService;
     @Autowired
     private ArticleService articleService;
+    @Autowired
+    private ResourceService resourceService;
 
     @RequestMapping("/page/{channel}")
     public String page(Model viewModel,
@@ -103,5 +109,21 @@ public class CmsController extends _BaseController {
         viewModel.addAttribute("model", searchResult);
         viewModel.addAttribute("keywords", keywords);
         return "public/search";
+    }
+
+    @RequestMapping("/resources/{channelName}")
+    public String resources(Model viewModel,
+                           @PathVariable(name = "channelName") String channelName) throws NoResourceFoundException {
+
+        Channel channel = this.channelService.getByNameOrNameKey(channelName);
+        if (channel != null) {
+            viewModel.addAttribute("channel", channel);
+            List<File> files = this.resourceService.getFilesByChannelId(channel.getId());
+            viewModel.addAttribute("files", files);
+        } else {
+            throw new NoResourceFoundException();
+        }
+
+        return "public/resources";
     }
 }

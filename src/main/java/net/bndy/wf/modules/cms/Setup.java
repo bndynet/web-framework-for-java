@@ -31,7 +31,7 @@ public class Setup {
     @Autowired
     private MenuService menuService;
 
-    public String[] MODULES_EXCLUDED = {"cms-articles", "cms-page"};
+    public String[] MODULES_EXCLUDED = {"cms-articles", "cms-page", "cms-resources"};
     private final static String DATA_DIR = "./mockdata/cms";
     private static Menu rootMenu;
 

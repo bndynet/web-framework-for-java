@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/web/thymeleaf/layout"
+      layout:decorator="public/_layout">
+<head>
+    <title th:text="${channel.name}"></title>
+</head>
+<body>
+<div class="page-body" layout:fragment="content">
+    <div class="banner">
+        <img src="/static/public/img/banner3.png" />
+    </div>
+
+    <div class="content">
+        <div class="container">
+            <div class="page-heading text-center">
+                <h1 th:text="${channel.name}"></h1>
+                <p class="text-muted"></p>
+                <hr>
+            </div>
+
+            <th:block th:each="item: ${files}">
+                <div class="media">
+                    <img class="mr-3" th:src="@{'/static/assets/img/fileTypes/'+ ${item.extName} + '.png'}" th:alt="${item.extName}"
+                         style="width: 48px; height: 48px;"
+                         onerror="this.src='/static/assets/img/fileTypes/_blank.png'">
+                    <div class="media-body">
+                        <h5 class="mt-0">
+                            <a th:href="@{'/files/' + ${item.uuid}}" target="_blank">
+                                <span th:text="${item.name}"></span>.<span th:text="${item.extName}"></span>
+                            </a>
+                        </h5>
+                        <span th:text="${#numbers.formatDecimal(item.size / 1024 / 1024, 0, 2)}"></span> MB
+                    </div>
+                </div>
+                <br />
+            </th:block>
+        </div>
+    </div>
+</div>
+</body>
+</html>
