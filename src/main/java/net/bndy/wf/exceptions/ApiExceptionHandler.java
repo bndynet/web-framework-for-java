@@ -6,12 +6,14 @@ package net.bndy.wf.exceptions;
 
 import javax.servlet.http.HttpServletRequest;
 
+import net.bndy.lib.AnnotationHelper;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.ControllerAdvice;
 import org.springframework.web.bind.annotation.ExceptionHandler;
+import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.bind.annotation.RestController;
 
 import net.bndy.wf.lib.ResponseResult;
@@ -28,6 +30,12 @@ public class ApiExceptionHandler {
         this.logger.error("{} for {}", e.getMessage(), req.getRequestURL());
 
         ApiError error = new ApiError(e);
+        if (e != null) {
+            ResponseStatus rs = AnnotationHelper.getClassAnnotation(ResponseStatus.class, e.getClass());
+            if (rs != null) {
+                error.setStatus(rs.value());
+            }
+        }
         return error.toResponse();
     }
 }
