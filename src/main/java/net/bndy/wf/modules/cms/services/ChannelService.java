@@ -24,6 +24,8 @@ public class ChannelService extends _BaseService<Channel> {
     private ArticleService articleService;
     @Autowired
     private PageService pageService;
+    @Autowired
+    private ResourceService resourceService;
 
     public List<Channel> getTree(boolean all) {
         if (all) {
@@ -89,6 +91,7 @@ public class ChannelService extends _BaseService<Channel> {
     public boolean hasContent(long channelId) {
         return this.pageService.countByChannelId(channelId) > 0
             || this.articleService.countByChannelId(channelId) > 0
+            || this.resourceService.countByChannelId(channelId) > 0
             ;
     }
 
@@ -105,9 +108,9 @@ public class ChannelService extends _BaseService<Channel> {
         Channel source = this.channelRepository.findOne(sourceId);
         Channel target = this.channelRepository.findOne(targetId);
         if (source != null && target != null && source.getBoType() == target.getBoType()) {
-            // TODO: transfer BO according to boType
             switch (source.getBoType()) {
                 case Resource:
+                    this.resourceService.transfer(source.getId(), target.getId());
                     break;
                 case Page:
                     this.pageService.transfer(source.getId(), target.getId());
@@ -182,7 +185,7 @@ public class ChannelService extends _BaseService<Channel> {
                         this.pageService.deleteByChannelId(channel.getId());
                         break;
                     case Resource:
-                        // TODO: remove File channel
+                        this.resourceService.deleteByChannelId(channel.getId());
                         break;
                 }
             }

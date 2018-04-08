@@ -83,7 +83,7 @@ public class ArticleService extends _BaseService<Article> {
                 entity.getId(),
                 entity.getTitle(),
                 entity.getTitleKey(),
-                entity.getContent().replaceAll("<.*?>", ""),    // TODO: use stripHtml method instead
+                StringHelper.stripHtml(entity.getContent()),
                 BoType.Article.getName()
             ));
         } catch (NoKeyDefinedException ex) {

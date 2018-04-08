@@ -101,7 +101,7 @@ public class PageService extends _BaseService<Page> {
                 entity.getId(),
                 entity.getTitle(),
                 StringHelper.title2Url(entity.getTitle()),
-                entity.getContent().replaceAll("<.*?>", ""), // TODO: use stripHtml method instead
+                StringHelper.stripHtml(entity.getContent()),
                 BoType.Page.getName()
             ));
         } catch (NoKeyDefinedException ex) {

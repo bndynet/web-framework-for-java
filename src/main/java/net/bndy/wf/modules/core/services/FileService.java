@@ -12,6 +12,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.lang.reflect.Field;
+import java.util.ArrayList;
 import java.util.List;
 
 @Service
@@ -32,6 +33,9 @@ public class FileService extends _BaseService<File> {
     }
 
     public List<File> getFilesByIds(List<Long> ids) {
+        if (ids == null || ids.size() == 0) {
+            return new ArrayList<>();
+        }
         return this.fileRepository.findByIds(ids);
     }
 }

@@ -35,9 +35,6 @@ angular.module('app')
                 }
                 dialogForm.show();
             };
-            $scope.getExchangeTitle = function() {
-                return
-            };
             $scope.view = function(item) {
                 switch(item.boType.name) {
                     case 'Page':
