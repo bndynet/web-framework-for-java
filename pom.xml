@@ -24,7 +24,9 @@
     </repositories>
 
     <properties>
+		<java.version>1.8</java.version>
         <tomcat.version>8.5.24</tomcat.version>
+        <maven.test.skip>true</maven.test.skip>
     </properties>
 
 	<parent>
