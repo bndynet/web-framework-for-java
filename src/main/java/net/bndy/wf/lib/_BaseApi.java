@@ -39,18 +39,15 @@ import io.swagger.annotations.ApiOperation;
 import net.bndy.lib.*;
 import net.bndy.wf.*;
 import net.bndy.wf.modules.core.models.User;
-import net.bndy.wf.modules.core.services.repositories.UserRepository;
 
 public abstract class _BaseApi<T extends _BaseEntity> {
 
 	@Autowired
-	_BaseService<T> service;
+	private _BaseService<T> service;
 	@Autowired
-	FileService fileService;
+	private FileService fileService;
 	@Autowired
-	UserRepository userRepository;
-	@Autowired
-    ApplicationConfig appliationConfig;
+    protected ApplicationConfig appliationConfig;
 
 	public User getCurrentUser() {
 		return ApplicationContext.getCurrentUser();
@@ -109,7 +106,7 @@ public abstract class _BaseApi<T extends _BaseEntity> {
 
 		net.bndy.wf.modules.core.models.File f = new net.bndy.wf.modules.core.models.File();
 		f.setSize(file.getSize());
-		f.setType(FileInfo.getTypeByName(file.getOriginalFilename()));
+		f.setType(FileHelper.getTypeByName(file.getOriginalFilename()));
 		f.setExtName("");
 
 		if (file.getOriginalFilename().indexOf(".") >= 0) {

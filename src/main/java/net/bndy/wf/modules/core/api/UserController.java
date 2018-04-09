@@ -9,10 +9,10 @@ import java.net.MalformedURLException;
 import java.util.HashMap;
 import java.util.Map;
 
+import net.bndy.lib.wrapper.LongsWrapper;
 import net.bndy.wf.ApplicationContext;
 import net.bndy.wf.exceptions.AppException;
 import net.bndy.wf.exceptions.DisabledFeatureException;
-import net.bndy.wf.lib.LongsWrapper;
 import net.bndy.wf.modules.core.models.File;
 import net.bndy.wf.modules.core.models.User;
 import net.bndy.wf.modules.core.models.UserProfile;

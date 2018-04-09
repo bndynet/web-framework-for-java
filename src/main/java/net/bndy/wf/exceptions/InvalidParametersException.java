@@ -11,7 +11,6 @@ import org.springframework.web.bind.annotation.ResponseStatus;
 
 @ResponseStatus(value = HttpStatus.BAD_REQUEST)
 public class InvalidParametersException extends AppException {
-	
 	private static final long serialVersionUID = 1L;
 
 	public ArrayList<String> Parameters = new ArrayList<String>();

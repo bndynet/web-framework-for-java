@@ -2,8 +2,8 @@ package net.bndy.wf.modules.core.api;
 
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
+import net.bndy.lib.wrapper.LongsWrapper;
 import net.bndy.wf.exceptions.ResourceIntegrityException;
-import net.bndy.wf.lib.LongsWrapper;
 import net.bndy.wf.lib._BaseApi;
 import net.bndy.wf.modules.core.models.Role;
 import net.bndy.wf.modules.core.services.RoleService;
