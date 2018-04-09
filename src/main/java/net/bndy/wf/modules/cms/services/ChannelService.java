@@ -99,7 +99,7 @@ public class ChannelService extends _BaseService<Channel> {
         List<Channel> result = new ArrayList<>();
         Channel channel = this.get(sourceChannelId);
         if (channel != null && channel.getBoType() != null) {
-            result = this.channelRepository.findByBoType(channel.getBoType().getValue());
+            result = this.channelRepository.findByBoTypeValue(channel.getBoType().getValue());
         }
         return result;
     }
@@ -166,6 +166,8 @@ public class ChannelService extends _BaseService<Channel> {
                     p.setTitle(entity.getName());
                     this.pageService.save(p);
                     break;
+                default:
+                	break;
             }
         }
 

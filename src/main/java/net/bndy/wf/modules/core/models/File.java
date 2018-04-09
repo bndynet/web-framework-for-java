@@ -16,8 +16,9 @@ import java.util.UUID;
     @Index(name = "idx_uuid", columnList = "uuid", unique = true)
 })
 public class File extends _BaseEntity {
+	private static final long serialVersionUID = 1L;
 
-    private String uuid;
+	private String uuid;
     private String name;
     private String extName;
     private long size;

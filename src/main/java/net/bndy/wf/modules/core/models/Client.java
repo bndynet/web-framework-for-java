@@ -12,7 +12,6 @@ import net.bndy.wf.modules.oauth.models.OauthClientDetails;
 @Entity
 @Table(name = "core_client")
 public class Client extends _BaseEntity {
-
 	private static final long serialVersionUID = 1L;
 
 	private String name;

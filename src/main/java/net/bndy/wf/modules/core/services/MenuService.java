@@ -16,7 +16,6 @@ import org.springframework.stereotype.Service;
 import net.bndy.wf.lib._BaseService;
 import net.bndy.wf.modules.core.models.Menu;
 import net.bndy.wf.modules.core.services.repositories.MenuRepository;
-import net.bndy.wf.modules.cms.services.repositories.PageRepository;
 import org.thymeleaf.util.ArrayUtils;
 
 @Service
@@ -27,8 +26,6 @@ public class MenuService extends _BaseService<Menu> {
     private AppService appService;
     @Autowired
     private MenuRepository menuRepo;
-    @Autowired
-    private PageRepository pageRepo;
 
     @Autowired
     private net.bndy.wf.modules.cms.Setup cmsSetup;
@@ -40,7 +37,7 @@ public class MenuService extends _BaseService<Menu> {
 
         List<String> menus = this.appService.allModules();
 
-        Map<String, Menu> pathMapping = new HashMap();
+        Map<String, Menu> pathMapping = new HashMap<String, Menu>();
         for (String menu : menus) {
             // exclude modules
             if (menu.startsWith("shared")) {
@@ -84,7 +81,7 @@ public class MenuService extends _BaseService<Menu> {
 
             menus.sort(Comparator.naturalOrder());
 
-            Map<String, Menu> pathMapping = new HashMap();
+            Map<String, Menu> pathMapping = new HashMap<String, Menu>();
             for (String menu : menus) {
                 if (menu.startsWith("shared")
                     || ArrayUtils.contains(this.coreSetup.MODULES_EXCLUDED, menu)

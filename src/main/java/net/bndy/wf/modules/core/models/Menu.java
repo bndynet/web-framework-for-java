@@ -8,18 +8,14 @@ import java.util.ArrayList;
 import java.util.Collection;
 
 import javax.persistence.Entity;
-import javax.persistence.EnumType;
-import javax.persistence.Enumerated;
 import javax.persistence.Table;
 import javax.persistence.Transient;
 
-import net.bndy.wf.lib.AppBoType;
 import net.bndy.wf.lib._BaseEntity;
 
 @Entity
 @Table(name="core_menu")
 public class Menu extends _BaseEntity {
-
 	private static final long serialVersionUID = 1L;
 	
 	private Long parentId;

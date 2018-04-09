@@ -16,7 +16,6 @@ import net.bndy.wf.lib.LongsWrapper;
 import net.bndy.wf.modules.core.models.File;
 import net.bndy.wf.modules.core.models.User;
 import net.bndy.wf.modules.core.models.UserProfile;
-import net.bndy.wf.modules.core.services.FileService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
@@ -51,8 +50,6 @@ public class UserController extends _BaseApi<User> {
     private UserService userService;
     @Autowired
     private AuthenticationManager authenticationManager;
-    @Autowired
-    private FileService fileService;
 
     @ApiOperation(value = "Gets current user")
     @RequestMapping(value = "/me", method = RequestMethod.GET)

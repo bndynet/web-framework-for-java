@@ -2,7 +2,6 @@ package net.bndy.wf.modules.core.api;
 
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
-import net.bndy.wf.config.ApplicationConfig;
 import net.bndy.wf.exceptions.ResourceIntegrityException;
 import net.bndy.wf.lib.LongsWrapper;
 import net.bndy.wf.lib._BaseApi;
@@ -24,8 +23,6 @@ public class RoleController extends _BaseApi<Role> {
 
     @Autowired
     private RoleService roleService;
-    @Autowired
-    private ApplicationConfig applicationConfig;
 
     @ApiOperation(value = "Assigns menus to role")
     @RequestMapping(value = "/{id}/assignMenus", method = RequestMethod.PUT)

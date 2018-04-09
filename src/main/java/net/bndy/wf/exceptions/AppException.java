@@ -3,8 +3,8 @@ package net.bndy.wf.exceptions;
 import net.bndy.wf.ApplicationContext;
 
 public class AppException extends Exception {
-
-    private Throwable innerException;
+	private static final long serialVersionUID = 1L;
+	private Throwable innerException;
 
     public AppException() {
 

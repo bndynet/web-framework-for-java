@@ -6,7 +6,6 @@ package net.bndy.wf.modules.cms.services.repositories;
 
 import java.util.List;
 
-import net.bndy.wf.modules.cms.models.BoType;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Modifying;
 import org.springframework.data.jpa.repository.Query;

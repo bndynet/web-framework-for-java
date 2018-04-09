@@ -5,8 +5,10 @@
 	<artifactId>wf</artifactId>
 	<version>0.0.1-SNAPSHOT</version>
 	<packaging>war</packaging>
-	<name>wf</name>
-	<description>wf</description>
+
+	<name>web-framework-for-java</name>
+	<description>Web Framework for Java</description>
+	<url>https://github.com/bndynet/web-framework-for-java</url>
 
     <repositories>
         <repository>
@@ -47,6 +49,11 @@
 		<dependency>
 			<groupId>org.springframework.boot</groupId>
 			<artifactId>spring-boot-starter-thymeleaf</artifactId>
+		</dependency>
+		<dependency>
+			<groupId>net.sourceforge.nekohtml</groupId>
+			<artifactId>nekohtml</artifactId>
+			<version>1.9.22</version><!--$NO-MVN-MAN-VER$-->
 		</dependency>
 		<dependency>
 			<groupId>org.thymeleaf.extras</groupId>
@@ -146,11 +153,6 @@
 			<version>1.1.5</version>
 		</dependency>
 		<dependency>
-			<groupId>net.sourceforge.nekohtml</groupId>
-			<artifactId>nekohtml</artifactId>
-			<version>1.9.22</version>
-		</dependency>
-		<dependency>
 			<groupId>org.webjars.bower</groupId>
 			<artifactId>toaster</artifactId>
 			<version>0.4.15</version>
@@ -160,6 +162,11 @@
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-devtools</artifactId>
             <optional>true</optional>
+        </dependency>
+        <dependency>
+        	<groupId>org.springframework.boot</groupId>
+        	<artifactId>spring-boot-configuration-processor</artifactId>
+        	<optional>true</optional>
         </dependency>
 	</dependencies>
 	<build>

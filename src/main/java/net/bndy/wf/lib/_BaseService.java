@@ -26,6 +26,7 @@ public class _BaseService<T> {
 	@Autowired
 	JpaRepository<T, Long> repo;
 
+	@SuppressWarnings("unchecked")
 	public _BaseService() {
 		this.domainClass = (Class<T>) ((ParameterizedType) getClass()
 			.getGenericSuperclass()).getActualTypeArguments()[0];

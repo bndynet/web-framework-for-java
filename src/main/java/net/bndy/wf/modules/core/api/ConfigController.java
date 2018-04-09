@@ -7,8 +7,6 @@ package net.bndy.wf.modules.core.api;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import net.bndy.wf.ApplicationContext;
-import net.bndy.wf.modules.core.services.UserService;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -24,9 +22,6 @@ import java.util.Map;
 @RestController
 @RequestMapping({"/api/core/config", "/api/v1/core/config"})
 public class ConfigController {
-
-    @Autowired
-    private UserService userService;
 
     @ApiOperation(value = "Gets all messages of current locale")
     @CacheResult(cacheName = "default")

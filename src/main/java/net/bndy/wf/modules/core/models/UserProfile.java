@@ -13,8 +13,8 @@ import net.bndy.wf.lib._BaseEntity;
 @Entity
 @Table(name="core_user_profile")
 public class UserProfile extends _BaseEntity {
-
 	private static final long serialVersionUID = 1L;
+
 	@Column(columnDefinition = "BIGINT UNSIGNED", unique = true, nullable = false)
 	private Long userId;
 	private String email;

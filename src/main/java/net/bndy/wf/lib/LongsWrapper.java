@@ -5,7 +5,11 @@ import java.util.List;
 
 public class LongsWrapper implements Serializable {
 
-    private List<Long> values;
+    /**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
+	private List<Long> values;
 
     public List<Long> getValues() {
         return values;

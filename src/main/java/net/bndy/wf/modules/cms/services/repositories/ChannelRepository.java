@@ -16,7 +16,7 @@ public interface ChannelRepository extends JpaRepository<Channel, Long> {
     List<Channel> findByIsVisible(boolean isVisible);
 
     @Query(value = "SELECT * FROM cms_channel WHERE bo_type = ?1", nativeQuery = true)
-    List<Channel> findByBoType(int boType);
+    List<Channel> findByBoTypeValue(int boTypeValue);
 
     @Modifying
     @Transactional

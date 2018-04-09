@@ -31,8 +31,6 @@ public class PageService extends _BaseService<Page> {
     private FileService fileService;
     @Autowired
     private PageRepository pageRepository;
-    @Autowired
-    private ChannelService channelService;
 
     public Page getByChannelId(long channelId) {
         Page result = this.pageRepository.findByChannelId(channelId);

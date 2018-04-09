@@ -18,8 +18,8 @@ import net.bndy.wf.lib._BaseEntity;
 @Entity
 @Table(name = "core_role")
 public class Role extends _BaseEntity {
-
     private static final long serialVersionUID = 1L;
+
     private String name;
     private String menuIds;
     private String description;

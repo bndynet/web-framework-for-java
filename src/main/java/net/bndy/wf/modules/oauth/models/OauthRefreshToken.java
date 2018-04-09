@@ -14,7 +14,28 @@ import java.sql.Blob;
 @Entity
 @Table(name = "oauth_refresh_token")
 public class OauthRefreshToken extends _BaseEntity {
-    private String tokenId;
+	private static final long serialVersionUID = 1L;
+
+	private String tokenId;
     private Blob token;
     private Blob authentication;
+
+	public String getTokenId() {
+		return tokenId;
+	}
+	public void setTokenId(String tokenId) {
+		this.tokenId = tokenId;
+	}
+	public Blob getToken() {
+		return token;
+	}
+	public void setToken(Blob token) {
+		this.token = token;
+	}
+	public Blob getAuthentication() {
+		return authentication;
+	}
+	public void setAuthentication(Blob authentication) {
+		this.authentication = authentication;
+	}
 }

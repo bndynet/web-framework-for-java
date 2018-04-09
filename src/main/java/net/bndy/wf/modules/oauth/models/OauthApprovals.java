@@ -14,8 +14,9 @@ import java.sql.Timestamp;
 @Entity
 @Table(name = "oauth_approvals")
 public class OauthApprovals extends _BaseEntity {
+	private static final long serialVersionUID = 1L;
 
-    @Column(name = "userId")
+	@Column(name = "userId")
     private String userId;
     @Column(name = "clientId")
     private String clientId;

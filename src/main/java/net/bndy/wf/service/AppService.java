@@ -24,8 +24,6 @@ public class AppService {
 
     @Autowired
     private net.bndy.wf.modules.cms.Setup cmsSetup;
-    @Autowired
-    private net.bndy.wf.modules.core.Setup coreSetup;
 
     public List<String> allModules() {
         List<String> modules = new ArrayList<>();

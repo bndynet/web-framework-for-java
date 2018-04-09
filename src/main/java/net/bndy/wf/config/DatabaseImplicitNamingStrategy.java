@@ -9,7 +9,12 @@ import org.hibernate.boot.spi.MetadataBuildingContext;
 
 public class DatabaseImplicitNamingStrategy extends ImplicitNamingStrategyJpaCompliantImpl {
 
-    @Override
+    /**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
+
+	@Override
     public Identifier determineBasicColumnName(ImplicitBasicColumnNameSource source) {
 
         String columnName =

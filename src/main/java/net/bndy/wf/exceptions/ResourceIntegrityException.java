@@ -6,7 +6,12 @@ import org.springframework.web.bind.annotation.ResponseStatus;
 @ResponseStatus(value = HttpStatus.CONFLICT)
 public class ResourceIntegrityException extends AppException {
 
-    public ResourceIntegrityException(String message) {
+    /**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
+
+	public ResourceIntegrityException(String message) {
         super(message);
     }
 
