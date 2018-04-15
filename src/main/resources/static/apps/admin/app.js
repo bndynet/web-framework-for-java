@@ -8,8 +8,12 @@ app.config(['$provide', '$qProvider', '$httpProvider', '$stateProvider', '$trans
         $cookies = _$cookies_;
     }]);
 
-    $translateProvider.useUrlLoader('/api/core/config/lang');
-    $translateProvider.preferredLanguage($cookies.get("LOCALE")||defaultLang);
+    var lang = $cookies.get("LOCALE") || defaultLang;
+    $.get('/api/core/config/lang?lang=' + lang, function(res) {
+    	$translateProvider.translations(lang, JSON.parse(res));
+		$translateProvider.preferredLanguage(lang);
+		$translateProvider.use(lang);
+    });
 
     // override translateFilter for supporting java i18n format
     $provide.decorator('translateFilter', ['$delegate', function($delegate) {
