@@ -27,7 +27,6 @@
 
     <properties>
 		<java.version>1.8</java.version>
-        <tomcat.version>8.5.24</tomcat.version>
         <maven.test.skip>true</maven.test.skip>
         <maven.build.timestamp.format>yyyyMMddHHmm</maven.build.timestamp.format>
 
@@ -129,12 +128,12 @@
 		<dependency>
 			<groupId>net.bndy</groupId>
 			<artifactId>ftsi</artifactId>
-			<version>1.4</version>
+			<version>1.5</version>
 		</dependency>
 		<dependency>
 			<groupId>net.bndy</groupId>
 			<artifactId>spring-boot-starter-ftsi</artifactId>
-			<version>1.0-pre</version>
+			<version>1.0</version>
 		</dependency>
 		<dependency>
 			<groupId>org.webjars</groupId>
@@ -162,11 +161,11 @@
 			<version>0.4.15</version>
 		</dependency>
         <!-- hot swapping, disable cache for template, enable live reload -->
-        <dependency>
-            <groupId>org.springframework.boot</groupId>
-            <artifactId>spring-boot-devtools</artifactId>
-            <optional>true</optional>
-        </dependency>
+        <!--<dependency>-->
+            <!--<groupId>org.springframework.boot</groupId>-->
+            <!--<artifactId>spring-boot-devtools</artifactId>-->
+            <!--<optional>true</optional>-->
+        <!--</dependency>-->
         <dependency>
         	<groupId>org.springframework.boot</groupId>
         	<artifactId>spring-boot-configuration-processor</artifactId>
@@ -174,6 +173,20 @@
         </dependency>
 	</dependencies>
 	<build>
+	 	<resources>
+			<resource>
+				<directory>src/main/resources</directory>
+				<filtering>false</filtering>
+			</resource>
+            <resource>
+                <directory>src/main/resources</directory>
+                <filtering>true</filtering>
+                <includes>
+					<include>banner.txt</include>
+					<include>application.yml</include>
+				</includes>
+            </resource>
+        </resources>
 		<plugins>
 			<plugin>
 				<groupId>org.apache.maven.plugins</groupId>
@@ -193,28 +206,6 @@
 						</goals>
 					</execution>
 				</executions>
-            </plugin>
-            <!--
-            use following plugin to specify war name
-            -->
-            <plugin>
-                <groupId>org.apache.maven.plugins</groupId>
-                <artifactId>maven-war-plugin</artifactId>
-                <configuration>
-                    <warName>${project.shortName}-${project.version}</warName>
-                    <failOnMissingWebXml>false</failOnMissingWebXml>
-                    <webResources>
-                    	<resource>
-                    		<filtering>true</filtering>
-                    		<directory>src/main/resources</directory>
-                    		<targetPath>WEB-INF/classes</targetPath>
-                    		<includes>
-                    			<include>banner.txt</include>
-                    			<include>application.yml</include>
-                    		</includes>
-                    	</resource>
-                    </webResources>
-                </configuration>
             </plugin>
 		</plugins>
 	</build>

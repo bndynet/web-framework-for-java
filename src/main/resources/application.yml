@@ -20,10 +20,10 @@ server:
   
 # APPLICATION
 application:
-  name: ${project.name}
-  version: ${project.version}
-  short-name: ${project.shortName}
-  build-number: ${project.buildNumber}
+  name: @project.name@
+  version: @project.version@
+  short-name: @project.shortName@
+  build-number: @project.buildNumber@
   default-lang: ${var.lang}
   upload-disabled: ${var.upload-disabled}
   upload-path: ${var.upload-path}
