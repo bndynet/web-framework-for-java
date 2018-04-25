@@ -31,8 +31,8 @@
         <maven.test.skip>true</maven.test.skip>
         <maven.build.timestamp.format>yyyyMMddHHmm</maven.build.timestamp.format>
 
-        <app.shortName>WF</app.shortName>
-        <app.buildNumber>${maven.build.timestamp}</app.buildNumber>
+        <project.shortName>WF</project.shortName>
+        <project.buildNumber>${maven.build.timestamp}</project.buildNumber>
     </properties>
 
 	<parent>
@@ -201,7 +201,7 @@
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-war-plugin</artifactId>
                 <configuration>
-                    <warName>wf-${version}</warName>
+                    <warName>${project.shortName}-${project.version}</warName>
                     <failOnMissingWebXml>false</failOnMissingWebXml>
                     <webResources>
                     	<resource>
