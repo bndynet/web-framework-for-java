@@ -1,6 +1,6 @@
 
  _______                   __                __    __              __     
-/       \                 /  |              /  \  /  |            /  |  ${application.title} ${application.version}  
+/       \                 /  |              /  \  /  |            /  |  ${application.name} ${application.version}  
 $$$$$$$  | _______    ____$$ | __    __     $$  \ $$ |  ______   _$$ |_   
 $$ |__$$ |/       \  /    $$ |/  |  /  |    $$$  \$$ | /      \ / $$   |  Spring Boot ${spring-boot.version}
 $$    $$< $$$$$$$  |/$$$$$$$ |$$ |  $$ |    $$$$  $$ |/$$$$$$  |$$$$$$/   

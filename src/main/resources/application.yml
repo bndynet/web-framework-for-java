@@ -20,12 +20,10 @@ server:
   
 # APPLICATION
 application:
-  title: Web Framework 
-  version: 1.0.0.PRE
-  # ====================================
-  app-name: Web Framework
-  app-logo:
-  app-short-name: WF
+  name: ${pom.name}
+  version: ${pom.version}
+  short-name: ${app.shortName}
+  build-number: ${app.buildNumber}
   default-lang: ${var.lang}
   upload-disabled: ${var.upload-disabled}
   upload-path: ${var.upload-path}

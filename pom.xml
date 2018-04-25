@@ -3,11 +3,11 @@
 	<modelVersion>4.0.0</modelVersion>
 	<groupId>net.bndy</groupId>
 	<artifactId>wf</artifactId>
-	<version>0.0.1-SNAPSHOT</version>
+	<version>1.0.0</version>
 	<packaging>war</packaging>
 
-	<name>web-framework-for-java</name>
-	<description>Web Framework for Java</description>
+	<name>Web Framework</name>
+	<description>A seed project with web primary components in java.</description>
 	<url>https://github.com/bndynet/web-framework-for-java</url>
 
     <repositories>
@@ -29,6 +29,10 @@
 		<java.version>1.8</java.version>
         <tomcat.version>8.5.24</tomcat.version>
         <maven.test.skip>true</maven.test.skip>
+        <maven.build.timestamp.format>yyyyMMddHHmm</maven.build.timestamp.format>
+
+        <app.shortName>WF</app.shortName>
+        <app.buildNumber>${maven.build.timestamp}</app.buildNumber>
     </properties>
 
 	<parent>
@@ -192,14 +196,26 @@
             </plugin>
             <!--
             use following plugin to specify war name
+            -->
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-war-plugin</artifactId>
                 <configuration>
-                    <warName>wf</warName>
+                    <warName>wf-${version}</warName>
+                    <failOnMissingWebXml>false</failOnMissingWebXml>
+                    <webResources>
+                    	<resource>
+                    		<filtering>true</filtering>
+                    		<directory>src/main/resources</directory>
+                    		<targetPath>WEB-INF/classes</targetPath>
+                    		<includes>
+                    			<include>banner.txt</include>
+                    			<include>application.yml</include>
+                    		</includes>
+                    	</resource>
+                    </webResources>
                 </configuration>
             </plugin>
-            -->
 		</plugins>
 	</build>
 </project>

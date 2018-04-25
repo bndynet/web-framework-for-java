@@ -4,10 +4,10 @@
 <head>
 </head>
 <body>
-<!-- adminlte -->
 <footer th:fragment="footer" class="main-footer">
     <div class="pull-right hidden-xs">
-        <b>AdminLTE</b> v2.4.2
+    	v <strong th:utext="${app.version}"></strong>
+        (build <strong th:utext="${app.buildNumber}"></strong>)
     </div>
     <span th:utext="#{copyright}"></span>
 </footer>

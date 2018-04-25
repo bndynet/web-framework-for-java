@@ -13,10 +13,11 @@ import org.springframework.util.Assert;
 @ConfigurationProperties(prefix="application")
 public class ApplicationConfig {
 
-	private String appLogo;
-	private String appName;
-	private String appShortName;
-    private String defaultLang;
+	private String name;
+	private String version;
+	private String shortName;
+	private String buildNumber;
+	private String defaultLang;
 	private boolean uploadDisabled;
 	private String uploadPath;
 	private String fullTextIndexPath;
@@ -26,6 +27,14 @@ public class ApplicationConfig {
 	private boolean renameUploadFile;
 	private String adminSkin;
 	private String adminRole;
+
+	public String getVersion() {
+		return version;
+	}
+
+	public void setVersion(String version) {
+		this.version = version;
+	}
 
 	public String getDefaultLang() {
 		return defaultLang;
@@ -79,28 +88,20 @@ public class ApplicationConfig {
 		this.defaultUserAvatar = defaultUserAvatar;
 	}
 
-	public String getAppLogo() {
-		return appLogo;
+	public String getName() {
+		return name;
 	}
 
-	public void setAppLogo(String appLogo) {
-		this.appLogo = appLogo;
+	public void setName(String name) {
+		this.name = name;
 	}
 
-	public String getAppName() {
-		return appName;
+	public String getShortName() {
+		return shortName;
 	}
 
-	public void setAppName(String appName) {
-		this.appName = appName;
-	}
-
-	public String getAppShortName() {
-		return appShortName;
-	}
-
-	public void setAppShortName(String appShortName) {
-		this.appShortName = appShortName;
+	public void setShortName(String shortName) {
+		this.shortName = shortName;
 	}
 
 	public String getAdminSkin() {
@@ -126,6 +127,14 @@ public class ApplicationConfig {
 
 	public void setUploadDisabled(boolean uploadDisabled) {
 		this.uploadDisabled = uploadDisabled;
+	}
+
+    public String getBuildNumber() {
+		return buildNumber;
+	}
+
+	public void setBuildNumber(String buildNumber) {
+		this.buildNumber = buildNumber;
 	}
 
 }
