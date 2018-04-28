@@ -10,6 +10,7 @@ import java.nio.file.Paths;
 
 import net.bndy.lib.IOHelper;
 import net.bndy.wf.ApplicationContext;
+import net.bndy.wf.exceptions.NoResourceFoundException;
 import net.bndy.wf.modules.core.services.FileService;
 import net.bndy.wf.modules.core.services.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -38,12 +39,12 @@ public class HomeController extends _BaseController {
 	}
 
 	@RequestMapping(value = "/files/{uuid:[\\w-]{36}}", method = RequestMethod.GET, produces = {MediaType.APPLICATION_OCTET_STREAM_VALUE})
-	public void get(@PathVariable(name = "uuid") String uuid, HttpServletResponse resp) throws IOException {
+	public void get(@PathVariable(name = "uuid") String uuid, HttpServletResponse resp) throws IOException, NoResourceFoundException {
 		net.bndy.wf.modules.core.models.File f = this.fileService.getByUuid(uuid);
 		if (f != null) {
 			String filePath = ApplicationContext.getFileFullPath(f.getPath());
 			if (!IOHelper.isFileExisted(filePath)) {
-				throw new FileNotFoundException(f.getName());
+				throw new NoResourceFoundException();
 			}
 			
 			switch (f.getType()) {
