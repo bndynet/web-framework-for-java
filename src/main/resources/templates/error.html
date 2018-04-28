@@ -13,6 +13,8 @@
 				<h4 th:utext="${error}" th:if="${error!=null}"></h4>
 				<h4 th:utext="${message}" th:if="${error==null}"></h4>
 				<br />
+				<a href="/" th:text="#{common.backHome}"></a>
+				<br />
 				<div th:inline="text" style="display:none;" th:if="${exception!=null}">
 					Failed URL: [[${url}]] <br />
 					Exception: [[${exception.message}]] <br />

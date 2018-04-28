@@ -6,6 +6,7 @@ package net.bndy.wf.controller;
 
 import javax.servlet.http.HttpSession;
 
+import net.bndy.wf.exceptions.AbnormalAccountException;
 import net.bndy.wf.modules.core.models.User;
 import net.bndy.wf.modules.core.services.UserService;
 import net.bndy.wf.modules.core.services.UserValidator;
@@ -40,14 +41,24 @@ public class SsoController extends _BaseController {
 	}
 
 	@RequestMapping(value = "/signup", method = RequestMethod.POST)
-	public String signup(@ModelAttribute("model") User user, BindingResult bindingResult, Model model) {
+	public String signup(@ModelAttribute("model") User user, BindingResult bindingResult, Model model) throws AbnormalAccountException {
 		userValidator.validate(user, bindingResult);
 
 		if (bindingResult.hasErrors()) {
 			return "sso/signup";
 		}
 
-		userService.save(user);
+		user = userService.save(user);
+		
+		if (!user.isEnabled()) {
+			throw new AbnormalAccountException("error.disabledUser");
+		}
+		if (!user.isLocked()) {
+			throw new AbnormalAccountException("error.lockedUser");
+		}
+		if (!user.isExpired()) {
+			throw new AbnormalAccountException("error.expiredUser");
+		}
 
 		securityService.autologin(user.getUsername(), user.getPasswordConfirm());
 
