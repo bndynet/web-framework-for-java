@@ -29,7 +29,7 @@
             <tbody>
             <tr ng-repeat="item in pager.content">
                 <td>
-                    <a class="title" target="_blank" href="/article/{{item.titleKey}}" ng-bind="item.title"></a>
+                    <a class="title" target="_blank" href="{{'/article/' + item.titleKey | path}}" ng-bind="item.title"></a>
                 </td>
                 <td ng-bind="item.createDate | date: 'yyyy-MM-dd HH:mm'"></td>
                 <td ng-bind="item.lastUpdate | date: 'yyyy-MM-dd HH:mm'"></td>
@@ -60,7 +60,7 @@
                <br />
                <div class="form-group">
                    <div class="tag tag-inline" ng-repeat="item in formModel.attachments">
-                       <a href="/files/{{item.uuid}}" target="_blank">
+                       <a href="{{'/files/' + item.uuid | path}}" target="_blank">
                            <span ng-bind="item.name"></span>.<span ng-bind="item.extName"></span>
                        </a>
                        <a class="text-danger" ng-click="removeAttachment(item)">

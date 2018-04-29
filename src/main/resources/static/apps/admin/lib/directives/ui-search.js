@@ -8,7 +8,7 @@ angular.module('app')
                 onCancel: '&?',
                 onSearch: '&'
             },
-            templateUrl: '/static/apps/admin/lib/directives/ui-search.html',
+            templateUrl: getPath('/static/apps/admin/lib/directives/ui-search.html'),
             link: function(scope, elem, attrs) {
                 scope.model = null;
 

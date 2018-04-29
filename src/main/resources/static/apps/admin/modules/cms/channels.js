@@ -1,7 +1,7 @@
 angular.module('app')
     .controller('ChannelsCtrl',
         /* @ngInject */
-        function($scope, appService, appDialog, $http, $timeout, $filter, $state) {
+        function($scope, appService, appDialog, $timeout, $filter, $state) {
             $scope.boTypes = [];
             $scope.sameTypeChannels = [];
             $scope.exchangeTitle = null;

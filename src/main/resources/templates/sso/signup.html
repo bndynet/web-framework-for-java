@@ -9,17 +9,16 @@
 <div layout:fragment="body" class="page-onebox">
     <div class="box">
         <div class="box-body">
-            <img class="logo" src="/static/assets/img/logo.png"/>
+            <img class="logo" th:src="@{/static/assets/img/logo.png}"/>
 
             <p class="title" th:if="!${admin}" th:text="#{sso.registerAccount}"></p>
             <p class="title" th:if="${admin}" th:text="#{sso.registerAdmin}"></p>
 
             <form th:action="@{/sso/signup}" th:object="${model}" method="post">
                 <div class="form-group has-feedback">
-                                                <input type="text"
-                                                class="form-control" name="username" th:field="*{username}" th:placeholder="#{sso.fieldUsername}"/>
-                                                <span class="glyphicon glyphicon-user form-control-feedback"></span>
-                                                </div>
+                    <input type="text" class="form-control" name="username" th:field="*{username}" th:placeholder="#{sso.fieldUsername}"/>
+                    <span class="glyphicon glyphicon-user form-control-feedback"></span>
+                </div>
                 <div class="form-group has-feedback">
                     <input type="password"
                            class="form-control" name="password" th:field="*{password}" th:placeholder="#{sso.fieldPassword}"/>
@@ -43,7 +42,7 @@
         </div>
     </div>
 
-    <div th:replace="common/footer::footer"></div>
+    <div th:replace="common/footer"></div>
 </div>
 </body>
 </html>

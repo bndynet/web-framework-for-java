@@ -12,7 +12,7 @@ angular.module('app')
                     name: '@',
                     title: '@'
                 },
-                templateUrl: '/static/apps/admin/lib/directives/ui-dialog.html',
+                templateUrl: getPath('/static/apps/admin/lib/directives/ui-dialog.html'),
                 link: function(scope, elem, attrs, ctrl, $transclude) {
                     if (attrs.size && attrs.size.indexOf(',') < 0) {
                         angular.element('.modal-dialog').addClass('modal-' + attrs.size);

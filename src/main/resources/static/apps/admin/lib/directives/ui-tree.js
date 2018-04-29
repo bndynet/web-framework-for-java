@@ -9,7 +9,7 @@ angular.module('app')
                     model: '=ngModel',
                     itemTemplate: '=',
                 },
-                templateUrl: '/static/apps/admin/lib/directives/ui-tree.html',
+                templateUrl: getPath('/static/apps/admin/lib/directives/ui-tree.html'),
                 link: function(scope, elem, attrs) {
                     scope.id = attrs.id;
                     if (!scope.id) {

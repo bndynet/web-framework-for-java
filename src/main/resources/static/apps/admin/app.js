@@ -9,7 +9,7 @@ app.config(['$provide', '$qProvider', '$httpProvider', '$stateProvider', '$trans
     }]);
 
     var lang = $cookies.get("LOCALE") || defaultLang;
-    $.get('/api/core/config/lang?lang=' + lang, function(res) {
+    $.get(getPath('/api/core/config/lang?lang=' + lang), function(res) {
     	$translateProvider.translations(lang, JSON.parse(res));
 		$translateProvider.preferredLanguage(lang);
 		$translateProvider.use(lang);
@@ -66,7 +66,7 @@ app.config(['$provide', '$qProvider', '$httpProvider', '$stateProvider', '$trans
                         break;
                     case 401:
                         $timeout(function() {
-                            location.href = '/sso/login';
+                            location.href = getPath('/sso/login');
                         }, 3000);
                         title = translate.instant('error.unauthorizedAccess');
                         message = translate.instant('common.msgRedirectToLogin');
@@ -90,7 +90,7 @@ app.config(['$provide', '$qProvider', '$httpProvider', '$stateProvider', '$trans
 		var path = name.replace(/-/g, '/');
 		$stateProvider.state(name, {
 			url: '/' + path,
-			templateUrl: '/static/apps/admin/modules/' + path + '.html',
+			templateUrl: getPath('/static/apps/admin/modules/' + path + '.html'),
 			params: { obj: null },
 		});
 	}
@@ -109,7 +109,7 @@ app.factory('appService', ['$rootScope', '$http', '$translate', function($rootSc
     var service = {};
 
     service.ajaxGet = function(apiUrl) {
-        return $http.get(apiUrl).then(function(res) {
+        return $http.get(getPath(apiUrl)).then(function(res) {
             var result = res.data;
             // for paging
             if (typeof result.totalElements !== 'undefined') {
@@ -121,17 +121,17 @@ app.factory('appService', ['$rootScope', '$http', '$translate', function($rootSc
         });
     };
     service.ajaxPut = function(apiUrl, data) {
-        return $http.put(apiUrl, data).then(function(res) {
+        return $http.put(getPath(apiUrl), data).then(function(res) {
             return res.data;
         });
     };
     service.ajaxPost = function(apiUrl, data) {
-        return $http.post(apiUrl, data).then(function(res) {
+        return $http.post(getPath(apiUrl), data).then(function(res) {
             return res.data;
         });
     };
     service.ajaxDelete = function(apiUrl, data) {
-        return $http.delete(apiUrl).then(function(res) {
+        return $http.delete(getPath(apiUrl)).then(function(res) {
             return res.data;
         });
     };
@@ -322,8 +322,16 @@ app.factory('appDialog', [
 	}
 ]);
 
-app.controller('LayoutCtrl', ['$http', '$scope', '$state', 'appDialog',
-    function($http, $scope, $state, appDialog) {
+// filters
+angular.module('app').
+    filter('path', function() {
+        return function(url) {
+            return getPath(url);
+        };
+    });
+
+app.controller('LayoutCtrl', ['$http', '$scope', '$state', 'appService', 'appDialog',
+    function($http, $scope, $state, appService, appDialog) {
 
         $scope.$on('loading', function(event, showLoading) {
             $scope.showLoading = showLoading;
@@ -331,8 +339,8 @@ app.controller('LayoutCtrl', ['$http', '$scope', '$state', 'appDialog',
 
         // menus
         $scope.menus = [];
-        $http.get('/api/core/menus/tree').then(function(res) {
-            $scope.menus = res.data;
+        appService.ajaxGet('/api/core/menus/tree').then(function(res) {
+            $scope.menus = res;
         });
 
         // search
@@ -349,13 +357,16 @@ app.controller('LayoutCtrl', ['$http', '$scope', '$state', 'appDialog',
         // messages
         // TODO: get messages from backend
         $scope.messages = [];
-        $http.get('/static/apps/admin/mockdata/messages.json').then(function(res) {
-            $scope.messages = res.data;
-            $scope.messages1 = angular.copy(res.data);
+        appService.ajaxGet('/static/apps/admin/mockdata/messages.json').then(function(res) {
+            _.forEach(res, function(item) {
+                item.img = getPath(item.img);
+            });
+            $scope.messages = res;
+            $scope.messages1 = angular.copy(res);
             for (var idx = 0; idx < $scope.messages1.length; idx++) {
                 $scope.messages1[idx].img = null;
             }
-            $scope.messages2 = angular.copy(res.data);
+            $scope.messages2 = angular.copy(res);
             for (var idx = 0; idx < $scope.messages2.length; idx++) {
                 $scope.messages2[idx].img = null;
                 $scope.messages2[idx].description = null;
@@ -363,7 +374,7 @@ app.controller('LayoutCtrl', ['$http', '$scope', '$state', 'appDialog',
         });
         $scope.messageClick = function(item) {
             // TODO: remove item from message bar
-            appDialog.showWin(item, DialogMessageCtrl, '/static/apps/admin/modules/shared/dialogMessage.html',
+            appDialog.showWin(item, DialogMessageCtrl, getPath('/static/apps/admin/modules/shared/dialogMessage.html'),
                 null, null, {
                     icon: 'fa fa-fw fa-user'
                 });
@@ -380,7 +391,7 @@ app.controller('LayoutCtrl', ['$http', '$scope', '$state', 'appDialog',
 
         // lock screen
         $scope.lockScreen = function() {
-            $http.get('/api/core/users/logout').then(function(){
+            appService.ajaxGet('/api/core/users/logout').then(function(){
                 $('.lockscreen').css('top', $(document).scrollTop()).show();
                 $('body').addClass('no-scroll');
             });
@@ -394,9 +405,9 @@ app.controller('LayoutCtrl', ['$http', '$scope', '$state', 'appDialog',
             }
 
             if ($scope.username && $scope.password) {
-                $http.post('/api/core/users/login', { username: $scope.username, password: $scope.password }).then(function(res) {
+                appService.ajaxPost('/api/core/users/login', { username: $scope.username, password: $scope.password }).then(function(res) {
                     $scope.password = '';
-                    if (res.data === true) {
+                    if (res) {
                         $scope.unlockScreenError = false;
                         $('.lockscreen').css('top', 0);
                         $('body').removeClass('no-scroll');
@@ -421,6 +432,12 @@ function initUI() {
     $('.colorpicker').colorpicker();
     $('.timepicker').timepicker({ showInputs: false });
     $('.datepicker').datepicker({ autoclose: true, format: 'yyyy-mm-dd' });
+}
+function getPath(url) {
+    if (url.indexOf('/') === 0) {
+        url = url.substring(1);
+    }
+    return contextPath + url;
 }
 
 // overwrite global settings
@@ -455,6 +472,6 @@ $(function () {
 	$('#LanguageOptions').change(function(){
 	    var lang = $(this).val();
 	    document.cookie = 'LOCALE=' + lang + ';path=/';
-	    location.href = '/admin/';
+	    location.href = getPath('/admin/');
 	});
 });

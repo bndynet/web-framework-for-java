@@ -13,7 +13,7 @@
                 <div class="col-lg-7 my-auto">
                     <div class="header-content mx-auto">
                         <div th:if="${#authorization.expression('isAuthenticated()')}">
-                            <img class="avatar" th:src="${user.avatar}"/>
+                            <img class="avatar" th:src="@{${user.avatar}}"/>
                             <br /><br />
                         </div>
                         <h1 class="mb-5">
@@ -23,7 +23,7 @@
                                 RESTful API, OAuth2, Bootstrap, AngularJS and AngularJS Material.
                             </p>
                         </h1>
-                        <a href="/admin/" class="btn btn-outline btn-xl">Go to <b>Admin Panel</b></a>
+                        <a th:href="@{/admin/}" class="btn btn-outline btn-xl">Go to <b>Admin Panel</b></a>
                     </div>
                 </div>
                 <div class="col-lg-5 my-auto">
@@ -31,7 +31,7 @@
                         <div class="device-mockup iphone6_plus portrait white">
                             <div class="device">
                                 <div class="screen">
-                                    <img src="/static/public/img/code.png" class="img-fluid" alt="">
+                                    <img th:src="@{/static/public/img/code.png}" class="img-fluid" alt="">
                                 </div>
                                 <div class="button">
                                     <!-- You can hook the "home button" to some JavaScript events or just remove it -->

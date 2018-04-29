@@ -8,7 +8,7 @@
 <body>
 <div class="page-body" layout:fragment="content">
     <div class="banner">
-        <img src="/static/public/img/banner3.png" />
+        <img th:src="@{/static/public/img/banner3.png}" />
     </div>
 
     <div class="content">
@@ -23,7 +23,7 @@
                 <div class="media">
                     <img class="mr-3" th:src="@{'/static/assets/img/fileTypes/'+ ${item.extName} + '.png'}" th:alt="${item.extName}"
                          style="width: 48px; height: 48px;"
-                         onerror="this.src='/static/assets/img/fileTypes/_blank.png'">
+                         onerror="this.src='../static/assets/img/fileTypes/_blank.png'">
                     <div class="media-body">
                         <h5 class="mt-0">
                             <a th:href="@{'/files/' + ${item.uuid}}" target="_blank">

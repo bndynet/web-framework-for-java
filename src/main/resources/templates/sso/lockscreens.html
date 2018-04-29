@@ -14,7 +14,7 @@
 
         <div class="lockscreen-item">
             <div class="lockscreen-image">
-                <img th:src="${user.avatar}" alt="User Image" class="user-avatar">
+                <img th:src="@{${user.avatar}}" alt="User Image" class="user-avatar">
             </div>
 
             <form name="lockForm" method="post" class="lockscreen-credentials" ng-submit="unlockScreen()">
@@ -31,7 +31,7 @@
         <div class="error-message text-center text-danger" ng-if="unlockScreenError" th:text="#{sso.invalidPassword}"></div>
         <div class="help-block text-center" th:text="#{sso.lockScreenTip}"></div>
         <div class="text-center">
-            <a href="/sso/login" th:text="#{sso.orSwitchUser}"></a>
+            <a th:href="@{/sso/login}" th:text="#{sso.orSwitchUser}"></a>
         </div>
         <div class="lockscreen-footer text-center">
             <th:block th:include="admin/partials/footers::footer-text"></th:block>

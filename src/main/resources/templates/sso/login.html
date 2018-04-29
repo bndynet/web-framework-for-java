@@ -11,7 +11,7 @@
         <div class="box-body">
             <div th:if="!${param.logout}">
 
-                <img class="logo" src="/static/assets/img/logo.png" />
+                <img class="logo" th:src="@{/static/assets/img/logo.png}" />
 
                 <p class="title" th:text="#{sso.titleLogin}"></p>
 
@@ -44,13 +44,13 @@
                 <i class="logo fa fa-check-circle-o fa-2x text-green"></i>
                 <h4 th:text="#{sso.loggedOut}"></h4>
                 <br />
-                <a href="/" th:text="#{common.backHome}"></a> &nbsp;&nbsp; | &nbsp;&nbsp; <a href="/sso/login" th:text="#{common.relogin}"></a>
+                <a th:href="@{/}" th:text="#{common.backHome}"></a> &nbsp;&nbsp; | &nbsp;&nbsp; <a th:href="@{/sso/login}" th:text="#{common.relogin}"></a>
                 <br />
             </div>
         </div>
     </div>
 
-    <div th:replace="common/footer::footer"></div>
+    <div th:replace="common/footer"></div>
 </div>
 </body>
 </html>

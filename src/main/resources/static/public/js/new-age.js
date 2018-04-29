@@ -28,7 +28,7 @@
 
   // Collapse Navbar
   var navbarCollapse = function() {
-    var isHome = location.pathname === '/';
+    var isHome = location.pathname === '/' || location.pathname === contextPath;
     if (!isHome) {
       $("#mainNav").addClass("navbar-shrink");
       return;

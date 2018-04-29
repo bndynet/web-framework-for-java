@@ -10,12 +10,12 @@ angular.module('app')
                 label: '@?',
                 onItemSuccess: '&?',
             },
-            templateUrl: '/static/apps/admin/lib/directives/ui-upload.html',
+            templateUrl: getPath('/static/apps/admin/lib/directives/ui-upload.html'),
             compile: function(elem, attrs) {
                 return {
                     pre: function(scope, element, attrs) {
                         scope.uploader = new FileUploader({
-                            url: scope.url,
+                            url: getPath(scope.url),
                             removeAfterUpload: true,
                             onSuccessItem: function(item, response, status, headers) {
                                 if (scope.onItemSuccess) {

@@ -19,7 +19,7 @@ angular.module('app')
                     onExchange: '&?',
                     showExchange: '=?',
                 },
-                templateUrl: '/static/apps/admin/lib/directives/ui-actions.html',
+                templateUrl: getPath('/static/apps/admin/lib/directives/ui-actions.html'),
                 link: function(scope, elem, attrs) {
                     if (typeof scope.showView === 'undefined') {
                         scope.showView = !!scope.onView;

@@ -10,7 +10,7 @@
                        on-search="search(__model)"></ui-search>
         </ui-page-content-header-left>
         <ui-page-content-header-right>
-            <a class="btn btn-sm btn-primary" href="/sso/signup" target="_blank">
+            <a class="btn btn-sm btn-primary" href="{{'/sso/signup'|path}}" target="_blank">
                 <i class="fa fa-fw fa-plus-circle"></i>
                 <span ng-bind="'admin.modules.core.users.addUser'|translate"></span>
             </a>

@@ -1,17 +1,18 @@
-app.controller('ApplicationsCtrl', [
-    '$scope', 'appDialog', '$http',
-    function($scope, appDialog, $http) {
+angular.module('app')
+    .controller('ApplicationsCtrl',
+    /* @ngInject */
+    function($scope, appService, appDialog) {
         $scope.data = [];
         $scope.init = function () {
-            $http.get('/api/core/clients').then(function(res) {
-                $scope.data = res.data;
+            appService.ajaxGet('/api/core/clients').then(function(res) {
+                $scope.data = res;
 
-                $http.get('/api/core/clients/myapprovals').then(function(res){
+                appService.ajaxGet('/api/core/clients/myapprovals').then(function(res){
                     for(var idx in $scope.data) {
                         $scope.data[idx].approvals = [];
-                        for(var idx1 in res.data) {
-                            if(res.data[idx1].clientId === $scope.data[idx].details.clientId) {
-                                $scope.data[idx].approvals.push(res.data[idx1]);
+                        for(var idx1 in res) {
+                            if(res[idx1].clientId === $scope.data[idx].details.clientId) {
+                                $scope.data[idx].approvals.push(res[idx1]);
                             }
                         }
                     }
@@ -30,13 +31,13 @@ app.controller('ApplicationsCtrl', [
         };
         $scope.save = function() {
             if ($scope.formModel.id) {
-                $http.put('/api/core/clients/' + $scope.formModel.id, $scope.formModel).then(function(res){
+                appService.ajaxPut('/api/core/clients/' + $scope.formModel.id, $scope.formModel).then(function(res){
                     $scope.formModel = null;
                     $('#dialogForm').modal('hide');
                     $scope.init();
                 });
             } else {
-                $http.post('/api/core/clients', $scope.formModel).then(function(res){
+                appService.ajaxPost('/api/core/clients', $scope.formModel).then(function(res){
                     $scope.formModel = null;
                     $('#dialogForm').modal('hide');
                     $scope.init();
@@ -45,7 +46,7 @@ app.controller('ApplicationsCtrl', [
         };
         $scope.remove = function(item) {
             appDialog.confirmDeletion(function(){
-                $http.delete('/api/core/clients/' + item.id).then(function(){
+                appService.ajaxDelete('/api/core/clients/' + item.id).then(function(){
                     $scope.data.splice($scope.data.indexOf(item), 1);
                     appDialog.success();
                 }, function() {
@@ -55,4 +56,4 @@ app.controller('ApplicationsCtrl', [
         };
 
         $scope.init();
-} ]);
+    });

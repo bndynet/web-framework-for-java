@@ -6,7 +6,7 @@
 <body>
 <header th:fragment="header" class="main-header">
     <!-- Logo -->
-    <a href="/" class="logo">
+    <a th:href="@{/}" class="logo">
         <!-- mini logo for sidebar mini 50x50 pixels -->
         <span class="logo-mini" th:text="${app.shortName}"></span>
         <span class="logo-lg" th:text="${app.name}"></span>
@@ -34,14 +34,14 @@
 
                 <li class="dropdown user user-menu">
                     <a href="#" class="dropdown-toggle" data-toggle="dropdown">
-                        <img th:src="${user.avatar}" class="user-image user-avatar" alt="User Image">
+                        <img th:src="@{${user.avatar}}" class="user-image user-avatar" alt="User Image">
                         <span class="hidden-xs">
                             <span th:text="${user.username}"></span>
                         </span>
                     </a>
                     <ul class="dropdown-menu">
                         <li class="user-header">
-                            <img th:src="${user.avatar}" class="circle user-avatar" alt="User Image">
+                            <img th:src="@{${user.avatar}}" class="circle user-avatar" alt="User Image">
 
                             <p>
                                 <span th:text="${user.username}"></span>
@@ -54,7 +54,7 @@
                             </div>
                             <div class="pull-right">
                                 <a class="btn btn-default btn-flat" ng-click="lockScreen()" th:text="#{admin.btnLock}"></a>
-                                <a href="/sso/logout" class="btn btn-default btn-flat" th:text="#{admin.btnLogout}"></a>
+                                <a th:href="@{/sso/logout}" class="btn btn-default btn-flat" th:text="#{admin.btnLogout}"></a>
                             </div>
                         </li>
                     </ul>

@@ -1,6 +1,7 @@
-app.controller('RolesCtrl',
-    [ '$scope', 'appService', 'appDialog', '$http', '$timeout',
-    function($scope, appService, appDialog, $http, $timeout) {
+angular.module('app')
+    .controller('RolesCtrl',
+    /* @ngInject */
+    function($scope, appService, appDialog, $timeout) {
 
         function initData() {
             appDialog.loading();
@@ -109,4 +110,4 @@ app.controller('RolesCtrl',
         };
 
         initData();
-    }]);
+    });

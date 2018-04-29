@@ -16,7 +16,7 @@ angular.module('app')
                 onItemToggleVisible: '&?',
                 onItemToggleSelect: '&?',
             },
-            templateUrl: '/static/apps/admin/lib/directives/ui-menu-tree.html',
+            templateUrl: getPath( '/static/apps/admin/lib/directives/ui-menu-tree.html'),
             link: function(scope, elem, attrs) {
 
                 function toggleChildren(item) {

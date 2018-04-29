@@ -1,5 +1,6 @@
-app.controller('UsersCtrl',
-    [ '$scope', 'appService', 'appDialog', '$timeout',
+angular.module('app')
+    .controller('UsersCtrl',
+    /* @ngInject */
     function($scope, appService, appDialog, $timeout) {
         $scope.pager = {};
         $scope.roles = null;
@@ -100,4 +101,4 @@ app.controller('UsersCtrl',
         };
 
         initData();
-    }]);
+    });

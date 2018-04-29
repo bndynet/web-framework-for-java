@@ -11,7 +11,7 @@ app.directive('uiNotifications', ['$http', '$translate', function($http, $transl
             moreClick: '&moreClick',
             data: '=data'
         },
-        templateUrl: '/static/apps/admin/lib/directives/ui-notifications.html',
+        templateUrl: getPath('/static/apps/admin/lib/directives/ui-notifications.html'),
         link: function(scope, element, attrs) {
         }
     };

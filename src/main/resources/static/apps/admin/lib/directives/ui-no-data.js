@@ -5,6 +5,6 @@ app.directive('uiNoData', ['$translate', function($translate){
         scope: {
             message: '@'
         },
-        templateUrl: '/static/apps/admin/lib/directives/ui-no-data.html',
+        templateUrl: getPath('/static/apps/admin/lib/directives/ui-no-data.html'),
     };
 }]);

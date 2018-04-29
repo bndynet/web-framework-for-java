@@ -1,13 +1,15 @@
-app.controller('UserProfileCtrl', [ '$scope', 'appDialog', '$http', '$timeout', 'Upload',
-    function($scope, appDialog, $http, $timeout, Upload) {
-        $http.get('/api/core/users/me').then(function(res) {
-            $scope.user = res.data;
+angular.module('app')
+    .controller('UserProfileCtrl',
+    /* @ngInject */
+    function($scope, appService, appDialog, $timeout, Upload) {
+        appService.ajaxGet('/api/core/users/me').then(function(res) {
+            $scope.user = res;
         });
         
         function initData() {
-        	$http.get('/api/core/users/profile').then(function(res) {
-        		if (res.data) {
-        			$scope.viewModel = res.data;
+        	appService.ajaxGet('/api/core/users/profile').then(function(res) {
+        		if (res) {
+        			$scope.viewModel = res;
         		} else {
         			$scope.viewModel = {};
         		}
@@ -62,7 +64,7 @@ app.controller('UserProfileCtrl', [ '$scope', 'appDialog', '$http', '$timeout', 
         $scope.updateProfile = function() {
             $scope.isUpdatingProfile = true;
             if ($scope.viewModel.id) {
-                $http.put('/api/core/userProfiles/' + $scope.viewModel.id, $scope.viewModel).then(function(res) {
+                appService.ajaxPut('/api/core/userProfiles/' + $scope.viewModel.id, $scope.viewModel).then(function(res) {
                 	initData();
                     appDialog.success();
                 }, function() {
@@ -71,7 +73,7 @@ app.controller('UserProfileCtrl', [ '$scope', 'appDialog', '$http', '$timeout', 
                     $scope.isUpdatingProfile = false;
                 });
             } else {
-                $http.post('/api/core/userProfiles', $scope.viewModel).then(function(res) {
+                appService.ajaxPost('/api/core/userProfiles', $scope.viewModel).then(function(res) {
                 	initData();
                     appDialog.success();
                 }, function() {
@@ -85,7 +87,7 @@ app.controller('UserProfileCtrl', [ '$scope', 'appDialog', '$http', '$timeout', 
         $scope.changePassword = function() {
             if ($scope.pwdModel.oldPassword && $scope.pwdModel.newPassword) {
                 $scope.isChangingPassword = true;
-                $http.post('/api/core/users/changePassword', {
+                appService.ajaxPost('/api/core/users/changePassword', {
                     oldPassword: $scope.pwdModel.oldPassword,
                     newPassword: $scope.pwdModel.newPassword
                 }).then(function() {
@@ -97,5 +99,4 @@ app.controller('UserProfileCtrl', [ '$scope', 'appDialog', '$http', '$timeout', 
                 });
             }
         };
-    }
-]);
+    });

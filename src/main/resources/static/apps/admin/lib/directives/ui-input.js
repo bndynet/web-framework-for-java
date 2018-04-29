@@ -20,7 +20,7 @@ app.directive('uiInput', ['$translate', function($translate){
             hasError: '=?',
             errorMessage: '@',
         },
-        templateUrl: '/static/apps/admin/lib/directives/ui-input.html',
+        templateUrl: getPath('/static/apps/admin/lib/directives/ui-input.html'),
         link: function(scope, elem, attrs) {
             if (scope.required) {
                 if (!scope.errorMessage) {

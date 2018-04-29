@@ -10,7 +10,7 @@ angular.module('app')
                     'headerCenter': '?uiPageContentHeaderCenter',
                     'footer': '?uiPageContentFooter'
                 },
-                templateUrl: '/static/apps/admin/lib/directives/ui-page-content.html',
+                templateUrl: getPath('/static/apps/admin/lib/directives/ui-page-content.html'),
                 link: function(scope, elem, attrs, ctrl, $transclude) {
                     scope.hasHeaderLeft = $transclude.isSlotFilled('headerLeft');
                     scope.hasHeaderRight = $transclude.isSlotFilled('headerRight');

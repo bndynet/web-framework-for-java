@@ -18,7 +18,7 @@
             <div class="media hover radius padding-sm">
                 <div class="media-left">
                     <i class="fa fa-lock text-warning" style="position:absolute;top:2px;left:18px;" ng-if="item.ref"></i>
-                    <img class="media-object" ng-src="{{getFileIcon(item)}}" onerror="this.src='/static/assets/img/fileTypes/_blank.png'">
+                    <img class="media-object" ng-src="{{getFileIcon(item)}}" onerror="this.src='../static/assets/img/fileTypes/_blank.png'">
                 </div>
                 <div class="media-body">
                     <h4 class="media-heading nowrap">
@@ -31,7 +31,7 @@
                     </small>
 
                     <div class="hover-target" style="position: absolute; top:7px; right: 20px;">
-                        <button class="btn btn-xs btn-block btn-default" ngclipboard ngclipboard-success="copied(item)" data-clipboard-text="{{item.url}}">
+                        <button class="btn btn-xs btn-block btn-default" ngclipboard ngclipboard-success="copied(item)" data-clipboard-text="{{item.url|path}}">
                             <i class="fa fa-clipboard"></i>
                             <span ng-bind="'admin.modules.core.files.copyUrl'|translate"></span>
                         </button>

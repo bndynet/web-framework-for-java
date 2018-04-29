@@ -12,7 +12,7 @@
             <br/>
             <div class="row middle">
                 <div class="col-xs-5">
-                    <img src="/static/assets/img/logo.png" class="stretch radius shadow"/>
+                    <img th:src="@{/static/assets/img/logo.png}" class="stretch radius shadow"/>
                 </div>
                 <div class="col-xs-2">
                     <br><br>
@@ -23,7 +23,7 @@
                 </div>
             </div>
             <br/>
-            <form id="confirmationForm" name="confirmationForm" action="/oauth/authorize" method="post">
+            <form id="confirmationForm" name="confirmationForm" th:action="@{/oauth/authorize}" method="post">
                 <div class="text-center">
                     <h4 th:utext="#{sso.confirmAuthClient(${clientApp.name})}"></h4>
                     <span th:each="scope: ${authRequest.scope}">
@@ -36,14 +36,14 @@
                 <button type="submit" class="btn btn-success btn-block" th:text="#{common.authorize}"></button>
             </form>
             <br/>
-            <form id="denialForm" name="denialForm" action="/oauth/authorize" method="post">
+            <form id="denialForm" name="denialForm" th:action="@{/oauth/authorize}" method="post">
                 <input name="user_oauth_approval" value="false" type="hidden"/>
                 <button type="submit" name="deny" class="btn btn-default btn-block" th:text="#{common.deny}"></button>
             </form>
         </div>
     </div>
 
-    <div th:replace="common/footer::footer"></div>
+    <div th:replace="common/footer"></div>
 </div>
 </body>
 </html>

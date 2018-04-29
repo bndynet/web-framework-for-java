@@ -1,6 +1,7 @@
-app.controller('MenusCtrl',
-    [ '$scope', '$http', '$mdSelect', 'appService', 'appDialog',
-    function($scope, $http, $mdSelect, appService, appDialog) {
+angular.module('app')
+    .controller('MenusCtrl',
+    /* @ngInject */
+    function($scope, $mdSelect, appService, appDialog) {
 
         function initData() {
             $scope.selectedMenuTemplate = null;
@@ -35,13 +36,13 @@ app.controller('MenusCtrl',
 
         $scope.save = function() {
             if ($scope.formModel.id) {
-                $http.put('/api/core/menus/' + $scope.formModel.id, $scope.formModel).then(function() {
+                appService.ajaxPut('/api/core/menus/' + $scope.formModel.id, $scope.formModel).then(function() {
                     $('#dialogForm').modal('hide');
                     appDialog.success();
                     initData();
                 });
             } else {
-                $http.post('/api/core/menus', $scope.formModel).then(function() {
+                appService.ajaxPost('/api/core/menus', $scope.formModel).then(function() {
                     $('#dialogForm').modal('hide');
                     appDialog.success();
                     initData();
@@ -50,7 +51,7 @@ app.controller('MenusCtrl',
         };
 
         $scope.toggleVisible = function(menu) {
-            $http.put('/api/core/menus/' + menu.id + '/toggleVisible').then(function() {
+            appService.ajaxPut('/api/core/menus/' + menu.id + '/toggleVisible').then(function() {
                 appDialog.success();
                 initData();
             });
@@ -58,7 +59,7 @@ app.controller('MenusCtrl',
 
         $scope.remove = function(menu) {
             appDialog.confirmDeletion(function() {
-                $http.delete('/api/core/menus/' + menu.id).then(function() {
+                appService.ajaxDelete('/api/core/menus/' + menu.id).then(function() {
                     appDialog.success();
                     initData();
                 });
@@ -78,5 +79,4 @@ app.controller('MenusCtrl',
         };
 
         initData();
-    }]
-);
+    });

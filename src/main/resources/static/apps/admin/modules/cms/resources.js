@@ -32,12 +32,12 @@ angular.module('app')
         $scope.getFileIcon = function(file) {
             switch(file.type) {
                 case 'IMAGE':
-                    return file.url;
+                    return getPath(file.url);
                 default:
-                    return '/static/assets/img/fileTypes/' + file.extName + '.png';
+                    return getPath('/static/assets/img/fileTypes/' + file.extName + '.png');
             }
 
-            return '/static/assets/img/fileTypes/_blank.png';
+            return getPath('/static/assets/img/fileTypes/_blank.png');
         };
 
         $scope.remove = function(file) {

@@ -7,7 +7,7 @@ app.directive('uiPageHeader', ['$translate', function($translate){
             subtitle: '=',
             breadcrumbs: '='
         },
-        templateUrl: '/static/apps/admin/lib/directives/ui-page-header.html',
+        templateUrl: getPath('/static/apps/admin/lib/directives/ui-page-header.html'),
         link: function(scope, element, attrs) {
         }
     };

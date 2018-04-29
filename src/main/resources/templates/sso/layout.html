@@ -8,14 +8,14 @@
     <title layout:title-pattern="$DECORATOR_TITLE - $CONTENT_TITLE">Web
         Framework</title>
     <meta content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" name="viewport">
-    <link href="/static/assets/img/logo.png" rel="shortcut icon">
+    <link th:href="@{/static/assets/img/logo.png}" rel="shortcut icon">
     <link rel="stylesheet" type="text/css"
-          href="/webjars/bootstrap/3.3.7/css/bootstrap.min.css"/>
-    <link rel="stylesheet" href="/static/plugins/font-awesome/css/font-awesome.min.css">
-    <link rel="stylesheet" href="/static/plugins/Ionicons/css/ionicons.min.css">
-    <link rel="stylesheet" href="/static/apps/admin/assets/css/AdminLTE.min.css">
-    <link rel="stylesheet" href="/static/plugins/iCheck/all.css">
-    <link rel="stylesheet" href="/static/assets/css/common.css">
+          th:href="@{/webjars/bootstrap/3.3.7/css/bootstrap.min.css}"/>
+    <link rel="stylesheet" th:href="@{/static/plugins/font-awesome/css/font-awesome.min.css}">
+    <link rel="stylesheet" th:href="@{/static/plugins/Ionicons/css/ionicons.min.css}">
+    <link rel="stylesheet" th:href="@{/static/apps/admin/assets/css/AdminLTE.min.css}">
+    <link rel="stylesheet" th:href="@{/static/plugins/iCheck/all.css}">
+    <link rel="stylesheet" th:href="@{/static/assets/css/common.css}">
 
     <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
     <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
@@ -27,15 +27,18 @@
     <!-- Google Font -->
     <link rel="stylesheet"
           href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,600,700,300italic,400italic,600italic">
+    <script th:inline="javascript">
+       var contextPath = [[@{/}]];
+    </script>
 </head>
 <body class="hold-transition register-page login-page">
 
 <div layout:fragment="body"></div>
 
-<script src="/static/plugins/jquery/jquery.min.js"></script>
+<script th:src="@{/static/plugins/jquery/jquery.min.js}"></script>
 <script type="text/javascript"
-        src="/webjars/bootstrap/3.3.7/js/bootstrap.min.js"></script>
-<script src="/static/plugins/iCheck/icheck.min.js"></script>
+        th:src="@{/webjars/bootstrap/3.3.7/js/bootstrap.min.js}"></script>
+<script th:src="@{/static/plugins/iCheck/icheck.min.js}"></script>
 <script>
   $(function () {
     $('input[type=checkbox]').iCheck({

@@ -4,27 +4,30 @@
       xmlns:layout="http://www.ultraq.net.nz/web/thymeleaf/layout">
 <head>
     <title layout:title-pattern="$DECORATOR_TITLE - $CONTENT_TITLE">Web Framework</title>
-    <link href="/static/assets/img/logo.png" rel="shortcut icon">
+    <link th:href="@{/static/assets/img/logo.png}" rel="shortcut icon">
     <!-- Bootstrap core CSS -->
-    <link href="/static/plugins/bootstrap/css/bootstrap.min.css" rel="stylesheet">
+    <link th:href="@{/static/plugins/bootstrap/css/bootstrap.min.css}" rel="stylesheet">
     <!-- Custom fonts for this template -->
-    <link rel="stylesheet" href="/static/plugins/font-awesome/css/font-awesome.min.css">
-    <link rel="stylesheet" href="/static/plugins/simple-line-icons/css/simple-line-icons.css">
+    <link rel="stylesheet" th:href="@{/static/plugins/font-awesome/css/font-awesome.min.css}">
+    <link rel="stylesheet" th:href="@{/static/plugins/simple-line-icons/css/simple-line-icons.css}">
     <link href="https://fonts.googleapis.com/css?family=Lato" rel="stylesheet">
     <link href="https://fonts.googleapis.com/css?family=Catamaran:100,200,300,400,500,600,700,800,900" rel="stylesheet">
     <link href="https://fonts.googleapis.com/css?family=Muli" rel="stylesheet">
 
     <!-- Custom styles for this template -->
-    <link href="/static/assets/css/common.css" rel="stylesheet">
-    <link href="/static/public/css/new-age.min.css" rel="stylesheet">
-    <link href="/static/public/css/skin.css" rel="stylesheet">
+    <link th:href="@{/static/assets/css/common.css}" rel="stylesheet">
+    <link th:href="@{/static/public/css/new-age.min.css}" rel="stylesheet">
+    <link th:href="@{/static/public/css/skin.css}" rel="stylesheet">
+    <script th:inline="javascript">
+       var contextPath = [[@{/}]];
+    </script>
 </head>
 <body id="page-top">
 
 <!-- Navigation -->
 <nav class="navbar navbar-expand-lg navbar-light fixed-top" id="mainNav">
     <div class="container">
-        <a class="navbar-brand js-scroll-trigger" href="/">BNDY.NET</a>
+        <a class="navbar-brand js-scroll-trigger" th:href="@{/}">BNDY.NET</a>
         <button class="navbar-toggler navbar-toggler-right" type="button" data-toggle="collapse"
                 data-target="#navbarResponsive" aria-controls="navbarResponsive" aria-expanded="false"
                 aria-label="Toggle navigation">
@@ -35,14 +38,14 @@
             <!-- `ml-auto` class to set right -->
             <ul class="navbar-nav">
                 <li class="nav-item">
-                    <a class="nav-link js-scroll-trigger" href="/#features">Features</a>
+                    <a class="nav-link js-scroll-trigger" th:href="@{/#features}">Features</a>
                 </li>
                 <li class="nav-item">
                     <a class="nav-link" th:href="@{/docs/api}" target="_blank">API Docs</a>
                 </li>
                 <li class="nav-item" th:each="m: ${cms_menus}">
                     <a class="nav-link"
-                       th:href="${m.url}"
+                       th:href="@{${m.url}}"
                        th:attr="data-toggle=${m.children!=null and m.children.size() > 0} ? 'dropdown' : null, aria-haspopup='true', aria-expanded='false'">
                         <span th:text="${m.name}"></span>
                         <span class="caret" th:if="${m.children!=null and m.children.size() > 0}"></span>
@@ -50,12 +53,12 @@
                     <ul class="dropdown-menu" aria-labelledby="dLabel"
                         th:if="${m.children!=null and m.children.size() > 0}">
                         <li th:each="child: ${m.children}">
-                            <a th:href="${child.url}" th:text="${child.name}"></a></li>
+                            <a th:href="@{${child.url}}" th:text="${child.name}"></a></li>
                     </ul>
                 </li>
             </ul>
 
-            <form action="/search" method="get" class="ml-auto" role="search">
+            <form th:action="@{/search}" method="get" class="ml-auto" role="search">
                 <input name="q" type="text" class="form-control" required>
                 <button type="submit" class="btn btn-default" th:title="#{common.search}">
                     <i class="fa fa-search"></i>
@@ -76,14 +79,14 @@
 </footer>
 
 <!-- Bootstrap core JavaScript -->
-<script src="/static/plugins/jquery/jquery.min.js"></script>
-<script src="/static/plugins/bootstrap/js/bootstrap.bundle.min.js"></script>
+<script th:src="@{/static/plugins/jquery/jquery.min.js}"></script>
+<script th:src="@{/static/plugins/bootstrap/js/bootstrap.bundle.min.js}"></script>
 
 <!-- Plugin JavaScript -->
-<script src="/static/plugins/jquery-easing/jquery.easing.min.js"></script>
+<script th:src="@{/static/plugins/jquery-easing/jquery.easing.min.js}"></script>
 
 <!-- Custom scripts for this template -->
-<script src="/static/public/js/new-age.js"></script>
+<script th:src="@{/static/public/js/new-age.js}"></script>
 
 <th:block layout:fragment="scripts"></th:block>
 </body>
