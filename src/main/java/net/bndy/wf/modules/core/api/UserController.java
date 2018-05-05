@@ -64,6 +64,12 @@ public class UserController extends _BaseApi<User> {
         }
         return null;
     }
+    
+    @ApiOperation(value = "Check whether username exists")
+    @RequestMapping(value = "/exist", method = RequestMethod.GET)
+    public boolean existsUsername(@RequestParam(name = "username") String username) {
+    	return this.userService.findByUsername(username) != null;
+    }
 
     @ApiOperation(value = "Login")
     @RequestMapping(value = "/login", method = RequestMethod.POST)
