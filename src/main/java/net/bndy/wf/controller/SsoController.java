@@ -53,10 +53,10 @@ public class SsoController extends _BaseController {
 		if (!user.isEnabled()) {
 			throw new AbnormalAccountException("error.disabledUser");
 		}
-		if (!user.isLocked()) {
+		if (user.isLocked()) {
 			throw new AbnormalAccountException("error.lockedUser");
 		}
-		if (!user.isExpired()) {
+		if (user.isExpired()) {
 			throw new AbnormalAccountException("error.expiredUser");
 		}
 

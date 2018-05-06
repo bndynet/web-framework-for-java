@@ -39,7 +39,7 @@ angular.module('app')
             $scope.errFile = errFiles && errFiles[0];
             if (file) {
                 file.upload = Upload.upload({
-                   url: '/api/core/users/updateAvatar',
+                   url: getPath('/api/core/users/updateAvatar'),
                    data: {file: file}
                 });
 
