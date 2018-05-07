@@ -199,10 +199,6 @@ md-toolbar,
     }
 }
 
-.md-select-menu-container {
-    z-index: 9999;
-}
-
 .messages-menu {
     li {
         h3 {
@@ -469,6 +465,14 @@ md-toolbar,
 }
 
 /* angularjs material */
+
+.md-select-menu-container {
+    z-index: 9999;
+}
+
+md-backdrop.md-select-backdrop {
+    z-index: 9998;
+}
 
 .layout-row {
     md-input-container {

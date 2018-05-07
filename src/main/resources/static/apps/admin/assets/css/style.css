@@ -204,10 +204,6 @@ md-toolbar,
   margin-left: 0;
 }
 
-.md-select-menu-container {
-  z-index: 9999;
-}
-
 .messages-menu li h3 {
   margin: 0 0 10px 0;
   font-size: 14px;
@@ -410,6 +406,14 @@ md-toolbar,
 }
 
 /* angularjs material */
+.md-select-menu-container {
+  z-index: 9999;
+}
+
+md-backdrop.md-select-backdrop {
+  z-index: 9998;
+}
+
 .layout-row md-input-container {
   margin-bottom: 0;
 }
