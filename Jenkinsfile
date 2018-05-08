@@ -1,6 +1,10 @@
 pipeline {
     agent any
-    
+
+    tools { 
+        maven 'Maven 3.5'
+    }
+
     environment { 
         DEPLOY_TARGET    = '../../../webapps/wf.war'
         EMAIL_RECIPIENTS = 'zb@bndy.net'
@@ -8,16 +12,14 @@ pipeline {
     }
 
     stages {
-    	stage('Prepare') {
-    		steps {
-				sh 'printenv'
-				sh 'java -version'
-         		sh 'mvn -v'
-
-    			echo 'Pulling $BRANCH_NAME...'
-				checkout scm
-    		}
-    	}
+        stage('Prepare') {
+            steps {
+                updateGithubStatus("PENDING", "Begin to build");
+                //sh 'printenv'
+                sh 'java -version'
+                sh 'mvn -v'
+            }
+        }
         stage('Build') {
             steps {
                 echo 'Building...'
@@ -30,30 +32,34 @@ pipeline {
             }
         }
         stage('Deploy') {
-			when {
+            when {
                 branch 'master'
             }
             steps {
                 echo 'Deploying....'
                 sh 'rm -f $DEPLOY_TARGET'
                 sh 'mv ./target/wf-*.war $DEPLOY_TARGET'
-                HAS_DEPLOYMENT = 'true'
+                script {
+                    HAS_DEPLOYMENT = 'true'
+                }
             }
         }
     }
+    
     post {
-    	always  {
-    	}
         success {
+            updateGithubStatus("SUCCESS", "Build complete");
             sendEmail("SUCCESS");
         }
         unstable {
+            updateGithubStatus("UNSTABLE", "Build complete");
             sendEmail("UNSTABLE");
         }
         failure {
+            updateGithubStatus("FAILURE", "Build complete");
             sendEmail("FAILURE");
         }
-   	}
+    }
 }
 
 // get change log to be send over the mail
@@ -69,24 +75,57 @@ def getChangeString() {
         for (int j = 0; j < entries.length; j++) {
             def entry = entries[j]
             truncated_msg = entry.msg.take(MAX_MSG_LEN)
-            changeString += " - ${truncated_msg} [${entry.author}]\n"
+            changeString += "<li>${truncated_msg} [${entry.author}]</li>"
         }
     }
 
     if (!changeString) {
-        changeString = " - No new changes"
+        changeString = "<li>No new changes</li>"
     }
     return changeString
 }
 
 def sendEmail(status) {
-	def subject = "[" + status + "] CI - ${currentBuild.fullDisplayName}"
-	if (HAS_DEPLOYMENT == 'true') {
-		subject += " - deployed"
-	}
-    mail(
-		to: "$EMAIL_RECIPIENTS",
-		subject: "${subject}",
-		body: "Changes:\n " + getChangeString() + "\n\n Check console output at: $BUILD_URL/console" + "\n"
-	)
+    def subject = "[" + status + "] ${currentBuild.fullDisplayName}"
+    if (HAS_DEPLOYMENT == 'true') {
+        subject += " - deployed"
+    }
+
+    // Default Email Notification Plugin: email(...), but below supports html
+        emailext(
+        to: "$EMAIL_RECIPIENTS",
+        subject: "${subject}",
+        body: "Changes:<ul>" + getChangeString() + "</ul><br />Check console output at: ${BUILD_URL}console" + "<br />",
+        recipientProviders: [[$class: 'DevelopersRecipientProvider']]
+    )
+}
+
+// set GitHub status
+def getRepoURL() {
+    sh "git config --get remote.origin.url > .git/remote-url"
+    return readFile(".git/remote-url").trim()
+}
+
+def getCommitSha() {
+    sh "git rev-parse HEAD > .git/current-commit"
+    return readFile(".git/current-commit").trim()
+}
+
+def updateGithubStatus(status, message) {
+    // status: pending, success, failure or error
+    repoUrl = getRepoURL()
+    commitSha = getCommitSha()
+
+    step ([
+        $class: 'GitHubCommitStatusSetter',
+        reposSource: [$class: "ManuallyEnteredRepositorySource", url: repoUrl],
+        commitShaSource: [$class: "ManuallyEnteredShaSource", sha: commitSha],
+        errorHandlers: [[$class: 'ShallowAnyErrorHandler']],
+        statusResultSource: [
+            $class: 'ConditionalStatusResultSource',
+            results: [
+                [$class: 'AnyBuildResult', state: status, message: message]
+            ]
+        ]
+    ])
 }
