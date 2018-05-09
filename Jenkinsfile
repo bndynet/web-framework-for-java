@@ -33,6 +33,7 @@ pipeline {
         }
         stage('Deploy') {
             when {
+                // following expression is just available for multi-branch project
                 branch 'master'
             }
             steps {
