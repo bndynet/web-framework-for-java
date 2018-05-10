@@ -94,9 +94,12 @@ def sendEmail(status) {
 
     // Default Email Notification Plugin: email(...), but below supports html
         emailext(
+	mimeType: "text/html",
         to: "$EMAIL_RECIPIENTS",
         subject: "${subject}",
-        body: "Changes:<ul>" + getChangeString() + "</ul><br />Check console output at: ${BUILD_URL}console" + "<br />",
+	body: '''${SCRIPT, template="my-groovy-html.template"}''',
+	//body: '''${SCRIPT, template="jenkins-generic-matrix-email-html.template"}''',
+        //body: "Changes:<ul>" + getChangeString() + "</ul><br />Check console output at: ${BUILD_URL}console" + "<br />",
         recipientProviders: [[$class: 'DevelopersRecipientProvider']]
     )
 }

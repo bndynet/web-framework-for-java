@@ -1,0 +1,288 @@
+<STYLE>
+    BODY {
+      font-family: Verdana, Helvetica, sans serif;
+      font-size: 12px;
+      color: #333333;
+    }
+    td {
+      padding: 3px 10px;
+    }
+    .console {
+      font-family: Courier New;
+    }
+    .filesChanged {
+      width: 10%;
+      padding-left: 10px;
+    }
+    .section {
+      position: relative;
+      width: 100%;
+      border-top: solid 3px <%= (build.result == null || build.result.toString() == 'SUCCESS') ? '#00a28a' : build.result.toString() == 'FAILURE' ? '#b76ba3' : '#f7c46c' %>;
+      border-radius: 3px 3px 0 0;
+      background-color: #f5fbfa;
+      border-collapse: collapse;
+      box-shadow: 0 0 0 1px rgba(61,70,79,.05), 0 1px 3px 0 rgba(61,70,79,.15);
+    }
+    .section .body {
+      padding: 1rem;
+    }
+    .td-title-main {
+      font-size: 200%;
+      padding: 3px 10px;
+      font-weight: bold;
+    }
+    .td-title {
+      font-size: 120%;
+      font-weight: bold;
+      text-transform: uppercase;
+    }
+    .td-title-tests {
+      font-weight: bold;
+      font-size: 120%;
+    }
+    .td-header-maven-module {
+      font-weight: bold;
+      font-size: 120%;    
+    }
+    .td-maven-artifact {
+      padding-left: 5px;
+    }
+    .tr-title {
+      color: <%= (build.result == null || build.result.toString() == 'SUCCESS') ? '#038d7a' : build.result.toString() == 'FAILURE' ? '#9d5f8f' : '#d3a961' %>;
+    }
+    .test {
+      padding-left: 20px;
+    }
+    .test-fixed {
+      color: #038d7a;
+    }
+    .test-failed {
+      color: #9d5f8f;
+    }
+
+    .container {
+      width: 860px;
+      margin: 2rem auto;
+    }
+  
+  </STYLE>
+  <BODY>
+    <div class="container">
+    <!-- BUILD RESULT -->
+    <table class="section">
+      <tr class="tr-title">
+        <td class="td-title-main" colspan=2>
+          BUILD ${build.result ?: 'COMPLETED'}
+        </td>
+      </tr>
+      <tr>
+        <td>URL:</td>
+        <td><A href="${rooturl}${build.url}">${rooturl}${build.url}</A></td>
+      </tr>
+      <tr>
+        <td>Project:</td>
+        <td>${project.fullName}</td>
+      </tr>
+      <tr>
+        <td>Date:</td>
+        <td>${it.timestampString}</td>
+      </tr>
+      <tr>
+        <td>Duration:</td>
+        <td>${build.durationString}</td>
+      </tr>
+      <tr>
+        <td>Cause:</td>
+        <td><% build.causes.each() { cause -> %> ${cause.shortDescription} <%  } %></td>
+      </tr>
+    </table>
+    <br/>
+  
+    <!-- CHANGE SET -->
+    <%
+    def changeSets = build.changeSets
+    if(changeSets != null) {
+      def hadChanges = false %>
+    <table class="section">
+      <tr class="tr-title">
+        <td class="td-title" colspan="2">CHANGES</td>
+      </tr>
+      <% changeSets.each() { 
+        cs_list -> cs_list.each() { 
+          cs -> hadChanges = true %>
+      <tr>
+        <td>
+          Revision
+          <%= cs.metaClass.hasProperty('commitId') ? cs.commitId : cs.metaClass.hasProperty('revision') ? cs.revision : cs.metaClass.hasProperty('changeNumber') ? cs.changeNumber : "" %>
+          by <B><%= cs.author %></B>
+        </td>
+        <td>${cs.msgAnnotated}</td>
+      </tr>
+          <% cs.affectedFiles.each() {
+            p -> %>
+      <tr>
+        <td class="filesChanged">${p.editType.name}</td>
+        <td>${p.path}</td>
+      </tr>
+          <% }
+        }
+      }
+      if ( !hadChanges ) { %>
+      <tr>
+        <td colspan="2">No Changes</td>
+      </tr>
+      <% } %>
+    </table>
+    <br/>
+    <% } %>
+  
+  <!-- ARTIFACTS -->
+    <% 
+    def artifacts = build.artifacts
+    if ( artifacts != null && artifacts.size() > 0 ) { %>
+    <table class="section">
+      <tr class="tr-title">
+        <td class="td-title">BUILD ARTIFACTS</td>
+      </tr>
+      <% artifacts.each() {
+        f -> %>
+        <tr>
+          <td>
+            <a href="${rooturl}${build.url}artifact/${f}">${f}</a>
+        </td>
+      </tr>
+      <% } %>
+    </table>
+    <br/>
+    <% } %>
+  
+  <!-- MAVEN ARTIFACTS -->
+    <%
+    try {
+      def mbuilds = build.moduleBuilds
+      if ( mbuilds != null ) { %>
+    <table class="section">
+      <tr class="tr-title">
+        <td class="td-title">BUILD ARTIFACTS</td>
+      </tr>
+        <%
+        try {
+          mbuilds.each() {
+            m -> %>
+      <tr>
+        <td class="td-header-maven-module">${m.key.displayName}</td>
+      </tr>
+            <%
+            m.value.each() { 
+              mvnbld -> def artifactz = mvnbld.artifacts
+              if ( artifactz != null && artifactz.size() > 0) { %>
+      <tr>
+        <td class="td-maven-artifact">
+                <% artifactz.each() {
+                  f -> %>
+          <a href="${rooturl}${mvnbld.url}artifact/${f}">${f}</a><br/>
+                <% } %>
+        </td>
+      </tr>
+              <% }
+            }
+          }
+        } catch(e) {
+          // we don't do anything
+        } %>
+    </table>
+    <br/>
+      <% }
+    } catch(e) {
+      // we don't do anything
+    } %>
+  
+  <!-- JUnit TEMPLATE -->
+  
+    <%
+    def junitResultList = it.JUnitTestResult
+    try {
+      def cucumberTestResultAction = it.getAction("org.jenkinsci.plugins.cucumber.jsontestsupport.CucumberTestResultAction")
+      junitResultList.add( cucumberTestResultAction.getResult() )
+    } catch(e) {
+      //cucumberTestResultAction not exist in this build
+    }
+    if ( junitResultList.size() > 0 ) { %>
+    <table class="section">
+      <tr class="tr-title">
+        <td class="td-title" colspan="5">${junitResultList.first().displayName}</td>
+      </tr>
+      <tr>
+          <td class="td-title-tests">Name</td>
+          <td class="td-title-tests">Failed</td>
+          <td class="td-title-tests">Passed</td>
+          <td class="td-title-tests">Skipped</td>
+          <td class="td-title-tests">Total</td>
+        </tr>
+      <% junitResultList.each {
+        junitResult -> junitResult.getChildren().each {
+          packageResult -> %>
+      <tr>
+        <td>${packageResult.getName()}</td>
+        <td>${packageResult.getFailCount()}</td>
+        <td>${packageResult.getPassCount()}</td>
+        <td>${packageResult.getSkipCount()}</td>
+        <td>${packageResult.getPassCount() + packageResult.getFailCount() + packageResult.getSkipCount()}</td>
+      </tr>
+      <% packageResult.getPassedTests().findAll({it.getStatus().toString() == "FIXED";}).each{
+          test -> %>
+              <tr>
+                <td class="test test-fixed" colspan="5">
+                  ${test.getFullName()} ${test.getStatus()}
+                </td>
+              </tr>
+          <% } %>
+          <% packageResult.getFailedTests().sort({a,b -> a.getAge() <=> b.getAge()}).each{
+            failed_test -> %>
+      <tr>
+        <td class="test test-failed" colspan="5">
+          ${failed_test.getFullName()} (Age: ${failed_test.getAge()})
+        </td>
+      </tr>
+          <% }
+        }
+      } %>
+    </table>
+    <br/>
+    <% } %>
+  
+  <!-- CONSOLE OUTPUT -->
+    <%
+    if ( build.result == hudson.model.Result.FAILURE ) { %>
+    <table class="section" cellpadding="0" cellspacing="0">
+      <tr class="tr-title">
+        <td class="td-title">CONSOLE OUTPUT</td>
+      </tr>
+      <%     build.getLog(100).each() {
+        line -> %>
+        <tr>
+        <td class="console">${org.apache.commons.lang.StringEscapeUtils.escapeHtml(line)}</td>
+      </tr>
+      <% } %>
+    </table>
+    <br/>
+    <% } %>
+
+    <!-- Footer -->
+    <table class="section footer" style="border: none; height: 50px;">
+      <tr>
+        <td style="width: 60px; padding: 0;">
+          <a href="http://bndy.net" target="_blank">
+            <img src="http://bndy.net/favicon.ico" style="height: 50px; background-color: #ffffff; box-shadow: 0 0 0 1px rgba(61,70,79,.05), 0 1px 3px 0 rgba(61,70,79,.15);" />
+          </a>
+        </td>
+        <td style="vertical-align: middle; padding: 0; font-size: 13px;">
+          Copyright &copy; <a href="http://bndy.net" target="_blank">BDNY-NET</a>, All rights reserved.
+          Created by Bendy Zhang &lt;zb@bndy.net&gt;
+        </td>
+      </tr>
+    </table>
+
+    </div>
+  </BODY>
+  
