@@ -18,6 +18,7 @@ pipeline {
                 //sh 'printenv'
                 sh 'java -version'
                 sh 'mvn -v'
+                sh 'mkdir -p ../../email-templates/ && \\cp ./jenkins/my-groovy-html.template ../../email-templates/my-groovy-html.template'
             }
         }
         stage('Build') {
@@ -98,9 +99,8 @@ def sendEmail(status) {
         to: "$EMAIL_RECIPIENTS",
         subject: "${subject}",
 	body: '''${SCRIPT, template="my-groovy-html.template"}''',
-	//body: '''${SCRIPT, template="jenkins-generic-matrix-email-html.template"}''',
         //body: "Changes:<ul>" + getChangeString() + "</ul><br />Check console output at: ${BUILD_URL}console" + "<br />",
-        recipientProviders: [[$class: 'DevelopersRecipientProvider']]
+	recipientProviders: [[$class: 'CulpritsRecipientProvider'], [$class: 'RequesterRecipientProvider']]
     )
 }
 
