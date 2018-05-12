@@ -14,6 +14,8 @@
 
 # Web Framework - A Starter Project for Spring Boot
 
+[![Build Status](http://111.231.222.123:8080/jenkins/buildStatus/icon?job=web-framework-for-java/master)](http://jenkins.bndy.net)
+
 **NOTE** : Use **MySQL v5.7+**, if JDBC exception occurred, please drop all tables and let it recreate automatically.
 
 **Home Page**
