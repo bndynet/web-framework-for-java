@@ -11,7 +11,7 @@
       font-family: Courier New;
     }
     .filesChanged {
-      width: 10%;
+      width: 60px;
       padding-left: 10px;
     }
     .section {
@@ -76,7 +76,7 @@
         </td>
       </tr>
       <tr>
-        <td>URL:</td>
+        <td style="width:60px;">URL:</td>
         <td><A href="${rooturl}${build.url}">${rooturl}${build.url}</A></td>
       </tr>
       <tr>
