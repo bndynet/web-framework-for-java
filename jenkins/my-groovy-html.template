@@ -111,12 +111,13 @@
         cs_list -> cs_list.each() { 
           cs -> hadChanges = true %>
       <tr>
-        <td>
+        <td colspan="2">
           Revision
           <%= cs.metaClass.hasProperty('commitId') ? cs.commitId : cs.metaClass.hasProperty('revision') ? cs.revision : cs.metaClass.hasProperty('changeNumber') ? cs.changeNumber : "" %>
           by <B><%= cs.author %></B>
+          - 
+          ${cs.msgAnnotated}
         </td>
-        <td>${cs.msgAnnotated}</td>
       </tr>
           <% cs.affectedFiles.each() {
             p -> %>
