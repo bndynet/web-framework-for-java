@@ -122,8 +122,10 @@ public class User extends _BaseEntity implements UserDetails {
 
     public List<String> getRoleNames() {
         List<String> list = new ArrayList<>();
-        for (Role role : this.getRoles()) {
-            list.add(role.getName());
+        if (this.getRoles() != null) {
+            for (Role role : this.getRoles()) {
+                list.add(role.getName());
+            }
         }
         return list;
     }

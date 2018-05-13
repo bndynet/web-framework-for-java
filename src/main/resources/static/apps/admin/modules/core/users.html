@@ -10,7 +10,7 @@
                        on-search="search(__model)"></ui-search>
         </ui-page-content-header-left>
         <ui-page-content-header-right>
-            <a class="btn btn-sm btn-primary" href="{{'/sso/signup'|path}}" target="_blank">
+            <a class="btn btn-sm btn-primary" ng-click="openUserDialog()">
                 <i class="fa fa-fw fa-plus-circle"></i>
                 <span ng-bind="'admin.modules.core.users.addUser'|translate"></span>
             </a>
@@ -117,6 +117,59 @@
                     <button type="button" class="btn btn-primary"
                             ng-bind="'common.saveChanges'|translate"
                             ng-click="saveRoles()"></button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div id="dialogUser" class="modal fade" tabindex="-1" role="dialog">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal"
+                            aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                    <h4 class="modal-title">
+                        <span ng-if="formModel.id" ng-bind="'admin.modules.core.users.editUser'|translate"></span>
+                        <span ng-if="!formModel.id" ng-bind="'admin.modules.core.users.addUser'|translate"></span>
+                    </h4>
+                </div>
+                <div class="modal-body">
+                    <form name="formUser">
+                        <md-input-container class="md-block">
+                            <label ng-bind="'admin.modules.core.users.fieldUsername'|translate"></label>
+                            <input name="username" required ng-model="userModel.username" ng-change="checkUsername(userModel.username)"/>
+                            <div ng-messages="formUser.username.$error">
+                                <div ng-message="required" ng-bind="'common.msgRequired'|translate"></div>
+                                <div ng-message="existed" ng-bind="'admin.modules.core.users.errorUsernameExisted'|translate"></div>
+                            </div>
+                        </md-input-container>
+                        <md-input-container class="md-block">
+                            <label ng-bind="'admin.modules.core.users.fieldPassword'|translate"></label>
+                            <input name="password" required ng-model="userModel.password"/>
+                            <div ng-messages="formUser.password.$error">
+                                <div ng-message="required" ng-bind="'common.msgRequired'|translate"></div>
+                            </div>
+                        </md-input-container>
+                        <md-input-container class="md-block">
+                            <label ng-bind="'admin.modules.core.users.fieldRepassword'|translate"></label>
+                            <input name="repassword" ng-model="userModel.repassword" ng-change="checkRepassword()"/>
+                            <div ng-messages="formUser.repassword.$error">
+                                <div ng-message="same" ng-bind="'admin.modules.core.users.errorRepassword'|translate"></div>
+                            </div>
+                        </md-input-container>
+                    </form>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-default" data-dismiss="modal"
+                            ng-bind="'common.close'|translate"></button>
+                    <button type="button" class="btn btn-primary"
+                            ui-wait-on="savingUser"
+                            ng-disabled="formUser.$invalid || !userModel.canSave"
+                            ng-bind="'common.saveChanges'|translate"
+                            ng-click="saveUser()">
+                    </button>
                 </div>
             </div>
         </div>

@@ -86,8 +86,13 @@ public class UserService extends _BaseService<User> {
         return null;
     }
 
+    public String encodePassword(String pwd) {
+        return this.passwordEncoder.encode(pwd);
+    }
+
     public User register(User user) {
-        user.setPassword(passwordEncoder.encode(user.getPassword()));
+        // TODO: check username exists
+        user.setPassword(this.encodePassword(user.getPassword()));
         user.setEnabled(true);
         return userRepository.saveAndFlush(user);
     }

@@ -83,6 +83,50 @@ angular.module('app')
             });
         };
 
+        var userDialog = appDialog.getModal('dialogUser');
+        $scope.openUserDialog = function(user) {
+            angular.resetForm($scope.formUser);
+            $scope.userModel = angular.copy(user) || {};
+            $scope.userModel.__origin = user;
+            userDialog.show();
+        };
+        $scope.saveUser = function() {
+            $scope.savingUser = true;
+            appService.ajaxSave('/api/core/users', $scope.userModel).then(function(res) {
+                $scope.pageUsers(1);
+                userDialog.close();
+            }).finally(function() {
+                $scope.savingUser = false;
+            });
+        };
+        $scope.checkUsername = function(username) {
+            if ($scope.userModel.__origin && $scope.userModel.username === $scope.userModel.__origin.username) {
+                $scope.formUser.username.$error = {};
+                return;
+            }
+
+            $scope.userModel.canSave = false;
+            $scope.userModel.checkingUsername = true;
+            appService.ajaxGet('/api/core/users/exist?username=' + username).then(function(res) {
+                if (!res) {
+                    $scope.userModel.canSave = true;
+                    $scope.formUser.username.$setValidity('existed', true);
+                } else {
+                    $scope.formUser.username.$setValidity('existed', false);
+                }
+            }).finally(function() {
+                $scope.userModel.checkingUsername = false;
+            });
+
+        };
+        $scope.checkRepassword = function() {
+            if ($scope.userModel.repassword !== $scope.userModel.password) {
+                $scope.formUser.repassword.$setValidity('same', false);
+            } else {
+                $scope.formUser.repassword.$setValidity('same', true);
+            }
+        };
+
         $scope.search = function(keywords) {
             $scope.searchKeywords = keywords;
             $scope.pageUsers(1);

@@ -9,6 +9,7 @@ import java.net.MalformedURLException;
 import java.util.HashMap;
 import java.util.Map;
 
+import net.bndy.lib.StringHelper;
 import net.bndy.lib.wrapper.LongsWrapper;
 import net.bndy.wf.ApplicationContext;
 import net.bndy.wf.exceptions.AppException;
@@ -126,6 +127,23 @@ public class UserController extends _BaseApi<User> {
     @Override
     public Page<User> get(@PageableDefault(value = 10, sort = {"id"}, direction = Sort.Direction.DESC) Pageable pageable) {
         return super.get(pageable);
+    }
+
+    @Override
+    public User post(@RequestBody  User entity) {
+        return this.userService.register(entity);
+    }
+
+    @Override
+    public User put(long id, @RequestBody User entity) {
+        User user = this.userService.get(id);
+        if (user != null) {
+            user.setUsername(entity.getUsername());
+            if (!StringHelper.isNullOrWhiteSpace(entity.getPassword())) {
+                user.setPassword(this.userService.encodePassword(entity.getPassword()));
+            }
+        }
+        return super.put(id, entity);
     }
 
     @Override
