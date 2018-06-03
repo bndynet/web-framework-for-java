@@ -6,7 +6,7 @@ pipeline {
     }
 
     environment { 
-        DEPLOY_TARGET    = '../../../webapps/wf.war'
+        DEPLOY_TARGET    = '../../../../websites/demo/wf.war'
         EMAIL_RECIPIENTS = 'zb@bndy.net'
         HAS_DEPLOYMENT   = 'false'
     }
