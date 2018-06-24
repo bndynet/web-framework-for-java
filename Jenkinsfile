@@ -6,7 +6,8 @@ pipeline {
     }
 
     environment { 
-        DEPLOY_TARGET    = '../../../../websites/demo/wf.war'
+        APP_NAME     = 'wf'
+        DEPLOY_TO    = '../../../../websites/demo/'
         EMAIL_RECIPIENTS = 'zb@bndy.net'
         HAS_DEPLOYMENT   = 'false'
     }
@@ -39,8 +40,9 @@ pipeline {
             }
             steps {
                 echo 'Deploying....'
-                sh 'rm -f $DEPLOY_TARGET'
-                sh 'mv ./target/wf-*.war $DEPLOY_TARGET'
+                sh 'rm -f ${DEPLOY_TO}/${APP_NAME}.war'
+                sh 'rm -Rf $DEPLOY_TO'
+                sh 'mv ./target/wf-*.war ${DEPLOY_TO}/${APP_NAME}.war'
                 script {
                     HAS_DEPLOYMENT = 'true'
                 }
