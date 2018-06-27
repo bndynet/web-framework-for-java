@@ -5,11 +5,13 @@
 package net.bndy.wf.modules.oauth.models;
 
 import net.bndy.wf.lib._BaseEntity;
+import org.hibernate.annotations.UpdateTimestamp;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Table;
 import java.sql.Timestamp;
+import java.util.Date;
 
 @Entity
 @Table(name = "oauth_approvals")
@@ -24,10 +26,11 @@ public class OauthApprovals extends _BaseEntity {
     private String scope;
     @Column(name = "status")
     private String status;
-    @Column(name = "expiresAt", columnDefinition = "TIMESTAMP DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP")
+    @Column(name = "expiresAt")
     private Timestamp expiresAt;
-    @Column(name = "lastModifiedAt", columnDefinition = "TIMESTAMP DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP")
-    private Timestamp lastModifiedAt;
+    @UpdateTimestamp
+    @Column(name = "lastModifiedAt", columnDefinition = "TIMESTAMP NULL")
+    private Date lastModifiedAt;
 
     public String getUserId() {
         return userId;
@@ -69,11 +72,11 @@ public class OauthApprovals extends _BaseEntity {
         this.expiresAt = expiresAt;
     }
 
-    public Timestamp getLastModifiedAt() {
+    public Date getLastModifiedAt() {
         return lastModifiedAt;
     }
 
-    public void setLastModifiedAt(Timestamp lastModifiedAt) {
+    public void setLastModifiedAt(Date lastModifiedAt) {
         this.lastModifiedAt = lastModifiedAt;
     }
 }
