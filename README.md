@@ -1,27 +1,23 @@
-	
-	 _______                   __                __    __              __     
-	/       \                 /  |              /  \  /  |            /  |  
-	$$$$$$$  | _______    ____$$ | __    __     $$  \ $$ |  ______   _$$ |_   
-	$$ |__$$ |/       \  /    $$ |/  |  /  |    $$$  \$$ | /      \ / $$   |
-	$$    $$< $$$$$$$  |/$$$$$$$ |$$ |  $$ |    $$$$  $$ |/$$$$$$  |$$$$$$/   
-	$$$$$$$  |$$ |  $$ |$$ |  $$ |$$ |  $$ |    $$ $$ $$ |$$    $$ |  $$ | __ 
-	$$ |__$$ |$$ |  $$ |$$ \__$$ |$$ \__$$ | __ $$ |$$$$ |$$$$$$$$/   $$ |/  | 
-	$$    $$/ $$ |  $$ |$$    $$ |$$    $$ |/  |$$ | $$$ |$$       |  $$  $$/ 
-	$$$$$$$/  $$/   $$/  $$$$$$$/  $$$$$$$ |$$/ $$/   $$/  $$$$$$$/    $$$$/  
-	                              /  \__$$ |                                  
-	                              $$    $$/                                   
-	                               $$$$$$/                                    
 
-# Web Framework - A Starter Project for Spring Boot
+    ,-----.   ,------.   ,--.  ,--. ,--.   ,--.      ,--.  ,--. ,------. ,--------. 
+    |  |) /_  |  .-.  \  |  ,'.|  |  \  `.'  /       |  ,'.|  | |  .---' '--.  .--' 
+    |  .-.  \ |  |  \  : |  |' '  |   '.    /        |  |' '  | |  `--,     |  |    
+    |  '--' / |  '--'  / |  | `   |     |  |    .--. |  | `   | |  `---.    |  |    
+    `------'  `-------'  `--'  `--'     `--'    '--' `--'  `--' `------'    `--'    
+
+
+# Web Framework - A starter project with basic functions for Spring Boot
 
 [![Build Status](http://jenkins.bndy.net/buildStatus/icon?job=web-framework-for-java/master)](http://jenkins.bndy.net)
 
-**NOTE** : Use **MySQL v5.7+**, if JDBC exception occurred, please drop all tables and let it recreate automatically.
+**NOTE** : If JDBC exception occurred, please drop all tables and let it recreate automatically.
 
 **Home Page**
+
 ![](https://raw.githubusercontent.com/bndynet/web-framework-for-java/master/docs/img/home.png)
 
 **Admin Page**
+
 ![](https://raw.githubusercontent.com/bndynet/web-framework-for-java/master/docs/img/admin-home.png)
 
 
