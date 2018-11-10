@@ -9,13 +9,7 @@
         Framework</title>
     <meta content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" name="viewport">
     <link th:href="@{/static/assets/img/logo.png}" rel="shortcut icon">
-    <link rel="stylesheet" type="text/css"
-          th:href="@{/webjars/bootstrap/3.3.7/css/bootstrap.min.css}"/>
-    <link rel="stylesheet" th:href="@{/static/plugins/font-awesome/css/font-awesome.min.css}">
-    <link rel="stylesheet" th:href="@{/static/plugins/Ionicons/css/ionicons.min.css}">
-    <link rel="stylesheet" th:href="@{/static/apps/admin/assets/css/AdminLTE.min.css}">
-    <link rel="stylesheet" th:href="@{/static/plugins/iCheck/all.css}">
-    <link rel="stylesheet" th:href="@{/static/assets/css/common.css}">
+    <link th:href="@{/static/dist/css/sso-all.min.css}" rel="stylesheet">
 
     <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
     <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
@@ -35,10 +29,8 @@
 
 <div layout:fragment="body"></div>
 
-<script th:src="@{/static/plugins/jquery/jquery.min.js}"></script>
-<script type="text/javascript"
-        th:src="@{/webjars/bootstrap/3.3.7/js/bootstrap.min.js}"></script>
-<script th:src="@{/static/plugins/iCheck/icheck.min.js}"></script>
+<script th:src="@{/static/dist/js/sso-all.min.js}"></script>
+
 <script>
   $(function () {
     $('input[type=checkbox]').iCheck({
