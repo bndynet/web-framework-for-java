@@ -1,4 +1,5 @@
-<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+<project xmlns="http://maven.apache.org/POM/4.0.0"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
 	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
 	<modelVersion>4.0.0</modelVersion>
 	<groupId>net.bndy</groupId>
@@ -10,11 +11,11 @@
 	<description>A seed project with web primary components in java.</description>
 	<url>https://github.com/bndynet/web-framework-for-java</url>
 
-    <repositories>
-        <repository>
-            <id>maven-ali</id>
-            <url>http://maven.aliyun.com/nexus/content/groups/public/</url>
-        </repository>
+	<repositories>
+		<repository>
+			<id>maven-ali</id>
+			<url>http://maven.aliyun.com/nexus/content/groups/public/</url>
+		</repository>
 		<repository>
 			<id>maven-central</id>
 			<url>http://repo1.maven.org/maven2</url>
@@ -23,16 +24,16 @@
 			<id>maven-staging</id>
 			<url>https://oss.sonatype.org/content/groups/staging</url>
 		</repository>
-    </repositories>
+	</repositories>
 
-    <properties>
+	<properties>
 		<java.version>1.8</java.version>
-        <maven.test.skip>true</maven.test.skip>
-        <maven.build.timestamp.format>yyyyMMddHHmm</maven.build.timestamp.format>
+		<maven.test.skip>true</maven.test.skip>
+		<maven.build.timestamp.format>yyyyMMddHHmm</maven.build.timestamp.format>
 
-        <project.shortName>WF</project.shortName>
-        <project.buildNumber>${maven.build.timestamp}</project.buildNumber>
-    </properties>
+		<project.shortName>WF</project.shortName>
+		<project.buildNumber>${maven.build.timestamp}</project.buildNumber>
+	</properties>
 
 	<parent>
 		<groupId>org.springframework.boot</groupId>
@@ -56,7 +57,7 @@
 		<dependency>
 			<groupId>net.sourceforge.nekohtml</groupId>
 			<artifactId>nekohtml</artifactId>
-			<version>1.9.22</version><!--$NO-MVN-MAN-VER$-->
+			<version>1.9.22</version><!--$NO-MVN-MAN-VER$ -->
 		</dependency>
 		<dependency>
 			<groupId>org.thymeleaf.extras</groupId>
@@ -91,8 +92,8 @@
 			<artifactId>spring-boot-starter-security</artifactId>
 		</dependency>
 		<dependency>
-            <groupId>org.springframework.security.oauth</groupId>
-            <artifactId>spring-security-oauth2</artifactId>
+			<groupId>org.springframework.security.oauth</groupId>
+			<artifactId>spring-security-oauth2</artifactId>
 		</dependency>
 		<dependency>
 			<groupId>io.springfox</groupId>
@@ -160,33 +161,33 @@
 			<artifactId>toaster</artifactId>
 			<version>0.4.15</version>
 		</dependency>
-        <!-- hot swapping, disable cache for template, enable live reload -->
-        <!--<dependency>-->
-            <!--<groupId>org.springframework.boot</groupId>-->
-            <!--<artifactId>spring-boot-devtools</artifactId>-->
-            <!--<optional>true</optional>-->
-        <!--</dependency>-->
-        <dependency>
-        	<groupId>org.springframework.boot</groupId>
-        	<artifactId>spring-boot-configuration-processor</artifactId>
-        	<optional>true</optional>
-        </dependency>
+		<!-- hot swapping, disable cache for template, enable live reload -->
+		<!--<dependency> -->
+		<!--<groupId>org.springframework.boot</groupId> -->
+		<!--<artifactId>spring-boot-devtools</artifactId> -->
+		<!--<optional>true</optional> -->
+		<!--</dependency> -->
+		<dependency>
+			<groupId>org.springframework.boot</groupId>
+			<artifactId>spring-boot-configuration-processor</artifactId>
+			<optional>true</optional>
+		</dependency>
 	</dependencies>
 	<build>
-	 	<resources>
+		<resources>
 			<resource>
 				<directory>src/main/resources</directory>
 				<filtering>false</filtering>
 			</resource>
-            <resource>
-                <directory>src/main/resources</directory>
-                <filtering>true</filtering>
-                <includes>
+			<resource>
+				<directory>src/main/resources</directory>
+				<filtering>true</filtering>
+				<includes>
 					<include>banner.txt</include>
 					<include>application.yml</include>
 				</includes>
-            </resource>
-        </resources>
+			</resource>
+		</resources>
 		<plugins>
 			<plugin>
 				<groupId>org.apache.maven.plugins</groupId>
@@ -196,9 +197,9 @@
 					<target>1.8</target>
 				</configuration>
 			</plugin>
-            <plugin>
-                <groupId>org.springframework.boot</groupId>
-                <artifactId>spring-boot-maven-plugin</artifactId>
+			<plugin>
+				<groupId>org.springframework.boot</groupId>
+				<artifactId>spring-boot-maven-plugin</artifactId>
 				<executions>
 					<execution>
 						<goals>
@@ -206,7 +207,121 @@
 						</goals>
 					</execution>
 				</executions>
-            </plugin>
+			</plugin>
+			<plugin>
+				<artifactId>maven-resources-plugin</artifactId>
+				<executions>
+					<execution>
+						<id>copy-resources</id>
+						<phase>validate</phase>
+						<goals>
+							<goal>copy-resources</goal>
+						</goals>
+						<configuration>
+							<outputDirectory>${basedir}/src/main/resources/static/dist</outputDirectory>
+							<resources>
+								<resource>
+								    <targetPath>fonts</targetPath>
+									<directory>src/main/resources/static/plugins/bootstrap/3.3.7/fonts</directory>
+									<filtering>true</filtering>
+								</resource>
+								<resource>
+								    <targetPath>fonts</targetPath>
+									<directory>src/main/resources/static/plugins/font-awesome/fonts</directory>
+								</resource>
+								<resource>
+								    <targetPath>fonts</targetPath>
+									<directory>src/main/resources/static/plugins/Ionicons/fonts</directory>
+								</resource>
+								<resource>
+								    <targetPath>fonts</targetPath>
+									<directory>src/main/resources/static/plugins/simple-line-icons/fonts</directory>
+								</resource>
+								
+								<resource>
+								    <targetPath>img</targetPath>
+									<directory>src/main/resources/static/assets/public/img</directory>
+								</resource>
+								<resource>
+								    <targetPath>img</targetPath>
+									<directory>src/main/resources/static/assets/img</directory>
+								</resource>
+							</resources>
+						</configuration>
+					</execution>
+				</executions>
+			</plugin>
+			<plugin>
+				<groupId>net.alchim31.maven</groupId>
+				<artifactId>yuicompressor-maven-plugin</artifactId>
+				<version>1.5.1</version>
+				<executions>
+					<execution>
+						<goals>
+							<goal>compress</goal>
+						</goals>
+					</execution>
+				</executions>
+				<configuration>
+					<jswarn>false</jswarn>
+					<nosuffix>true</nosuffix>
+					<aggregations>
+						<aggregation>
+							<removeIncluded>false</removeIncluded>
+							<insertNewLine>true</insertNewLine>
+							<inputDir>${basedir}/src/main/resources/static/</inputDir>
+							<output>${basedir}/src/main/resources/static/dist/css/public-all.min.css</output>
+							<includes>
+								<include>plugins/bootstrap/css/bootstrap.min.css</include>
+								<include>plugins/font-awesome/css/font-awesome.min.css</include>
+								<include>plugins/simple-line-icons/css/simple-line-icons.css</include>
+								<include>assets/css/common.css</include>
+								<include>assets/public/css/new-age.min.css</include>
+								<include>assets/public/css/skin.css</include>
+							</includes>
+						</aggregation>
+						<aggregation>
+							<removeIncluded>false</removeIncluded>
+							<insertNewLine>true</insertNewLine>
+							<inputDir>${basedir}/src/main/resources/static/</inputDir>
+							<!-- <output>${project.build.directory}/${project.build.finalName}/WEB-INF/classes/static/js/public-all.min.js</output> -->
+							<output>${basedir}/src/main/resources/static/dist/js/public-all.min.js</output>
+							<includes>
+								<include>plugins/jquery/jquery.min.js</include>
+								<include>plugins/bootstrap/js/bootstrap.bundle.min.js</include>
+								<include>plugins/jquery-easing/jquery.easing.min.js</include>
+								<include>assets/public/js/new-age.js</include>
+							</includes>
+						</aggregation>
+
+						<aggregation>
+							<removeIncluded>false</removeIncluded>
+							<insertNewLine>true</insertNewLine>
+							<inputDir>${basedir}/src/main/resources/static/</inputDir>
+							<output>${basedir}/src/main/resources/static/dist/css/sso-all.min.css</output>
+							<includes>
+								<include>plugins/bootstrap/3.3.7/css/bootstrap.min.css</include>
+								<include>plugins/font-awesome/css/font-awesome.min.css</include>
+								<include>plugins/Ionicons/css/ionicons.min.css</include>
+								<include>apps/admin/assets/css/AdminLTE.min.css</include>
+								<include>plugins/iCheck/all.css</include>
+								<include>assets/css/common.css</include>
+							</includes>
+						</aggregation>
+						<aggregation>
+							<removeIncluded>false</removeIncluded>
+							<insertNewLine>true</insertNewLine>
+							<inputDir>${basedir}/src/main/resources/static/</inputDir>
+							<output>${basedir}/src/main/resources/static/dist/js/sso-all.min.js</output>
+							<includes>
+								<include>plugins/jquery/jquery.min.js</include>
+								<include>plugins/bootstrap/3.3.7/js/bootstrap.min.js</include>
+								<include>plugins/iCheck/icheck.min.js</include>
+							</includes>
+						</aggregation>
+					</aggregations>
+				</configuration>
+			</plugin>
 		</plugins>
 	</build>
 </project>
