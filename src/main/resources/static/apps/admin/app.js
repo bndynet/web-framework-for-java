@@ -427,12 +427,6 @@ angular.element(document).ready(function () {
 
 
 // misc functions
-function initUI() {
-    $('.icheck, .iradio').iCheck({ checkboxClass: 'icheckbox_flat-green', radioClass   : 'iradio_flat-green'});
-    $('.colorpicker').colorpicker();
-    $('.timepicker').timepicker({ showInputs: false });
-    $('.datepicker').datepicker({ autoclose: true, format: 'yyyy-mm-dd' });
-}
 function getPath(url) {
     if (url.indexOf('/') === 0) {
         url = url.substring(1);
@@ -447,8 +441,6 @@ $.fn.modal.prototype.constructor.Constructor.DEFAULTS.backdrop = 'static';
 $.fn.modal.prototype.constructor.Constructor.DEFAULTS.keyboard =  false;
 
 $(function () {
-    initUI();
-
 	// fix the actions of AdminLTE in AngularJS
 	$('body').on('click', '[data-widget=collapse]', function (event) {
 		var iconTag = $(this).find('i');
