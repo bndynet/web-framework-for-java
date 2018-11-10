@@ -6,7 +6,7 @@
  * @version 12.2.13
  */
 
-(function () {
+;(function () {
   /** @namespace FileAPI.noContentTimeout */
 
   function patchXHR(fnName, newFn) {

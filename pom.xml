@@ -136,31 +136,6 @@
 			<artifactId>spring-boot-starter-ftsi</artifactId>
 			<version>1.0</version>
 		</dependency>
-		<dependency>
-			<groupId>org.webjars</groupId>
-			<artifactId>bootstrap</artifactId>
-			<version>3.3.7</version>
-		</dependency>
-		<dependency>
-			<groupId>org.webjars</groupId>
-			<artifactId>angularjs</artifactId>
-			<version>1.6.4</version>
-		</dependency>
-		<dependency>
-			<groupId>org.webjars.bower</groupId>
-			<artifactId>angular-ui-router</artifactId>
-			<version>1.0.12</version>
-		</dependency>
-		<dependency>
-			<groupId>org.webjars</groupId>
-			<artifactId>angular-material</artifactId>
-			<version>1.1.5</version>
-		</dependency>
-		<dependency>
-			<groupId>org.webjars.bower</groupId>
-			<artifactId>toaster</artifactId>
-			<version>0.4.15</version>
-		</dependency>
 		<!-- hot swapping, disable cache for template, enable live reload -->
 		<!--<dependency> -->
 		<!--<groupId>org.springframework.boot</groupId> -->
@@ -218,32 +193,42 @@
 							<goal>copy-resources</goal>
 						</goals>
 						<configuration>
+							<nonFilteredFileExtensions>
+								<!-- Prevent binary files filtering without adding some excludes 
+									configuration for the following file extensions jpg, jpeg, gif, bmp and png -->
+								<nonFilteredFileExtension>eot</nonFilteredFileExtension>
+								<nonFilteredFileExtension>svg</nonFilteredFileExtension>
+								<nonFilteredFileExtension>otf</nonFilteredFileExtension>
+								<nonFilteredFileExtension>ttf</nonFilteredFileExtension>
+								<nonFilteredFileExtension>eot</nonFilteredFileExtension>
+								<nonFilteredFileExtension>woff</nonFilteredFileExtension>
+								<nonFilteredFileExtension>woff2</nonFilteredFileExtension>
+							</nonFilteredFileExtensions>
 							<outputDirectory>${basedir}/src/main/resources/static/dist</outputDirectory>
 							<resources>
 								<resource>
-								    <targetPath>fonts</targetPath>
+									<targetPath>fonts</targetPath>
 									<directory>src/main/resources/static/plugins/bootstrap/3.3.7/fonts</directory>
-									<filtering>true</filtering>
 								</resource>
 								<resource>
-								    <targetPath>fonts</targetPath>
+									<targetPath>fonts</targetPath>
 									<directory>src/main/resources/static/plugins/font-awesome/fonts</directory>
 								</resource>
 								<resource>
-								    <targetPath>fonts</targetPath>
+									<targetPath>fonts</targetPath>
 									<directory>src/main/resources/static/plugins/Ionicons/fonts</directory>
 								</resource>
 								<resource>
-								    <targetPath>fonts</targetPath>
+									<targetPath>fonts</targetPath>
 									<directory>src/main/resources/static/plugins/simple-line-icons/fonts</directory>
 								</resource>
-								
+
 								<resource>
-								    <targetPath>img</targetPath>
+									<targetPath>img</targetPath>
 									<directory>src/main/resources/static/assets/public/img</directory>
 								</resource>
 								<resource>
-								    <targetPath>img</targetPath>
+									<targetPath>img</targetPath>
 									<directory>src/main/resources/static/assets/img</directory>
 								</resource>
 							</resources>
@@ -317,6 +302,93 @@
 								<include>plugins/jquery/jquery.min.js</include>
 								<include>plugins/bootstrap/3.3.7/js/bootstrap.min.js</include>
 								<include>plugins/iCheck/icheck.min.js</include>
+							</includes>
+						</aggregation>
+
+						<aggregation>
+							<removeIncluded>false</removeIncluded>
+							<insertNewLine>true</insertNewLine>
+							<inputDir>${basedir}/src/main/resources/static/</inputDir>
+							<output>${basedir}/src/main/resources/static/dist/css/admin-all.min.css</output>
+							<includes>
+								<include>plugins/bootstrap/3.3.7/css/bootstrap.min.css</include>
+								<include>plugins/font-awesome/css/font-awesome.min.css</include>
+								<include>plugins/Ionicons/css/ionicons.min.css</include>
+								<include>plugins/morris.js/morris.css</include>
+								<include>plugins/jvectormap/jquery-jvectormap-1.2.2.css</include>
+								<include>plugins/iCheck/all.css</include>
+								<include>plugins/select2/dist/css/select2.min.css</include>
+								<include>plugins/bootstrap-slider/slider.css</include>
+								<include>plugins/bootstrap-datepicker/dist/css/bootstrap-datepicker.min.css</include>
+								<include>plugins/bootstrap-daterangepicker/daterangepicker.css</include>
+								<include>plugins/bootstrap-colorpicker/dist/css/bootstrap-colorpicker.min.css</include>
+								<include>plugins/timepicker/bootstrap-timepicker.min.css</include>
+								<include>plugins/bootstrap-wysihtml5/bootstrap3-wysihtml5.min.css</include>
+								<include>plugins/angular-material/1.1.5/angular-material.min.css</include>
+								<include>plugins/toaster/0.4.15/toaster.min.css</include>
+								<include>plugins/angular-bootstrap-datetimepicker/src/css/datetimepicker.css</include>
+								<include>apps/admin/assets/css/AdminLTE.min.css</include>
+								<include>apps/admin/assets/css/skins/_all-skins.min.css</include>
+								<include>apps/admin/assets/css/angular-more.min.css</include>
+								<include>assets/css/common.css</include>
+								<include>apps/admin/assets/css/style.css</include>
+							</includes>
+						</aggregation>
+						<aggregation>
+							<removeIncluded>false</removeIncluded>
+							<insertNewLine>true</insertNewLine>
+							<inputDir>${basedir}/src/main/resources/static/</inputDir>
+							<output>${basedir}/src/main/resources/static/dist/js/admin-all.min.js</output>
+							<includes>
+								<include>plugins/jquery/jquery.min.js</include>
+								<include>plugins/bootstrap/3.3.7/js/bootstrap.min.js</include>
+								<include>plugins/lodash/lodash.min.js</include>
+								<include>plugins/moment/min/moment.min.js</include>
+								<!-- <include>plugins/raphael/raphael.min.js</include> <include>plugins/morris.js/morris.min.js</include> 
+									<include>plugins/jquery-sparkline/dist/jquery.sparkline.min.js</include> 
+									<include>plugins/jvectormap/jquery-jvectormap-1.2.2.min.js</include> <include>plugins/jvectormap/jquery-jvectormap-world-mill-en.js</include> 
+									<include>plugins/jquery-knob/dist/jquery.knob.min.js</include> <include>plugins/bootstrap-daterangepicker/daterangepicker.js</include> 
+									<include>plugins/bootstrap-wysihtml5/bootstrap3-wysihtml5.all.min.js</include> 
+									<include>plugins/jquery-slimscroll/jquery.slimscroll.min.js</include> <include>plugins/fastclick/lib/fastclick.js</include> 
+									<include>plugins/bootstrap-slider/bootstrap-slider.js</include> <include>plugins/datatables.net/js/jquery.dataTables.min.js</include> 
+									<include>plugins/input-mask/jquery.inputmask.js</include> <include>plugins/input-mask/jquery.inputmask.date.extensions.js</include> 
+									<include>plugins/input-mask/jquery.inputmask.extensions.js</include> <include>plugins/chart.js/Chart.min.js</include> 
+									<include>plugins/clipboard.js/clipboard.min.js</include> -->
+								<include>plugins/ckeditor/ckeditor.js</include>
+								<include>plugins/iCheck/icheck.min.js</include>
+								<include>plugins/select2/dist/js/select2.full.min.js</include>
+								<include>plugins/timepicker/bootstrap-timepicker.min.js</include>
+								<include>plugins/bootstrap-colorpicker/dist/js/bootstrap-colorpicker.min.js</include>
+								<include>plugins/bootstrap-datepicker/dist/js/bootstrap-datepicker.min.js</include>
+
+								<include>plugins/angularjs/1.6.4/angular.min.js</include>
+								<include>plugins/angularjs/1.6.4/angular-animate.min.js</include>
+								<include>plugins/angularjs/1.6.4/angular-aria.min.js</include>
+								<include>plugins/angularjs/1.6.4/angular-cookies.min.js</include>
+								<include>plugins/angularjs/1.6.4/angular-messages.min.js</include>
+								<include>plugins/angularjs/1.6.4/angular-message-format.min.js</include>
+								<include>plugins/angularjs/1.6.4/angular-route.min.js</include>
+								<include>plugins/angularjs/1.6.4/angular-sanitize.min.js</include>
+								<include>plugins/angular/angular-translate.min.js</include>
+								<include>plugins/angular/angular-translate-loader-url.min.js</include>
+								<include>plugins/angular-ui-router/1.0.12/release/angular-ui-router.min.js</include>
+								<include>plugins/angular-material/1.1.5/angular-material.min.js</include>
+								<include>plugins/angular-bootstrap-datetimepicker/src/js/datetimepicker.js</include>
+								<include>plugins/angular-bootstrap-datetimepicker/src/js/datetimepicker.templates.js</include>
+								<include>plugins/angular-date-time-input/src/dateTimeInput.js</include>
+								<include>plugins/angular-file-upload/ng-file-upload-shim.js</include>
+								<include>plugins/angular-file-upload/ng-file-upload.js</include>
+								<include>plugins/angular-file-upload/angular-file-upload.js</include>
+								<include>plugins/angular-copyto-clipboard/ngclipboard.js</include>
+								<include>plugins/toaster/0.4.15/toaster.min.js</include>
+								<include>plugins/jslib/common.js</include>
+								<include>plugins/jslib/lodash.ext.js</include>
+								<include>plugins/jslib/jquery.ext.js</include>
+								<include>plugins/jslib/angular.ext.js</include>
+								<include>apps/admin/assets/js/adminlte.min.js</include>
+								<include>apps/admin/assets/js/main.js</include>
+								<include>apps/admin/assets/js/angular-more.min.js</include>
+								<include>apps/admin/app.js</include>
 							</includes>
 						</aggregation>
 					</aggregations>
