@@ -3,9 +3,9 @@ var:
   db-name: wf
   db-user: ${MYSQL_USER:root}
   db-password: ${MYSQL_PASSWORD:123456}
-  ft-path: ft-index
+  ft-path: /opt/websites_workspace/wf/ft-index
   upload-disabled: false
-  upload-path: upload
+  upload-path: /opt/websites_workspace/wf/upload
 
 # EMBEDDED SERVER CONFIGURATION (ServerProperties)
 server:
@@ -37,7 +37,7 @@ application:
 
 # LOGGING  
 logging:
-  file: logs/app.log
+  file: /opt/websites_workspace/wf/logs/app.log
   config: 
   level:
     org.springframework.web: DEBUG
