@@ -19,7 +19,6 @@ angular.module('app')
         		}
 
         		$timeout(function(){
-        			initUI();
         			$('input[name=gender]').each(function(){
         				$(this).on('ifChecked', function(event) {
         					$scope.viewModel.gender = event.target.value;
