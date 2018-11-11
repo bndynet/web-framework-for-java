@@ -13,6 +13,10 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 
+import com.sun.mail.handlers.image_gif;
+
+import static org.hamcrest.CoreMatchers.notNullValue;
+
 import java.io.File;
 import java.io.IOException;
 import java.util.ArrayList;
@@ -21,7 +25,9 @@ import java.util.List;
 @Controller
 @RequestMapping(value = "/admin")
 public class AdminController extends _BaseController {
-
+    
+    private static List<String> sJsFiles;
+    private static List<String> sModules;
 
     @RequestMapping(value = "/")
     public String home(Model model) throws IOException, UnauthorizedException {
@@ -34,44 +40,46 @@ public class AdminController extends _BaseController {
         model.addAttribute("locale", LocaleContextHolder.getLocale().toString());
 
         File resourcesRoot = new ClassPathResource("/").getFile();
-
-        List<String> jsFiles = new ArrayList<>();
-        File angularDirectiveDir = new ClassPathResource("/static/apps/admin/lib/directives").getFile();
-        // load all angularjs directives
-        for (File f : FileUtil.listFiles(angularDirectiveDir, (pathname) -> pathname.getName().toLowerCase().endsWith(".js"))) {
-            jsFiles.add(f.getAbsolutePath().replace(resourcesRoot.getAbsolutePath(), "/")
-                // fix path separator issue on WinOS
-                .replace("\\", "/")
-                .replace("//", "/")
-            );
-        }
-
         File rootModule = new ClassPathResource("/static/apps/admin/modules").getFile();
+        
+        if (sJsFiles == null) {
+            sJsFiles = new ArrayList<>();
+            // load all angularjs directives
+            File angularDirectiveDir = new ClassPathResource("/static/apps/admin/lib/directives").getFile();
+            for (File f : FileUtil.listFiles(angularDirectiveDir, (pathname) -> pathname.getName().toLowerCase().endsWith(".js"))) {
+                sJsFiles.add(f.getAbsolutePath().replace(resourcesRoot.getAbsolutePath(), "/")
+                    // fix path separator issue on WinOS
+                    .replace("\\", "/")
+                    .replace("//", "/")
+                );
+            }
+            // load all js files in modules
+            for (File f : FileUtil.listFiles(rootModule,
+                (pathname) -> pathname.getName().toLowerCase().endsWith(".js"))) {
 
-        // load all js files in modules
-        for (File f : FileUtil.listFiles(rootModule,
-            (pathname) -> pathname.getName().toLowerCase().endsWith(".js"))) {
-
-            jsFiles.add(f.getAbsolutePath().replace(resourcesRoot.getAbsolutePath(), "/")
-                // fix path separator issue on WinOS
-                .replace("\\", "/")
-                .replace("//", "/")
-            );
+                sJsFiles.add(f.getAbsolutePath().replace(resourcesRoot.getAbsolutePath(), "/")
+                    // fix path separator issue on WinOS
+                    .replace("\\", "/")
+                    .replace("//", "/")
+                );
+            }
         }
-        model.addAttribute("jsFiles", jsFiles);
+        model.addAttribute("jsFiles", sJsFiles);
 
-        // load all html files as modules
-        List<String> modules = new ArrayList<>();
-        for (File f : FileUtil.listFiles(rootModule, (pathname -> pathname.getName().toLowerCase().endsWith(".html")))) {
-            String moduleName = f.getPath()
-                .replace(".html", "")
-                .replace(rootModule.getAbsolutePath(), "")
-                .replaceAll("[\\\\/]+", "-")
-                .replaceAll("^-", "");
+        if (sModules == null) {
+            // load all html files as modules
+            sModules = new ArrayList<>();
+            for (File f : FileUtil.listFiles(rootModule, (pathname -> pathname.getName().toLowerCase().endsWith(".html")))) {
+                String moduleName = f.getPath()
+                    .replace(".html", "")
+                    .replace(rootModule.getAbsolutePath(), "")
+                    .replaceAll("[\\\\/]+", "-")
+                    .replaceAll("^-", "");
 
-            modules.add(moduleName);
+                sModules.add(moduleName);
+            }
         }
-        model.addAttribute("modules", modules);
+        model.addAttribute("modules", sModules);
 
         return "admin/index";
     }

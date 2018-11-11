@@ -428,10 +428,13 @@ angular.element(document).ready(function () {
 
 // misc functions
 function getPath(url) {
-    if (url.indexOf('/') === 0) {
+    if (url && url.toLowerCase().indexOf('http') === 0) {
+        return url;
+    }
+    if (url && url.indexOf('/') === 0) {
         url = url.substring(1);
     }
-    return contextPath + url;
+    return contextPath + url||'';
 }
 
 // overwrite global settings
