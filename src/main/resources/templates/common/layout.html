@@ -5,14 +5,11 @@
 <head>
 <title layout:title-pattern="$DECORATOR_TITLE - $CONTENT_TITLE">Web Framework</title>
     <link th:href="@{/static/assets/img/logo.png}" rel="shortcut icon">
-	<link th:href="@{/static/plugins/bootstrap/css/bootstrap.min.css}" rel="stylesheet">
-    <link rel="stylesheet" type="text/css" th:href="@{/static/assets/css/common.css}" />
-
-	<script th:src="@{/static/plugins/jquery/jquery.min.js}"></script>
-	<script th:src="@{/static/plugins/bootstrap/js/bootstrap.bundle.min.js}"></script>
-	<script th:inline="javascript">
+    <link th:href="@{/static/dist/css/public-all.min.css}" rel="stylesheet">
+    <script th:inline="javascript">
        var contextPath = [[@{/}]];
     </script>
+    <script th:src="@{/static/dist/js/public-all.min.js}"></script>
 </head>
 <body>
 	<div layout:fragment="body"></div>
