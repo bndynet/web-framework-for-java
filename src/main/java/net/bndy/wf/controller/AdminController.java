@@ -13,10 +13,6 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 
-import com.sun.mail.handlers.image_gif;
-
-import static org.hamcrest.CoreMatchers.notNullValue;
-
 import java.io.File;
 import java.io.IOException;
 import java.util.ArrayList;
