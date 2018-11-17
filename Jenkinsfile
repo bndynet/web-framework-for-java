@@ -41,7 +41,7 @@ pipeline {
             steps {
                 echo 'Deploying....'
                 sh 'rm -f ${DEPLOY_TO}/${APP_NAME}.war'
-                sh 'rm -Rf $DEPLOY_TO'
+                sh 'rm -Rf $DEPLOY_TO/${APP_NAME}'
                 sh 'mv ./target/wf-*.war ${DEPLOY_TO}/${APP_NAME}.war'
                 script {
                     HAS_DEPLOYMENT = 'true'
