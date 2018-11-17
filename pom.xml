@@ -216,7 +216,7 @@
 								<nonFilteredFileExtension>woff</nonFilteredFileExtension>
 								<nonFilteredFileExtension>woff2</nonFilteredFileExtension>
 							</nonFilteredFileExtensions>
-							<outputDirectory>${basedir}/src/main/resources/static/dist</outputDirectory>
+							<outputDirectory>${basedir}/src/main/resources/static/assets</outputDirectory>
 							<resources>
 								<resource>
 									<targetPath>fonts</targetPath>
@@ -233,17 +233,6 @@
 								<resource>
 									<targetPath>fonts</targetPath>
 									<directory>src/main/resources/static/plugins/simple-line-icons/fonts</directory>
-								</resource>
-
-								<resource>
-									<targetPath>img</targetPath>
-									<directory>src/main/resources/static/assets/css</directory>
-									<includes>
-										<include>*.jpg</include>
-										<include>*.png</include>
-										<include>*.bmp</include>
-										<include>*.gif</include>
-									</includes>
 								</resource>
 							</resources>
 						</configuration>
@@ -272,7 +261,7 @@
 							<removeIncluded>false</removeIncluded>
 							<insertNewLine>true</insertNewLine>
 							<inputDir>${basedir}/src/main/resources/static/</inputDir>
-							<output>${basedir}/src/main/resources/static/dist/css/public-all.min.css</output>
+							<output>${basedir}/src/main/resources/static/assets/css/public-all.min.css</output>
 							<includes>
 								<include>plugins/bootstrap/css/bootstrap.min.css</include>
 								<include>plugins/font-awesome/css/font-awesome.min.css</include>
@@ -287,7 +276,7 @@
 							<insertNewLine>true</insertNewLine>
 							<inputDir>${basedir}/src/main/resources/static/</inputDir>
 							<!-- <output>${project.build.directory}/${project.build.finalName}/WEB-INF/classes/static/js/public-all.min.js</output> -->
-							<output>${basedir}/src/main/resources/static/dist/js/public-all.min.js</output>
+							<output>${basedir}/src/main/resources/static/assets/js/public-all.min.js</output>
 							<includes>
 								<include>plugins/jquery/jquery.min.js</include>
 								<include>plugins/bootstrap/js/bootstrap.bundle.min.js</include>
@@ -300,7 +289,7 @@
 							<removeIncluded>false</removeIncluded>
 							<insertNewLine>true</insertNewLine>
 							<inputDir>${basedir}/src/main/resources/static/</inputDir>
-							<output>${basedir}/src/main/resources/static/dist/css/sso-all.min.css</output>
+							<output>${basedir}/src/main/resources/static/assets/css/sso-all.min.css</output>
 							<includes>
 								<include>plugins/bootstrap/3.3.7/css/bootstrap.min.css</include>
 								<include>plugins/font-awesome/css/font-awesome.min.css</include>
@@ -314,7 +303,7 @@
 							<removeIncluded>false</removeIncluded>
 							<insertNewLine>true</insertNewLine>
 							<inputDir>${basedir}/src/main/resources/static/</inputDir>
-							<output>${basedir}/src/main/resources/static/dist/js/sso-all.min.js</output>
+							<output>${basedir}/src/main/resources/static/assets/js/sso-all.min.js</output>
 							<includes>
 								<include>plugins/jquery/jquery.min.js</include>
 								<include>plugins/bootstrap/3.3.7/js/bootstrap.min.js</include>
@@ -326,7 +315,7 @@
 							<removeIncluded>false</removeIncluded>
 							<insertNewLine>true</insertNewLine>
 							<inputDir>${basedir}/src/main/resources/static/</inputDir>
-							<output>${basedir}/src/main/resources/static/dist/css/admin-all.min.css</output>
+							<output>${basedir}/src/main/resources/static/assets/css/admin-all.min.css</output>
 							<includes>
 								<include>plugins/bootstrap/3.3.7/css/bootstrap.min.css</include>
 								<include>plugins/font-awesome/css/font-awesome.min.css</include>
@@ -343,7 +332,7 @@
 							<removeIncluded>false</removeIncluded>
 							<insertNewLine>true</insertNewLine>
 							<inputDir>${basedir}/src/main/resources/static/</inputDir>
-							<output>${basedir}/src/main/resources/static/dist/js/admin-all.min.js</output>
+							<output>${basedir}/src/main/resources/static/assets/js/admin-all.min.js</output>
 							<includes>
 								<include>assets/js/variables.js</include>
 								<include>plugins/jquery/jquery.min.js</include>

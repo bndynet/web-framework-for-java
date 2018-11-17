@@ -24,4 +24,5 @@ hs_err_pid*
 
 upload/
 ft-index/
-src/main/resources/static/dist/
+src/main/resources/static/assets/**/*-all.*
+src/main/resources/static/assets/fonts

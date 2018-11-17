@@ -5,11 +5,11 @@
 <head>
 <title layout:title-pattern="$DECORATOR_TITLE - $CONTENT_TITLE">Web Framework</title>
     <link th:href="@{/static/assets/img/logo.png}" rel="shortcut icon">
-    <link th:href="@{/static/dist/css/public-all.min.css}" rel="stylesheet">
+    <link th:href="@{/static/assets/css/public-all.min.css}" rel="stylesheet">
     <script th:inline="javascript">
        var contextPath = [[@{/}]];
     </script>
-    <script th:src="@{/static/dist/js/public-all.min.js}"></script>
+    <script th:src="@{/static/assets/js/public-all.min.js}"></script>
 </head>
 <body>
 	<div layout:fragment="body"></div>
