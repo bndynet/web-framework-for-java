@@ -161,9 +161,9 @@
 				<directory>src/main/resources</directory>
 				<filtering>false</filtering>
 				<includes>
-				    <!-- include plugins used in application -->
-				    <include>static/plugins/ckeditor/**</include>
-				    <include>static/plugins/iCheck/**</include>
+					<!-- include plugins used in application -->
+					<include>static/plugins/ckeditor/**</include>
+					<include>static/plugins/iCheck/**</include>
 				</includes>
 			</resource>
 			<resource>
@@ -237,11 +237,13 @@
 
 								<resource>
 									<targetPath>img</targetPath>
-									<directory>src/main/resources/static/apps/public/img</directory>
-								</resource>
-								<resource>
-									<targetPath>img</targetPath>
-									<directory>src/main/resources/static/assets/img</directory>
+									<directory>src/main/resources/static/assets/css</directory>
+									<includes>
+										<include>*.jpg</include>
+										<include>*.png</include>
+										<include>*.bmp</include>
+										<include>*.gif</include>
+									</includes>
 								</resource>
 							</resources>
 						</configuration>
@@ -345,39 +347,39 @@
 							<includes>
 								<include>assets/js/variables.js</include>
 								<include>plugins/jquery/jquery.min.js</include>
-                                <include>plugins/bootstrap/3.3.7/js/bootstrap.min.js</include>
-                                <include>plugins/lodash/lodash.min.js</include>
-                                <include>plugins/moment/min/moment.min.js</include>
-								<include>plugins/clipboard.js/clipboard.min.js</include> 
-                                <include>plugins/ckeditor/ckeditor.js</include>
-                                <include>plugins/angularjs/1.6.4/angular.min.js</include>
-                                <include>plugins/angularjs/1.6.4/angular-animate.min.js</include>
-                                <include>plugins/angularjs/1.6.4/angular-aria.min.js</include>
-                                <include>plugins/angularjs/1.6.4/angular-route.min.js</include>
-                                <include>plugins/angularjs/1.6.4/angular-cookies.min.js</include>
-                                <include>plugins/angularjs/1.6.4/angular-messages.min.js</include>
-                                <include>plugins/angularjs/1.6.4/angular-message-format.min.js</include>
-                                <include>plugins/angularjs/1.6.4/angular-sanitize.min.js</include>
-                                <include>plugins/angular/angular-translate.min.js</include>
-                                <include>plugins/angular/angular-translate-loader-url.min.js</include>
-                                <include>plugins/angular-ui-router/1.0.12/release/angular-ui-router.min.js</include>
-                                <include>plugins/angular-material/1.1.5/angular-material.min.js</include>
-                                <include>plugins/angular-bootstrap-datetimepicker/src/js/datetimepicker.js</include>
-                                <include>plugins/angular-bootstrap-datetimepicker/src/js/datetimepicker.templates.js</include>
-                                <include>plugins/angular-date-time-input/src/dateTimeInput.js</include>
-                                <include>plugins/angular-file-upload/ng-file-upload-shim.js</include>
-                                <include>plugins/angular-file-upload/ng-file-upload.js</include>
-                                <include>plugins/angular-file-upload/angular-file-upload.js</include>
-                                <include>plugins/angular-copyto-clipboard/ngclipboard.js</include>
-                                <include>plugins/toaster/0.4.15/toaster.min.js</include>
-                                <include>plugins/jslib/common.js</include>
-                                <include>plugins/jslib/lodash.ext.js</include>
-                                <include>plugins/jslib/jquery.ext.js</include>
-                                <include>plugins/jslib/angular.ext.js</include>
-                                <include>apps/admin/assets/js/adminlte.min.js</include>
-                                <include>apps/admin/assets/js/main.js</include>
-                                <include>apps/admin/assets/js/angular-more.min.js</include>
-                                <include>apps/admin/app.js</include>
+								<include>plugins/bootstrap/3.3.7/js/bootstrap.min.js</include>
+								<include>plugins/lodash/lodash.min.js</include>
+								<include>plugins/moment/min/moment.min.js</include>
+								<include>plugins/clipboard.js/clipboard.min.js</include>
+								<include>plugins/ckeditor/ckeditor.js</include>
+								<include>plugins/angularjs/1.6.4/angular.min.js</include>
+								<include>plugins/angularjs/1.6.4/angular-animate.min.js</include>
+								<include>plugins/angularjs/1.6.4/angular-aria.min.js</include>
+								<include>plugins/angularjs/1.6.4/angular-route.min.js</include>
+								<include>plugins/angularjs/1.6.4/angular-cookies.min.js</include>
+								<include>plugins/angularjs/1.6.4/angular-messages.min.js</include>
+								<include>plugins/angularjs/1.6.4/angular-message-format.min.js</include>
+								<include>plugins/angularjs/1.6.4/angular-sanitize.min.js</include>
+								<include>plugins/angular/angular-translate.min.js</include>
+								<include>plugins/angular/angular-translate-loader-url.min.js</include>
+								<include>plugins/angular-ui-router/1.0.12/release/angular-ui-router.min.js</include>
+								<include>plugins/angular-material/1.1.5/angular-material.min.js</include>
+								<include>plugins/angular-bootstrap-datetimepicker/src/js/datetimepicker.js</include>
+								<include>plugins/angular-bootstrap-datetimepicker/src/js/datetimepicker.templates.js</include>
+								<include>plugins/angular-date-time-input/src/dateTimeInput.js</include>
+								<include>plugins/angular-file-upload/ng-file-upload-shim.js</include>
+								<include>plugins/angular-file-upload/ng-file-upload.js</include>
+								<include>plugins/angular-file-upload/angular-file-upload.js</include>
+								<include>plugins/angular-copyto-clipboard/ngclipboard.js</include>
+								<include>plugins/toaster/0.4.15/toaster.min.js</include>
+								<include>plugins/jslib/common.js</include>
+								<include>plugins/jslib/lodash.ext.js</include>
+								<include>plugins/jslib/jquery.ext.js</include>
+								<include>plugins/jslib/angular.ext.js</include>
+								<include>apps/admin/assets/js/adminlte.min.js</include>
+								<include>apps/admin/assets/js/main.js</include>
+								<include>apps/admin/assets/js/angular-more.min.js</include>
+								<include>apps/admin/app.js</include>
 							</includes>
 						</aggregation>
 					</aggregations>
