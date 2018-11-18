@@ -154,6 +154,12 @@
 				<directory>src/main/resources</directory>
 				<filtering>false</filtering>
 				<excludes>
+					<!-- exclude all js and css files because they will be compressed into 
+						one file in package -->
+					<exclude>static/assets/js/**</exclude>
+					<exclude>static/assets/css/**</exclude>
+					<exclude>static/apps/admin/assets/js/**</exclude>
+					<exclude>static/apps/admin/assets/css/**</exclude>
 					<exclude>static/plugins/**</exclude>
 				</excludes>
 			</resource>
@@ -161,7 +167,10 @@
 				<directory>src/main/resources</directory>
 				<filtering>false</filtering>
 				<includes>
-					<!-- include plugins used in application -->
+					<!-- include all compressed files in package -->
+					<include>static/assets/css/*-all*</include>
+					<include>static/assets/js/*-all*</include>
+					<!-- TODO: here to include plugins which path used in your code -->
 					<include>static/plugins/ckeditor/**</include>
 					<include>static/plugins/iCheck/**</include>
 				</includes>
@@ -275,7 +284,6 @@
 							<removeIncluded>false</removeIncluded>
 							<insertNewLine>true</insertNewLine>
 							<inputDir>${basedir}/src/main/resources/static/</inputDir>
-							<!-- <output>${project.build.directory}/${project.build.finalName}/WEB-INF/classes/static/js/public-all.min.js</output> -->
 							<output>${basedir}/src/main/resources/static/assets/js/public-all.min.js</output>
 							<includes>
 								<include>plugins/jquery/jquery.min.js</include>
